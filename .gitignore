@@ -61,3 +61,6 @@ sysinfo.txt
 # Crashlytics generated file
 crashlytics-build.properties
 
+# Ignore third party data
+Assets/_ThirdParty.meta
+Assets/_ThirdParty
