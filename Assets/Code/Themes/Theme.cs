@@ -2,6 +2,9 @@
 
 namespace MinimalMiner.Themes
 {
+    /// <summary>
+    /// Represents a set of colors and sprites that are applied to the game's UI, HUD, etc.
+    /// </summary>
     public struct Theme
     {
         #region Fields
