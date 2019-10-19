@@ -1,0 +1,15 @@
+{
+    "name": "MinimalMiner-Entity",
+    "references": [
+        "GUID:a9b5389721cd0cf46a4ac77099e8009a"
+    ],
+    "includePlatforms": [],
+    "excludePlatforms": [],
+    "allowUnsafeCode": false,
+    "overrideReferences": false,
+    "precompiledReferences": [],
+    "autoReferenced": true,
+    "defineConstraints": [],
+    "versionDefines": [],
+    "noEngineReferences": false
+}
