@@ -1,7 +1,9 @@
 {
     "name": "MinimalMiner-UI",
     "references": [
-        "GUID:a9b5389721cd0cf46a4ac77099e8009a"
+        "GUID:a9b5389721cd0cf46a4ac77099e8009a",
+        "GUID:6055be8ebefd69e48b49212b09b47b2f",
+        "GUID:63a8bb38ad5ef0b4eb953ee5b75c87db"
     ],
     "includePlatforms": [],
     "excludePlatforms": [],
