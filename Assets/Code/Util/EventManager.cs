@@ -16,18 +16,32 @@ namespace MinimalMiner.Util
     }
 
     /// <summary>
-    /// <para>Handles incoming events from UI for other managers to subscribe to</para>
-    /// Master GameState is tracked here
+    /// EventManager passes event related information to managers that depend on them. This primarily consists of UI and Input calls.
     /// </summary>
     public class EventManager : MonoBehaviour
     {
-        public delegate void OnUpdateTheme(int themeIndex);
-        public static event OnUpdateTheme onUpdateTheme;
+        public delegate void OnSelectTheme(int themeIndex);
+        public static event OnSelectTheme onSelectTheme;
 
         public delegate void OnUpdateGameState(GameState newState, GameState prevState);
         public static event OnUpdateGameState onUpdateGameState;
 
         private GameState currState;
+        public InputDefinitions Controls
+        {
+            get; private set;
+        }
+
+        private void Update()
+        {
+            if (currState == GameState.play)
+            {
+                if (Input.GetKeyDown(Controls.ControlPreferences["Pause"]))
+                {
+                    UpdateGameState(GameState.pause);
+                }
+            }
+        }
 
         public void UpdateGameState(GameState newState)
         {
@@ -37,7 +51,7 @@ namespace MinimalMiner.Util
 
         public void UpdateTheme(int themeIndex)
         {
-            onUpdateTheme(themeIndex);
+            onSelectTheme(themeIndex);
         }
     }
 }

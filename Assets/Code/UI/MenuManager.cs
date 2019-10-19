@@ -46,12 +46,14 @@ namespace MinimalMiner.UI
 
         private void OnEnable()
         {
-            EventManager.onUpdateTheme += UpdateTheme;
+            ThemeManager.updateTheme += UpdateTheme;
+            EventManager.onUpdateGameState += UpdateGameState;
         }
 
         private void OnDisable()
         {
-            EventManager.onUpdateTheme -= UpdateTheme;
+            ThemeManager.updateTheme -= UpdateTheme;
+            EventManager.onUpdateGameState -= UpdateGameState;
         }
 
         /// <summary>
@@ -74,9 +76,68 @@ namespace MinimalMiner.UI
             settingsDropdowns = canvasSettings.GetComponentsInChildren<TMP_Dropdown>();
         }
 
-        public void UpdateTheme(int themeIndex)
+        /// <summary>
+        /// Handles updates to the theme
+        /// </summary>
+        /// <param name="theme">The new theme</param>
+        public void UpdateTheme(Theme theme)
         {
-            print("MenuManager says hi" + themeIndex);
+
+        }
+
+        /// <summary>
+        /// Handles updates to the game-state
+        /// </summary>
+        /// <param name="newState">The desired game-state</param>
+        /// <param name="prevState">The previous game-state</param>
+        public void UpdateGameState(GameState newState, GameState prevState)
+        {
+            // Deactivate previous UI
+            switch (prevState)
+            {
+                case GameState.settings:
+                    canvasSettings.SetActive(false);
+                    break;
+                case GameState.play:
+                    canvasPlay.SetActive(false);
+                    break;
+                case GameState.pause:
+                    canvasPause.SetActive(false);
+                    break;
+                case GameState.death:
+                    canvasDeath.SetActive(false);
+                    break;
+                case GameState.main:
+                    canvasMain.SetActive(false);
+                    break;
+                default:
+                    canvasDeath.SetActive(false);
+                    canvasPause.SetActive(false);
+                    canvasPlay.SetActive(false);
+                    canvasSettings.SetActive(false);
+                    break;
+            }
+
+            // Activate current UI
+            switch (newState)
+            {
+                case GameState.settings:
+                    canvasSettings.SetActive(true);
+                    break;
+                case GameState.play:
+                    canvasPlay.SetActive(true);
+                    break;
+                case GameState.pause:
+                    canvasPause.SetActive(true);
+                    break;
+                case GameState.death:
+                    canvasDeath.SetActive(true);
+                    break;
+                case GameState.main:
+                default:
+                    canvasMain.SetActive(true);
+                    break;
+            }
         }
     }
 }
