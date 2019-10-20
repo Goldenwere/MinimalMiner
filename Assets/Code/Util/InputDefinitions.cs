@@ -5,10 +5,15 @@ using UnityEngine;
 namespace MinimalMiner.Util
 {
     /// <summary>
-    /// Defines customizable 
+    /// Defines customizable controls
     /// </summary>
     public struct InputDefinitions
     {
-        public Dictionary<string, KeyCode> ControlPreferences;
+        public KeyCode Ship_Forward;
+        public KeyCode Ship_Reverse;
+        public KeyCode Ship_CW;
+        public KeyCode Ship_CCW;
+
+        public KeyCode Menu_Pause;
     }
 }

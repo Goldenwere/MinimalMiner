@@ -31,12 +31,18 @@ namespace MinimalMiner.Util
         {
             get; private set;
         }
+        [SerializeField] private PlayerPreferences playerPrefs;
+
+        private void Start()
+        {
+            Controls = playerPrefs.Controls;
+        }
 
         private void Update()
         {
             if (currState == GameState.play)
             {
-                if (Input.GetKeyDown(Controls.ControlPreferences["Pause"]))
+                if (Input.GetKeyDown(Controls.Menu_Pause))
                 {
                     UpdateGameState(GameState.pause);
                 }

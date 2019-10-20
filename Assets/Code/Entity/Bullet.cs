@@ -5,28 +5,14 @@ using MinimalMiner.Util;
 
 namespace MinimalMiner.Entity
 {
-    /// <summary>
-    /// Defines an asteroid gameobject in the scene
-    /// </summary>
-    public class Asteroid : MonoBehaviour
+    public class Bullet : MonoBehaviour
     {
-        /// <summary>
-        /// The type that the asteroid is
-        /// </summary>
-        public AsteroidType Type
-        {
-            get; private set;
-        }
-
-        /// <summary>
-        /// The velocity of the asteroid
-        /// </summary>
         public Vector3 Vel
         {
             get; private set;
         }
 
-        // Needed for tracking the current state of the asteroid
+        private float aliveTimer;
         private GameState currState;
         [SerializeField] private SpriteRenderer sprite;
 
@@ -45,16 +31,14 @@ namespace MinimalMiner.Entity
             if (currState == GameState.play)
             {
                 transform.position += Vel;
-            }
-        }
 
-        /// <summary>
-        /// Used when first spawning an asteroid
-        /// </summary>
-        /// <param name="type">The type that the asteroid should be</param>
-        public void Setup(AsteroidType type)
-        {
-            Type = type;
+                // Increment timer and destroy object when object has existed for longer than 3 seconds
+                aliveTimer += Time.deltaTime;
+                if (aliveTimer > 3f)
+                {
+                    Destroy(gameObject);
+                }
+            }
         }
 
         private void UpdateGameState(GameState newState, GameState prevState)
