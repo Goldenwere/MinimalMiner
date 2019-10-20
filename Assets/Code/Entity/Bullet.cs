@@ -19,11 +19,13 @@ namespace MinimalMiner.Entity
         private void OnEnable()
         {
             EventManager.onUpdateGameState += UpdateGameState;
+            PlayerPreferences.updateTheme += UpdateTheme;
         }
 
         private void OnDisable()
         {
             EventManager.onUpdateGameState -= UpdateGameState;
+            PlayerPreferences.updateTheme -= UpdateTheme;
         }
 
         private void Update()
@@ -44,6 +46,11 @@ namespace MinimalMiner.Entity
         private void UpdateGameState(GameState newState, GameState prevState)
         {
             currState = newState;
+        }
+
+        private void UpdateTheme(Theme theme)
+        {
+            sprite.material.color = theme.sprite_player;
         }
 
         public void Setup(Vector3 vel)

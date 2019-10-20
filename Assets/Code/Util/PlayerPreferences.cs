@@ -14,6 +14,11 @@ namespace MinimalMiner.Util
             get; private set;
         }
 
+        public Theme[] Themes
+        {
+            get; private set;
+        }
+
         private void Awake()
         {
             InputDefinitions input = new InputDefinitions
@@ -26,6 +31,24 @@ namespace MinimalMiner.Util
                 Ship_Fire = KeyCode.Space
             };
             Controls = input;
+        }
+
+        public delegate void UpdateTheme(Theme theme);
+        public static event UpdateTheme updateTheme;
+
+        private void OnEnable()
+        {
+            EventManager.onSelectTheme += SelectTheme;
+        }
+
+        private void OnDisable()
+        {
+            EventManager.onSelectTheme -= SelectTheme;
+        }
+
+        public void SelectTheme(int themeIndex)
+        {
+            updateTheme(Themes[themeIndex]);
         }
     }
 }

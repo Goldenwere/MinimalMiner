@@ -4,7 +4,6 @@ using UnityEngine;
 using UnityEngine.UI;
 using TMPro;
 using MinimalMiner.Util;
-using MinimalMiner.Themes;
 
 namespace MinimalMiner.UI
 {
@@ -48,13 +47,13 @@ namespace MinimalMiner.UI
 
         private void OnEnable()
         {
-            ThemeManager.updateTheme += UpdateTheme;
+            PlayerPreferences.updateTheme += UpdateTheme;
             EventManager.onUpdateGameState += UpdateGameState;
         }
 
         private void OnDisable()
         {
-            ThemeManager.updateTheme -= UpdateTheme;
+            PlayerPreferences.updateTheme -= UpdateTheme;
             EventManager.onUpdateGameState -= UpdateGameState;
         }
 

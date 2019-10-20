@@ -1,4 +1,6 @@
-﻿using System.Collections;
+﻿#pragma warning disable 0649
+
+using System.Collections;
 using System.Collections.Generic;
 using UnityEngine;
 using MinimalMiner.Util;
@@ -12,7 +14,7 @@ namespace MinimalMiner.Entity
     {
         private GameState currState;
         private PlayerPreferences playerPrefs;
-        [SerializeField] private SpriteRenderer shipMat;
+        [SerializeField] private SpriteRenderer sprite;
 
         // Ship physics for current movement
         private Vector3 shipPos;
@@ -50,11 +52,13 @@ namespace MinimalMiner.Entity
         private void OnEnable()
         {
             EventManager.onUpdateGameState += UpdateGameState;
+            PlayerPreferences.updateTheme += UpdateTheme;
         }
 
         private void OnDisable()
         {
             EventManager.onUpdateGameState -= UpdateGameState;
+            PlayerPreferences.updateTheme -= UpdateTheme;
         }
 
         private void Update()
@@ -69,6 +73,11 @@ namespace MinimalMiner.Entity
         private void UpdateGameState(GameState newState, GameState prevState)
         {
             currState = newState;
+        }
+
+        private void UpdateTheme(Theme theme)
+        {
+            sprite.material.color = theme.sprite_player;
         }
 
         private void PlayerMovement()
@@ -120,7 +129,7 @@ namespace MinimalMiner.Entity
                 // Set up its velocity and color based on current theme (aka the ship's color{)
                 Bullet bulletBeh = bullet.GetComponentInChildren<Bullet>();
                 bulletBeh.Setup(new Vector3(shipDir.x * 0.25f, shipDir.y * 0.25f));
-                bullet.GetComponentInChildren<SpriteRenderer>().material.color = shipMat.material.color;
+                bullet.GetComponentInChildren<SpriteRenderer>().material.color = sprite.material.color;
 
                 // Reset fire timer to limit firing, and play the firing sound
                 fireTimer = 0;

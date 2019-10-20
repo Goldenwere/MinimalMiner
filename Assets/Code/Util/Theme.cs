@@ -1,6 +1,6 @@
 ﻿using UnityEngine;
 
-namespace MinimalMiner.Themes
+namespace MinimalMiner.Util
 {
     /// <summary>
     /// Represents a set of colors and sprites that are applied to the game's UI, HUD, etc.
@@ -70,6 +70,20 @@ namespace MinimalMiner.Themes
 
         #endregion
 
+        #region Sprites
+
+        /// <summary>
+        /// The color used for player (bullets and ship)
+        /// </summary>
+        public Color32 sprite_player;
+
+        /// <summary>
+        /// The color used for asteroids
+        /// </summary>
+        public Color32 sprite_asteroid;
+
+        #endregion
+
         #endregion
 
         #region Constructors
@@ -94,6 +108,9 @@ namespace MinimalMiner.Themes
             button_active = back;
             button_focus = back;
             button_disabled = back;
+
+            sprite_player = fore;
+            sprite_asteroid = fore;
         }
 
         #endregion
