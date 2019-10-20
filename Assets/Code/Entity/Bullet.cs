@@ -1,5 +1,5 @@
-﻿using System.Collections;
-using System.Collections.Generic;
+﻿#pragma warning disable 0649
+
 using UnityEngine;
 using MinimalMiner.Util;
 

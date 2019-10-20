@@ -1,6 +1,6 @@
 ﻿using UnityEngine;
 
-namespace MinimalMiner.Util
+namespace MinimalMiner
 {
     /// <summary>
     /// Represents a set of colors and sprites that are applied to the game's UI, HUD, etc.
@@ -114,5 +114,19 @@ namespace MinimalMiner.Util
         }
 
         #endregion
+    }
+
+    /// <summary>
+    /// Defines customizable controls
+    /// </summary>
+    public struct InputDefinitions
+    {
+        public KeyCode Ship_Forward;
+        public KeyCode Ship_Reverse;
+        public KeyCode Ship_CW;
+        public KeyCode Ship_CCW;
+        public KeyCode Ship_Fire;
+
+        public KeyCode Menu_Pause;
     }
 }
