@@ -45,5 +45,10 @@ namespace MinimalMiner.Entity
         {
             currState = newState;
         }
+
+        public void Setup(Vector3 vel)
+        {
+            Vel = vel;
+        }
     }
 }

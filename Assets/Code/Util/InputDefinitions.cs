@@ -13,6 +13,7 @@ namespace MinimalMiner.Util
         public KeyCode Ship_Reverse;
         public KeyCode Ship_CW;
         public KeyCode Ship_CCW;
+        public KeyCode Ship_Fire;
 
         public KeyCode Menu_Pause;
     }

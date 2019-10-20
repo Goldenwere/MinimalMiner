@@ -13,5 +13,19 @@ namespace MinimalMiner.Util
         {
             get; private set;
         }
+
+        private void Awake()
+        {
+            InputDefinitions input = new InputDefinitions
+            {
+                Menu_Pause = KeyCode.Escape,
+                Ship_Forward = KeyCode.W,
+                Ship_Reverse = KeyCode.S,
+                Ship_CW = KeyCode.D,
+                Ship_CCW = KeyCode.A,
+                Ship_Fire = KeyCode.Space
+            };
+            Controls = input;
+        }
     }
 }
