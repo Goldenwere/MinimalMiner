@@ -56,3 +56,28 @@ The Util namespace contains various utility classes that other namespaces depend
 
 - EventManager
 - PlayerPreferences
+
+------
+------
+
+# Roadmap
+
+## 1.0.0
+
+Very similar functionality to the project that this was based off of
+
+## TBA 1
+
+Saving and loading theme files, game sprites (asteroid array, player, etc.) are part of themes
+
+## TBA 2
+
+Saving and loading controls
+
+## TBA 3
+
+Splitting up ship aspects such as weaponry, defenses, etc; has different sprites (bullets, ship, etc), properties (speed, etc.)
+
+## TBA 4
+
+Some sort of restricted zoning, asteroids despawn outside zone (like screen-wrapping except not)
