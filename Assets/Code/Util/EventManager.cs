@@ -38,12 +38,20 @@ namespace MinimalMiner.Util
             }
         }
 
+        /// <summary>
+        /// Updates the current GameState and passes this update to relevant objects
+        /// </summary>
+        /// <param name="newState"></param>
         public void UpdateGameState(GameState newState)
         {
             OnUpdateGameState(newState, currState);
             currState = newState;
         }
 
+        /// <summary>
+        /// Handles a theme selection in the settings menu
+        /// </summary>
+        /// <param name="themeIndex">The index of the theme selected in the settings menu</param>
         public void UpdateTheme(int themeIndex)
         {
             OnSelectTheme(themeIndex);

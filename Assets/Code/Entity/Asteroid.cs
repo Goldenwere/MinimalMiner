@@ -53,6 +53,10 @@ namespace MinimalMiner.Entity
             }
         }
 
+        /// <summary>
+        /// Handles collision between this asteroid and another object in the scene
+        /// </summary>
+        /// <param name="collision">Holds the collision information</param>
         private void OnCollisionEnter(Collision collision)
         {
             if (collision.gameObject.tag == "asteroid")
@@ -80,16 +84,29 @@ namespace MinimalMiner.Entity
             Type = type;
         }
 
+        /// <summary>
+        /// Called when the current GameState is changed
+        /// </summary>
+        /// <param name="newState">The new GameState</param>
+        /// <param name="prevState">The previous GameState</param>
         private void UpdateGameState(GameState newState, GameState prevState)
         {
             currState = newState;
         }
 
+        /// <summary>
+        /// Called when the game theme is changed
+        /// </summary>
+        /// <param name="theme">The new theme properties</param>
         private void UpdateTheme(Theme theme)
         {
             sprite.material.color = theme.sprite_asteroid;
         }
 
+        /// <summary>
+        /// Handles splitting an asteroid if an asteroid is large
+        /// </summary>
+        /// <returns>A list of newly split asteroids (returns null if a small asteroid)</returns>
         private List<GameObject> Split()
         {
             List<GameObject> newAsteroids = new List<GameObject>();

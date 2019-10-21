@@ -7,15 +7,32 @@ namespace MinimalMiner.Util
     /// </summary>
     public class PlayerPreferences : MonoBehaviour
     {
+        /// <summary>
+        /// The player's control preferences
+        /// </summary>
         public InputDefinitions Controls
         {
             get; private set;
         }
-
+        
+        /// <summary>
+        /// The themes that the player has installed
+        /// </summary>
         public Theme[] Themes
         {
             get; private set;
         }
+
+        /// <summary>
+        /// The player's current theme preference
+        /// </summary>
+        public Theme CurrentTheme
+        {
+            get; private set;
+        }
+
+        public delegate void UpdateThemeHandler(Theme theme);
+        public static event UpdateThemeHandler UpdateTheme;
 
         private void Awake()
         {
@@ -31,9 +48,6 @@ namespace MinimalMiner.Util
             Controls = input;
         }
 
-        public delegate void UpdateThemeHandler(Theme theme);
-        public static event UpdateThemeHandler UpdateTheme;
-
         private void OnEnable()
         {
             EventManager.OnSelectTheme += SelectTheme;
@@ -44,9 +58,14 @@ namespace MinimalMiner.Util
             EventManager.OnSelectTheme -= SelectTheme;
         }
 
-        public void SelectTheme(int themeIndex)
+        /// <summary>
+        /// Handles the updating of the player's current theme and passing the update to all objects that are theme-able
+        /// </summary>
+        /// <param name="themeIndex">The index of the theme selected in the settings menu</param>
+        private void SelectTheme(int themeIndex)
         {
-            UpdateTheme(Themes[themeIndex]);
+            CurrentTheme = Themes[themeIndex];
+            UpdateTheme(CurrentTheme);
         }
     }
 }
