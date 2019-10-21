@@ -49,14 +49,14 @@ namespace MinimalMiner.Entity
 
         private void OnEnable()
         {
-            EventManager.onUpdateGameState += UpdateGameState;
-            PlayerPreferences.updateTheme += UpdateTheme;
+            EventManager.OnUpdateGameState += UpdateGameState;
+            PlayerPreferences.UpdateTheme += UpdateTheme;
         }
 
         private void OnDisable()
         {
-            EventManager.onUpdateGameState -= UpdateGameState;
-            PlayerPreferences.updateTheme -= UpdateTheme;
+            EventManager.OnUpdateGameState -= UpdateGameState;
+            PlayerPreferences.UpdateTheme -= UpdateTheme;
         }
 
         private void Update()

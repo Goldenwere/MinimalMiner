@@ -1,5 +1,6 @@
 ﻿#pragma warning disable 0649
 
+using System.Collections.Generic;
 using UnityEngine;
 using MinimalMiner.Util;
 
@@ -28,18 +29,20 @@ namespace MinimalMiner.Entity
 
         // Needed for tracking the current state of the asteroid
         private GameState currState;
+        private int currHealth;
+        private AsteroidManager asteroidMgr;
         [SerializeField] private SpriteRenderer sprite;
 
         private void OnEnable()
         {
-            EventManager.onUpdateGameState += UpdateGameState;
-            PlayerPreferences.updateTheme += UpdateTheme;
+            EventManager.OnUpdateGameState += UpdateGameState;
+            PlayerPreferences.UpdateTheme += UpdateTheme;
         }
 
         private void OnDisable()
         {
-            EventManager.onUpdateGameState -= UpdateGameState;
-            PlayerPreferences.updateTheme -= UpdateTheme;
+            EventManager.OnUpdateGameState -= UpdateGameState;
+            PlayerPreferences.UpdateTheme -= UpdateTheme;
         }
 
         private void Update()
@@ -47,6 +50,24 @@ namespace MinimalMiner.Entity
             if (currState == GameState.play)
             {
                 transform.position += Vel;
+            }
+        }
+
+        private void OnCollisionEnter(Collision collision)
+        {
+            if (collision.gameObject.tag == "asteroid")
+            {
+                // TO-DO: Handle bouncing for same-layer asteroids
+            }
+
+            else if (collision.gameObject.tag == "player")
+            {
+                // TO-DO: Handle health decrementation
+            }
+
+            if (currHealth <= 0)
+            {
+                asteroidMgr.OnAsteroidDestruction(gameObject, Split());
             }
         }
 
@@ -67,6 +88,13 @@ namespace MinimalMiner.Entity
         private void UpdateTheme(Theme theme)
         {
             sprite.material.color = theme.sprite_asteroid;
+        }
+
+        private List<GameObject> Split()
+        {
+            List<GameObject> newAsteroids = new List<GameObject>();
+
+            return newAsteroids;
         }
     }
 }

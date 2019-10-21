@@ -9,11 +9,11 @@ namespace MinimalMiner.Util
     /// </summary>
     public class EventManager : MonoBehaviour
     {
-        public delegate void OnSelectTheme(int themeIndex);
-        public static event OnSelectTheme onSelectTheme;
+        public delegate void OnSelectThemeDelegate(int themeIndex);
+        public static event OnSelectThemeDelegate OnSelectTheme = delegate { };
 
-        public delegate void OnUpdateGameState(GameState newState, GameState prevState);
-        public static event OnUpdateGameState onUpdateGameState;
+        public delegate void OnUpdateGameStateDelegate(GameState newState, GameState prevState);
+        public static event OnUpdateGameStateDelegate OnUpdateGameState = delegate { };
 
         private GameState currState;
         public InputDefinitions Controls
@@ -40,13 +40,13 @@ namespace MinimalMiner.Util
 
         public void UpdateGameState(GameState newState)
         {
-            onUpdateGameState(newState, currState);
+            OnUpdateGameState(newState, currState);
             currState = newState;
         }
 
         public void UpdateTheme(int themeIndex)
         {
-            onSelectTheme(themeIndex);
+            OnSelectTheme(themeIndex);
         }
     }
 }

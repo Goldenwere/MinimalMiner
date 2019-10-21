@@ -31,22 +31,22 @@ namespace MinimalMiner.Util
             Controls = input;
         }
 
-        public delegate void UpdateTheme(Theme theme);
-        public static event UpdateTheme updateTheme;
+        public delegate void UpdateThemeHandler(Theme theme);
+        public static event UpdateThemeHandler UpdateTheme;
 
         private void OnEnable()
         {
-            EventManager.onSelectTheme += SelectTheme;
+            EventManager.OnSelectTheme += SelectTheme;
         }
 
         private void OnDisable()
         {
-            EventManager.onSelectTheme -= SelectTheme;
+            EventManager.OnSelectTheme -= SelectTheme;
         }
 
         public void SelectTheme(int themeIndex)
         {
-            updateTheme(Themes[themeIndex]);
+            UpdateTheme(Themes[themeIndex]);
         }
     }
 }

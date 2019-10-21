@@ -47,14 +47,14 @@ namespace MinimalMiner.UI
 
         private void OnEnable()
         {
-            PlayerPreferences.updateTheme += UpdateTheme;
-            EventManager.onUpdateGameState += UpdateGameState;
+            PlayerPreferences.UpdateTheme += UpdateTheme;
+            EventManager.OnUpdateGameState += UpdateGameState;
         }
 
         private void OnDisable()
         {
-            PlayerPreferences.updateTheme -= UpdateTheme;
-            EventManager.onUpdateGameState -= UpdateGameState;
+            PlayerPreferences.UpdateTheme -= UpdateTheme;
+            EventManager.OnUpdateGameState -= UpdateGameState;
         }
 
         /// <summary>
