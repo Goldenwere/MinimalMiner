@@ -81,3 +81,7 @@ Splitting up ship aspects such as weaponry, defenses, etc; has different sprites
 ## TBA 4
 
 Some sort of restricted zoning, asteroids despawn outside zone (like screen-wrapping except not)
+
+## TBA 5
+
+Physics: use original player movement physics as 'dampening,' have a non-dampening mode (e.g. make turning independent of velocity in this mode, achieves drifting effect)
