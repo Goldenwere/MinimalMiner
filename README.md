@@ -15,7 +15,7 @@ PC (Windows, Mac (TBA), Linux (TBA)), Mobile TBA
 
 | File/Directory | Contents |
 | -------------- | -------- |
-| [Assets/Code](CyberDungeon/Assets/Code) | Source code |
+| [Assets/Code](Assets/Code) | Source code |
 | [Docs]() | Project-related assets (e.g. documentation) N/A |
 
 ## License
