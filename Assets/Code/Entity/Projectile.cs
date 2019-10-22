@@ -1,4 +1,5 @@
 ﻿#pragma warning disable 0649
+#pragma warning disable 0108
 
 using UnityEngine;
 using MinimalMiner.Util;
@@ -7,12 +8,11 @@ namespace MinimalMiner.Entity
 {
     public class Projectile : MonoBehaviour
     {
-        private Vector3 vel;
-
         private float aliveTimer;
         private GameState currState;
         [SerializeField] private SpriteRenderer sprite;
         [SerializeField] private ColliderListener colliderListener;
+        [SerializeField] private Rigidbody2D rigidbody;
 
         private void OnEnable()
         {
@@ -33,8 +33,6 @@ namespace MinimalMiner.Entity
         {
             if (currState == GameState.play)
             {
-                transform.position += vel;
-
                 // Increment timer and destroy object when object has existed for longer than 3 seconds
                 aliveTimer += Time.deltaTime;
                 if (aliveTimer > 3f)
@@ -52,8 +50,9 @@ namespace MinimalMiner.Entity
             if (collision.gameObject.tag == "asteroid")
             {
                 collision.gameObject.GetComponent<Asteroid>().TakeDamage(5f);
-                Destroy(gameObject);
             }
+
+            Destroy(gameObject);
         }
 
         private void UpdateGameState(GameState newState, GameState prevState)
@@ -66,9 +65,9 @@ namespace MinimalMiner.Entity
             sprite.material.color = theme.sprite_player;
         }
 
-        public void Setup(Vector3 vel)
+        public void Setup(Vector2 vel)
         {
-            this.vel = vel;
+            rigidbody.AddForce(vel);
         }
     }
 }

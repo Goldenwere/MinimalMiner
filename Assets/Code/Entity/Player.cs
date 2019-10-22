@@ -31,10 +31,12 @@ namespace MinimalMiner.Entity
         [SerializeField] private Transform firesource;
         private float fireTimer;
         private float fireRate;
+        private float projectileSpeed;
 
         private void Start()
         {
             fireRate = 0.2f;
+            projectileSpeed = 100f;
             shipRotSpd = 5f;
             shipMaxSpd = 5f;
             shipAccRate = 5f;
@@ -115,7 +117,7 @@ namespace MinimalMiner.Entity
 
                 // Set up its velocity and color based on current theme (aka the ship's color)
                 Projectile bulletBeh = bullet.GetComponentInChildren<Projectile>();
-                bulletBeh.Setup(new Vector3(transform.right.x * 0.25f, transform.right.y * 0.25f));
+                bulletBeh.Setup(new Vector2(transform.right.x * projectileSpeed, transform.right.y * projectileSpeed));
                 bullet.GetComponentInChildren<SpriteRenderer>().material.color = sprite.material.color;
 
                 // Reset fire timer to limit firing, and play the firing sound
