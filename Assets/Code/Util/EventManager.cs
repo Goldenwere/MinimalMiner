@@ -86,8 +86,9 @@ namespace MinimalMiner.Util
         /// <param name="newState">The new state to update to</param>
         public void UpdateGameState(GameState newState)
         {
-            OnUpdateGameState(newState, CurrState);
+            GameState prevState = CurrState;
             CurrState = newState;
+            OnUpdateGameState(newState, prevState);
             UpdateTimeState();
         }
 
@@ -98,8 +99,9 @@ namespace MinimalMiner.Util
         public void UpdateGameState(string desiredState)
         {
             Enum.TryParse<GameState>(desiredState, out GameState newState);
-            OnUpdateGameState(newState, CurrState);
+            GameState prevState = CurrState;
             CurrState = newState;
+            OnUpdateGameState(newState, prevState);
             UpdateTimeState();
         }
 

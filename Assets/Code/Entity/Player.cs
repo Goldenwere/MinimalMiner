@@ -49,15 +49,12 @@ namespace MinimalMiner.Entity
             shipRotSpd = 1f;
             shipMaxSpd = 10f;
             shipAccRate = 1f;
-            shipAcc = new Vector2(0, 0);
-            transform.position = new Vector3(0, 0);
 
             GameObject managers = GameObject.FindWithTag("managers");
             playerPrefs = managers.GetComponent<PlayerPreferences>();
             eventMgr = managers.GetComponent<EventManager>();
 
-            playerHealth = 10f;
-            eventMgr.UpdateHUDElement(HUDElement.health, playerHealth.ToString());
+            ResetPlayer();
         }
 
         /// <summary>
@@ -159,6 +156,24 @@ namespace MinimalMiner.Entity
                 bulletSound.Play();
                 rigidbody.AddForce(-shipAcc * 5f);
             }
+        }
+
+        /// <summary>
+        /// Handles resetting player to the center of the screen with max health and zero speed/acceleration
+        /// </summary>
+        public void ResetPlayer()
+        {
+            // Reset state and stats
+            playerHealth = 10f;
+            eventMgr.UpdateHUDElement(HUDElement.health, playerHealth.ToString());
+
+            // Reset transform
+            transform.position = Vector3.zero;
+            transform.rotation = Quaternion.identity;
+
+            // Reset physics
+            shipAcc = Vector2.zero;
+            rigidbody.velocity = Vector2.zero;
         }
 
         /// <summary>

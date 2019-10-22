@@ -54,11 +54,13 @@ namespace MinimalMiner.Entity
         {
             currState = newState;
 
+            // Spawn asteroids at the start of gameplay
             if (newState == GameState.play && prevState == GameState.main)
             {
                 SpawnAsteroids();
             }
 
+            // Despawn asteroids at the end of gameplay
             else if (newState == GameState.main && prevState == GameState.pause
                 || newState == GameState.main && prevState == GameState.death)
             {
