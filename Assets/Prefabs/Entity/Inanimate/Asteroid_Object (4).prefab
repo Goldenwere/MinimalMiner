@@ -49,6 +49,8 @@ MonoBehaviour:
   m_EditorClassIdentifier: 
   colliderListener: {fileID: 48835326506426070}
   sprite: {fileID: 675552376118026469}
+  rigidbody: {fileID: 6596482357562244851, guid: 7dce6391c8174a14c942c49ef11ad72d,
+    type: 3}
 --- !u!212 &675552376118026469
 SpriteRenderer:
   m_ObjectHideFlags: 0

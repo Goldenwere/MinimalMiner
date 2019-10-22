@@ -1,4 +1,5 @@
 ﻿#pragma warning disable 0649
+#pragma warning disable 0108
 
 using System.Collections.Generic;
 using UnityEngine;
@@ -13,18 +14,13 @@ namespace MinimalMiner.Entity
     {
         // Needed for tracking the current state of the asteroid
         private GameState currState;
-        private float currHealth;
-        private Vector3 vel;
+        private float currHealth = 10f;
         private AsteroidType type;
         private AsteroidSize size;
         private AsteroidManager asteroidMgr;
         [SerializeField] private ColliderListener colliderListener;
         [SerializeField] private SpriteRenderer sprite;
-
-        private void Start()
-        {
-            currHealth = 10f;
-        }
+        [SerializeField] private Rigidbody2D rigidbody;
 
         private void OnEnable()
         {
@@ -49,18 +45,29 @@ namespace MinimalMiner.Entity
         {
             if (collision.gameObject.tag == "asteroid")
             {
-                // TO-DO: Handle bouncing for same-layer asteroids
+                collision.gameObject.GetComponentInParent<Asteroid>().TakeDamage(1f);
+                TakeDamage(1f);
             }
 
             else if (collision.gameObject.tag == "player")
             {
                 collision.gameObject.GetComponentInParent<Player>().TakeDamage(1f);
+                TakeDamage(1f);
             }
+        }
 
-            /*if (currHealth <= 0)
+        /// <summary>
+        /// Contributes damage to the asteroid
+        /// </summary>
+        /// <param name="damageDone">The damage to contribute</param>
+        public void TakeDamage(float damageDone)
+        {
+            currHealth -= damageDone;
+
+            if (currHealth <= 0)
             {
                 asteroidMgr.OnAsteroidDestruction(gameObject, Split());
-            }*/
+            }
         }
 
         /// <summary>
@@ -70,7 +77,8 @@ namespace MinimalMiner.Entity
         /// <param name="size">The size of the asteroid</param>
         /// <param name="velocity">The initial velocity of the asteroid</param>
         /// <param name="position">The initial position of the asteroid</param>
-        public void Setup(AsteroidType type, AsteroidSize size, Vector2 velocity, Vector3 position)
+        /// <param name="manager">The asteroid manager that spawned this asteroid</param>
+        public void Setup(AsteroidType type, AsteroidSize size, Vector2 velocity, Vector3 position, AsteroidManager manager)
         {
             this.type = type;
             this.size = size;
@@ -91,6 +99,7 @@ namespace MinimalMiner.Entity
 
             GetComponent<Rigidbody2D>().AddForce(velocity * 10f);
             transform.position = position;
+            asteroidMgr = manager;
         }
 
         /// <summary>
@@ -126,7 +135,7 @@ namespace MinimalMiner.Entity
 
                 for (int i = 0; i < amountToSpawn; i++)
                 {
-                    newAsteroids.Add(asteroidMgr.SpawnAsteroid(type, (int)size, vel, transform.position));
+                    newAsteroids.Add(asteroidMgr.SpawnAsteroid(type, (int)size, rigidbody.velocity, transform.position));
                 }
             }
 

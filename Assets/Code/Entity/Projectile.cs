@@ -49,7 +49,11 @@ namespace MinimalMiner.Entity
         /// </summary>
         private void OnCollisionDetected(Collision2D collision)
         {
-
+            if (collision.gameObject.tag == "asteroid")
+            {
+                collision.gameObject.GetComponent<Asteroid>().TakeDamage(5f);
+                Destroy(gameObject);
+            }
         }
 
         private void UpdateGameState(GameState newState, GameState prevState)

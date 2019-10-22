@@ -10,7 +10,7 @@ namespace MinimalMiner.Entity
     public class ColliderListener : MonoBehaviour
     {
         public delegate void OnCollisionDetectedDelegate(Collision2D collision);
-        public event OnCollisionDetectedDelegate OnCollisionDetected;
+        public event OnCollisionDetectedDelegate OnCollisionDetected = delegate { };
 
         private void OnCollisionEnter2D(Collision2D collision)
         {

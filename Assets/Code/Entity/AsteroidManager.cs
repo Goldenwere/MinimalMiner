@@ -70,7 +70,7 @@ namespace MinimalMiner.Entity
 
             Asteroid behaviour = asteroid.GetComponent<Asteroid>();
 
-            behaviour.Setup(AsteroidType.general, (AsteroidSize)size, velocity, position);
+            behaviour.Setup(AsteroidType.general, (AsteroidSize)size, velocity, position, this);
 
             return asteroid;
         }
@@ -87,13 +87,13 @@ namespace MinimalMiner.Entity
         {
             int prefab = Random.Range(0, 8);
             int size = Random.Range(0, maxSize);
-            Vector2 velocity = new Vector2(originalVelocity.x + Random.Range(-0.2f, 0.2f), originalVelocity.y + Random.Range(-0.2f, 0.2f));
+            Vector2 velocity = new Vector2(originalVelocity.x + Random.Range(-5f, 5f), originalVelocity.y + Random.Range(-5f, 5f));
 
             GameObject asteroid = Instantiate(asteroidPrefabs[prefab]);
 
             Asteroid behaviour = asteroid.GetComponentInChildren<Asteroid>();
 
-            behaviour.Setup(type, (AsteroidSize)size, velocity, originalPosition);
+            behaviour.Setup(type, (AsteroidSize)size, velocity, originalPosition, this);
 
             return asteroid;
         }
