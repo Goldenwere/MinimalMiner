@@ -25,6 +25,7 @@ namespace MinimalMiner.Util
         private void Start()
         {
             Controls = playerPrefs.Controls;
+            UpdateGameState(GameState.play);
         }
 
         private void Update()
@@ -34,6 +35,14 @@ namespace MinimalMiner.Util
                 if (Input.GetKeyDown(Controls.Menu_Pause))
                 {
                     UpdateGameState(GameState.pause);
+                }
+            }
+
+            else if (currState == GameState.pause)
+            {
+                if (Input.GetKeyDown(Controls.Menu_Pause))
+                {
+                    UpdateGameState(GameState.play);
                 }
             }
         }

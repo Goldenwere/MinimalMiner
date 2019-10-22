@@ -119,11 +119,14 @@ namespace MinimalMiner.Entity
         {
             List<GameObject> newAsteroids = new List<GameObject>();
 
-            int amountToSpawn = Random.Range(2, 5);
-
-            for (int i = 0; i < amountToSpawn; i++)
+            if (!(size == AsteroidSize.small))
             {
-                newAsteroids.Add(asteroidMgr.SpawnAsteroid(type, (int)size));
+                int amountToSpawn = Random.Range(2, 5);
+
+                for (int i = 0; i < amountToSpawn; i++)
+                {
+                    newAsteroids.Add(asteroidMgr.SpawnAsteroid(type, (int)size, vel, transform.position));
+                }
             }
 
             return newAsteroids;
