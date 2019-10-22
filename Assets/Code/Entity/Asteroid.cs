@@ -77,14 +77,14 @@ namespace MinimalMiner.Entity
             switch(size)
             {
                 case AsteroidSize.large:
-                    sprite.transform.localScale = new Vector3(0.2f, 0.2f, 0.2f);
+                    sprite.transform.localScale = new Vector3(4f, 4f, 4f);
                     break;
                 case AsteroidSize.medium:
-                    sprite.transform.localScale = new Vector3(0.15f, 0.15f, 0.15f);
+                    sprite.transform.localScale = new Vector3(2f, 2f, 2f);
                     break;
                 case AsteroidSize.small:
                 default:
-                    sprite.transform.localScale = new Vector3(0.1f, 0.1f, 0.1f);
+                    sprite.transform.localScale = new Vector3(1f, 1f, 1f);
                     break;
             }
 

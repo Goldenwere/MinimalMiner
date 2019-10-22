@@ -1,4 +1,6 @@
-﻿using System.Collections;
+﻿#pragma warning disable 0649
+
+using System.Collections;
 using System.Collections.Generic;
 using UnityEngine;
 
@@ -10,7 +12,7 @@ namespace MinimalMiner.Entity
     public class AsteroidManager : MonoBehaviour
     {
         private List<GameObject> asteroids;
-        private GameObject[] asteroidPrefabs;
+        [SerializeField] private GameObject[] asteroidPrefabs;
 
         private void Start()
         {
