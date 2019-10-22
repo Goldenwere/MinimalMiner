@@ -1,5 +1,6 @@
 ﻿#pragma warning disable 0649
 
+using System;
 using UnityEngine;
 
 namespace MinimalMiner.Util
@@ -53,9 +54,20 @@ namespace MinimalMiner.Util
         /// <summary>
         /// Updates the current GameState and passes this update to relevant objects
         /// </summary>
-        /// <param name="newState"></param>
+        /// <param name="newState">The new state to update to</param>
         public void UpdateGameState(GameState newState)
         {
+            OnUpdateGameState(newState, CurrState);
+            CurrState = newState;
+        }
+
+        /// <summary>
+        /// Updates the current GameState and passes this update to relevant objects
+        /// </summary>
+        /// <param name="desiredState">The desired state to update to</param>
+        public void UpdateGameState(string desiredState)
+        {
+            Enum.TryParse<GameState>(desiredState, out GameState newState);
             OnUpdateGameState(newState, CurrState);
             CurrState = newState;
         }
@@ -67,6 +79,14 @@ namespace MinimalMiner.Util
         public void UpdateTheme(int themeIndex)
         {
             OnSelectTheme(themeIndex);
+        }
+
+        /// <summary>
+        /// Quits the game
+        /// </summary>
+        public void CallQuit()
+        {
+            Application.Quit();
         }
     }
 }
