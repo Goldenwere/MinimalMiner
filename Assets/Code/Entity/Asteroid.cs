@@ -16,6 +16,7 @@ namespace MinimalMiner.Entity
         private int currHealth;
         private Vector3 vel;
         private AsteroidType type;
+        private AsteroidSize size;
         private AsteroidManager asteroidMgr;
         [SerializeField] private SpriteRenderer sprite;
 
@@ -71,6 +72,7 @@ namespace MinimalMiner.Entity
         public void Setup(AsteroidType type, AsteroidSize size, Vector3 velocity, Vector3 position)
         {
             this.type = type;
+            this.size = size;
 
             switch(size)
             {
@@ -116,6 +118,13 @@ namespace MinimalMiner.Entity
         private List<GameObject> Split()
         {
             List<GameObject> newAsteroids = new List<GameObject>();
+
+            int amountToSpawn = Random.Range(2, 5);
+
+            for (int i = 0; i < amountToSpawn; i++)
+            {
+                newAsteroids.Add(asteroidMgr.SpawnAsteroid(type, (int)size));
+            }
 
             return newAsteroids;
         }
