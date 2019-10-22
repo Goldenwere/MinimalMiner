@@ -5,6 +5,8 @@ TagManager:
   serializedVersion: 2
   tags:
   - asteroid
+  - player
+  - managers
   layers:
   - Default
   - TransparentFX

@@ -34,9 +34,9 @@ namespace MinimalMiner.Entity
 
         private void Start()
         {
-            shipRotSpd = 3f;
+            shipRotSpd = 5f;
             shipAccRate = 0.05f;
-            shipDragRate = 0.95f;
+            shipDragRate = 0.975f;
             shipMaxSpd = 0.1f;
             fireRate = 0.2f;
 
@@ -45,6 +45,8 @@ namespace MinimalMiner.Entity
             shipAcc = new Vector3(0, 0);
             shipPos = new Vector3(0, 0);
             transform.position = new Vector3(0, 0);
+
+            playerPrefs = GameObject.FindWithTag("managers").GetComponent<PlayerPreferences>();
         }
 
         private void OnEnable()
@@ -59,7 +61,7 @@ namespace MinimalMiner.Entity
             PlayerPreferences.UpdateTheme -= UpdateTheme;
         }
 
-        private void Update()
+        private void FixedUpdate()
         {
             if (currState == GameState.play)
             {
