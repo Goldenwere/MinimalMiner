@@ -1,4 +1,5 @@
 ﻿#pragma warning disable 0649
+#pragma warning disable 0108
 
 using UnityEngine;
 using MinimalMiner.Util;
@@ -14,19 +15,15 @@ namespace MinimalMiner.Entity
         private PlayerPreferences playerPrefs;
         private EventManager eventMgr;
         [SerializeField] private SpriteRenderer sprite;
+        [SerializeField] private Rigidbody2D rigidbody;
         private float playerHealth;
 
-        // Ship physics for current movement
-        private Vector3 shipPos;
-        private Vector3 shipDir;
-        private Vector3 shipVel;
-        private Vector3 shipAcc;
-
-        // Ship physics "limitations"
+        // Variables for ship physics
+        private Vector2 shipAcc;
         private float shipRotSpd;
+        private float shipMaxSpd;
         private float shipAccRate;
         private float shipDragRate;
-        private float shipMaxSpd;
 
         // Variables for ship firing
         [SerializeField] GameObject bulletPrefab;
@@ -36,16 +33,12 @@ namespace MinimalMiner.Entity
 
         private void Start()
         {
-            shipRotSpd = 5f;
-            shipAccRate = 0.05f;
-            shipDragRate = 0.975f;
-            shipMaxSpd = 0.1f;
             fireRate = 0.2f;
-
-            shipDir = new Vector3(1, 0);
-            shipVel = new Vector3(0, 0);
-            shipAcc = new Vector3(0, 0);
-            shipPos = new Vector3(0, 0);
+            shipRotSpd = 5f;
+            shipMaxSpd = 5f;
+            shipAccRate = 5f;
+            shipDragRate = 0.975f;
+            shipAcc = new Vector2(0, 0);
             transform.position = new Vector3(0, 0);
 
             GameObject managers = GameObject.FindWithTag("managers");
@@ -93,38 +86,23 @@ namespace MinimalMiner.Entity
             // Handle ship turning
             if (Input.GetKey(playerPrefs.Controls.Ship_CCW))
             {
-                shipDir = Quaternion.Euler(0, 0, shipRotSpd) * shipDir;
-                shipVel = shipVel.magnitude * shipDir;
+                transform.Rotate(0, 0, shipRotSpd);
             }
 
             if (Input.GetKey(playerPrefs.Controls.Ship_CW))
             {
-                shipDir = Quaternion.Euler(0, 0, -shipRotSpd) * shipDir;
-                shipVel = shipVel.magnitude * shipDir;
+                transform.Rotate(0, 0, -shipRotSpd);
             }
 
-            // Handle ship acceleration
-            shipAcc = shipAccRate * shipDir * Time.deltaTime;
+            shipAcc = shipAccRate * transform.right * (Time.fixedDeltaTime * 50f);
 
             if (Input.GetKey(playerPrefs.Controls.Ship_Forward))
             {
-                shipVel += shipAcc;
+                if (rigidbody.velocity.magnitude < shipMaxSpd)
+                {
+                    rigidbody.AddForce(shipAcc);
+                }
             }
-
-            else
-            {
-                shipVel = shipVel * shipDragRate;
-            }
-
-            shipVel = Vector3.ClampMagnitude(shipVel, shipMaxSpd);
-            shipPos += shipVel;
-
-            // Set transform
-            transform.position = shipPos;
-
-            float zAngle = Mathf.Atan2(shipDir.y, shipDir.x);
-            zAngle *= Mathf.Rad2Deg;
-            transform.rotation = Quaternion.Euler(0, 0, zAngle);
         }
 
         private void PlayerFiring()
@@ -137,7 +115,7 @@ namespace MinimalMiner.Entity
 
                 // Set up its velocity and color based on current theme (aka the ship's color{)
                 Projectile bulletBeh = bullet.GetComponentInChildren<Projectile>();
-                bulletBeh.Setup(new Vector3(shipDir.x * 0.25f, shipDir.y * 0.25f));
+                bulletBeh.Setup(new Vector3(transform.right.x * 0.25f, transform.right.y * 0.25f));
                 bullet.GetComponentInChildren<SpriteRenderer>().material.color = sprite.material.color;
 
                 // Reset fire timer to limit firing, and play the firing sound

@@ -302,6 +302,7 @@ MonoBehaviour:
   m_Name: 
   m_EditorClassIdentifier: 
   sprite: {fileID: 558806602634407301}
+  rigidbody: {fileID: 3004072309614854657}
   bulletPrefab: {fileID: 8385927219721995690, guid: 93ce7606e24d1544cb95e144ec62e143,
     type: 3}
   bulletSound: {fileID: 2842819293653186511}
@@ -398,8 +399,8 @@ Rigidbody2D:
   m_UseFullKinematicContacts: 0
   m_UseAutoMass: 0
   m_Mass: 0.25
-  m_LinearDrag: 0
-  m_AngularDrag: 0.05
+  m_LinearDrag: 5
+  m_AngularDrag: 5
   m_GravityScale: 0
   m_Material: {fileID: 6200000, guid: 33ad858af968ee548b7cd7ad102b1870, type: 2}
   m_Interpolate: 0
