@@ -1,22 +1,33 @@
 ﻿#pragma warning disable 0649
 
-using System.Collections;
-using System.Collections.Generic;
 using UnityEngine;
 using TMPro;
 using MinimalMiner.Util;
 
 namespace MinimalMiner.UI
 {
+    /// <summary>
+    /// Handles the in-game HUD
+    /// </summary>
     public class HUDManager : MonoBehaviour
     {
+        #region Fields
+        // Updatable HUD elements
         [SerializeField] TextMeshProUGUI healthText;
+        #endregion
 
+        #region Methods
+        /// <summary>
+        /// Handles subscribing to events
+        /// </summary>
         private void OnEnable()
         {
             EventManager.OnUpdateHUDElement += UpdateElement;
         }
 
+        /// <summary>
+        /// Handles unsubscribing to events
+        /// </summary>
         private void OnDisable()
         {
             EventManager.OnUpdateHUDElement -= UpdateElement;
@@ -34,5 +45,6 @@ namespace MinimalMiner.UI
                 healthText.text = content;
             }
         }
+        #endregion
     }
 }

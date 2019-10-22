@@ -10,31 +10,57 @@ namespace MinimalMiner.Util
     /// </summary>
     public class EventManager : MonoBehaviour
     {
+        #region Fields & Properties
         public delegate void OnSelectThemeDelegate(int themeIndex);
+        /// <summary>
+        /// Informs subscribed objects that a Theme was selected
+        /// </summary>
         public static event OnSelectThemeDelegate OnSelectTheme = delegate { };
 
         public delegate void OnUpdateGameStateDelegate(GameState newState, GameState prevState);
+        /// <summary>
+        /// Informs subscribed objects that the current GameState was changed
+        /// </summary>
         public static event OnUpdateGameStateDelegate OnUpdateGameState = delegate { };
 
         public delegate void OnUpdateHUDElementDelegate(HUDElement element, string content);
+        /// <summary>
+        /// Informs subscribed objects that a HUD element needs updated
+        /// </summary>
         public static event OnUpdateHUDElementDelegate OnUpdateHUDElement = delegate { };
 
+        /// <summary>
+        /// The current GameState that the game is in
+        /// </summary>
         public GameState CurrState
         {
             get; private set;
         }
+
+        /// <summary>
+        /// The current control preferences
+        /// </summary>
         public InputDefinitions Controls
         {
             get; private set;
         }
-        [SerializeField] private PlayerPreferences playerPrefs;
 
+        // Refers to the current player preferences
+        [SerializeField] private PlayerPreferences playerPrefs;
+        #endregion
+
+        /// <summary>
+        /// Handles the start of the object before the first frame
+        /// </summary>
         private void Start()
         {
             Controls = playerPrefs.Controls;
             UpdateGameState(GameState.main);
         }
 
+        /// <summary>
+        /// Updates once per frame
+        /// </summary>
         private void Update()
         {
             if (CurrState == GameState.play)

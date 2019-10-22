@@ -11,9 +11,13 @@ namespace MinimalMiner.Entity
     /// </summary>
     public class Player : MonoBehaviour
     {
+        #region Fields
+        // Core variables
         private GameState currState;
         private PlayerPreferences playerPrefs;
         private EventManager eventMgr;
+
+        // Ship variables
         [SerializeField] private SpriteRenderer sprite;
         [SerializeField] private Rigidbody2D rigidbody;
         private float playerHealth;
@@ -32,13 +36,18 @@ namespace MinimalMiner.Entity
         private float fireTimer;
         private float fireRate;
         private float projectileSpeed;
+        #endregion
 
+        #region Methods
+        /// <summary>
+        /// Handles the start of the object before the first frame
+        /// </summary>
         private void Start()
         {
             fireRate = 0.2f;
             projectileSpeed = 100f;
             shipRotSpd = 5f;
-            shipMaxSpd = 5f;
+            shipMaxSpd = 10f;
             shipAccRate = 5f;
             shipAcc = new Vector2(0, 0);
             transform.position = new Vector3(0, 0);
@@ -51,6 +60,9 @@ namespace MinimalMiner.Entity
             eventMgr.UpdateHUDElement(HUDElement.health, playerHealth.ToString());
         }
 
+        /// <summary>
+        /// Handles subscribing to events
+        /// </summary>
         private void OnEnable()
         {
             EventManager.OnUpdateGameState += UpdateGameState;
@@ -58,13 +70,19 @@ namespace MinimalMiner.Entity
             PlayerPreferences.UpdateTheme += UpdateTheme;
         }
 
+        /// <summary>
+        /// Handles unsubscribing to events
+        /// </summary>
         private void OnDisable()
         {
             EventManager.OnUpdateGameState -= UpdateGameState;
             PlayerPreferences.UpdateTheme -= UpdateTheme;
         }
 
-        private void FixedUpdate()
+        /// <summary>
+        /// Updates once per frame
+        /// </summary>
+        private void Update()
         {
             if (currState == GameState.play)
             {
@@ -73,16 +91,28 @@ namespace MinimalMiner.Entity
             }
         }
 
+        /// <summary>
+        /// Called when the current GameState is updated
+        /// </summary>
+        /// <param name="newState">The new GameState after updating</param>
+        /// <param name="prevState">The previous GameState before updating</param>
         private void UpdateGameState(GameState newState, GameState prevState)
         {
             currState = newState;
         }
 
+        /// <summary>
+        /// Called when the current Theme is updated
+        /// </summary>
+        /// <param name="theme">The new GameTheme properties</param>
         private void UpdateTheme(Theme theme)
         {
             sprite.material.color = theme.sprite_player;
         }
 
+        /// <summary>
+        /// Handles player movement
+        /// </summary>
         private void PlayerMovement()
         {
             // Handle ship turning
@@ -96,6 +126,7 @@ namespace MinimalMiner.Entity
                 transform.Rotate(0, 0, -shipRotSpd);
             }
 
+            // Handle ship acceleration
             shipAcc = shipAccRate * transform.right * (Time.fixedDeltaTime * 50f);
 
             if (Input.GetKey(playerPrefs.Controls.Ship_Forward))
@@ -107,6 +138,9 @@ namespace MinimalMiner.Entity
             }
         }
 
+        /// <summary>
+        /// Handles player firing
+        /// </summary>
         private void PlayerFiring()
         {
             fireTimer += Time.deltaTime;
@@ -136,5 +170,6 @@ namespace MinimalMiner.Entity
             playerHealth -= damageDone;
             eventMgr.UpdateHUDElement(HUDElement.health, playerHealth.ToString());
         }
+        #endregion
     }
 }

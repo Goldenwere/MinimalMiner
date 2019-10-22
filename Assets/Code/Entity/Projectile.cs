@@ -6,14 +6,26 @@ using MinimalMiner.Util;
 
 namespace MinimalMiner.Entity
 {
+    /// <summary>
+    /// Defines a projectile gameobject in the scene
+    /// </summary>
     public class Projectile : MonoBehaviour
     {
+        #region Fields
+        // Core variables
         private float aliveTimer;
         private GameState currState;
+
+        // Projectile variables
         [SerializeField] private SpriteRenderer sprite;
         [SerializeField] private ColliderListener colliderListener;
         [SerializeField] private Rigidbody2D rigidbody;
+        #endregion
 
+        #region Methods
+        /// <summary>
+        /// Handles subscribing to events
+        /// </summary>
         private void OnEnable()
         {
             EventManager.OnUpdateGameState += UpdateGameState;
@@ -22,6 +34,9 @@ namespace MinimalMiner.Entity
             colliderListener.OnCollisionDetected += OnCollisionDetected;
         }
 
+        /// <summary>
+        /// Handles unsubscribing to events
+        /// </summary>
         private void OnDisable()
         {
             EventManager.OnUpdateGameState -= UpdateGameState;
@@ -29,6 +44,9 @@ namespace MinimalMiner.Entity
             colliderListener.OnCollisionDetected -= OnCollisionDetected;
         }
 
+        /// <summary>
+        /// Updates once per frame
+        /// </summary>
         private void Update()
         {
             if (currState == GameState.play)
@@ -55,19 +73,33 @@ namespace MinimalMiner.Entity
             Destroy(gameObject);
         }
 
+        /// <summary>
+        /// Called when the current GameState is updated
+        /// </summary>
+        /// <param name="newState">The new GameState after updating</param>
+        /// <param name="prevState">The previous GameState before updating</param>
         private void UpdateGameState(GameState newState, GameState prevState)
         {
             currState = newState;
         }
 
+        /// <summary>
+        /// Called when the current Theme is updated
+        /// </summary>
+        /// <param name="theme">The new GameTheme properties</param>
         private void UpdateTheme(Theme theme)
         {
             sprite.material.color = theme.sprite_player;
         }
 
+        /// <summary>
+        /// Sets up the projectile on instantiation
+        /// </summary>
+        /// <param name="vel"></param>
         public void Setup(Vector2 vel)
         {
             rigidbody.AddForce(vel);
         }
+        #endregion
     }
 }

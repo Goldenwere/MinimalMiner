@@ -12,6 +12,7 @@ namespace MinimalMiner.UI
     /// </summary>
     public class MenuManager : MonoBehaviour
     {
+        #region Fields
         // Canvases
         [SerializeField] private GameObject canvasMain;
         [SerializeField] private GameObject canvasSettings;
@@ -31,7 +32,9 @@ namespace MinimalMiner.UI
         private Button[] pauseButtons;
         private Button[] deathButtons;
         private TMP_Dropdown[] settingsDropdowns;
+        #endregion
 
+        #region Methods
         /// <summary>
         /// Start is called before the first frame update
         /// </summary>
@@ -45,12 +48,18 @@ namespace MinimalMiner.UI
             GrabUIElements();
         }
 
+        /// <summary>
+        /// Handles subscribing to events
+        /// </summary>
         private void OnEnable()
         {
             PlayerPreferences.UpdateTheme += UpdateTheme;
             EventManager.OnUpdateGameState += UpdateGameState;
         }
 
+        /// <summary>
+        /// Handles unsubscribing to events
+        /// </summary>
         private void OnDisable()
         {
             PlayerPreferences.UpdateTheme -= UpdateTheme;
@@ -81,7 +90,7 @@ namespace MinimalMiner.UI
         /// Handles updates to the theme
         /// </summary>
         /// <param name="theme">The new theme</param>
-        public void UpdateTheme(Theme theme)
+        private void UpdateTheme(Theme theme)
         {
 
         }
@@ -91,7 +100,7 @@ namespace MinimalMiner.UI
         /// </summary>
         /// <param name="newState">The desired game-state</param>
         /// <param name="prevState">The previous game-state</param>
-        public void UpdateGameState(GameState newState, GameState prevState)
+        private void UpdateGameState(GameState newState, GameState prevState)
         {
             // Deactivate previous UI
             switch (prevState)
@@ -140,5 +149,6 @@ namespace MinimalMiner.UI
                     break;
             }
         }
+        #endregion
     }
 }

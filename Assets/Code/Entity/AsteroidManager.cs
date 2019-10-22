@@ -11,14 +11,32 @@ namespace MinimalMiner.Entity
     /// </summary>
     public class AsteroidManager : MonoBehaviour
     {
-        private List<GameObject> asteroids;
-        [SerializeField] private GameObject asteroidPrefab;
-        [SerializeField] private Sprite[] asteroidSprites;
+        #region Fields
+        private List<GameObject> asteroids;                         // The asteroids instantiated in the scene
+        [SerializeField] private GameObject asteroidPrefab;         // The basic asteroid prefab/format to spawn asteroids with
+        [SerializeField] private Sprite[] asteroidSprites;          // The various sprites asteroids can use
+        #endregion
 
+        #region Methods
+        /// <summary>
+        /// Handles the start of the object before the first frame
+        /// </summary>
         private void Start()
         {
             asteroids = new List<GameObject>();
             SpawnAsteroids();
+        }
+
+        /// <summary>
+        /// Spawns asteroids in the scene
+        /// </summary>
+        private void SpawnAsteroids()
+        {
+            // Currently hard-coding max-asteroids until some sort of StarSystem info struct is created
+            for (int i = 0; i < 10; i++)
+            {
+                asteroids.Add(SpawnAsteroid());
+            }
         }
 
         /// <summary>
@@ -40,19 +58,7 @@ namespace MinimalMiner.Entity
         }
 
         /// <summary>
-        /// Spawns asteroids in the scene
-        /// </summary>
-        private void SpawnAsteroids()
-        {
-            // Currently hard-coding max-asteroids until some sort of StarSystem info struct is created
-            for (int i = 0; i < 10; i++)
-            {
-                asteroids.Add(SpawnAsteroid());
-            }
-        }
-
-        /// <summary>
-        /// Spawns an asteroid
+        /// Spawns an asteroid with random characteristics
         /// </summary>
         /// <returns>The asteroid that was spawned</returns>
         public GameObject SpawnAsteroid()
@@ -77,7 +83,7 @@ namespace MinimalMiner.Entity
         }
 
         /// <summary>
-        /// Spawns an asteroid
+        /// Spawns an asteroid with characteristics based off of a parent or predetermined asteroid
         /// </summary>
         /// <param name="type">The type of asteroid to spawn</param>
         /// <param name="maxSize">The maximum size of the asteroid (exclusive)</param>
@@ -98,5 +104,6 @@ namespace MinimalMiner.Entity
 
             return asteroid;
         }
+        #endregion
     }
 }

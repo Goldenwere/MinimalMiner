@@ -12,16 +12,26 @@ namespace MinimalMiner.Entity
     /// </summary>
     public class Asteroid : MonoBehaviour
     {
-        // Needed for tracking the current state of the asteroid
+        #region Fields
+        // Core variables
         private GameState currState;
+        private AsteroidManager asteroidMgr;
+
+        // Asteroid variables
+        [SerializeField] private ColliderListener colliderListener;
+        [SerializeField] private Rigidbody2D rigidbody;
+        [SerializeField] private SpriteRenderer sprite;
         private float currHealth = 10f;
+
+        // Asteroid characteristics
         private AsteroidType type;
         private AsteroidSize size;
-        private AsteroidManager asteroidMgr;
-        [SerializeField] private ColliderListener colliderListener;
-        [SerializeField] private SpriteRenderer sprite;
-        [SerializeField] private Rigidbody2D rigidbody;
+        #endregion
 
+        #region Methods
+        /// <summary>
+        /// Handles the start of the object before the first frame
+        /// </summary>
         private void OnEnable()
         {
             EventManager.OnUpdateGameState += UpdateGameState;
@@ -30,6 +40,9 @@ namespace MinimalMiner.Entity
             colliderListener.OnCollisionDetected += OnCollisionDetected;
         }
 
+        /// <summary>
+        /// Handles subscribing to events
+        /// </summary>
         private void OnDisable()
         {
             EventManager.OnUpdateGameState -= UpdateGameState;
@@ -41,7 +54,7 @@ namespace MinimalMiner.Entity
         /// Handles collision between this asteroid and another object in the scene
         /// </summary>
         /// <param name="collision">Holds the collision information</param>
-        public void OnCollisionDetected(Collision2D collision)
+        private void OnCollisionDetected(Collision2D collision)
         {
             if (collision.gameObject.tag == "asteroid")
             {
@@ -57,66 +70,19 @@ namespace MinimalMiner.Entity
         }
 
         /// <summary>
-        /// Contributes damage to the asteroid
+        /// Called when the current GameState is updated
         /// </summary>
-        /// <param name="damageDone">The damage to contribute</param>
-        public void TakeDamage(float damageDone)
-        {
-            currHealth -= damageDone;
-
-            if (currHealth <= 0)
-            {
-                asteroidMgr.OnAsteroidDestruction(gameObject, Split());
-            }
-        }
-
-        /// <summary>
-        /// Used when first spawning an asteroid
-        /// </summary>
-        /// <param name="type">The type that the asteroid should be</param>
-        /// <param name="size">The size of the asteroid</param>
-        /// <param name="velocity">The initial velocity of the asteroid</param>
-        /// <param name="position">The initial position of the asteroid</param>
-        /// <param name="manager">The asteroid manager that spawned this asteroid</param>
-        public void Setup(AsteroidType type, AsteroidSize size, Sprite sprite, Vector2 velocity, Vector3 position, AsteroidManager manager)
-        {
-            this.type = type;
-            this.size = size;
-
-            switch(size)
-            {
-                case AsteroidSize.large:
-                    transform.localScale = new Vector3(4f, 4f, 4f);
-                    break;
-                case AsteroidSize.medium:
-                    transform.localScale = new Vector3(2f, 2f, 2f);
-                    break;
-                case AsteroidSize.small:
-                default:
-                    transform.localScale = new Vector3(1f, 1f, 1f);
-                    break;
-            }
-
-            GetComponent<Rigidbody2D>().AddForce(velocity * 10f);
-            transform.position = position;
-            asteroidMgr = manager;
-            this.sprite.sprite = sprite;
-        }
-
-        /// <summary>
-        /// Called when the current GameState is changed
-        /// </summary>
-        /// <param name="newState">The new GameState</param>
-        /// <param name="prevState">The previous GameState</param>
+        /// <param name="newState">The new GameState after updating</param>
+        /// <param name="prevState">The previous GameState before updating</param>
         private void UpdateGameState(GameState newState, GameState prevState)
         {
             currState = newState;
         }
 
         /// <summary>
-        /// Called when the game theme is changed
+        /// Called when the current Theme is updated
         /// </summary>
-        /// <param name="theme">The new theme properties</param>
+        /// <param name="theme">The new GameTheme properties</param>
         private void UpdateTheme(Theme theme)
         {
             sprite.material.color = theme.sprite_asteroid;
@@ -142,5 +108,53 @@ namespace MinimalMiner.Entity
 
             return newAsteroids;
         }
+
+        /// <summary>
+        /// Sets up the asteroid upon instantiation
+        /// </summary>
+        /// <param name="type">The type that the asteroid should be</param>
+        /// <param name="size">The size of the asteroid</param>
+        /// <param name="velocity">The initial velocity of the asteroid</param>
+        /// <param name="position">The initial position of the asteroid</param>
+        /// <param name="manager">The asteroid manager that spawned this asteroid</param>
+        public void Setup(AsteroidType type, AsteroidSize size, Sprite sprite, Vector2 velocity, Vector3 position, AsteroidManager manager)
+        {
+            this.type = type;
+            this.size = size;
+
+            switch (size)
+            {
+                case AsteroidSize.large:
+                    transform.localScale = new Vector3(4f, 4f, 4f);
+                    break;
+                case AsteroidSize.medium:
+                    transform.localScale = new Vector3(2f, 2f, 2f);
+                    break;
+                case AsteroidSize.small:
+                default:
+                    transform.localScale = new Vector3(1f, 1f, 1f);
+                    break;
+            }
+
+            GetComponent<Rigidbody2D>().AddForce(velocity * 10f);
+            transform.position = position;
+            asteroidMgr = manager;
+            this.sprite.sprite = sprite;
+        }
+
+        /// <summary>
+        /// Contributes damage to the asteroid
+        /// </summary>
+        /// <param name="damageDone">The damage to contribute</param>
+        public void TakeDamage(float damageDone)
+        {
+            currHealth -= damageDone;
+
+            if (currHealth <= 0)
+            {
+                asteroidMgr.OnAsteroidDestruction(gameObject, Split());
+            }
+        }
+        #endregion
     }
 }

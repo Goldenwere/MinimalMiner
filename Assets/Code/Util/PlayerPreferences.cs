@@ -7,6 +7,13 @@ namespace MinimalMiner.Util
     /// </summary>
     public class PlayerPreferences : MonoBehaviour
     {
+        #region Fields & Properties
+        public delegate void UpdateThemeHandler(Theme theme);
+        /// <summary>
+        /// Notifies subscribed objects that the current Theme has been changed
+        /// </summary>
+        public static event UpdateThemeHandler UpdateTheme;
+
         /// <summary>
         /// The player's control preferences
         /// </summary>
@@ -30,10 +37,11 @@ namespace MinimalMiner.Util
         {
             get; private set;
         }
+        #endregion
 
-        public delegate void UpdateThemeHandler(Theme theme);
-        public static event UpdateThemeHandler UpdateTheme;
-
+        /// <summary>
+        /// Sets up the preferences when Awake is called
+        /// </summary>
         private void Awake()
         {
             InputDefinitions input = new InputDefinitions
@@ -48,11 +56,17 @@ namespace MinimalMiner.Util
             Controls = input;
         }
 
+        /// <summary>
+        /// Handles subscribing to events
+        /// </summary>
         private void OnEnable()
         {
             EventManager.OnSelectTheme += SelectTheme;
         }
 
+        /// <summary>
+        /// Handles unsubscribing to events
+        /// </summary>
         private void OnDisable()
         {
             EventManager.OnSelectTheme -= SelectTheme;
