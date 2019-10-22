@@ -26,10 +26,11 @@ namespace MinimalMiner.Entity
         private float shipDragRate;
 
         // Variables for ship firing
-        [SerializeField] GameObject bulletPrefab;
-        [SerializeField] AudioSource bulletSound;
-        float fireTimer;
-        float fireRate;
+        [SerializeField] private GameObject bulletPrefab;
+        [SerializeField] private AudioSource bulletSound;
+        [SerializeField] private Transform firesource;
+        private float fireTimer;
+        private float fireRate;
 
         private void Start()
         {
@@ -37,7 +38,6 @@ namespace MinimalMiner.Entity
             shipRotSpd = 5f;
             shipMaxSpd = 5f;
             shipAccRate = 5f;
-            shipDragRate = 0.975f;
             shipAcc = new Vector2(0, 0);
             transform.position = new Vector3(0, 0);
 
@@ -111,9 +111,9 @@ namespace MinimalMiner.Entity
             if (Input.GetKey(playerPrefs.Controls.Ship_Fire) && fireTimer > fireRate)
             {
                 // Instantiate bullet
-                GameObject bullet = Instantiate(bulletPrefab, transform.position, Quaternion.identity);
+                GameObject bullet = Instantiate(bulletPrefab, firesource.position, Quaternion.identity);
 
-                // Set up its velocity and color based on current theme (aka the ship's color{)
+                // Set up its velocity and color based on current theme (aka the ship's color)
                 Projectile bulletBeh = bullet.GetComponentInChildren<Projectile>();
                 bulletBeh.Setup(new Vector3(transform.right.x * 0.25f, transform.right.y * 0.25f));
                 bullet.GetComponentInChildren<SpriteRenderer>().material.color = sprite.material.color;
@@ -121,6 +121,7 @@ namespace MinimalMiner.Entity
                 // Reset fire timer to limit firing, and play the firing sound
                 fireTimer = 0;
                 bulletSound.Play();
+                rigidbody.AddForce(-shipAcc * 5f);
             }
         }
 

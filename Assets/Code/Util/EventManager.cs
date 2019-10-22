@@ -62,6 +62,7 @@ namespace MinimalMiner.Util
         {
             OnUpdateGameState(newState, CurrState);
             CurrState = newState;
+            UpdateTimeState();
         }
 
         /// <summary>
@@ -73,6 +74,23 @@ namespace MinimalMiner.Util
             Enum.TryParse<GameState>(desiredState, out GameState newState);
             OnUpdateGameState(newState, CurrState);
             CurrState = newState;
+            UpdateTimeState();
+        }
+
+        /// <summary>
+        /// Updates the time scale of the game based on incoming GameState
+        /// </summary>
+        private void UpdateTimeState()
+        {
+            if (CurrState == GameState.play)
+            {
+                Time.timeScale = 1;
+            }
+
+            else
+            {
+                Time.timeScale = 0;
+            }
         }
 
         /// <summary>
