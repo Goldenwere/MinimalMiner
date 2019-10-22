@@ -85,7 +85,7 @@ namespace MinimalMiner.Entity
         /// <param name="theme">The new GameTheme properties</param>
         private void UpdateTheme(Theme theme)
         {
-            sprite.material.color = theme.sprite_asteroid;
+            sprite.material.color = theme.spriteColor_asteroid;
         }
 
         /// <summary>
