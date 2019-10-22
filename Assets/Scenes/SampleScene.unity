@@ -435,15 +435,17 @@ MonoBehaviour:
   m_Script: {fileID: 11500000, guid: f8b0a62420b0ab840a5646166a124313, type: 3}
   m_Name: 
   m_EditorClassIdentifier: 
-  asteroidPrefabs:
-  - {fileID: 4270855401526594693, guid: 7dce6391c8174a14c942c49ef11ad72d, type: 3}
-  - {fileID: 3485163064328594087, guid: 590fee8d0bed2d545834038154cdb7cc, type: 3}
-  - {fileID: 1008653800353884977, guid: c13fc4f77f143b14193600aff5e4f7da, type: 3}
-  - {fileID: 7364012851963769583, guid: 7b092a9c4407b614f958b5788fca2a83, type: 3}
-  - {fileID: 1541948318978625656, guid: 5caac1329e602454d9754d00ccc4fb04, type: 3}
-  - {fileID: 4675308872585232288, guid: e5ee9cfb1b8a7cd4ab75b39b640f8932, type: 3}
-  - {fileID: 5532197387699029522, guid: a0977a8bc3196cc438fcb34225a02b6e, type: 3}
-  - {fileID: 7354400455402040396, guid: 7d69014a708eab44eb985fcf9c956b28, type: 3}
+  asteroidPrefab: {fileID: 4270855401526594693, guid: 7dce6391c8174a14c942c49ef11ad72d,
+    type: 3}
+  asteroidSprites:
+  - {fileID: 3286163911610860551, guid: 5b8f3b40500d7164e8b99877a5fc778c, type: 3}
+  - {fileID: 3286163911610860551, guid: ac4479a4b8bf3084d814eec2aba3b5de, type: 3}
+  - {fileID: 3286163911610860551, guid: a8f80795a64a4344c808005f9bdec8d9, type: 3}
+  - {fileID: 3286163911610860551, guid: cc7a98d4e778fed4abc55512554eb524, type: 3}
+  - {fileID: 3286163911610860551, guid: 49152e1c2db69c64f941cdff7186fe9a, type: 3}
+  - {fileID: 3286163911610860551, guid: c308865dd634afe459351be655eb0844, type: 3}
+  - {fileID: 3286163911610860551, guid: bfc309a8cebb0b3498a91af9385d595e, type: 3}
+  - {fileID: 3286163911610860551, guid: 57b4d79754fcac24eb23094727144999, type: 3}
 --- !u!4 &247396940
 Transform:
   m_ObjectHideFlags: 0
@@ -452,7 +454,7 @@ Transform:
   m_PrefabAsset: {fileID: 0}
   m_GameObject: {fileID: 247396936}
   m_LocalRotation: {x: -0, y: -0, z: -0, w: 1}
-  m_LocalPosition: {x: -0.32818308, y: -0.123096734, z: -0.19739568}
+  m_LocalPosition: {x: 0, y: 0, z: 0}
   m_LocalScale: {x: 1, y: 1, z: 1}
   m_Children: []
   m_Father: {fileID: 234841985}

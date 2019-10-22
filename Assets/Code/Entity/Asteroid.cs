@@ -78,7 +78,7 @@ namespace MinimalMiner.Entity
         /// <param name="velocity">The initial velocity of the asteroid</param>
         /// <param name="position">The initial position of the asteroid</param>
         /// <param name="manager">The asteroid manager that spawned this asteroid</param>
-        public void Setup(AsteroidType type, AsteroidSize size, Vector2 velocity, Vector3 position, AsteroidManager manager)
+        public void Setup(AsteroidType type, AsteroidSize size, Sprite sprite, Vector2 velocity, Vector3 position, AsteroidManager manager)
         {
             this.type = type;
             this.size = size;
@@ -100,6 +100,7 @@ namespace MinimalMiner.Entity
             GetComponent<Rigidbody2D>().AddForce(velocity * 10f);
             transform.position = position;
             asteroidMgr = manager;
+            this.sprite.sprite = sprite;
         }
 
         /// <summary>
