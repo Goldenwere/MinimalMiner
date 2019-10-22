@@ -75,12 +75,12 @@ namespace MinimalMiner
         /// <summary>
         /// The color used for player (bullets and ship)
         /// </summary>
-        public Color32 sprite_player;
+        public Color32 spriteColor_player;
 
         /// <summary>
         /// The color used for asteroids
         /// </summary>
-        public Color32 sprite_asteroid;
+        public Color32 spriteColor_asteroid;
 
         #endregion
 
@@ -89,7 +89,7 @@ namespace MinimalMiner
         #region Constructors
 
         /// <summary>
-        /// Creates a basic theme
+        /// Creates a basic-level theme
         /// </summary>
         /// <param name="fore">UI Foreground color</param>
         /// <param name="back">UI Background color</param>
@@ -109,8 +109,39 @@ namespace MinimalMiner
             button_focus = back;
             button_disabled = back;
 
-            sprite_player = fore;
-            sprite_asteroid = fore;
+            spriteColor_player = fore;
+            spriteColor_asteroid = fore;
+        }
+
+        /// <summary>
+        /// Creates an intermediate-level theme
+        /// </summary>
+        /// <param name="textFore">Color used for text foregrounds</param>
+        /// <param name="spriteFore">Color used for sprite colors</param>
+        /// <param name="bkgdColor">World background color</param>
+        /// <param name="buttonBack">Color used for button backgrounds</param>
+        /// <param name="buttonHover">Color used for buttons when hovering</param>
+        /// <param name="buttonActive">Color used for buttons when active (clicked)</param>
+        /// <param name="buttonFocus">Color used for buttons when focused (selected)</param>
+        /// <param name="buttonDisabled">Color used for buttons when disabled</param>
+        /// <param name="bkgd">World background image</param>
+        public Theme(Color32 textFore, Color32 spriteFore, Color32 bkgdColor, Color32 buttonBack, Color32 buttonHover, Color32 buttonActive, Color32 buttonFocus, Color32 buttonDisabled, Sprite bkgd)
+        {
+            text_primaryHead = textFore;
+            text_secondaryHead = textFore;
+            text_body = textFore;
+
+            img_backgroundNormal = bkgd;
+            img_backgroundColor = bkgdColor;
+
+            button_normal = buttonBack;
+            button_hover = buttonHover;
+            button_active = buttonActive;
+            button_focus = buttonFocus;
+            button_disabled = buttonDisabled;
+
+            spriteColor_player = spriteFore;
+            spriteColor_asteroid = spriteFore;
         }
 
         #endregion

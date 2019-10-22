@@ -37,6 +37,9 @@ namespace MinimalMiner.Util
         {
             get; private set;
         }
+
+        // Temporary hard-coded themes
+        private Theme darkTheme;
         #endregion
 
         /// <summary>
@@ -54,6 +57,12 @@ namespace MinimalMiner.Util
                 Ship_Fire = KeyCode.Space
             };
             Controls = input;
+
+            darkTheme = new Theme(new Color32(255, 255, 255, 0), new Color32(245, 245, 245, 0),
+                new Color32(20, 20, 20, 0),
+                new Color32(30, 30, 30, 0), new Color32(60, 60, 60, 0), new Color32(90, 90, 90, 0), 
+                new Color32(0, 0, 0, 0), new Color32(120, 120, 120, 0),
+                null);
         }
 
         /// <summary>
