@@ -29,7 +29,7 @@ namespace MinimalMiner.Util
         private void Start()
         {
             Controls = playerPrefs.Controls;
-            UpdateGameState(GameState.play);
+            UpdateGameState(GameState.main);
         }
 
         private void Update()
