@@ -46,9 +46,9 @@ namespace MinimalMiner.Entity
         {
             fireRate = 0.2f;
             projectileSpeed = 100f;
-            shipRotSpd = 5f;
+            shipRotSpd = 1f;
             shipMaxSpd = 10f;
-            shipAccRate = 5f;
+            shipAccRate = 1f;
             shipAcc = new Vector2(0, 0);
             transform.position = new Vector3(0, 0);
 

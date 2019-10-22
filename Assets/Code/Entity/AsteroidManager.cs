@@ -3,6 +3,7 @@
 using System.Collections;
 using System.Collections.Generic;
 using UnityEngine;
+using MinimalMiner.Util;
 
 namespace MinimalMiner.Entity
 {
@@ -12,6 +13,7 @@ namespace MinimalMiner.Entity
     public class AsteroidManager : MonoBehaviour
     {
         #region Fields
+        private GameState currState;                                // The current GameState
         private List<GameObject> asteroids;                         // The asteroids instantiated in the scene
         [SerializeField] private GameObject asteroidPrefab;         // The basic asteroid prefab/format to spawn asteroids with
         [SerializeField] private Sprite[] asteroidSprites;          // The various sprites asteroids can use
@@ -24,7 +26,44 @@ namespace MinimalMiner.Entity
         private void Start()
         {
             asteroids = new List<GameObject>();
-            SpawnAsteroids();
+        }
+
+        /// <summary>
+        /// Handles the start of the object before the first frame
+        /// </summary>
+        private void OnEnable()
+        {
+            EventManager.OnUpdateGameState += UpdateGameState;
+            currState = GameObject.FindWithTag("managers").GetComponent<EventManager>().CurrState;
+        }
+
+        /// <summary>
+        /// Handles subscribing to events
+        /// </summary>
+        private void OnDisable()
+        {
+            EventManager.OnUpdateGameState -= UpdateGameState;
+        }
+
+        /// <summary>
+        /// Called when the current GameState is updated
+        /// </summary>
+        /// <param name="newState">The new GameState after updating</param>
+        /// <param name="prevState">The previous GameState before updating</param>
+        private void UpdateGameState(GameState newState, GameState prevState)
+        {
+            currState = newState;
+
+            if (newState == GameState.play && prevState == GameState.main)
+            {
+                SpawnAsteroids();
+            }
+
+            else if (newState == GameState.main && prevState == GameState.pause
+                || newState == GameState.main && prevState == GameState.death)
+            {
+                DespawnAsteroids();
+            }
         }
 
         /// <summary>
@@ -36,6 +75,18 @@ namespace MinimalMiner.Entity
             for (int i = 0; i < 10; i++)
             {
                 asteroids.Add(SpawnAsteroid());
+            }
+        }
+
+        /// <summary>
+        /// Despawns the asteroids currently in the scene
+        /// </summary>
+        private void DespawnAsteroids()
+        {
+            for (int i = asteroids.Count - 1; i >= 0; i--)
+            {
+                Destroy(asteroids[i]);
+                asteroids.RemoveAt(i);
             }
         }
 

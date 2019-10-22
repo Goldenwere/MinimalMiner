@@ -108,14 +108,14 @@ namespace MinimalMiner.Util
         /// </summary>
         private void UpdateTimeState()
         {
-            if (CurrState == GameState.play)
+            if (CurrState == GameState.pause)
             {
-                Time.timeScale = 1;
+                Time.timeScale = 0;
             }
 
             else
             {
-                Time.timeScale = 0;
+                Time.timeScale = 1;
             }
         }
 
