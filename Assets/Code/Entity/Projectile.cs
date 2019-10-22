@@ -5,7 +5,7 @@ using MinimalMiner.Util;
 
 namespace MinimalMiner.Entity
 {
-    public class Bullet : MonoBehaviour
+    public class Projectile : MonoBehaviour
     {
         public Vector3 Vel
         {
@@ -19,6 +19,7 @@ namespace MinimalMiner.Entity
         private void OnEnable()
         {
             EventManager.OnUpdateGameState += UpdateGameState;
+            currState = GameObject.FindWithTag("managers").GetComponent<EventManager>().CurrState;
             PlayerPreferences.UpdateTheme += UpdateTheme;
         }
 

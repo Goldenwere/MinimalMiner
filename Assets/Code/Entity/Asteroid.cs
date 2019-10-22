@@ -23,6 +23,7 @@ namespace MinimalMiner.Entity
         private void OnEnable()
         {
             EventManager.OnUpdateGameState += UpdateGameState;
+            currState = GameObject.FindWithTag("managers").GetComponent<EventManager>().CurrState;
             PlayerPreferences.UpdateTheme += UpdateTheme;
         }
 

@@ -52,6 +52,7 @@ namespace MinimalMiner.Entity
         private void OnEnable()
         {
             EventManager.OnUpdateGameState += UpdateGameState;
+            currState = GameObject.FindWithTag("managers").GetComponent<EventManager>().CurrState;
             PlayerPreferences.UpdateTheme += UpdateTheme;
         }
 
@@ -121,13 +122,14 @@ namespace MinimalMiner.Entity
 
         private void PlayerFiring()
         {
-            if (Input.GetKey(KeyCode.Space) && fireTimer > fireRate)
+            fireTimer += Time.deltaTime;
+            if (Input.GetKey(playerPrefs.Controls.Ship_Fire) && fireTimer > fireRate)
             {
                 // Instantiate bullet
                 GameObject bullet = Instantiate(bulletPrefab, transform.position, Quaternion.identity);
 
                 // Set up its velocity and color based on current theme (aka the ship's color{)
-                Bullet bulletBeh = bullet.GetComponentInChildren<Bullet>();
+                Projectile bulletBeh = bullet.GetComponentInChildren<Projectile>();
                 bulletBeh.Setup(new Vector3(shipDir.x * 0.25f, shipDir.y * 0.25f));
                 bullet.GetComponentInChildren<SpriteRenderer>().material.color = sprite.material.color;
 

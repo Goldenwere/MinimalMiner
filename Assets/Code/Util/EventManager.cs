@@ -15,7 +15,10 @@ namespace MinimalMiner.Util
         public delegate void OnUpdateGameStateDelegate(GameState newState, GameState prevState);
         public static event OnUpdateGameStateDelegate OnUpdateGameState = delegate { };
 
-        private GameState currState;
+        public GameState CurrState
+        {
+            get; private set;
+        }
         public InputDefinitions Controls
         {
             get; private set;
@@ -30,7 +33,7 @@ namespace MinimalMiner.Util
 
         private void Update()
         {
-            if (currState == GameState.play)
+            if (CurrState == GameState.play)
             {
                 if (Input.GetKeyDown(Controls.Menu_Pause))
                 {
@@ -38,7 +41,7 @@ namespace MinimalMiner.Util
                 }
             }
 
-            else if (currState == GameState.pause)
+            else if (CurrState == GameState.pause)
             {
                 if (Input.GetKeyDown(Controls.Menu_Pause))
                 {
@@ -53,8 +56,8 @@ namespace MinimalMiner.Util
         /// <param name="newState"></param>
         public void UpdateGameState(GameState newState)
         {
-            OnUpdateGameState(newState, currState);
-            currState = newState;
+            OnUpdateGameState(newState, CurrState);
+            CurrState = newState;
         }
 
         /// <summary>
