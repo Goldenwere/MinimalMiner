@@ -10,6 +10,12 @@ namespace MinimalMiner.Entity
     public class AsteroidManager : MonoBehaviour
     {
         private List<GameObject> asteroids;
+        private GameObject[] asteroidPrefabs;
+
+        private void Start()
+        {
+            SpawnAsteroids();
+        }
 
         /// <summary>
         /// Updates the asteroids list after a collision depletes the health of an asteroid
@@ -26,6 +32,32 @@ namespace MinimalMiner.Entity
             foreach (GameObject g in newAsteroids)
             {
                 asteroids.Add(g);
+            }
+        }
+
+        /// <summary>
+        /// Spawns asteroids in the scene
+        /// </summary>
+        public void SpawnAsteroids()
+        {
+            // Currently hard-coding max-asteroids until some sort of StarSystem info struct is created
+            for (int i = 0; i < 10; i++)
+            {
+                int prefab = Random.Range(0, 8);
+                int size = Random.Range(0, 3);
+                Vector3 velocity = new Vector3(Random.Range(-0.025f, 0.025f), Random.Range(-0.025f, 0.025f), 0);
+                Vector3 position;
+                do
+                {
+                    position = new Vector3(Random.Range(-6f, 6f), Random.Range(-4f, 4f), 0);
+                }
+                while (position.x > -1f && position.x < 1f || position.y > -1f && position.y < 1f);
+
+                GameObject asteroid = Instantiate(asteroidPrefabs[prefab]);
+
+                Asteroid behaviour = asteroid.GetComponentInChildren<Asteroid>();
+
+                behaviour.Setup(AsteroidType.general, (AsteroidSize)size, velocity, position);
             }
         }
     }

@@ -9,6 +9,16 @@
     }
 
     /// <summary>
+    /// Defines the size that an asteroid is
+    /// </summary>
+    public enum AsteroidSize
+    {
+        small,
+        medium,
+        large
+    }
+
+    /// <summary>
     /// Represents the different game states (menus, paused vs gameplay, etc.)
     /// </summary>
     public enum GameState

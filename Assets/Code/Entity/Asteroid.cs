@@ -11,25 +11,11 @@ namespace MinimalMiner.Entity
     /// </summary>
     public class Asteroid : MonoBehaviour
     {
-        /// <summary>
-        /// The type that the asteroid is
-        /// </summary>
-        public AsteroidType Type
-        {
-            get; private set;
-        }
-
-        /// <summary>
-        /// The velocity of the asteroid
-        /// </summary>
-        public Vector3 Vel
-        {
-            get; private set;
-        }
-
         // Needed for tracking the current state of the asteroid
         private GameState currState;
         private int currHealth;
+        private Vector3 vel;
+        private AsteroidType type;
         private AsteroidManager asteroidMgr;
         [SerializeField] private SpriteRenderer sprite;
 
@@ -49,7 +35,7 @@ namespace MinimalMiner.Entity
         {
             if (currState == GameState.play)
             {
-                transform.position += Vel;
+                transform.position += vel;
             }
         }
 
@@ -79,9 +65,29 @@ namespace MinimalMiner.Entity
         /// Used when first spawning an asteroid
         /// </summary>
         /// <param name="type">The type that the asteroid should be</param>
-        public void Setup(AsteroidType type)
+        /// <param name="size">The size of the asteroid</param>
+        /// <param name="velocity">The initial velocity of the asteroid</param>
+        /// <param name="position">The initial position of the asteroid</param>
+        public void Setup(AsteroidType type, AsteroidSize size, Vector3 velocity, Vector3 position)
         {
-            Type = type;
+            this.type = type;
+
+            switch(size)
+            {
+                case AsteroidSize.large:
+                    sprite.transform.localScale = new Vector3(0.2f, 0.2f, 0.2f);
+                    break;
+                case AsteroidSize.medium:
+                    sprite.transform.localScale = new Vector3(0.15f, 0.15f, 0.15f);
+                    break;
+                case AsteroidSize.small:
+                default:
+                    sprite.transform.localScale = new Vector3(0.1f, 0.1f, 0.1f);
+                    break;
+            }
+
+            this.vel = velocity;
+            transform.position = position;
         }
 
         /// <summary>
