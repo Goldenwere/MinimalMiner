@@ -29,5 +29,13 @@
         pause,
         death
     }
+
+    /// <summary>
+    /// Represents the different components of the HUD that can be updated during the play GameState
+    /// </summary>
+    public enum HUDElement
+    {
+        health
+    }
 }
 

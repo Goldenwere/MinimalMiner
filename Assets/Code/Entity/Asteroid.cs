@@ -13,39 +13,39 @@ namespace MinimalMiner.Entity
     {
         // Needed for tracking the current state of the asteroid
         private GameState currState;
-        private int currHealth;
+        private float currHealth;
         private Vector3 vel;
         private AsteroidType type;
         private AsteroidSize size;
         private AsteroidManager asteroidMgr;
+        [SerializeField] private ColliderListener colliderListener;
         [SerializeField] private SpriteRenderer sprite;
+
+        private void Start()
+        {
+            currHealth = 10f;
+        }
 
         private void OnEnable()
         {
             EventManager.OnUpdateGameState += UpdateGameState;
             currState = GameObject.FindWithTag("managers").GetComponent<EventManager>().CurrState;
             PlayerPreferences.UpdateTheme += UpdateTheme;
+            colliderListener.OnCollisionDetected += OnCollisionDetected;
         }
 
         private void OnDisable()
         {
             EventManager.OnUpdateGameState -= UpdateGameState;
             PlayerPreferences.UpdateTheme -= UpdateTheme;
-        }
-
-        private void Update()
-        {
-            if (currState == GameState.play)
-            {
-                transform.position += vel;
-            }
+            colliderListener.OnCollisionDetected -= OnCollisionDetected;
         }
 
         /// <summary>
         /// Handles collision between this asteroid and another object in the scene
         /// </summary>
         /// <param name="collision">Holds the collision information</param>
-        private void OnCollisionEnter(Collision collision)
+        public void OnCollisionDetected(Collision2D collision)
         {
             if (collision.gameObject.tag == "asteroid")
             {
@@ -54,13 +54,13 @@ namespace MinimalMiner.Entity
 
             else if (collision.gameObject.tag == "player")
             {
-                // TO-DO: Handle health decrementation
+                collision.gameObject.GetComponentInParent<Player>().TakeDamage(1f);
             }
 
-            if (currHealth <= 0)
+            /*if (currHealth <= 0)
             {
                 asteroidMgr.OnAsteroidDestruction(gameObject, Split());
-            }
+            }*/
         }
 
         /// <summary>
@@ -70,7 +70,7 @@ namespace MinimalMiner.Entity
         /// <param name="size">The size of the asteroid</param>
         /// <param name="velocity">The initial velocity of the asteroid</param>
         /// <param name="position">The initial position of the asteroid</param>
-        public void Setup(AsteroidType type, AsteroidSize size, Vector3 velocity, Vector3 position)
+        public void Setup(AsteroidType type, AsteroidSize size, Vector2 velocity, Vector3 position)
         {
             this.type = type;
             this.size = size;
@@ -78,18 +78,18 @@ namespace MinimalMiner.Entity
             switch(size)
             {
                 case AsteroidSize.large:
-                    sprite.transform.localScale = new Vector3(4f, 4f, 4f);
+                    transform.localScale = new Vector3(4f, 4f, 4f);
                     break;
                 case AsteroidSize.medium:
-                    sprite.transform.localScale = new Vector3(2f, 2f, 2f);
+                    transform.localScale = new Vector3(2f, 2f, 2f);
                     break;
                 case AsteroidSize.small:
                 default:
-                    sprite.transform.localScale = new Vector3(1f, 1f, 1f);
+                    transform.localScale = new Vector3(1f, 1f, 1f);
                     break;
             }
 
-            this.vel = velocity;
+            GetComponent<Rigidbody2D>().AddForce(velocity * 10f);
             transform.position = position;
         }
 

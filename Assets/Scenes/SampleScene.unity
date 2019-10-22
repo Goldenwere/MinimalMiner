@@ -390,6 +390,7 @@ GameObject:
   - component: {fileID: 247396938}
   - component: {fileID: 247396937}
   - component: {fileID: 247396941}
+  - component: {fileID: 247396942}
   m_Layer: 0
   m_Name: Game Managers
   m_TagString: managers
@@ -474,6 +475,19 @@ MonoBehaviour:
   canvasPlay: {fileID: 773647166}
   canvasPause: {fileID: 2143225988}
   canvasDeath: {fileID: 1936125932}
+--- !u!114 &247396942
+MonoBehaviour:
+  m_ObjectHideFlags: 0
+  m_CorrespondingSourceObject: {fileID: 0}
+  m_PrefabInstance: {fileID: 0}
+  m_PrefabAsset: {fileID: 0}
+  m_GameObject: {fileID: 247396936}
+  m_Enabled: 1
+  m_EditorHideFlags: 0
+  m_Script: {fileID: 11500000, guid: 2291770e7d3e9724ebd19bef8c9e77ee, type: 3}
+  m_Name: 
+  m_EditorClassIdentifier: 
+  healthText: {fileID: 390018913}
 --- !u!1 &309782896
 GameObject:
   m_ObjectHideFlags: 0
@@ -3903,11 +3917,6 @@ PrefabInstance:
         type: 3}
       propertyPath: m_Name
       value: Player
-      objectReference: {fileID: 0}
-    - target: {fileID: 2842819292967055842, guid: d0670d720d9aac4418f1b90074e5145a,
-        type: 3}
-      propertyPath: m_IsActive
-      value: 1
       objectReference: {fileID: 0}
     - target: {fileID: 2842819292967055844, guid: d0670d720d9aac4418f1b90074e5145a,
         type: 3}

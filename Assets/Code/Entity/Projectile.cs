@@ -7,33 +7,33 @@ namespace MinimalMiner.Entity
 {
     public class Projectile : MonoBehaviour
     {
-        public Vector3 Vel
-        {
-            get; private set;
-        }
+        private Vector3 vel;
 
         private float aliveTimer;
         private GameState currState;
         [SerializeField] private SpriteRenderer sprite;
+        [SerializeField] private ColliderListener colliderListener;
 
         private void OnEnable()
         {
             EventManager.OnUpdateGameState += UpdateGameState;
             currState = GameObject.FindWithTag("managers").GetComponent<EventManager>().CurrState;
             PlayerPreferences.UpdateTheme += UpdateTheme;
+            colliderListener.OnCollisionDetected += OnCollisionDetected;
         }
 
         private void OnDisable()
         {
             EventManager.OnUpdateGameState -= UpdateGameState;
             PlayerPreferences.UpdateTheme -= UpdateTheme;
+            colliderListener.OnCollisionDetected -= OnCollisionDetected;
         }
 
         private void Update()
         {
             if (currState == GameState.play)
             {
-                transform.position += Vel;
+                transform.position += vel;
 
                 // Increment timer and destroy object when object has existed for longer than 3 seconds
                 aliveTimer += Time.deltaTime;
@@ -42,6 +42,14 @@ namespace MinimalMiner.Entity
                     Destroy(gameObject);
                 }
             }
+        }
+
+        /// <summary>
+        /// Handles collision between this projectile and another object in the scene
+        /// </summary>
+        private void OnCollisionDetected(Collision2D collision)
+        {
+
         }
 
         private void UpdateGameState(GameState newState, GameState prevState)
@@ -56,7 +64,7 @@ namespace MinimalMiner.Entity
 
         public void Setup(Vector3 vel)
         {
-            Vel = vel;
+            this.vel = vel;
         }
     }
 }

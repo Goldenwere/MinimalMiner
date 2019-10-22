@@ -12,7 +12,9 @@ namespace MinimalMiner.Entity
     {
         private GameState currState;
         private PlayerPreferences playerPrefs;
+        private EventManager eventMgr;
         [SerializeField] private SpriteRenderer sprite;
+        private float playerHealth;
 
         // Ship physics for current movement
         private Vector3 shipPos;
@@ -46,7 +48,12 @@ namespace MinimalMiner.Entity
             shipPos = new Vector3(0, 0);
             transform.position = new Vector3(0, 0);
 
-            playerPrefs = GameObject.FindWithTag("managers").GetComponent<PlayerPreferences>();
+            GameObject managers = GameObject.FindWithTag("managers");
+            playerPrefs = managers.GetComponent<PlayerPreferences>();
+            eventMgr = managers.GetComponent<EventManager>();
+
+            playerHealth = 10f;
+            eventMgr.UpdateHUDElement(HUDElement.health, playerHealth.ToString());
         }
 
         private void OnEnable()
@@ -137,6 +144,16 @@ namespace MinimalMiner.Entity
                 fireTimer = 0;
                 bulletSound.Play();
             }
+        }
+
+        /// <summary>
+        /// Contributes damage to the player
+        /// </summary>
+        /// <param name="damageDone">The damage to contribute</param>
+        public void TakeDamage(float damageDone)
+        {
+            playerHealth -= damageDone;
+            eventMgr.UpdateHUDElement(HUDElement.health, playerHealth.ToString());
         }
     }
 }

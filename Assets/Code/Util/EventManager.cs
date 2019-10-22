@@ -16,6 +16,9 @@ namespace MinimalMiner.Util
         public delegate void OnUpdateGameStateDelegate(GameState newState, GameState prevState);
         public static event OnUpdateGameStateDelegate OnUpdateGameState = delegate { };
 
+        public delegate void OnUpdateHUDElementDelegate(HUDElement element, string content);
+        public static event OnUpdateHUDElementDelegate OnUpdateHUDElement = delegate { };
+
         public GameState CurrState
         {
             get; private set;
@@ -87,6 +90,15 @@ namespace MinimalMiner.Util
         public void CallQuit()
         {
             Application.Quit();
+        }
+
+        /// <summary>
+        /// Can be used to notify the HUD to update an element
+        /// </summary>
+        /// <param name="element"></param>
+        public void UpdateHUDElement(HUDElement element, string content)
+        {
+            OnUpdateHUDElement(element, content);
         }
     }
 }

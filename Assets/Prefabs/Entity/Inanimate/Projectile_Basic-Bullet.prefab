@@ -1,5 +1,33 @@
 %YAML 1.1
 %TAG !u! tag:unity3d.com,2011:
+--- !u!58 &1641783191828892910
+CircleCollider2D:
+  m_ObjectHideFlags: 0
+  m_CorrespondingSourceObject: {fileID: 0}
+  m_PrefabInstance: {fileID: 0}
+  m_PrefabAsset: {fileID: 0}
+  m_GameObject: {fileID: 7383673264946588033}
+  m_Enabled: 1
+  m_Density: 1
+  m_Material: {fileID: 0}
+  m_IsTrigger: 0
+  m_UsedByEffector: 0
+  m_UsedByComposite: 0
+  m_Offset: {x: 0, y: 0}
+  serializedVersion: 2
+  m_Radius: 1
+--- !u!114 &7530526162288285966
+MonoBehaviour:
+  m_ObjectHideFlags: 0
+  m_CorrespondingSourceObject: {fileID: 0}
+  m_PrefabInstance: {fileID: 0}
+  m_PrefabAsset: {fileID: 0}
+  m_GameObject: {fileID: 7383673264946588033}
+  m_Enabled: 1
+  m_EditorHideFlags: 0
+  m_Script: {fileID: 11500000, guid: db04ebc9da43c9042b3a75988ff11103, type: 3}
+  m_Name: 
+  m_EditorClassIdentifier: 
 --- !u!1 &8385927219721995690
 GameObject:
   m_ObjectHideFlags: 0
@@ -45,6 +73,7 @@ MonoBehaviour:
   m_Name: 
   m_EditorClassIdentifier: 
   sprite: {fileID: 8107461606036826248}
+  colliderListener: {fileID: 7530526162288285966}
 --- !u!1001 &8385927219016398359
 PrefabInstance:
   m_ObjectHideFlags: 0
@@ -52,11 +81,6 @@ PrefabInstance:
   m_Modification:
     m_TransformParent: {fileID: 8385927219721995700}
     m_Modifications:
-    - target: {fileID: -7919333831168958570, guid: 80e486d8dd2a9fa4ab8728488378e951,
-        type: 3}
-      propertyPath: m_Name
-      value: sprite
-      objectReference: {fileID: 0}
     - target: {fileID: -169985088406473666, guid: 80e486d8dd2a9fa4ab8728488378e951,
         type: 3}
       propertyPath: m_LocalPosition.x
@@ -122,9 +146,20 @@ PrefabInstance:
       propertyPath: m_LocalScale.y
       value: 0.05
       objectReference: {fileID: 0}
+    - target: {fileID: -7919333831168958570, guid: 80e486d8dd2a9fa4ab8728488378e951,
+        type: 3}
+      propertyPath: m_Name
+      value: sprite
+      objectReference: {fileID: 0}
     m_RemovedComponents: []
   m_SourcePrefab: {fileID: 7243324766535440047, guid: 80e486d8dd2a9fa4ab8728488378e951,
     type: 3}
+--- !u!1 &7383673264946588033 stripped
+GameObject:
+  m_CorrespondingSourceObject: {fileID: -7919333831168958570, guid: 80e486d8dd2a9fa4ab8728488378e951,
+    type: 3}
+  m_PrefabInstance: {fileID: 8385927219016398359}
+  m_PrefabAsset: {fileID: 0}
 --- !u!4 &703928331420779049 stripped
 Transform:
   m_CorrespondingSourceObject: {fileID: -169985088406473666, guid: 80e486d8dd2a9fa4ab8728488378e951,

@@ -58,7 +58,7 @@ namespace MinimalMiner.Entity
         {
             int prefab = Random.Range(0, 8);
             int size = Random.Range(0, 3);
-            Vector3 velocity = new Vector3(Random.Range(-0.005f, 0.005f), Random.Range(-0.005f, 0.005f), 0);
+            Vector2 velocity = new Vector2(Random.Range(-10f, 10f), Random.Range(-10f, 10f));
             Vector3 position;
             do
             {
@@ -68,7 +68,7 @@ namespace MinimalMiner.Entity
 
             GameObject asteroid = Instantiate(asteroidPrefabs[prefab]);
 
-            Asteroid behaviour = asteroid.GetComponentInChildren<Asteroid>();
+            Asteroid behaviour = asteroid.GetComponent<Asteroid>();
 
             behaviour.Setup(AsteroidType.general, (AsteroidSize)size, velocity, position);
 
@@ -83,11 +83,11 @@ namespace MinimalMiner.Entity
         /// <param name="originalVelocity">The original velocity to base new velocity off of</param>
         /// <param name="originalPosition">The original position to base new position off of</param>
         /// <returns>The asteroid that was spawned</returns>
-        public GameObject SpawnAsteroid(AsteroidType type, int maxSize, Vector3 originalVelocity, Vector3 originalPosition)
+        public GameObject SpawnAsteroid(AsteroidType type, int maxSize, Vector2 originalVelocity, Vector3 originalPosition)
         {
             int prefab = Random.Range(0, 8);
             int size = Random.Range(0, maxSize);
-            Vector3 velocity = new Vector3(originalVelocity.x + Random.Range(-0.001f, 0.001f), originalVelocity.y + Random.Range(-0.001f, 0.001f), 0);
+            Vector2 velocity = new Vector2(originalVelocity.x + Random.Range(-0.2f, 0.2f), originalVelocity.y + Random.Range(-0.2f, 0.2f));
 
             GameObject asteroid = Instantiate(asteroidPrefabs[prefab]);
 
