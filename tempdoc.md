@@ -15,8 +15,9 @@ The MinimalMiner namespace contains certain types and enumerations that are to b
 
 ## Enumerations
 
-- GameState
+- AsteroidSize
 - AsteroidType
+- GameState
 
 ------
 
@@ -29,7 +30,8 @@ The Entity namespace contains the behaviours of entities that are spawned in the
 ## Classes
 
 - Asteroid
-- Bullet
+- AsteroidManager
+- Projectile
 - Player
 
 ------
@@ -54,6 +56,7 @@ The Util namespace contains various utility classes that other namespaces depend
 
 ## Classes
 
+- CameraTracking
 - EventManager
 - PlayerPreferences
 
