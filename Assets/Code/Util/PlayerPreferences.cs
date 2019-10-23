@@ -40,6 +40,7 @@ namespace MinimalMiner.Util
 
         // Temporary hard-coded themes
         private Theme darkTheme;
+        private Theme lightTheme;
         #endregion
 
         /// <summary>
@@ -58,11 +59,20 @@ namespace MinimalMiner.Util
             };
             Controls = input;
 
-            darkTheme = new Theme(new Color32(255, 255, 255, 0), new Color32(245, 245, 245, 0),
-                new Color32(20, 20, 20, 0),
-                new Color32(30, 30, 30, 0), new Color32(60, 60, 60, 0), new Color32(90, 90, 90, 0), 
-                new Color32(0, 0, 0, 0), new Color32(120, 120, 120, 0),
+            darkTheme = new Theme(new Color32(255, 255, 255, 255), new Color32(245, 245, 245, 255),
+                new Color32(20, 20, 20, 255),
+                new Color32(30, 30, 30, 255), new Color32(60, 60, 60, 255), new Color32(90, 90, 90, 255), 
+                new Color32(0, 0, 0, 255), new Color32(120, 120, 120, 255),
                 null);
+
+            lightTheme = new Theme(new Color32(20, 20, 20, 255), new Color32(30, 30, 30, 255),
+                new Color32(235, 235, 235, 255),
+                new Color32(200, 200, 200, 255), new Color32(170, 170, 170, 255), new Color32(140, 140, 140, 255),
+                new Color32(255, 255, 255, 255), new Color32(100, 100, 100, 255), null);
+
+            Themes = new Theme[2];
+            Themes[0] = lightTheme;
+            Themes[1] = darkTheme;
         }
 
         /// <summary>
