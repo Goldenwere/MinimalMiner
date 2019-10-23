@@ -146,7 +146,7 @@ namespace MinimalMiner.Entity
                 // Reset fire timer to limit firing, and play the firing sound
                 fireTimer = 0;
                 bulletSound.Play();
-                rigidbody.AddForce(-shipAcc * 10f);
+                rigidbody.AddForce(-shipAcc * 5f);
             }
         }
 
@@ -168,6 +168,7 @@ namespace MinimalMiner.Entity
             // Reset state and stats
             playerHealth = 10f;
             eventMgr.UpdateHUDElement(HUDElement.health, playerHealth.ToString());
+            UpdateTheme(playerPrefs.CurrentTheme);
 
             // Reset transform
             transform.position = Vector3.zero;

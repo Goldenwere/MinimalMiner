@@ -7,24 +7,38 @@ using UnityEngine;
 
 namespace MinimalMiner.Util
 {
-    public class CameraTracking : MonoBehaviour
+    public class CameraManager : MonoBehaviour
     {
+        #region Fields
         [SerializeField] private GameObject target;
         [SerializeField] private Camera camera;
         [SerializeField] private float dampTime;
         private Vector3 velocity = Vector3.zero;
         private GameState currState;
+        #endregion
 
+        #region Methods
+        /// <summary>
+        /// Handles subscribing to events
+        /// </summary>
         private void OnEnable()
         {
             EventManager.OnUpdateGameState += UpdateGameState;
+            PlayerPreferences.UpdateTheme += UpdateTheme;
         }
 
+        /// <summary>
+        /// Handles unsubscribing to events
+        /// </summary>
         private void OnDisable()
         {
             EventManager.OnUpdateGameState -= UpdateGameState;
+            PlayerPreferences.UpdateTheme -= UpdateTheme;
         }
 
+        /// <summary>
+        /// Updates camera tracking at a fixed interval
+        /// </summary>
         private void FixedUpdate()
         {
             if (currState == GameState.play)
@@ -36,9 +50,24 @@ namespace MinimalMiner.Util
             }
         }
 
+        /// <summary>
+        /// Handles updates to the theme
+        /// </summary>
+        /// <param name="theme">The new theme</param>
+        private void UpdateTheme(Theme theme)
+        {
+            camera.backgroundColor = theme.img_backgroundColor;
+        }
+
+        /// <summary>
+        /// Handles updates to the game-state
+        /// </summary>
+        /// <param name="newState">The desired game-state</param>
+        /// <param name="prevState">The previous game-state</param>
         private void UpdateGameState(GameState newState, GameState prevState)
         {
             currState = newState;
         }
+        #endregion
     }
 }

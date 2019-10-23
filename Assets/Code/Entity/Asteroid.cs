@@ -39,6 +39,7 @@ namespace MinimalMiner.Entity
             currState = GameObject.FindWithTag("managers").GetComponent<EventManager>().CurrState;
             PlayerPreferences.UpdateTheme += UpdateTheme;
             colliderListener.OnCollisionDetected += OnCollisionDetected;
+            UpdateTheme(GameObject.FindWithTag("managers").GetComponent<PlayerPreferences>().CurrentTheme);
         }
 
         /// <summary>

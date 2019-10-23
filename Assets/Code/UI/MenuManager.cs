@@ -4,6 +4,7 @@ using UnityEngine;
 using UnityEngine.UI;
 using TMPro;
 using MinimalMiner.Util;
+using System.Collections.Generic;
 
 namespace MinimalMiner.UI
 {
@@ -21,20 +22,22 @@ namespace MinimalMiner.UI
         [SerializeField] private GameObject canvasDeath;
 
         // Collections of UI elements that need theme updates
-        private TextMeshProUGUI[] mainText;
-        private TextMeshProUGUI[] settingsText;
-        private TextMeshProUGUI[] playText;
-        private TextMeshProUGUI[] pauseText;
-        private TextMeshProUGUI[] deathText;
-        private Button[] mainButtons;
-        private Button[] settingsButtons;
-        private Button[] playButtons;
-        private Button[] pauseButtons;
-        private Button[] deathButtons;
-        private TMP_Dropdown[] settingsDropdowns;
+        private List<TextMeshProUGUI> primaryHeadings;
+        private List<TextMeshProUGUI> secondaryHeadings;
+        private List<TextMeshProUGUI> bodyText;
+        private List<Button> buttons;
+        private List<TMP_Dropdown> dropdowns;
         #endregion
 
         #region Methods
+        /// <summary>
+        /// Grab UI elements before theme is initially set
+        /// </summary>
+        private void Awake()
+        {
+            GrabUIElements();
+        }
+
         /// <summary>
         /// Start is called before the first frame update
         /// </summary>
@@ -45,7 +48,6 @@ namespace MinimalMiner.UI
             canvasPause.SetActive(false);
             canvasDeath.SetActive(false);
             canvasMain.SetActive(true);
-            GrabUIElements();
         }
 
         /// <summary>
@@ -71,19 +73,30 @@ namespace MinimalMiner.UI
         /// </summary>
         private void GrabUIElements()
         {
-            mainText = canvasMain.GetComponentsInChildren<TextMeshProUGUI>();
-            settingsText = canvasSettings.GetComponentsInChildren<TextMeshProUGUI>();
-            playText = canvasPlay.GetComponentsInChildren<TextMeshProUGUI>();
-            pauseText = canvasPause.GetComponentsInChildren<TextMeshProUGUI>();
-            deathText = canvasDeath.GetComponentsInChildren<TextMeshProUGUI>();
+            primaryHeadings = new List<TextMeshProUGUI>();
+            secondaryHeadings = new List<TextMeshProUGUI>();
+            bodyText = new List<TextMeshProUGUI>();
+            buttons = new List<Button>();
+            dropdowns = new List<TMP_Dropdown>();
 
-            mainButtons = canvasMain.GetComponentsInChildren<Button>();
-            settingsButtons = canvasSettings.GetComponentsInChildren<Button>();
-            playButtons = canvasPlay.GetComponentsInChildren<Button>();
-            pauseButtons = canvasPause.GetComponentsInChildren<Button>();
-            deathButtons = canvasDeath.GetComponentsInChildren<Button>();
+            List<GameObject> canvases = new List<GameObject>()
+            {
+                canvasMain,
+                canvasSettings,
+                canvasPlay,
+                canvasPause,
+                canvasDeath
+            };
 
-            settingsDropdowns = canvasSettings.GetComponentsInChildren<TMP_Dropdown>();
+            foreach(GameObject c in canvases)
+            {
+                primaryHeadings.AddRange(c.FindComponentsInChildrenWithTag<TextMeshProUGUI>("UI_text_primaryHead"));
+                secondaryHeadings.AddRange(c.FindComponentsInChildrenWithTag<TextMeshProUGUI>("UI_text_secondaryHead"));
+                bodyText.AddRange(c.FindComponentsInChildrenWithTag<TextMeshProUGUI>("UI_text_body"));
+
+                buttons.AddRange(c.GetComponentsInChildren<Button>());
+                dropdowns.AddRange(c.GetComponentsInChildren<TMP_Dropdown>());
+            }
         }
 
         /// <summary>
@@ -92,7 +105,45 @@ namespace MinimalMiner.UI
         /// <param name="theme">The new theme</param>
         private void UpdateTheme(Theme theme)
         {
+            // Update primary headings
+            foreach(TextMeshProUGUI t in primaryHeadings)
+                t.color = theme.text_primaryHead;
 
+            // Update secondary headings
+            foreach(TextMeshProUGUI t in secondaryHeadings)
+                t.color = theme.text_secondaryHead;
+
+            // Update body text
+            foreach(TextMeshProUGUI t in bodyText)
+                t.color = theme.text_body;
+
+            // Update button colors
+            foreach(Button b in buttons)
+            {
+                ColorBlock c = b.colors;
+
+                c.normalColor = theme.button_normal;
+                c.highlightedColor = theme.button_hover;
+                c.pressedColor = theme.button_active;
+                c.selectedColor = theme.button_focus;
+                c.disabledColor = theme.button_disabled;
+
+                b.colors = c;
+            }
+
+            // update dropdown colors
+            foreach(TMP_Dropdown d in dropdowns)
+            {
+                ColorBlock c = d.colors;
+
+                c.normalColor = theme.button_normal;
+                c.highlightedColor = theme.button_hover;
+                c.pressedColor = theme.button_active;
+                c.selectedColor = theme.button_focus;
+                c.disabledColor = theme.button_disabled;
+
+                d.colors = c;
+            }
         }
 
         /// <summary>

@@ -73,6 +73,15 @@ namespace MinimalMiner.Util
             Themes = new Theme[2];
             Themes[0] = lightTheme;
             Themes[1] = darkTheme;
+            CurrentTheme = Themes[0];
+        }
+
+        /// <summary>
+        /// Called before the first frame
+        /// </summary>
+        private void Start()
+        {
+            UpdateTheme(Themes[0]);
         }
 
         /// <summary>
@@ -81,6 +90,7 @@ namespace MinimalMiner.Util
         private void OnEnable()
         {
             EventManager.OnSelectTheme += SelectTheme;
+            EventManager.OnUpdateGameState += UpdateGameState;
         }
 
         /// <summary>
@@ -89,6 +99,7 @@ namespace MinimalMiner.Util
         private void OnDisable()
         {
             EventManager.OnSelectTheme -= SelectTheme;
+            EventManager.OnUpdateGameState -= UpdateGameState;
         }
 
         /// <summary>
@@ -99,6 +110,19 @@ namespace MinimalMiner.Util
         {
             CurrentTheme = Themes[themeIndex];
             UpdateTheme(CurrentTheme);
+        }
+
+        /// <summary>
+        /// Handles updates to the game-state
+        /// </summary>
+        /// <param name="newState">The desired game-state</param>
+        /// <param name="prevState">The previous game-state</param>
+        private void UpdateGameState(GameState newState, GameState prevState)
+        {
+            if (newState == GameState.play)
+            {
+                UpdateTheme(CurrentTheme);
+            }
         }
     }
 }
