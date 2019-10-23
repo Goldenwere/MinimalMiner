@@ -4,6 +4,9 @@ using UnityEngine;
 
 namespace MinimalMiner
 {
+    /// <summary>
+    /// Extensions to the Unity API
+    /// </summary>
     public static class Extensions
     {
         /// <summary>

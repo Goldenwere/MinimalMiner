@@ -11,7 +11,6 @@ namespace MinimalMiner.Entity
     public class PlayerManager : MonoBehaviour
     {
         #region Fields
-        private GameState currState;                        // The current GameState
         [SerializeField] private GameObject playerObj;      // The player object in the scene
         [SerializeField] private Player player;             // The player class in the scene
         #endregion
@@ -23,7 +22,6 @@ namespace MinimalMiner.Entity
         private void OnEnable()
         {
             EventManager.OnUpdateGameState += UpdateGameState;
-            currState = GameObject.FindWithTag("managers").GetComponent<EventManager>().CurrState;
         }
 
         /// <summary>
@@ -41,8 +39,6 @@ namespace MinimalMiner.Entity
         /// <param name="prevState">The previous GameState before updating</param>
         private void UpdateGameState(GameState newState, GameState prevState)
         {
-            currState = newState;
-
             // Enable player at the start of gameplay
             if (newState == GameState.play && prevState == GameState.main)
             {

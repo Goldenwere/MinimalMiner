@@ -7,6 +7,9 @@ using UnityEngine;
 
 namespace MinimalMiner.Util
 {
+    /// <summary>
+    /// Maintains the camera in the scene
+    /// </summary>
     public class CameraManager : MonoBehaviour
     {
         #region Fields
