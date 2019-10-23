@@ -13,8 +13,7 @@ namespace MinimalMiner.Entity
     public class Asteroid : MonoBehaviour
     {
         #region Fields
-        // Core variables
-        private GameState currState;
+        // Core variable
         private AsteroidManager asteroidMgr;
 
         // Asteroid variables
@@ -35,11 +34,7 @@ namespace MinimalMiner.Entity
         /// </summary>
         private void OnEnable()
         {
-            EventManager.OnUpdateGameState += UpdateGameState;
-            currState = GameObject.FindWithTag("managers").GetComponent<EventManager>().CurrState;
-            PlayerPreferences.UpdateTheme += UpdateTheme;
             colliderListener.OnCollisionDetected += OnCollisionDetected;
-            UpdateTheme(GameObject.FindWithTag("managers").GetComponent<PlayerPreferences>().CurrentTheme);
         }
 
         /// <summary>
@@ -47,8 +42,6 @@ namespace MinimalMiner.Entity
         /// </summary>
         private void OnDisable()
         {
-            EventManager.OnUpdateGameState -= UpdateGameState;
-            PlayerPreferences.UpdateTheme -= UpdateTheme;
             colliderListener.OnCollisionDetected -= OnCollisionDetected;
         }
 
@@ -72,20 +65,10 @@ namespace MinimalMiner.Entity
         }
 
         /// <summary>
-        /// Called when the current GameState is updated
-        /// </summary>
-        /// <param name="newState">The new GameState after updating</param>
-        /// <param name="prevState">The previous GameState before updating</param>
-        private void UpdateGameState(GameState newState, GameState prevState)
-        {
-            currState = newState;
-        }
-
-        /// <summary>
         /// Called when the current Theme is updated
         /// </summary>
         /// <param name="theme">The new GameTheme properties</param>
-        private void UpdateTheme(Theme theme)
+        public void UpdateTheme(Theme theme)
         {
             sprite.material.color = theme.spriteColor_asteroid;
         }
@@ -116,10 +99,12 @@ namespace MinimalMiner.Entity
         /// </summary>
         /// <param name="type">The type that the asteroid should be</param>
         /// <param name="size">The size of the asteroid</param>
+        /// <param name="sprite">The sprite to use for the asteroid</param>
+        /// <param name="color">The color to use for the sprite</param>
         /// <param name="velocity">The initial velocity of the asteroid</param>
         /// <param name="position">The initial position of the asteroid</param>
         /// <param name="manager">The asteroid manager that spawned this asteroid</param>
-        public void Setup(AsteroidType type, AsteroidSize size, Sprite sprite, Vector2 velocity, Vector3 position, AsteroidManager manager)
+        public void Setup(AsteroidType type, AsteroidSize size, Sprite sprite, Color32 color, Vector2 velocity, Vector3 position, AsteroidManager manager)
         {
             this.type = type;
             this.size = size;
@@ -142,6 +127,7 @@ namespace MinimalMiner.Entity
             transform.position = position;
             asteroidMgr = manager;
             this.sprite.sprite = sprite;
+            this.sprite.color = color;
         }
 
         /// <summary>

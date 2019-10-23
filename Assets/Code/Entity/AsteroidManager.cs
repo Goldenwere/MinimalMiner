@@ -14,6 +14,7 @@ namespace MinimalMiner.Entity
     {
         #region Fields
         private GameState currState;                                // The current GameState
+        private Theme currTheme;                                    // The current Theme
         private List<GameObject> asteroids;                         // The asteroids instantiated in the scene
         [SerializeField] private GameObject asteroidPrefab;         // The basic asteroid prefab/format to spawn asteroids with
         [SerializeField] private Sprite[] asteroidSprites;          // The various sprites asteroids can use
@@ -21,9 +22,9 @@ namespace MinimalMiner.Entity
 
         #region Methods
         /// <summary>
-        /// Handles the start of the object before the first frame
+        /// Instantiates asteroids list before events are first handled under Start
         /// </summary>
-        private void Start()
+        private void Awake()
         {
             asteroids = new List<GameObject>();
         }
@@ -35,6 +36,7 @@ namespace MinimalMiner.Entity
         {
             EventManager.OnUpdateGameState += UpdateGameState;
             currState = GameObject.FindWithTag("managers").GetComponent<EventManager>().CurrState;
+            PlayerPreferences.UpdateTheme += UpdateTheme;
         }
 
         /// <summary>
@@ -43,6 +45,16 @@ namespace MinimalMiner.Entity
         private void OnDisable()
         {
             EventManager.OnUpdateGameState -= UpdateGameState;
+            PlayerPreferences.UpdateTheme -= UpdateTheme;
+        }
+
+        /// <summary>
+        /// Handles updates to the theme
+        /// </summary>
+        /// <param name="theme">The new theme</param>
+        private void UpdateTheme(Theme theme)
+        {
+            currTheme = theme;
         }
 
         /// <summary>
@@ -130,7 +142,7 @@ namespace MinimalMiner.Entity
 
             Asteroid behaviour = asteroid.GetComponent<Asteroid>();
 
-            behaviour.Setup(AsteroidType.general, (AsteroidSize)size, asteroidSprites[spriteIndex], velocity, position, this);
+            behaviour.Setup(AsteroidType.general, (AsteroidSize)size, asteroidSprites[spriteIndex], currTheme.spriteColor_asteroid, velocity, position, this);
 
             return asteroid;
         }
@@ -153,7 +165,7 @@ namespace MinimalMiner.Entity
 
             Asteroid behaviour = asteroid.GetComponentInChildren<Asteroid>();
 
-            behaviour.Setup(type, (AsteroidSize)size, asteroidSprites[spriteIndex], velocity, originalPosition, this);
+            behaviour.Setup(type, (AsteroidSize)size, asteroidSprites[spriteIndex], currTheme.spriteColor_asteroid, velocity, originalPosition, this);
 
             return asteroid;
         }
