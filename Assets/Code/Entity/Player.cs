@@ -21,6 +21,7 @@ namespace MinimalMiner.Entity
         [SerializeField] private SpriteRenderer sprite;
         [SerializeField] private Rigidbody2D rigidbody;
         [SerializeField] private AudioSource damageSound;
+        [SerializeField] private AudioSource deathSound;
         private float playerHealth;
 
         // Variables for ship physics
@@ -183,9 +184,20 @@ namespace MinimalMiner.Entity
         /// <param name="damageDone">The damage to contribute</param>
         public void TakeDamage(float damageDone)
         {
-            playerHealth -= damageDone;
-            damageSound.Play();
-            eventMgr.UpdateHUDElement(HUDElement.health, playerHealth.ToString());
+            // Wrapped under if so that sound doesn't play even after death
+            if (playerHealth > 0)
+            {
+                playerHealth -= damageDone;
+                eventMgr.UpdateHUDElement(HUDElement.health, playerHealth.ToString());
+                damageSound.Play();
+            }
+
+            // Not using else if because if decrementing above makes health 0, death should occur, separate if because of sound, second condition to prevent repeating event/sound
+            if (playerHealth <= 0 && currState != GameState.death)
+            {
+                eventMgr.UpdateGameState(GameState.death);
+                deathSound.Play();
+            }
         }
         #endregion
     }

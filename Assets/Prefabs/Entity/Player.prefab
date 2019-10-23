@@ -305,6 +305,7 @@ MonoBehaviour:
   sprite: {fileID: 558806602634407301}
   rigidbody: {fileID: 3004072309614854657}
   damageSound: {fileID: 2842819291952887565}
+  deathSound: {fileID: 2842819292667426328}
   bulletPrefab: {fileID: 8385927219721995690, guid: 93ce7606e24d1544cb95e144ec62e143,
     type: 3}
   bulletSound: {fileID: 2842819293653186511}
