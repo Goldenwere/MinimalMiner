@@ -87,8 +87,12 @@ Splitting up ship aspects such as weaponry, defenses, etc; has different sprites
 
 ## TBA 4
 
-Some sort of restricted zoning, asteroids despawn outside zone (like screen-wrapping except not)
+Some sort of restricted zoning, asteroids despawn outside zone (like screen-wrapping except not), ship auto-targets nearest asteroid if almost facing it (sort of handicap/accesibility option)
 
 ## TBA 5
 
 Physics: use original player movement physics as 'dampening,' have a non-dampening mode (e.g. make turning independent of velocity in this mode, achieves drifting effect)
+
+## TBA 6
+
+Start story mode, career mode, endless mode
