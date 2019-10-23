@@ -10,14 +10,15 @@ The MinimalMiner namespace contains certain types and enumerations that are to b
 
 ## Types
 
-- Theme
 - InputDefinitions
+- Theme
 
 ## Enumerations
 
 - AsteroidSize
 - AsteroidType
 - GameState
+- HUDElement
 
 ------
 
@@ -31,8 +32,10 @@ The Entity namespace contains the behaviours of entities that are spawned in the
 
 - Asteroid
 - AsteroidManager
+- ColliderListener
 - Projectile
 - Player
+- PlayerManager
 
 ------
 
@@ -44,6 +47,7 @@ The UI (user interface) namespace contains the behaviours of various UI elements
 
 ## Classes
 
+- HUD Manager
 - MenuManager
 
 ------
