@@ -69,9 +69,9 @@ namespace MinimalMiner.Entity
         }
 
         /// <summary>
-        /// Updates once per frame
+        /// Updates once per physics frame
         /// </summary>
-        private void Update()
+        private void FixedUpdate()
         {
             if (currState == GameState.play)
             {
@@ -157,9 +157,9 @@ namespace MinimalMiner.Entity
         {
             fireRate = 0.2f;
             projectileSpeed = 100f;
-            shipRotSpd = 1f;
+            shipRotSpd = 5f;
             shipMaxSpd = 10f;
-            shipAccRate = 1f;
+            shipAccRate = 5f;
 
             GameObject managers = GameObject.FindWithTag("managers");
             playerPrefs = managers.GetComponent<PlayerPreferences>();
