@@ -21,6 +21,7 @@ namespace MinimalMiner.Entity
         [SerializeField] private ColliderListener colliderListener;
         [SerializeField] private Rigidbody2D rigidbody;
         [SerializeField] private SpriteRenderer sprite;
+        [SerializeField] private AudioSource audio;
         private float currHealth = 10f;
 
         // Asteroid characteristics
@@ -149,6 +150,7 @@ namespace MinimalMiner.Entity
         public void TakeDamage(float damageDone)
         {
             currHealth -= damageDone;
+            audio.Play();
 
             if (currHealth <= 0)
             {

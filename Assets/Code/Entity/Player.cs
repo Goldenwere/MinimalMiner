@@ -20,6 +20,7 @@ namespace MinimalMiner.Entity
         // Ship variables
         [SerializeField] private SpriteRenderer sprite;
         [SerializeField] private Rigidbody2D rigidbody;
+        [SerializeField] private AudioSource damageSound;
         private float playerHealth;
 
         // Variables for ship physics
@@ -44,16 +45,6 @@ namespace MinimalMiner.Entity
         /// </summary>
         private void Start()
         {
-            fireRate = 0.2f;
-            projectileSpeed = 100f;
-            shipRotSpd = 1f;
-            shipMaxSpd = 10f;
-            shipAccRate = 1f;
-
-            GameObject managers = GameObject.FindWithTag("managers");
-            playerPrefs = managers.GetComponent<PlayerPreferences>();
-            eventMgr = managers.GetComponent<EventManager>();
-
             ResetPlayer();
         }
 
@@ -154,7 +145,7 @@ namespace MinimalMiner.Entity
                 // Reset fire timer to limit firing, and play the firing sound
                 fireTimer = 0;
                 bulletSound.Play();
-                rigidbody.AddForce(-shipAcc * 5f);
+                rigidbody.AddForce(-shipAcc * 10f);
             }
         }
 
@@ -163,6 +154,16 @@ namespace MinimalMiner.Entity
         /// </summary>
         public void ResetPlayer()
         {
+            fireRate = 0.2f;
+            projectileSpeed = 100f;
+            shipRotSpd = 1f;
+            shipMaxSpd = 10f;
+            shipAccRate = 1f;
+
+            GameObject managers = GameObject.FindWithTag("managers");
+            playerPrefs = managers.GetComponent<PlayerPreferences>();
+            eventMgr = managers.GetComponent<EventManager>();
+
             // Reset state and stats
             playerHealth = 10f;
             eventMgr.UpdateHUDElement(HUDElement.health, playerHealth.ToString());
@@ -183,6 +184,7 @@ namespace MinimalMiner.Entity
         public void TakeDamage(float damageDone)
         {
             playerHealth -= damageDone;
+            damageSound.Play();
             eventMgr.UpdateHUDElement(HUDElement.health, playerHealth.ToString());
         }
         #endregion
