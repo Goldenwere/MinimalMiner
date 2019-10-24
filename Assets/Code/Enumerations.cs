@@ -37,5 +37,24 @@
     {
         health
     }
+
+    /// <summary>
+    /// Represents the file names that theme files must have
+    /// </summary>
+    public enum ThemeFileName
+    {
+        asteroid0,
+        asteroid1,
+        asteroid2,
+        asteroid3,
+        asteroid4,
+        asteroid5,
+        asteroid6,
+        asteroid7,
+
+        playerShip,
+
+        backgroundNormal
+    }
 }
 

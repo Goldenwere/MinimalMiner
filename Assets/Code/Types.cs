@@ -1,4 +1,7 @@
-﻿using System.Collections;
+﻿#pragma warning disable 0618
+
+using System.Collections;
+using System.Collections.Generic;
 using System.IO;
 using UnityEngine;
 
@@ -64,7 +67,6 @@ namespace MinimalMiner
 
         #region Images
 
-        public string img_backgroundNormalName;
         /// <summary>
         /// Image - Background image used during normal game-play
         /// </summary>
@@ -85,9 +87,19 @@ namespace MinimalMiner
         public Color32 spriteColor_player;
 
         /// <summary>
+        /// The sprite used for the player
+        /// </summary>
+        public Sprite spriteImage_Player;
+
+        /// <summary>
         /// The color used for asteroids
         /// </summary>
         public Color32 spriteColor_asteroid;
+
+        /// <summary>
+        /// The sprites used for the asteroids
+        /// </summary>
+        public Sprite[] spriteImage_asteroid;
 
         #endregion
 
@@ -127,7 +139,8 @@ namespace MinimalMiner
             spriteColor_player = sprite;
 
             img_backgroundNormal = null;
-            img_backgroundNormalName = null;
+            spriteImage_asteroid = null;
+            spriteImage_Player = null;
         }
 
         /// <summary>
@@ -155,7 +168,8 @@ namespace MinimalMiner
             spriteColor_asteroid = fore;
 
             img_backgroundNormal = null;
-            img_backgroundNormalName = null;
+            spriteImage_asteroid = null;
+            spriteImage_Player = null;
         }
 
         /// <summary>
@@ -190,7 +204,8 @@ namespace MinimalMiner
             spriteColor_asteroid = spriteFore;
 
             img_backgroundNormal = null;
-            img_backgroundNormalName = null;
+            spriteImage_asteroid = null;
+            spriteImage_Player = null;
         }
 
         public Sprite GetSprite(string themeName, string spriteName)
@@ -200,8 +215,9 @@ namespace MinimalMiner
             Sprite sprite = null;
             foreach (FileInfo file in files)
             {
-                if (file.Name == spriteName)
+                if (Path.GetFileNameWithoutExtension(file.Name) == spriteName)
                 {
+                    // WWW is obsolete, needs replaced eventually
                     WWW www = new WWW(file.FullName);
                     Texture2D tex = www.texture;
                     sprite = Sprite.Create(tex, new Rect(new Vector2(), new Vector2(tex.width, tex.height)), new Vector2(tex.width / 2, tex.height / 2));

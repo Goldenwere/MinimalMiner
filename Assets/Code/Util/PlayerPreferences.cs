@@ -90,7 +90,7 @@ namespace MinimalMiner.Util
                         serializer = new XmlSerializer(type);
                         xmlReader = new XmlTextReader(sr);
                         theme = (Theme)serializer.Deserialize(xmlReader);
-                        theme.img_backgroundNormal = theme.GetSprite(theme.themeName, theme.img_backgroundNormalName);
+                        theme.img_backgroundNormal = theme.GetSprite(theme.themeName, ThemeFileName.backgroundNormal.ToString());
 
                         Themes.Add(theme);
                     }
