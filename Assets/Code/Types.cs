@@ -1,4 +1,6 @@
-﻿using UnityEngine;
+﻿using System.Collections;
+using System.IO;
+using UnityEngine;
 
 namespace MinimalMiner
 {
@@ -8,6 +10,10 @@ namespace MinimalMiner
     public struct Theme
     {
         #region Fields
+
+        #region Theme Properties
+        public string themeName;
+        #endregion
 
         #region UI text
         /// <summary>
@@ -58,6 +64,7 @@ namespace MinimalMiner
 
         #region Images
 
+        public string img_backgroundNormalName;
         /// <summary>
         /// Image - Background image used during normal game-play
         /// </summary>
@@ -89,18 +96,53 @@ namespace MinimalMiner
         #region Constructors
 
         /// <summary>
+        /// Creates a default theme
+        /// </summary>
+        public Theme(string name)
+        {
+            themeName = name;
+
+            Color32 text = new Color32(20, 20, 20, 255);
+            Color32 sprite = new Color32(30, 30, 30, 255);
+            Color32 bkgd = new Color32(235, 235, 235, 255);
+            Color32 bBack = new Color32(200, 200, 200, 255);
+            Color32 bHover = new Color32(170, 170, 170, 255);
+            Color32 bActive = new Color32(140, 140, 140, 255);
+            Color32 bFocus = new Color32(255, 255, 255, 255);
+            Color32 bDisabled = new Color32(100, 100, 100, 255);
+
+            text_primaryHead = text;
+            text_secondaryHead = text;
+            text_body = text;
+
+            img_backgroundColor = bkgd;
+
+            button_normal = bBack;
+            button_hover = bHover;
+            button_active = bActive;
+            button_focus = bFocus;
+            button_disabled = bDisabled;
+
+            spriteColor_asteroid = sprite;
+            spriteColor_player = sprite;
+
+            img_backgroundNormal = null;
+            img_backgroundNormalName = null;
+        }
+
+        /// <summary>
         /// Creates a basic-level theme
         /// </summary>
+        /// <param name="name">The name of the theme</param>
         /// <param name="fore">UI Foreground color</param>
         /// <param name="back">UI Background color</param>
-        /// <param name="bkgd">World background</param>
-        public Theme(Color32 fore, Color32 back, Sprite bkgd)
+        public Theme(string name, Color32 fore, Color32 back)
         {
+            themeName = name;
             text_primaryHead = fore;
             text_secondaryHead = fore;
             text_body = fore;
 
-            img_backgroundNormal = bkgd;
             img_backgroundColor = back;
 
             button_normal = back;
@@ -111,11 +153,15 @@ namespace MinimalMiner
 
             spriteColor_player = fore;
             spriteColor_asteroid = fore;
+
+            img_backgroundNormal = null;
+            img_backgroundNormalName = null;
         }
 
         /// <summary>
         /// Creates an intermediate-level theme
         /// </summary>
+        /// <param name="name">The name of the theme</param>
         /// <param name="textFore">Color used for text foregrounds</param>
         /// <param name="spriteFore">Color used for sprite colors</param>
         /// <param name="bkgdColor">World background color</param>
@@ -124,14 +170,14 @@ namespace MinimalMiner
         /// <param name="buttonActive">Color used for buttons when active (clicked)</param>
         /// <param name="buttonFocus">Color used for buttons when focused (selected)</param>
         /// <param name="buttonDisabled">Color used for buttons when disabled</param>
-        /// <param name="bkgd">World background image</param>
-        public Theme(Color32 textFore, Color32 spriteFore, Color32 bkgdColor, Color32 buttonBack, Color32 buttonHover, Color32 buttonActive, Color32 buttonFocus, Color32 buttonDisabled, Sprite bkgd)
+        public Theme(string name, Color32 textFore, Color32 spriteFore, Color32 bkgdColor, Color32 buttonBack, Color32 buttonHover, Color32 buttonActive, Color32 buttonFocus, Color32 buttonDisabled)
         {
+            string path = Application.streamingAssetsPath + "/Themes/" + name;
+            themeName = name;
             text_primaryHead = textFore;
             text_secondaryHead = textFore;
             text_body = textFore;
 
-            img_backgroundNormal = bkgd;
             img_backgroundColor = bkgdColor;
 
             button_normal = buttonBack;
@@ -142,8 +188,32 @@ namespace MinimalMiner
 
             spriteColor_player = spriteFore;
             spriteColor_asteroid = spriteFore;
+
+            img_backgroundNormal = null;
+            img_backgroundNormalName = null;
         }
 
+        public Sprite GetSprite(string themeName, string spriteName)
+        {
+            DirectoryInfo directoryInfo = new DirectoryInfo(Application.streamingAssetsPath + "/Themes/" + themeName);
+            FileInfo[] files = directoryInfo.GetFiles("*.*", SearchOption.AllDirectories);
+            Sprite sprite = null;
+            foreach (FileInfo file in files)
+            {
+                if (file.Name == spriteName)
+                {
+                    MonoBehaviour.print("found");
+                    WWW www = new WWW(file.FullName);
+                    MonoBehaviour.print(www);
+                    Texture2D tex = www.texture;
+                    MonoBehaviour.print(tex);
+                    sprite = Sprite.Create(tex, new Rect(new Vector2(), new Vector2(tex.width, tex.height)), new Vector2(tex.width / 2, tex.height / 2));
+                    MonoBehaviour.print(sprite);
+                }
+            }
+
+            return sprite;
+        }
         #endregion
     }
 

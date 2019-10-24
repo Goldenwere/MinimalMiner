@@ -60,6 +60,10 @@ namespace MinimalMiner.Util
         private void UpdateTheme(Theme theme)
         {
             camera.backgroundColor = theme.img_backgroundColor;
+            if (theme.img_backgroundNormal != null)
+            {
+                Instantiate(theme.img_backgroundNormal);
+            }
         }
 
         /// <summary>

@@ -41,13 +41,14 @@ namespace MinimalMiner.UI
         /// <summary>
         /// Start is called before the first frame update
         /// </summary>
-        void Start()
+        private void Start()
         {
             canvasSettings.SetActive(false);
             canvasPlay.SetActive(false);
             canvasPause.SetActive(false);
             canvasDeath.SetActive(false);
             canvasMain.SetActive(true);
+            SetupUIElements();
         }
 
         /// <summary>
@@ -96,6 +97,25 @@ namespace MinimalMiner.UI
 
                 buttons.AddRange(c.GetComponentsInChildren<Button>());
                 dropdowns.AddRange(c.GetComponentsInChildren<TMP_Dropdown>());
+            }
+        }
+
+        /// <summary>
+        /// Sets up various UI elements that depend on options that may change or have loaded values that differ from defaults
+        /// </summary>
+        private void SetupUIElements()
+        {
+            PlayerPreferences playerPrefs = GameObject.FindWithTag("managers").GetComponent<PlayerPreferences>();
+
+            foreach (TMP_Dropdown dropdown in dropdowns)
+            {
+                if (dropdown.name == "Dropdown_Theme")
+                {
+                    for (int i = 0; i < playerPrefs.Themes.Count; i++)
+                    {
+                        dropdown.options[i].text = playerPrefs.Themes[i].themeName;
+                    }
+                }
             }
         }
 
