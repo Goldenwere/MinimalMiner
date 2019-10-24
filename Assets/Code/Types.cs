@@ -202,13 +202,9 @@ namespace MinimalMiner
             {
                 if (file.Name == spriteName)
                 {
-                    MonoBehaviour.print("found");
                     WWW www = new WWW(file.FullName);
-                    MonoBehaviour.print(www);
                     Texture2D tex = www.texture;
-                    MonoBehaviour.print(tex);
                     sprite = Sprite.Create(tex, new Rect(new Vector2(), new Vector2(tex.width, tex.height)), new Vector2(tex.width / 2, tex.height / 2));
-                    MonoBehaviour.print(sprite);
                 }
             }
 

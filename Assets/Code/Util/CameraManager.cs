@@ -4,6 +4,7 @@
 using System.Collections;
 using System.Collections.Generic;
 using UnityEngine;
+using UnityEngine.UI;
 
 namespace MinimalMiner.Util
 {
@@ -16,6 +17,7 @@ namespace MinimalMiner.Util
         [SerializeField] private GameObject target;
         [SerializeField] private Camera camera;
         [SerializeField] private float dampTime;
+        [SerializeField] private Image background;
         private Vector3 velocity = Vector3.zero;
         private GameState currState;
         #endregion
@@ -62,7 +64,12 @@ namespace MinimalMiner.Util
             camera.backgroundColor = theme.img_backgroundColor;
             if (theme.img_backgroundNormal != null)
             {
-                Instantiate(theme.img_backgroundNormal);
+                background.enabled = true;
+                background.sprite = theme.img_backgroundNormal;
+            }
+            else
+            {
+                background.enabled = false;
             }
         }
 
