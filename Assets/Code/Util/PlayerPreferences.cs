@@ -76,37 +76,7 @@ namespace MinimalMiner.Util
             {
                 if (file.Extension.Contains("theme"))
                 {
-                    StreamReader reader = null;
-                    StringReader sr = null;
-                    XmlSerializer serializer = null;
-                    XmlTextReader xmlReader = null;
-                    Theme theme;
-                    try
-                    {
-                        Type type = typeof(Theme);
-                        reader = new StreamReader(file.OpenRead());
-                        string data = reader.ReadToEnd();
-                        sr = new StringReader(data);
-                        serializer = new XmlSerializer(type);
-                        xmlReader = new XmlTextReader(sr);
-                        theme = (Theme)serializer.Deserialize(xmlReader);
-                        theme.img_backgroundNormal = theme.GetSprite(theme.themeName, ThemeFileName.backgroundNormal.ToString());
-
-                        Themes.Add(theme);
-                    }
-                    catch (Exception ex)
-                    {
-                        print(ex);
-                    }
-                    finally
-                    {
-                        if (xmlReader != null)
-                            xmlReader.Close();
-                        if (sr != null)
-                            sr.Close();
-                        if (reader != null)
-                            reader.Close();
-                    }
+                    Themes.Add(ThemeReader.GetTheme(file));
                 }
             }
 

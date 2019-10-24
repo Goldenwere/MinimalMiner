@@ -49,7 +49,6 @@
         <b>120</b>
         <a>255</a>
     </button_disabled>
-    <img_backgroundNormalName>normal.png</img_backgroundNormalName>
     <img_backgroundColor>
         <r>20</r>
         <g>20</g>

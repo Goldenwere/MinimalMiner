@@ -207,25 +207,6 @@ namespace MinimalMiner
             spriteImage_asteroid = null;
             spriteImage_Player = null;
         }
-
-        public Sprite GetSprite(string themeName, string spriteName)
-        {
-            DirectoryInfo directoryInfo = new DirectoryInfo(Application.streamingAssetsPath + "/Themes/" + themeName);
-            FileInfo[] files = directoryInfo.GetFiles("*.*", SearchOption.AllDirectories);
-            Sprite sprite = null;
-            foreach (FileInfo file in files)
-            {
-                if (Path.GetFileNameWithoutExtension(file.Name) == spriteName)
-                {
-                    // WWW is obsolete, needs replaced eventually
-                    WWW www = new WWW(file.FullName);
-                    Texture2D tex = www.texture;
-                    sprite = Sprite.Create(tex, new Rect(new Vector2(), new Vector2(tex.width, tex.height)), new Vector2(tex.width / 2, tex.height / 2));
-                }
-            }
-
-            return sprite;
-        }
         #endregion
     }
 
