@@ -14,16 +14,19 @@ namespace MinimalMiner.Util
     public class CameraManager : MonoBehaviour
     {
         #region Fields
-        [SerializeField] private GameObject target;
-        [SerializeField] private Camera camera;
-        [SerializeField] private float dampTime;
-        [SerializeField] private List<Image> backgrounds;
-        [SerializeField] private GameObject parentBackground;
-        private Vector3 velocity = Vector3.zero;
-        private GameState currState;
+        [SerializeField] private GameObject target;                 // The player object in the scene
+        [SerializeField] private Camera camera;                     // The camera to be managed
+        [SerializeField] private float dampTime;                    // The dampening time for camera following
+        [SerializeField] private List<Image> backgrounds;           // The backgrounds that cover the camera color background (may eventually be controlled)
+        [SerializeField] private GameObject parentBackground;       // The parent object to attach the backgrounds to
+        private Vector3 velocity = Vector3.zero;                    // Used in the smooth dampening of the camera
+        private GameState currState;                                // Camera only smooth-follows during play gamestate
         #endregion
 
         #region Methods
+        /// <summary>
+        /// Create a list of backgrounds before themes are first set up and applied to the backgrounds
+        /// </summary>
         private void Awake()
         {
             backgrounds = new List<Image>();
