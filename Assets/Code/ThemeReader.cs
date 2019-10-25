@@ -6,9 +6,18 @@ using System.Xml;
 using System.Xml.Serialization;
 using UnityEngine;
 
-namespace MinimalMiner {
+namespace MinimalMiner
+{
+    /// <summary>
+    /// Handles the reading of theme files (written in XML format)
+    /// </summary>
     public static class ThemeReader
     {
+        /// <summary>
+        /// Reads from a specified file and returns a Theme object
+        /// </summary>
+        /// <param name="file">The .theme file</param>
+        /// <returns>The Theme data stored in the file</returns>
         public static Theme GetTheme(FileInfo file)
         {
             // IO stuff
@@ -32,8 +41,11 @@ namespace MinimalMiner {
                 xmlReader = new XmlTextReader(sr);
                 theme = (Theme)serializer.Deserialize(xmlReader);
 
-                // Assign sprites
-                theme.img_backgroundNormal = GetSprite(theme.themeName, ThemeFileName.backgroundNormal.ToString());
+                // Assign sprites and return theme
+                theme = AssignSprites(theme);
+
+                // TO-DO: only assign sprites on a selected theme
+
                 return theme;
             }
 
@@ -55,7 +67,13 @@ namespace MinimalMiner {
             return new Theme("undefined");
         }
 
-        private static Sprite GetSprite(string themeName, string spriteName)
+        /// <summary>
+        /// Creates a sprite stored at the specified theme directory, to be used for assigning sprites to a theme
+        /// </summary>
+        /// <param name="themeName"></param>
+        /// <param name="spriteName"></param>
+        /// <returns></returns>
+        public static Sprite GetSprite(string themeName, string spriteName)
         {
             DirectoryInfo directoryInfo = new DirectoryInfo(Application.streamingAssetsPath + "/Themes/" + themeName);
             FileInfo[] files = directoryInfo.GetFiles("*.*", SearchOption.AllDirectories);
@@ -72,6 +90,20 @@ namespace MinimalMiner {
             }
 
             return sprite;
+        }
+
+        /// <summary>
+        /// Assigns sprites to a theme
+        /// </summary>
+        /// <param name="theme"></param>
+        /// <returns></returns>
+        /// <remarks>This should only be called on an active theme to prevent overusage of memory</remarks>
+        public static Theme AssignSprites(Theme theme)
+        {
+
+            theme.img_backgroundNormal = GetSprite(theme.themeName, ThemeFileName.backgroundNormal.ToString());
+
+            return theme;
         }
     }
 }

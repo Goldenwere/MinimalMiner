@@ -17,12 +17,32 @@ namespace MinimalMiner.Util
         [SerializeField] private GameObject target;
         [SerializeField] private Camera camera;
         [SerializeField] private float dampTime;
-        [SerializeField] private Image background;
+        [SerializeField] private List<Image> backgrounds;
+        [SerializeField] private GameObject parentBackground;
         private Vector3 velocity = Vector3.zero;
         private GameState currState;
         #endregion
 
         #region Methods
+        private void Awake()
+        {
+            backgrounds = new List<Image>();
+            GameObject parent = new GameObject("temp", typeof(RectTransform));
+            for (int x = -4; x < 5; x++)
+            {
+                for (int y = -4; y < 5; y++)
+                {
+                    GameObject obj = Instantiate(parent, parentBackground.transform);
+                    RectTransform t = (RectTransform)obj.transform;
+                    t.position = new Vector3(x * 20, y * 20, 20);
+                    t.sizeDelta = new Vector2(20, 20);
+                    
+                    backgrounds.Add(obj.AddComponent<Image>());
+                }
+            }
+            Destroy(parent);
+        }
+
         /// <summary>
         /// Handles subscribing to events
         /// </summary>
@@ -64,12 +84,18 @@ namespace MinimalMiner.Util
             camera.backgroundColor = theme.img_backgroundColor;
             if (theme.img_backgroundNormal != null)
             {
-                background.enabled = true;
-                background.sprite = theme.img_backgroundNormal;
+                foreach (Image i in backgrounds)
+                {
+                    i.enabled = true;
+                    i.sprite = theme.img_backgroundNormal;
+                }
             }
             else
             {
-                background.enabled = false;
+                foreach (Image i in backgrounds)
+                {
+                    i.enabled = false;
+                }
             }
         }
 
