@@ -89,7 +89,7 @@ namespace MinimalMiner
         /// <summary>
         /// The sprite used for the player
         /// </summary>
-        public Sprite spriteImage_Player;
+        public Sprite spriteImage_player;
 
         /// <summary>
         /// The color used for asteroids
@@ -99,7 +99,7 @@ namespace MinimalMiner
         /// <summary>
         /// The sprites used for the asteroids
         /// </summary>
-        public Sprite[] spriteImage_asteroid;
+        public List<Sprite> spriteImage_asteroid;
 
         #endregion
 
@@ -140,7 +140,7 @@ namespace MinimalMiner
 
             img_backgroundNormal = null;
             spriteImage_asteroid = null;
-            spriteImage_Player = null;
+            spriteImage_player = null;
         }
 
         /// <summary>
@@ -169,7 +169,7 @@ namespace MinimalMiner
 
             img_backgroundNormal = null;
             spriteImage_asteroid = null;
-            spriteImage_Player = null;
+            spriteImage_player = null;
         }
 
         /// <summary>
@@ -205,7 +205,7 @@ namespace MinimalMiner
 
             img_backgroundNormal = null;
             spriteImage_asteroid = null;
-            spriteImage_Player = null;
+            spriteImage_player = null;
         }
         #endregion
     }

@@ -127,7 +127,7 @@ namespace MinimalMiner.Entity
         /// <returns>The asteroid that was spawned</returns>
         public GameObject SpawnAsteroid()
         {
-            int spriteIndex = Random.Range(0, 8);
+            int spriteIndex = Random.Range(0, asteroidSprites.Length);
             int size = Random.Range(0, 3);
             Vector2 velocity = new Vector2(Random.Range(-10f, 10f), Random.Range(-10f, 10f));
             Vector3 position;
@@ -156,7 +156,7 @@ namespace MinimalMiner.Entity
         /// <returns>The asteroid that was spawned</returns>
         public GameObject SpawnAsteroid(AsteroidType type, int maxSize, Vector2 originalVelocity, Vector3 originalPosition)
         {
-            int spriteIndex = Random.Range(0, 8);
+            int spriteIndex = Random.Range(0, asteroidSprites.Length);
             int size = Random.Range(0, maxSize);
             Vector2 velocity = new Vector2(originalVelocity.x + Random.Range(-5f, 5f), originalVelocity.y + Random.Range(-5f, 5f));
 

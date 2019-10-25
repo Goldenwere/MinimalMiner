@@ -1,4 +1,6 @@
-﻿using System;
+﻿#pragma warning disable 0618
+
+using System;
 using System.Collections;
 using System.Collections.Generic;
 using System.IO;
@@ -72,7 +74,7 @@ namespace MinimalMiner
         /// </summary>
         /// <param name="themeName"></param>
         /// <param name="spriteName"></param>
-        /// <returns></returns>
+        /// <returns>The sprite found</returns>
         public static Sprite GetSprite(string themeName, string spriteName)
         {
             DirectoryInfo directoryInfo = new DirectoryInfo(Application.streamingAssetsPath + "/Themes/" + themeName);
@@ -93,6 +95,31 @@ namespace MinimalMiner
         }
 
         /// <summary>
+        /// Creates sprites stored at the specified theme directory, to be used for assigning sprites to a theme
+        /// </summary>
+        /// <param name="themeName"></param>
+        /// <param name="spriteName"></param>
+        /// <returns>The sprites found</returns>
+        public static List<Sprite> GetSprites(string themeName, string spriteName)
+        {
+            DirectoryInfo directoryInfo = new DirectoryInfo(Application.streamingAssetsPath + "/Themes/" + themeName);
+            FileInfo[] files = directoryInfo.GetFiles("*.*", SearchOption.AllDirectories);
+            List<Sprite> sprites = new List<Sprite>();
+            foreach (FileInfo file in files)
+            {
+                if (file.Name.Contains(spriteName))
+                {
+                    // WWW is obsolete, needs replaced eventually
+                    WWW www = new WWW(file.FullName);
+                    Texture2D tex = www.texture;
+                    sprites.Add(Sprite.Create(tex, new Rect(new Vector2(), new Vector2(tex.width, tex.height)), new Vector2(tex.width / 2, tex.height / 2)));
+                }
+            }
+
+            return sprites;
+        }
+
+        /// <summary>
         /// Assigns sprites to a theme
         /// </summary>
         /// <param name="theme"></param>
@@ -100,8 +127,9 @@ namespace MinimalMiner
         /// <remarks>This should only be called on an active theme to prevent overusage of memory</remarks>
         public static Theme AssignSprites(Theme theme)
         {
-
             theme.img_backgroundNormal = GetSprite(theme.themeName, ThemeFileName.backgroundNormal.ToString());
+            theme.spriteImage_asteroid = GetSprites(theme.themeName, ThemeFileName.asteroid.ToString());
+            theme.spriteImage_player = GetSprite(theme.themeName, ThemeFileName.playerShip.ToString());
 
             return theme;
         }
