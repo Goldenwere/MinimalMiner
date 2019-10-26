@@ -172,7 +172,6 @@ namespace MinimalMiner.Entity
             fireTimer += Time.deltaTime;
             if (Input.GetKey(playerPrefs.Controls.Ship_Fire) && fireTimer > fireRate)
             {
-                print("fired");
                 // Instantiate bullet
                 GameObject bullet = Instantiate(bulletPrefab, firesource.position, Quaternion.identity);
 
