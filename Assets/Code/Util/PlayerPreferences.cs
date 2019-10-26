@@ -110,6 +110,7 @@ namespace MinimalMiner.Util
         private void SelectTheme(int themeIndex)
         {
             CurrentTheme = Themes[themeIndex];
+            CurrentTheme = ThemeReader.AssignSprites(CurrentTheme);
             UpdateTheme(CurrentTheme);
         }
 

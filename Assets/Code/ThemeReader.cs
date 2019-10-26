@@ -46,7 +46,7 @@ namespace MinimalMiner
                 theme = (Theme)serializer.Deserialize(xmlReader);
 
                 // Assign sprites and return theme
-                theme = AssignSprites(theme);
+                //theme = AssignSprites(theme);
 
                 // TO-DO: only assign sprites on a selected theme
 
@@ -281,10 +281,10 @@ namespace MinimalMiner
                 DetermineSprite(ThemeFileName.backgroundNormal.ToString(), theme));
 
             theme.spriteImage_asteroid = GetSprites(theme.themeName, ThemeFileName.asteroid.ToString(), 
-                DetermineSprite(ThemeFileName.backgroundNormal.ToString(), theme));
+                DetermineSprite(ThemeFileName.asteroid.ToString(), theme));
 
             theme.spriteImage_player = GetSprite(theme.themeName, ThemeFileName.playerShip.ToString(), 
-                DetermineSprite(ThemeFileName.backgroundNormal.ToString(), theme));
+                DetermineSprite(ThemeFileName.playerShip.ToString(), theme));
 
             return theme;
         }
