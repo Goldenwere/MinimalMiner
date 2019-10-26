@@ -1,6 +1,9 @@
 <?xml version="1.0" encoding="utf-16"?>
 <Theme xmlns:xsd="http://www.w3.org/2001/XMLSchema" xmlns:xsi="http://www.w3.org/2001/XMLSchema-instance">
     <themeName>Test</themeName>
+    <import_Backgrounds>0</import_Backgrounds>
+    <import_Asteroids>0</import_Asteroids>
+    <import_Player>0</import_Player>
     <text_primaryHead>
         <r>255</r>
         <g>255</g>

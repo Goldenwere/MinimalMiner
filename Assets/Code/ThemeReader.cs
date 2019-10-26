@@ -7,6 +7,7 @@ using System.IO;
 using System.Xml;
 using System.Xml.Serialization;
 using UnityEngine;
+using TextureScale;
 
 namespace MinimalMiner
 {
@@ -72,8 +73,8 @@ namespace MinimalMiner
         /// <summary>
         /// Creates a sprite stored at the specified theme directory, to be used for assigning sprites to a theme
         /// </summary>
-        /// <param name="themeName"></param>
-        /// <param name="spriteName"></param>
+        /// <param name="themeName">The name of the theme (for path)</param>
+        /// <param name="spriteName">The name of the sprite</param>
         /// <returns>The sprite found</returns>
         public static Sprite GetSprite(string themeName, string spriteName)
         {
@@ -82,12 +83,27 @@ namespace MinimalMiner
             Sprite sprite = null;
             foreach (FileInfo file in files)
             {
-                if (Path.GetFileNameWithoutExtension(file.Name) == spriteName)
+                if (Path.GetFileNameWithoutExtension(file.Name) == spriteName && !file.Name.Contains("meta"))
                 {
                     // WWW is obsolete, needs replaced eventually
                     WWW www = new WWW(file.FullName);
                     Texture2D tex = www.texture;
-                    sprite = Sprite.Create(tex, new Rect(new Vector2(), new Vector2(tex.width, tex.height)), new Vector2(tex.width / 2, tex.height / 2));
+
+                    // Determine size
+                    int size = 0;
+                    if (spriteName == "asteroid")
+                        size = 512;
+                    else if (spriteName.Contains("background"))
+                        size = 2048;
+                    else if (spriteName == "playerShip")
+                        size = 100;
+
+                    Texture2D newTex = MonoBehaviour.Instantiate(tex);
+                    TextureScaler.Bilinear(newTex, size, size);
+                    
+
+                    // Create the sprite
+                    sprite = Sprite.Create(newTex, new Rect(new Vector2(), new Vector2(size, size)), new Vector2(0.5f, 0.5f), size);
                 }
             }
 
@@ -97,8 +113,8 @@ namespace MinimalMiner
         /// <summary>
         /// Creates sprites stored at the specified theme directory, to be used for assigning sprites to a theme
         /// </summary>
-        /// <param name="themeName"></param>
-        /// <param name="spriteName"></param>
+        /// <param name="themeName">The name of the theme (for path)</param>
+        /// <param name="spriteName">The name of the sprite</param>
         /// <returns>The sprites found</returns>
         public static List<Sprite> GetSprites(string themeName, string spriteName)
         {
@@ -107,12 +123,27 @@ namespace MinimalMiner
             List<Sprite> sprites = new List<Sprite>();
             foreach (FileInfo file in files)
             {
-                if (file.Name.Contains(spriteName))
+                if (file.Name.Contains(spriteName) && !file.Name.Contains("meta"))
                 {
                     // WWW is obsolete, needs replaced eventually
                     WWW www = new WWW(file.FullName);
                     Texture2D tex = www.texture;
-                    sprites.Add(Sprite.Create(tex, new Rect(new Vector2(), new Vector2(tex.width, tex.height)), new Vector2(tex.width / 2, tex.height / 2)));
+                    tex.alphaIsTransparency = true;
+
+                    // Determine size
+                    int size = 0;
+                    if (spriteName == "asteroid")
+                        size = 512;
+                    else if (spriteName.Contains("background"))
+                        size = 2048;
+                    else if (spriteName == "playerShip")
+                        size = 100;
+
+                    Texture2D newTex = MonoBehaviour.Instantiate(tex);
+                    TextureScaler.Bilinear(newTex, size, size);
+
+                    // Create the sprite
+                    sprites.Add(Sprite.Create(newTex, new Rect(new Vector2(), new Vector2(size, size)), new Vector2(0.5f, 0.5f), size));
                 }
             }
 
@@ -122,8 +153,8 @@ namespace MinimalMiner
         /// <summary>
         /// Assigns sprites to a theme
         /// </summary>
-        /// <param name="theme"></param>
-        /// <returns></returns>
+        /// <param name="theme">The theme to edit and assign sprites to</param>
+        /// <returns>The theme that was edited</returns>
         /// <remarks>This should only be called on an active theme to prevent overusage of memory</remarks>
         public static Theme AssignSprites(Theme theme)
         {

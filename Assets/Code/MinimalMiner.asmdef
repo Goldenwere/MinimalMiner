@@ -1,3 +1,15 @@
-﻿{
-	"name": "MinimalMiner"
+{
+    "name": "MinimalMiner",
+    "references": [
+        "GUID:a37b2962f3f71bb49b793d3f1ddd04a8"
+    ],
+    "includePlatforms": [],
+    "excludePlatforms": [],
+    "allowUnsafeCode": false,
+    "overrideReferences": false,
+    "precompiledReferences": [],
+    "autoReferenced": true,
+    "defineConstraints": [],
+    "versionDefines": [],
+    "noEngineReferences": false
 }

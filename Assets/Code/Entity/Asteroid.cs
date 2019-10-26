@@ -99,11 +99,12 @@ namespace MinimalMiner.Entity
         /// <param name="type">The type that the asteroid should be</param>
         /// <param name="size">The size of the asteroid</param>
         /// <param name="sprite">The sprite to use for the asteroid</param>
+        /// <param name="mat">The material to use for the asteroid</param>
         /// <param name="color">The color to use for the sprite</param>
         /// <param name="velocity">The initial velocity of the asteroid</param>
         /// <param name="position">The initial position of the asteroid</param>
         /// <param name="manager">The asteroid manager that spawned this asteroid</param>
-        public void Setup(AsteroidType type, AsteroidSize size, Sprite sprite, Color32 color, Vector2 velocity, Vector3 position, AsteroidManager manager)
+        public void Setup(AsteroidType type, AsteroidSize size, Sprite sprite, Material mat, Color32 color, Vector2 velocity, Vector3 position, AsteroidManager manager)
         {
             this.type = type;
             this.size = size;
@@ -127,6 +128,7 @@ namespace MinimalMiner.Entity
             asteroidMgr = manager;
             this.sprite.sprite = sprite;
             this.sprite.color = color;
+            this.sprite.material = mat;
         }
 
         /// <summary>

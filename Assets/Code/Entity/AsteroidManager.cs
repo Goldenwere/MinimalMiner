@@ -18,6 +18,7 @@ namespace MinimalMiner.Entity
         [SerializeField] private GameObject asteroidPrefab;         // The basic asteroid prefab/format to spawn asteroids with
         [SerializeField] private Sprite[] asteroidSprites;          // The various sprites asteroids can use
         [SerializeField] private Sprite[] defaultSprites;           // Default asteroid sprites
+        [SerializeField] private MaterialManager matMgr;            // Used for setting appropriate materials for sprites based on theme
         #endregion
 
         #region Methods
@@ -147,11 +148,25 @@ namespace MinimalMiner.Entity
             }
             while (position.x > -1f && position.x < 1f || position.y > -1f && position.y < 1f);
 
+            Material mat = null;
+
+            switch(currTheme.import_Asteroids)
+            {
+                case (int)SpriteImportType.png:
+                    mat = matMgr.Mat_Raster;
+                    break;
+                case (int)SpriteImportType.svg:
+                default:
+                    mat = matMgr.Mat_Vector;
+                    break;
+            }
+
+
             GameObject asteroid = Instantiate(asteroidPrefab);
 
             Asteroid behaviour = asteroid.GetComponent<Asteroid>();
 
-            behaviour.Setup(AsteroidType.general, (AsteroidSize)size, asteroidSprites[spriteIndex], currTheme.spriteColor_asteroid, velocity, position, this);
+            behaviour.Setup(AsteroidType.general, (AsteroidSize)size, asteroidSprites[spriteIndex], mat, currTheme.spriteColor_asteroid, velocity, position, this);
 
             return asteroid;
         }
@@ -170,11 +185,27 @@ namespace MinimalMiner.Entity
             int size = Random.Range(0, maxSize);
             Vector2 velocity = new Vector2(originalVelocity.x + Random.Range(-5f, 5f), originalVelocity.y + Random.Range(-5f, 5f));
 
+            Material mat = null;
+
+            switch (currTheme.import_Asteroids)
+            {
+                case (int)SpriteImportType.png:
+                    mat = matMgr.Mat_Raster;
+                    break;
+                case (int)SpriteImportType.svggradient:
+                    mat = matMgr.Mat_VectorGradient;
+                    break;
+                case (int)SpriteImportType.svg:
+                default:
+                    mat = matMgr.Mat_Vector;
+                    break;
+            }
+
             GameObject asteroid = Instantiate(asteroidPrefab);
 
             Asteroid behaviour = asteroid.GetComponentInChildren<Asteroid>();
 
-            behaviour.Setup(type, (AsteroidSize)size, asteroidSprites[spriteIndex], currTheme.spriteColor_asteroid, velocity, originalPosition, this);
+            behaviour.Setup(type, (AsteroidSize)size, asteroidSprites[spriteIndex], mat, currTheme.spriteColor_asteroid, velocity, originalPosition, this);
 
             return asteroid;
         }

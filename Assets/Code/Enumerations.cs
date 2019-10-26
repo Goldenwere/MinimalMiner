@@ -47,5 +47,15 @@
         playerShip,
         backgroundNormal
     }
+
+    /// <summary>
+    /// Represents the file type imported textures use in the theme
+    /// </summary>
+    public enum SpriteImportType
+    {
+        png,
+        svg,
+        svggradient
+    }
 }
 

@@ -16,6 +16,9 @@ namespace MinimalMiner
 
         #region Theme Properties
         public string themeName;
+        public int import_Backgrounds;
+        public int import_Asteroids;
+        public int import_Player;
         #endregion
 
         #region UI text
@@ -141,6 +144,10 @@ namespace MinimalMiner
             img_backgroundNormal = null;
             spriteImage_asteroid = null;
             spriteImage_player = null;
+
+            import_Asteroids = 0;
+            import_Backgrounds = 0;
+            import_Player = 0;
         }
 
         /// <summary>
@@ -170,6 +177,10 @@ namespace MinimalMiner
             img_backgroundNormal = null;
             spriteImage_asteroid = null;
             spriteImage_player = null;
+
+            import_Asteroids = 0;
+            import_Backgrounds = 0;
+            import_Player = 0;
         }
 
         /// <summary>
@@ -206,6 +217,10 @@ namespace MinimalMiner
             img_backgroundNormal = null;
             spriteImage_asteroid = null;
             spriteImage_player = null;
+
+            import_Asteroids = 0;
+            import_Backgrounds = 0;
+            import_Player = 0;
         }
         #endregion
     }
