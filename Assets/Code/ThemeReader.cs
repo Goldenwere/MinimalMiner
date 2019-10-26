@@ -216,6 +216,8 @@ namespace MinimalMiner
             catch (Exception e)
             {
                 MonoBehaviour.print(e.Message);
+                MonoBehaviour.print(e.StackTrace);
+                MonoBehaviour.print(file.Name);
             }
 
             finally
@@ -236,18 +238,16 @@ namespace MinimalMiner
         /// <returns></returns>
         public static int DetermineSize(string spriteName)
         {
-            switch (spriteName)
-            {
-                // Backgrounds are 2048px in size
-                case "background":
-                    return 2048;
+            // Backgrounds are 2048px in size
+            if (spriteName.Contains("background"))
+                return 2048;
+            // Asteroids and the player ship are 512px in size
+            else if (spriteName == "asteroid" || spriteName == "playerShip")
+                return 512;
 
-                // Asteroids, player ship, and other unspecified sprites are 512px in size
-                case "asteroid":
-                case "player":
-                default:
-                    return 512;
-            }
+            // Other sprites default to 512
+            else
+                return 512;
         }
 
         /// <summary>
@@ -258,17 +258,15 @@ namespace MinimalMiner
         /// <returns></returns>
         public static SpriteImportType DetermineSprite(string spriteName, Theme theme)
         {
-            switch (spriteName)
-            {
-                case "asteroid":
-                    return (SpriteImportType)theme.import_Asteroids;
-                case "background":
-                    return (SpriteImportType)theme.import_Backgrounds;
-                case "playerShip":
-                    return (SpriteImportType)theme.import_Player;
-            }
+            if (spriteName.Contains("background"))
+                return (SpriteImportType)theme.import_Backgrounds;
+            else if (spriteName == "asteroid")
+                return (SpriteImportType)theme.import_Asteroids;
+            else if (spriteName == "playerShip")
+                return (SpriteImportType)theme.import_Player;
 
-            return SpriteImportType.svg;
+            else
+                return SpriteImportType.png;
         }
 
         /// <summary>

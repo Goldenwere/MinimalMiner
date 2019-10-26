@@ -6,33 +6,33 @@
    xmlns:svg="http://www.w3.org/2000/svg"
    xmlns="http://www.w3.org/2000/svg"
    xmlns:xlink="http://www.w3.org/1999/xlink"
-   id="svg8"
-   version="1.1"
-   viewBox="0 0 200 200"
+   width="200mm"
    height="200mm"
-   width="200mm">
+   viewBox="0 0 200 200"
+   version="1.1"
+   id="svg8">
   <defs
      id="defs2">
     <linearGradient
        id="linearGradient821">
       <stop
-         id="stop817"
+         style="stop-color:#ffffff;stop-opacity:1;"
          offset="0"
-         style="stop-color:#ffffff;stop-opacity:1;" />
+         id="stop817" />
       <stop
-         id="stop819"
+         style="stop-color:#dcdcdc;stop-opacity:1"
          offset="1"
-         style="stop-color:#dcdcdc;stop-opacity:1" />
+         id="stop819" />
     </linearGradient>
     <radialGradient
-       gradientUnits="userSpaceOnUse"
-       r="100"
-       fy="197"
-       fx="100"
-       cy="197"
-       cx="100"
+       xlink:href="#linearGradient821"
        id="radialGradient823"
-       xlink:href="#linearGradient821" />
+       cx="100"
+       cy="197"
+       fx="100"
+       fy="197"
+       r="100"
+       gradientUnits="userSpaceOnUse" />
   </defs>
   <metadata
      id="metadata5">
@@ -47,13 +47,13 @@
     </rdf:RDF>
   </metadata>
   <g
-     transform="translate(0,-97)"
-     id="layer1">
+     id="layer1"
+     transform="translate(0,-97)">
     <circle
-       r="100"
-       cy="197"
-       cx="100"
+       style="opacity:1;fill:url(#radialGradient823);fill-opacity:1;stroke:none;stroke-width:0.29408035;stroke-linecap:round;stroke-miterlimit:4;stroke-dasharray:none;stroke-dashoffset:0;stroke-opacity:1;paint-order:normal"
        id="path815"
-       style="opacity:1;fill:url(#radialGradient823);fill-opacity:1;stroke:none;stroke-width:0.29408035;stroke-linecap:round;stroke-miterlimit:4;stroke-dasharray:none;stroke-dashoffset:0;stroke-opacity:1;paint-order:normal" />
+       cx="100"
+       cy="197"
+       r="100" />
   </g>
 </svg>

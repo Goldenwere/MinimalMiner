@@ -1,6 +1,4 @@
 <?xml version="1.0" encoding="UTF-8" standalone="no"?>
-<!-- Created with Inkscape (http://www.inkscape.org/) -->
-
 <svg
    xmlns:dc="http://purl.org/dc/elements/1.1/"
    xmlns:cc="http://creativecommons.org/ns#"
@@ -8,58 +6,33 @@
    xmlns:svg="http://www.w3.org/2000/svg"
    xmlns="http://www.w3.org/2000/svg"
    xmlns:xlink="http://www.w3.org/1999/xlink"
-   xmlns:sodipodi="http://sodipodi.sourceforge.net/DTD/sodipodi-0.dtd"
-   xmlns:inkscape="http://www.inkscape.org/namespaces/inkscape"
-   width="200mm"
-   height="200mm"
-   viewBox="0 0 200 200"
-   version="1.1"
    id="svg7208"
-   inkscape:version="0.92.4 (5da689c313, 2019-01-14)"
-   sodipodi:docname="rock3.svg">
+   version="1.1"
+   viewBox="0 0 200 200"
+   height="200mm"
+   width="200mm">
   <defs
      id="defs7202">
     <linearGradient
-       inkscape:collect="always"
        id="linearGradient7759">
       <stop
-         style="stop-color:#fffffc;stop-opacity:1"
+         id="stop7755"
          offset="0"
-         id="stop7755" />
+         style="stop-color:#fffffc;stop-opacity:1" />
       <stop
-         style="stop-color:#c8c8c8;stop-opacity:0.95767194"
+         id="stop7757"
          offset="1"
-         id="stop7757" />
+         style="stop-color:#c8c8c8;stop-opacity:0.95767194" />
     </linearGradient>
     <linearGradient
-       inkscape:collect="always"
-       xlink:href="#linearGradient7759"
-       id="linearGradient7761"
-       x1="3.0693319"
-       y1="196.10363"
-       x2="198.47808"
+       gradientUnits="userSpaceOnUse"
        y2="196.10363"
-       gradientUnits="userSpaceOnUse" />
+       x2="198.47808"
+       y1="196.10363"
+       x1="3.0693319"
+       id="linearGradient7761"
+       xlink:href="#linearGradient7759" />
   </defs>
-  <sodipodi:namedview
-     id="base"
-     pagecolor="#ffffff"
-     bordercolor="#666666"
-     borderopacity="1.0"
-     inkscape:pageopacity="0.0"
-     inkscape:pageshadow="2"
-     inkscape:zoom="0.98994949"
-     inkscape:cx="432.65489"
-     inkscape:cy="296.91729"
-     inkscape:document-units="mm"
-     inkscape:current-layer="layer1"
-     showgrid="false"
-     inkscape:pagecheckerboard="true"
-     inkscape:window-width="1920"
-     inkscape:window-height="1017"
-     inkscape:window-x="-8"
-     inkscape:window-y="-8"
-     inkscape:window-maximized="1" />
   <metadata
      id="metadata7205">
     <rdf:RDF>
@@ -68,19 +41,16 @@
         <dc:format>image/svg+xml</dc:format>
         <dc:type
            rdf:resource="http://purl.org/dc/dcmitype/StillImage" />
-        <dc:title />
+        <dc:title></dc:title>
       </cc:Work>
     </rdf:RDF>
   </metadata>
   <g
-     inkscape:label="Layer 1"
-     inkscape:groupmode="layer"
-     id="layer1"
-     transform="translate(0,-97)">
+     transform="translate(0,-97)"
+     id="layer1">
     <path
-       style="fill:url(#linearGradient7761);stroke:none;stroke-width:0.26458332px;stroke-linecap:butt;stroke-linejoin:miter;stroke-opacity:1;fill-opacity:1"
-       d="m 80.448128,103.22959 113.856812,29.39965 4.00905,15.50163 -29.66692,5.07813 -6.41447,13.36347 27.79603,17.63979 2.40543,29.93419 -13.36348,59.33383 -27.26149,17.90706 -63.877416,2.93996 -44.901281,-19.51067 -25.657874,1.87088 -14.1652846,-25.3906 7.2162766,-44.90128 36.081385,-22.71791 20.312486,-27.52876 -7.483546,-23.51972 -14.165286,0.26727 -25.390605,4.81085 -13.8980155,-15.7689 1.0690781,-17.10525 15.7689014,-6.949007 47.841245,9.354437 z"
        id="path7753"
-       inkscape:connector-curvature="0" />
+       d="m 80.448128,103.22959 113.856812,29.39965 4.00905,15.50163 -29.66692,5.07813 -6.41447,13.36347 27.79603,17.63979 2.40543,29.93419 -13.36348,59.33383 -27.26149,17.90706 -63.877416,2.93996 -44.901281,-19.51067 -25.657874,1.87088 -14.1652846,-25.3906 7.2162766,-44.90128 36.081385,-22.71791 20.312486,-27.52876 -7.483546,-23.51972 -14.165286,0.26727 -25.390605,4.81085 -13.8980155,-15.7689 1.0690781,-17.10525 15.7689014,-6.949007 47.841245,9.354437 z"
+       style="fill:url(#linearGradient7761);stroke:none;stroke-width:0.26458332px;stroke-linecap:butt;stroke-linejoin:miter;stroke-opacity:1;fill-opacity:1" />
   </g>
 </svg>
