@@ -16,6 +16,7 @@ namespace MinimalMiner.Entity
         private GameState currState;
         private PlayerPreferences playerPrefs;
         private EventManager eventMgr;
+        private MaterialManager matMgr;
 
         // Ship variables
         [SerializeField] private SpriteRenderer sprite;
@@ -41,6 +42,17 @@ namespace MinimalMiner.Entity
         #endregion
 
         #region Methods
+        /// <summary>
+        /// Handles finding certain managers before events called
+        /// </summary>
+        private void Awake()
+        {
+            GameObject managers = GameObject.FindWithTag("managers");
+            playerPrefs = managers.GetComponent<PlayerPreferences>();
+            eventMgr = managers.GetComponent<EventManager>();
+            matMgr = managers.GetComponent<MaterialManager>();
+        }
+
         /// <summary>
         /// Handles the start of the object before the first frame
         /// </summary>
@@ -96,6 +108,31 @@ namespace MinimalMiner.Entity
         /// <param name="theme">The new GameTheme properties</param>
         private void UpdateTheme(Theme theme)
         {
+            if (theme.spriteImage_player != null)
+            {
+                sprite.sprite = theme.spriteImage_player;
+
+                switch (theme.import_Asteroids)
+                {
+                    case (int)SpriteImportType.png:
+                        sprite.material = matMgr.Mat_Raster;
+                        break;
+                    case (int)SpriteImportType.svggradient:
+                        sprite.material = matMgr.Mat_VectorGradient;
+                        break;
+                    case (int)SpriteImportType.svg:
+                    default:
+                        sprite.material = matMgr.Mat_Vector;
+                        break;
+                }
+            }
+
+            else
+            {
+                sprite.sprite = matMgr.Default_Player;
+                sprite.material = matMgr.Mat_Vector;
+            }
+
             sprite.material.color = theme.spriteColor_player;
         }
 
@@ -135,6 +172,7 @@ namespace MinimalMiner.Entity
             fireTimer += Time.deltaTime;
             if (Input.GetKey(playerPrefs.Controls.Ship_Fire) && fireTimer > fireRate)
             {
+                print("fired");
                 // Instantiate bullet
                 GameObject bullet = Instantiate(bulletPrefab, firesource.position, Quaternion.identity);
 
@@ -164,6 +202,7 @@ namespace MinimalMiner.Entity
             GameObject managers = GameObject.FindWithTag("managers");
             playerPrefs = managers.GetComponent<PlayerPreferences>();
             eventMgr = managers.GetComponent<EventManager>();
+            matMgr = managers.GetComponent<MaterialManager>();
 
             // Reset state and stats
             playerHealth = 10f;

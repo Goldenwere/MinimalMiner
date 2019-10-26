@@ -1,11 +1,12 @@
 ﻿#pragma warning disable 0649
 
 using UnityEngine;
+using System.Collections.Generic;
 
 namespace MinimalMiner.Util
 {
     /// <summary>
-    /// Holds materials for SVG sprites and raster sprites for other managers to utilize on theme changes
+    /// Holds materials for SVG sprites and raster sprites for other managers to utilize on theme changes; Also holds default sprites
     /// </summary>
     public class MaterialManager : MonoBehaviour
     {
@@ -41,6 +42,28 @@ namespace MinimalMiner.Util
         public Material Mat_Raster
         {
             get { return mat_raster; }
+        }
+
+
+
+        [SerializeField] private Sprite default_Player;
+
+        /// <summary>
+        /// The default player sprite
+        /// </summary>
+        public Sprite Default_Player
+        {
+            get { return default_Player; }
+        }
+
+        [SerializeField] private List<Sprite> default_Asteroids;
+
+        /// <summary>
+        /// The default asteroid sprites
+        /// </summary>
+        public List<Sprite> Default_Asteroids
+        {
+            get { return default_Asteroids; }
         }
     }
 }

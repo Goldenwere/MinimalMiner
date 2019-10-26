@@ -16,8 +16,7 @@ namespace MinimalMiner.Entity
         private Theme currTheme;                                    // The current Theme
         private List<GameObject> asteroids;                         // The asteroids instantiated in the scene
         [SerializeField] private GameObject asteroidPrefab;         // The basic asteroid prefab/format to spawn asteroids with
-        [SerializeField] private Sprite[] asteroidSprites;          // The various sprites asteroids can use
-        [SerializeField] private Sprite[] defaultSprites;           // Default asteroid sprites
+        private List<Sprite> asteroidSprites;                       // The various sprites asteroids can use
         [SerializeField] private MaterialManager matMgr;            // Used for setting appropriate materials for sprites based on theme
         #endregion
 
@@ -58,12 +57,15 @@ namespace MinimalMiner.Entity
             currTheme = theme;
             if (theme.spriteImage_asteroid.Count > 0)
             {
-                defaultSprites = asteroidSprites;
-                asteroidSprites = new Sprite[theme.spriteImage_asteroid.Count];
-                for (int i = 0; i < asteroidSprites.Length; i++)
-                {
-                    asteroidSprites[i] = theme.spriteImage_asteroid[i];
-                }
+                asteroidSprites = new List<Sprite>();
+
+                foreach (Sprite s in theme.spriteImage_asteroid)
+                    asteroidSprites.Add(s);
+            }
+
+            else
+            {
+                asteroidSprites = matMgr.Default_Asteroids;
             }
         }
 
@@ -138,7 +140,7 @@ namespace MinimalMiner.Entity
         /// <returns>The asteroid that was spawned</returns>
         public GameObject SpawnAsteroid()
         {
-            int spriteIndex = Random.Range(0, asteroidSprites.Length);
+            int spriteIndex = Random.Range(0, asteroidSprites.Count);
             int size = Random.Range(0, 3);
             Vector2 velocity = new Vector2(Random.Range(-10f, 10f), Random.Range(-10f, 10f));
             Vector3 position;
@@ -150,10 +152,13 @@ namespace MinimalMiner.Entity
 
             Material mat = null;
 
-            switch(currTheme.import_Asteroids)
+            switch (currTheme.import_Asteroids)
             {
                 case (int)SpriteImportType.png:
                     mat = matMgr.Mat_Raster;
+                    break;
+                case (int)SpriteImportType.svggradient:
+                    mat = matMgr.Mat_VectorGradient;
                     break;
                 case (int)SpriteImportType.svg:
                 default:
@@ -181,7 +186,7 @@ namespace MinimalMiner.Entity
         /// <returns>The asteroid that was spawned</returns>
         public GameObject SpawnAsteroid(AsteroidType type, int maxSize, Vector2 originalVelocity, Vector3 originalPosition)
         {
-            int spriteIndex = Random.Range(0, asteroidSprites.Length);
+            int spriteIndex = Random.Range(0, asteroidSprites.Count);
             int size = Random.Range(0, maxSize);
             Vector2 velocity = new Vector2(originalVelocity.x + Random.Range(-5f, 5f), originalVelocity.y + Random.Range(-5f, 5f));
 

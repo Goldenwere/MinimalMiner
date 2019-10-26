@@ -127,8 +127,8 @@ namespace MinimalMiner.Entity
             transform.position = position;
             asteroidMgr = manager;
             this.sprite.sprite = sprite;
-            this.sprite.color = color;
             this.sprite.material = mat;
+            this.sprite.color = color;
         }
 
         /// <summary>

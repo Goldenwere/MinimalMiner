@@ -96,14 +96,14 @@ namespace MinimalMiner
                     else if (spriteName.Contains("background"))
                         size = 2048;
                     else if (spriteName == "playerShip")
-                        size = 100;
+                        size = 512;
 
                     Texture2D newTex = MonoBehaviour.Instantiate(tex);
                     TextureScaler.Bilinear(newTex, size, size);
                     
 
                     // Create the sprite
-                    sprite = Sprite.Create(newTex, new Rect(new Vector2(), new Vector2(size, size)), new Vector2(0.5f, 0.5f), size);
+                    sprite = Sprite.Create(newTex, new Rect(new Vector2(), new Vector2(size, size)), new Vector2(0.5f, 0.5f), size * 2);
                 }
             }
 
@@ -137,13 +137,13 @@ namespace MinimalMiner
                     else if (spriteName.Contains("background"))
                         size = 2048;
                     else if (spriteName == "playerShip")
-                        size = 100;
+                        size = 512;
 
                     Texture2D newTex = MonoBehaviour.Instantiate(tex);
                     TextureScaler.Bilinear(newTex, size, size);
 
                     // Create the sprite
-                    sprites.Add(Sprite.Create(newTex, new Rect(new Vector2(), new Vector2(size, size)), new Vector2(0.5f, 0.5f), size));
+                    sprites.Add(Sprite.Create(newTex, new Rect(new Vector2(), new Vector2(size, size)), new Vector2(0.5f, 0.5f), size * 2));
                 }
             }
 

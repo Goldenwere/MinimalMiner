@@ -42,12 +42,6 @@ namespace MinimalMiner.Util
         {
             get; private set;
         }
-
-        // Temporary hard-coded themes
-        private Theme darkTheme;
-        private Theme lightTheme;
-
-        [SerializeField] string dump;
         #endregion
 
         /// <summary>

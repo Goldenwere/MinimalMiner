@@ -599,7 +599,6 @@ MonoBehaviour:
   m_Script: {fileID: 11500000, guid: ce1444659eada1447bdad83148fc115a, type: 3}
   m_Name: 
   m_EditorClassIdentifier: 
-  dump: 
 --- !u!114 &247396938
 MonoBehaviour:
   m_ObjectHideFlags: 0
@@ -627,24 +626,6 @@ MonoBehaviour:
   m_EditorClassIdentifier: 
   asteroidPrefab: {fileID: 4270855401526594693, guid: 7dce6391c8174a14c942c49ef11ad72d,
     type: 3}
-  asteroidSprites:
-  - {fileID: 3286163911610860551, guid: 5b8f3b40500d7164e8b99877a5fc778c, type: 3}
-  - {fileID: 3286163911610860551, guid: ac4479a4b8bf3084d814eec2aba3b5de, type: 3}
-  - {fileID: 3286163911610860551, guid: a8f80795a64a4344c808005f9bdec8d9, type: 3}
-  - {fileID: 3286163911610860551, guid: cc7a98d4e778fed4abc55512554eb524, type: 3}
-  - {fileID: 3286163911610860551, guid: 49152e1c2db69c64f941cdff7186fe9a, type: 3}
-  - {fileID: 3286163911610860551, guid: c308865dd634afe459351be655eb0844, type: 3}
-  - {fileID: 3286163911610860551, guid: bfc309a8cebb0b3498a91af9385d595e, type: 3}
-  - {fileID: 3286163911610860551, guid: 57b4d79754fcac24eb23094727144999, type: 3}
-  defaultSprites:
-  - {fileID: 3286163911610860551, guid: 5b8f3b40500d7164e8b99877a5fc778c, type: 3}
-  - {fileID: 3286163911610860551, guid: ac4479a4b8bf3084d814eec2aba3b5de, type: 3}
-  - {fileID: 3286163911610860551, guid: a8f80795a64a4344c808005f9bdec8d9, type: 3}
-  - {fileID: 3286163911610860551, guid: cc7a98d4e778fed4abc55512554eb524, type: 3}
-  - {fileID: 3286163911610860551, guid: 49152e1c2db69c64f941cdff7186fe9a, type: 3}
-  - {fileID: 3286163911610860551, guid: c308865dd634afe459351be655eb0844, type: 3}
-  - {fileID: 3286163911610860551, guid: bfc309a8cebb0b3498a91af9385d595e, type: 3}
-  - {fileID: 3286163911610860551, guid: 57b4d79754fcac24eb23094727144999, type: 3}
   matMgr: {fileID: 247396944}
 --- !u!4 &247396940
 Transform:
@@ -719,6 +700,17 @@ MonoBehaviour:
   mat_vector: {fileID: 2100000, guid: 2ba9fedae24e00043ab494ef8d1ab3d5, type: 2}
   mat_vect_grad: {fileID: 2100000, guid: 8e18dbe5b91e52e46aca80c91bd35a4e, type: 2}
   mat_raster: {fileID: 2100000, guid: c4c547f721d9a50469f87352aa55255a, type: 2}
+  default_Player: {fileID: 3286163911610860551, guid: d8a7ec798416cbd479753cf5f83fce3a,
+    type: 3}
+  default_Asteroids:
+  - {fileID: 3286163911610860551, guid: 5b8f3b40500d7164e8b99877a5fc778c, type: 3}
+  - {fileID: 3286163911610860551, guid: ac4479a4b8bf3084d814eec2aba3b5de, type: 3}
+  - {fileID: 3286163911610860551, guid: a8f80795a64a4344c808005f9bdec8d9, type: 3}
+  - {fileID: 3286163911610860551, guid: cc7a98d4e778fed4abc55512554eb524, type: 3}
+  - {fileID: 3286163911610860551, guid: 49152e1c2db69c64f941cdff7186fe9a, type: 3}
+  - {fileID: 3286163911610860551, guid: c308865dd634afe459351be655eb0844, type: 3}
+  - {fileID: 3286163911610860551, guid: bfc309a8cebb0b3498a91af9385d595e, type: 3}
+  - {fileID: 3286163911610860551, guid: 57b4d79754fcac24eb23094727144999, type: 3}
 --- !u!1 &309782896
 GameObject:
   m_ObjectHideFlags: 0
@@ -5790,6 +5782,11 @@ PrefabInstance:
         type: 3}
       propertyPath: m_LocalEulerAnglesHint.z
       value: 0
+      objectReference: {fileID: 0}
+    - target: {fileID: 5380528078638206743, guid: d0670d720d9aac4418f1b90074e5145a,
+        type: 3}
+      propertyPath: m_LocalPosition.x
+      value: 0.35
       objectReference: {fileID: 0}
     m_RemovedComponents: []
   m_SourcePrefab: {fileID: 100100000, guid: d0670d720d9aac4418f1b90074e5145a, type: 3}
