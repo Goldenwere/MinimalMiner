@@ -1,7 +1,8 @@
 {
     "name": "MinimalMiner",
     "references": [
-        "GUID:a37b2962f3f71bb49b793d3f1ddd04a8"
+        "GUID:a37b2962f3f71bb49b793d3f1ddd04a8",
+        "GUID:68550284b645f4b9894995579f34290a"
     ],
     "includePlatforms": [],
     "excludePlatforms": [],
