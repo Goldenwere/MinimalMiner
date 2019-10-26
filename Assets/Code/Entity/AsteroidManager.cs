@@ -17,6 +17,7 @@ namespace MinimalMiner.Entity
         private List<GameObject> asteroids;                         // The asteroids instantiated in the scene
         [SerializeField] private GameObject asteroidPrefab;         // The basic asteroid prefab/format to spawn asteroids with
         [SerializeField] private Sprite[] asteroidSprites;          // The various sprites asteroids can use
+        [SerializeField] private Sprite[] defaultSprites;           // Default asteroid sprites
         #endregion
 
         #region Methods
@@ -54,6 +55,15 @@ namespace MinimalMiner.Entity
         private void UpdateTheme(Theme theme)
         {
             currTheme = theme;
+            if (theme.spriteImage_asteroid.Count > 0)
+            {
+                defaultSprites = asteroidSprites;
+                asteroidSprites = new Sprite[theme.spriteImage_asteroid.Count];
+                for (int i = 0; i < asteroidSprites.Length; i++)
+                {
+                    asteroidSprites[i] = theme.spriteImage_asteroid[i];
+                }
+            }
         }
 
         /// <summary>

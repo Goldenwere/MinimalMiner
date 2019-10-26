@@ -111,8 +111,10 @@ namespace MinimalMiner.UI
             {
                 if (dropdown.name == "Dropdown_Theme")
                 {
+                    dropdown.options = new List<TMP_Dropdown.OptionData>(playerPrefs.Themes.Count);
                     for (int i = 0; i < playerPrefs.Themes.Count; i++)
                     {
+                        dropdown.options.Add(new TMP_Dropdown.OptionData());
                         dropdown.options[i].text = playerPrefs.Themes[i].themeName;
                     }
                 }
