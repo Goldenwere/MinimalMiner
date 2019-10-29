@@ -126,6 +126,40 @@ namespace MinimalMiner.Util
                 UpdateTheme(CurrentTheme);
             }
         }
+
+        /// <summary>
+        /// Handles updates to the control preferences
+        /// </summary>
+        /// <param name="key">The new key to assign to the controls</param>
+        /// <param name="control">The control being modified</param>
+        public void UpdateControls(KeyCode key, string control)
+        {
+            InputDefinitions newControls = Controls;
+
+            switch (control)
+            {
+                case "Ship_Forward":
+                    newControls.Ship_Forward = key;
+                    break;
+                case "Ship_Reverse":
+                    newControls.Ship_Reverse = key;
+                    break;
+                case "Ship_CW":
+                    newControls.Ship_CW = key;
+                    break;
+                case "Ship_CCW":
+                    newControls.Ship_CCW = key;
+                    break;
+                case "Ship_Fire":
+                    newControls.Ship_Fire = key;
+                    break;
+                case "Menu_Pause":
+                    newControls.Menu_Pause = key;
+                    break;
+            }
+
+            Controls = newControls;
+        }
     }
 }
  

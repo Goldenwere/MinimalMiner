@@ -95,6 +95,7 @@ namespace MinimalMiner
                         case SpriteImportType.svggradient:
                             newTex = ImportVector(file, size, spriteType);
                             sprite = Sprite.Create(newTex, new Rect(new Vector2(), new Vector2(size, size)), new Vector2(0.5f, 0.5f), size * 2);
+                            //sprite = ImportVector(file, size, spriteType);
                             break;
                         case SpriteImportType.png:
                         default:
@@ -132,6 +133,7 @@ namespace MinimalMiner
                         case SpriteImportType.svggradient:
                             newTex = ImportVector(file, size, spriteType);
                             sprites.Add(Sprite.Create(newTex, new Rect(new Vector2(), new Vector2(size, size)), new Vector2(0.5f, 0.5f), size * 2));
+                            //sprites.Add(ImportVector(file, size, spriteType));
                             break;
                         case SpriteImportType.png:
                         default:
@@ -190,9 +192,9 @@ namespace MinimalMiner
                 };
 
                 List<VectorUtils.Geometry> geoms = VectorUtils.TessellateScene(scene.Scene, tessOptions);
-                Sprite sprite = VectorUtils.BuildSprite(geoms, size, VectorUtils.Alignment.Center, Vector2.zero, 64, false);
-                Shader shader = null;
+                Sprite sprite = VectorUtils.BuildSprite(geoms, size * 2, VectorUtils.Alignment.Center, Vector2.zero, 64, false);
 
+                Shader shader = null;
                 switch(type)
                 {
                     case SpriteImportType.svggradient:

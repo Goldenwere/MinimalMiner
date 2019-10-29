@@ -23,11 +23,45 @@
     /// </summary>
     public enum GameState
     {
+        /// <summary>
+        /// The main menu
+        /// </summary>
         main,
+        /// <summary>
+        /// The settings menu
+        /// </summary>
         settings,
+        /// <summary>
+        /// Normal play screen
+        /// </summary>
         play,
+        /// <summary>
+        /// The pause menu
+        /// </summary>
         pause,
+        /// <summary>
+        /// The death menu
+        /// </summary>
         death
+    }
+
+    /// <summary>
+    /// Represents the states of the settings menu
+    /// </summary>
+    public enum SettingsState
+    {
+        /// <summary>
+        /// The regular settings menu
+        /// </summary>
+        settings,
+        /// <summary>
+        /// The controls menu, without a control selected
+        /// </summary>
+        controls_inactive,
+        /// <summary>
+        /// The controls menu, with a control selected
+        /// </summary>
+        controls_active
     }
 
     /// <summary>
