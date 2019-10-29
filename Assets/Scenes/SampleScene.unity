@@ -487,8 +487,8 @@ GameObject:
   - component: {fileID: 75085551}
   - component: {fileID: 75085550}
   m_Layer: 5
-  m_Name: Text (TMP)
-  m_TagString: Untagged
+  m_Name: Text_Turn-Left
+  m_TagString: UI_text_body
   m_Icon: {fileID: 0}
   m_NavMeshLayer: 0
   m_StaticEditorFlags: 0
@@ -1024,7 +1024,40 @@ MonoBehaviour:
   m_TargetGraphic: {fileID: 168144860}
   m_OnClick:
     m_PersistentCalls:
-      m_Calls: []
+      m_Calls:
+      - m_Target: {fileID: 397969070}
+        m_MethodName: UpdateSettingsState
+        m_Mode: 3
+        m_Arguments:
+          m_ObjectArgument: {fileID: 0}
+          m_ObjectArgumentAssemblyTypeName: UnityEngine.Object, UnityEngine
+          m_IntArgument: 2
+          m_FloatArgument: 0
+          m_StringArgument: 
+          m_BoolArgument: 0
+        m_CallState: 2
+      - m_Target: {fileID: 397969070}
+        m_MethodName: UpdateControlState
+        m_Mode: 5
+        m_Arguments:
+          m_ObjectArgument: {fileID: 0}
+          m_ObjectArgumentAssemblyTypeName: UnityEngine.Object, UnityEngine
+          m_IntArgument: 0
+          m_FloatArgument: 0
+          m_StringArgument: Ship_Fire
+          m_BoolArgument: 0
+        m_CallState: 2
+      - m_Target: {fileID: 770967117}
+        m_MethodName: Play
+        m_Mode: 1
+        m_Arguments:
+          m_ObjectArgument: {fileID: 0}
+          m_ObjectArgumentAssemblyTypeName: UnityEngine.Object, UnityEngine
+          m_IntArgument: 0
+          m_FloatArgument: 0
+          m_StringArgument: 
+          m_BoolArgument: 0
+        m_CallState: 2
 --- !u!114 &168144860
 MonoBehaviour:
   m_ObjectHideFlags: 0
@@ -1144,7 +1177,7 @@ MonoBehaviour:
     m_PersistentCalls:
       m_Calls:
       - m_Target: {fileID: 397969070}
-        m_MethodName: UpdateState
+        m_MethodName: UpdateSettingsState
         m_Mode: 3
         m_Arguments:
           m_ObjectArgument: {fileID: 0}
@@ -2186,7 +2219,7 @@ GameObject:
   m_Icon: {fileID: 0}
   m_NavMeshLayer: 0
   m_StaticEditorFlags: 0
-  m_IsActive: 1
+  m_IsActive: 0
 --- !u!114 &397969066
 MonoBehaviour:
   m_ObjectHideFlags: 0
@@ -2280,6 +2313,26 @@ MonoBehaviour:
   m_Script: {fileID: 11500000, guid: cfa71147e66ee75419ecb389e264bb30, type: 3}
   m_Name: 
   m_EditorClassIdentifier: 
+  canvasSettingsPrimary: {fileID: 1381763374}
+  canvasSettingsControls: {fileID: 34160361}
+  controls:
+  - {fileID: 1286866957}
+  - {fileID: 2116330354}
+  - {fileID: 1381001338}
+  - {fileID: 1029514662}
+  - {fileID: 168144859}
+  controlText_key:
+  - Button_Thrust
+  - Button_Turn-Left
+  - Button_Turn-Right
+  - Button_Pause
+  - Button_Fire
+  controlText_value:
+  - {fileID: 1039160253}
+  - {fileID: 75085550}
+  - {fileID: 633269543}
+  - {fileID: 1341098191}
+  - {fileID: 1526967403}
 --- !u!1 &488441722
 GameObject:
   m_ObjectHideFlags: 0
@@ -2690,7 +2743,7 @@ GameObject:
   - component: {fileID: 532579059}
   m_Layer: 5
   m_Name: Text (TMP)
-  m_TagString: Untagged
+  m_TagString: UI_text_body
   m_Icon: {fileID: 0}
   m_NavMeshLayer: 0
   m_StaticEditorFlags: 0
@@ -3157,8 +3210,8 @@ GameObject:
   - component: {fileID: 633269544}
   - component: {fileID: 633269543}
   m_Layer: 5
-  m_Name: Text (TMP)
-  m_TagString: Untagged
+  m_Name: Text_Turn-Right
+  m_TagString: UI_text_body
   m_Icon: {fileID: 0}
   m_NavMeshLayer: 0
   m_StaticEditorFlags: 0
@@ -4921,7 +4974,18 @@ MonoBehaviour:
     m_PersistentCalls:
       m_Calls:
       - m_Target: {fileID: 397969070}
-        m_MethodName: UpdateState
+        m_MethodName: UpdateSettingsState
+        m_Mode: 3
+        m_Arguments:
+          m_ObjectArgument: {fileID: 0}
+          m_ObjectArgumentAssemblyTypeName: UnityEngine.Object, UnityEngine
+          m_IntArgument: 2
+          m_FloatArgument: 0
+          m_StringArgument: 
+          m_BoolArgument: 0
+        m_CallState: 2
+      - m_Target: {fileID: 397969070}
+        m_MethodName: UpdateControlState
         m_Mode: 5
         m_Arguments:
           m_ObjectArgument: {fileID: 0}
@@ -5146,8 +5210,8 @@ GameObject:
   - component: {fileID: 1039160254}
   - component: {fileID: 1039160253}
   m_Layer: 5
-  m_Name: Text (TMP)
-  m_TagString: Untagged
+  m_Name: Text_Thrust
+  m_TagString: UI_text_body
   m_Icon: {fileID: 0}
   m_NavMeshLayer: 0
   m_StaticEditorFlags: 0
@@ -6376,7 +6440,40 @@ MonoBehaviour:
   m_TargetGraphic: {fileID: 1286866958}
   m_OnClick:
     m_PersistentCalls:
-      m_Calls: []
+      m_Calls:
+      - m_Target: {fileID: 397969070}
+        m_MethodName: UpdateSettingsState
+        m_Mode: 3
+        m_Arguments:
+          m_ObjectArgument: {fileID: 0}
+          m_ObjectArgumentAssemblyTypeName: UnityEngine.Object, UnityEngine
+          m_IntArgument: 2
+          m_FloatArgument: 0
+          m_StringArgument: 
+          m_BoolArgument: 0
+        m_CallState: 2
+      - m_Target: {fileID: 397969070}
+        m_MethodName: UpdateControlState
+        m_Mode: 5
+        m_Arguments:
+          m_ObjectArgument: {fileID: 0}
+          m_ObjectArgumentAssemblyTypeName: UnityEngine.Object, UnityEngine
+          m_IntArgument: 0
+          m_FloatArgument: 0
+          m_StringArgument: Ship_Forward
+          m_BoolArgument: 0
+        m_CallState: 2
+      - m_Target: {fileID: 770967117}
+        m_MethodName: Play
+        m_Mode: 1
+        m_Arguments:
+          m_ObjectArgument: {fileID: 0}
+          m_ObjectArgumentAssemblyTypeName: UnityEngine.Object, UnityEngine
+          m_IntArgument: 0
+          m_FloatArgument: 0
+          m_StringArgument: 
+          m_BoolArgument: 0
+        m_CallState: 2
 --- !u!114 &1286866958
 MonoBehaviour:
   m_ObjectHideFlags: 0
@@ -6581,8 +6678,8 @@ GameObject:
   - component: {fileID: 1341098192}
   - component: {fileID: 1341098191}
   m_Layer: 5
-  m_Name: Text (TMP)
-  m_TagString: Untagged
+  m_Name: Text_Pause
+  m_TagString: UI_text_body
   m_Icon: {fileID: 0}
   m_NavMeshLayer: 0
   m_StaticEditorFlags: 0
@@ -6806,7 +6903,40 @@ MonoBehaviour:
   m_TargetGraphic: {fileID: 1381001339}
   m_OnClick:
     m_PersistentCalls:
-      m_Calls: []
+      m_Calls:
+      - m_Target: {fileID: 397969070}
+        m_MethodName: UpdateSettingsState
+        m_Mode: 3
+        m_Arguments:
+          m_ObjectArgument: {fileID: 0}
+          m_ObjectArgumentAssemblyTypeName: UnityEngine.Object, UnityEngine
+          m_IntArgument: 2
+          m_FloatArgument: 0
+          m_StringArgument: 
+          m_BoolArgument: 0
+        m_CallState: 2
+      - m_Target: {fileID: 397969070}
+        m_MethodName: UpdateControlState
+        m_Mode: 5
+        m_Arguments:
+          m_ObjectArgument: {fileID: 0}
+          m_ObjectArgumentAssemblyTypeName: UnityEngine.Object, UnityEngine
+          m_IntArgument: 0
+          m_FloatArgument: 0
+          m_StringArgument: Ship_CW
+          m_BoolArgument: 0
+        m_CallState: 2
+      - m_Target: {fileID: 770967117}
+        m_MethodName: Play
+        m_Mode: 1
+        m_Arguments:
+          m_ObjectArgument: {fileID: 0}
+          m_ObjectArgumentAssemblyTypeName: UnityEngine.Object, UnityEngine
+          m_IntArgument: 0
+          m_FloatArgument: 0
+          m_StringArgument: 
+          m_BoolArgument: 0
+        m_CallState: 2
 --- !u!114 &1381001339
 MonoBehaviour:
   m_ObjectHideFlags: 0
@@ -6858,7 +6988,7 @@ GameObject:
   m_Icon: {fileID: 0}
   m_NavMeshLayer: 0
   m_StaticEditorFlags: 0
-  m_IsActive: 0
+  m_IsActive: 1
 --- !u!224 &1381763375
 RectTransform:
   m_ObjectHideFlags: 0
@@ -7124,12 +7254,12 @@ MonoBehaviour:
     m_PersistentCalls:
       m_Calls:
       - m_Target: {fileID: 397969070}
-        m_MethodName: UpdateState
+        m_MethodName: UpdateSettingsState
         m_Mode: 3
         m_Arguments:
           m_ObjectArgument: {fileID: 0}
           m_ObjectArgumentAssemblyTypeName: UnityEngine.Object, UnityEngine
-          m_IntArgument: 2
+          m_IntArgument: 1
           m_FloatArgument: 0
           m_StringArgument: 
           m_BoolArgument: 0
@@ -7193,8 +7323,8 @@ GameObject:
   - component: {fileID: 1526967404}
   - component: {fileID: 1526967403}
   m_Layer: 5
-  m_Name: Text (TMP)
-  m_TagString: Untagged
+  m_Name: Text_Fire
+  m_TagString: UI_text_body
   m_Icon: {fileID: 0}
   m_NavMeshLayer: 0
   m_StaticEditorFlags: 0
@@ -9205,7 +9335,40 @@ MonoBehaviour:
   m_TargetGraphic: {fileID: 2116330355}
   m_OnClick:
     m_PersistentCalls:
-      m_Calls: []
+      m_Calls:
+      - m_Target: {fileID: 397969070}
+        m_MethodName: UpdateSettingsState
+        m_Mode: 3
+        m_Arguments:
+          m_ObjectArgument: {fileID: 0}
+          m_ObjectArgumentAssemblyTypeName: UnityEngine.Object, UnityEngine
+          m_IntArgument: 2
+          m_FloatArgument: 0
+          m_StringArgument: 
+          m_BoolArgument: 0
+        m_CallState: 2
+      - m_Target: {fileID: 397969070}
+        m_MethodName: UpdateControlState
+        m_Mode: 5
+        m_Arguments:
+          m_ObjectArgument: {fileID: 0}
+          m_ObjectArgumentAssemblyTypeName: UnityEngine.Object, UnityEngine
+          m_IntArgument: 0
+          m_FloatArgument: 0
+          m_StringArgument: Ship_CCW
+          m_BoolArgument: 0
+        m_CallState: 2
+      - m_Target: {fileID: 770967117}
+        m_MethodName: Play
+        m_Mode: 1
+        m_Arguments:
+          m_ObjectArgument: {fileID: 0}
+          m_ObjectArgumentAssemblyTypeName: UnityEngine.Object, UnityEngine
+          m_IntArgument: 0
+          m_FloatArgument: 0
+          m_StringArgument: 
+          m_BoolArgument: 0
+        m_CallState: 2
 --- !u!114 &2116330355
 MonoBehaviour:
   m_ObjectHideFlags: 0

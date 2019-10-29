@@ -1,9 +1,11 @@
-﻿using System.Collections;
+﻿#pragma warning disable 0649
+
+using System.Collections;
 using System.Collections.Generic;
 using System;
 using UnityEngine;
 using UnityEngine.UI;
-using MinimalMiner;
+using TMPro;
 using MinimalMiner.Util;
 
 namespace MinimalMiner.UI
@@ -13,13 +15,55 @@ namespace MinimalMiner.UI
     /// </summary>
     public class SettingsManager : MonoBehaviour
     {
-        private PlayerPreferences prefs;
-        private SettingsState currState;
-        private string currControl;
+        // Core fields to manipulate
+        private PlayerPreferences prefs;                                // Used for updating controls
+        private SettingsState currState;                                // The current SettingsState
+        private string currControl;                                     // The current control to modify
 
-        [SerializeField] GameObject canvasSettingsPrimary;
-        [SerializeField] GameObject canvasSettingsControls;
-        [SerializeField] List<Button> controls;
+        // Canvases that need enabled/disabled appropriately
+        [SerializeField] private GameObject canvasSettingsPrimary;      // The main settings canvas gameobject
+        [SerializeField] private GameObject canvasSettingsControls;     // The controls settings canvas gameobject
+
+        // UI elements that need updating
+        [SerializeField] private List<Button> controls;                 // A list of the buttons related to controls in the controls canvas
+        private Dictionary<string, TextMeshProUGUI> controlText;        // A collection of the texts associated with the controls' buttons
+
+        // Assign these in the inspector in matching order
+        [SerializeField] private string[] controlText_key;              // used for controlText
+        [SerializeField] private TextMeshProUGUI[] controlText_value;   // used for controlText
+
+        /// <summary>
+        /// Sets up the controlText collection before Start is first called
+        /// </summary>
+        private void Awake()
+        {
+            controlText = new Dictionary<string, TextMeshProUGUI>();
+            
+            for (int i = 0; i < controlText_key.Length; i++)
+            {
+                controlText.Add(controlText_key[i], controlText_value[i]);
+            }
+        }
+
+        /// <summary>
+        /// Sets up the controls menu and current states before the first frame
+        /// </summary>
+        private void Start()
+        {
+            // Find the player preferences
+            prefs = GameObject.FindWithTag("managers").GetComponent<PlayerPreferences>();
+
+            // Update the buttons' texts
+            controlText["Button_Thrust"].text = prefs.Controls.Ship_Forward.ToString();
+            controlText["Button_Turn-Right"].text = prefs.Controls.Ship_CW.ToString();
+            controlText["Button_Turn-Left"].text = prefs.Controls.Ship_CCW.ToString();
+            controlText["Button_Fire"].text = prefs.Controls.Ship_Fire.ToString();
+            controlText["Button_Pause"].text = prefs.Controls.Menu_Pause.ToString();
+
+            // Set up current states
+            currControl = "";
+            UpdateSettingsState(0);
+        }
 
         /// <summary>
         /// Detects input once per frame when in the active controls state
@@ -58,6 +102,7 @@ namespace MinimalMiner.UI
                     canvasSettingsControls.SetActive(true);
                     break;
                 case SettingsState.controls_active:
+                    // Handled with UpdateControlState
                     break;
                 case SettingsState.settings:
                 default:
@@ -84,21 +129,21 @@ namespace MinimalMiner.UI
                 switch (currControl)
                 {
                     case "Ship_Forward":
-                        GameObject.Find("Button_Thrust").GetComponentInChildren<Text>().text = "";
+                        controlText["Button_Thrust"].text = "";
                         break;
                     case "Ship_Reverse":
                         break;
                     case "Ship_CW":
-                        GameObject.Find("Button_Turn-Right").GetComponentInChildren<Text>().text = "";
+                        controlText["Button_Turn-Right"].text = "";
                         break;
                     case "Ship_CCW":
-                        GameObject.Find("Button_Turn-Left").GetComponentInChildren<Text>().text = "";
+                        controlText["Button_Turn-Left"].text = "";
                         break;
                     case "Ship_Fire":
-                        GameObject.Find("Button_Fire").GetComponentInChildren<Text>().text = "";
+                        controlText["Button_Fire"].text = "";
                         break;
                     case "Menu_Pause":
-                        GameObject.Find("Button_Pause").GetComponentInChildren<Text>().text = "";
+                        controlText["Button_Pause"].text = "";
                         break;
                 }
             }
@@ -112,21 +157,21 @@ namespace MinimalMiner.UI
                 switch (currControl)
                 {
                     case "Ship_Forward":
-                        GameObject.Find("Button_Thrust").GetComponentInChildren<Text>().text = prefs.Controls.Ship_Forward.ToString();
+                        controlText["Button_Thrust"].text = prefs.Controls.Ship_Forward.ToString();
                         break;
                     case "Ship_Reverse":
                         break;
                     case "Ship_CW":
-                        GameObject.Find("Button_Turn-Right").GetComponentInChildren<Text>().text = prefs.Controls.Ship_CW.ToString();
+                        controlText["Button_Turn-Right"].text = prefs.Controls.Ship_CW.ToString();
                         break;
                     case "Ship_CCW":
-                        GameObject.Find("Button_Turn-Left").GetComponentInChildren<Text>().text = prefs.Controls.Ship_CCW.ToString();
+                        controlText["Button_Turn-Left"].text = prefs.Controls.Ship_CCW.ToString();
                         break;
                     case "Ship_Fire":
-                        GameObject.Find("Button_Fire").GetComponentInChildren<Text>().text = prefs.Controls.Ship_Fire.ToString();
+                        controlText["Button_Fire"].text = prefs.Controls.Ship_Fire.ToString();
                         break;
                     case "Menu_Pause":
-                        GameObject.Find("Button_Pause").GetComponentInChildren<Text>().text = prefs.Controls.Menu_Pause.ToString();
+                        controlText["Button_Pause"].text = prefs.Controls.Menu_Pause.ToString();
                         break;
                 }
             }
