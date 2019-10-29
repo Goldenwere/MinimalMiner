@@ -49,15 +49,86 @@ namespace MinimalMiner.Util
         /// </summary>
         private void Awake()
         {
-            InputDefinitions input = new InputDefinitions
+            // Define input
+            InputDefinitions input;
+
+            // Find the preferences file
+            string prefsPath = Application.persistentDataPath;
+            DirectoryInfo prefsDir = new DirectoryInfo(prefsPath);
+            FileInfo[] prefsFiles = prefsDir.GetFiles("*.*", SearchOption.AllDirectories);
+            bool prefsFound = false;
+
+            foreach(FileInfo file in prefsFiles)
+                if (file.Name.Contains("preferences.xml"))
+                    prefsFound = true;
+
+            // If found, read from it
+            if (prefsFound)
             {
-                Menu_Pause = KeyCode.Escape,
-                Ship_Forward = KeyCode.W,
-                Ship_Reverse = KeyCode.S,
-                Ship_CW = KeyCode.D,
-                Ship_CCW = KeyCode.A,
-                Ship_Fire = KeyCode.Space
-            };
+                input = new InputDefinitions();
+
+                StreamReader reader = null;
+                StringReader sr = null;
+                XmlSerializer serializer = null;
+                XmlTextReader xmlReader = null;
+
+                try
+                {
+                    // TO-DO
+                }
+
+                catch (Exception e)
+                {
+                    print(e.Message + "\n" + e.StackTrace);
+                }
+
+                finally
+                {
+                    if (reader != null)
+                        reader.Close();
+                    if (sr != null)
+                        sr.Close();
+
+                    if (xmlReader != null)
+                        xmlReader.Close();
+                }
+            }
+
+            // Otherwise, create one
+            else
+            {
+                StreamWriter writer = null;
+                StringWriter sw = null;
+
+                input = new InputDefinitions
+                {
+                    Menu_Pause = KeyCode.Escape,
+                    Ship_Forward = KeyCode.W,
+                    Ship_Reverse = KeyCode.S,
+                    Ship_CW = KeyCode.D,
+                    Ship_CCW = KeyCode.A,
+                    Ship_Fire = KeyCode.Space
+                };
+
+                try
+                {
+                    // TO-DO
+                }
+
+                catch (Exception e)
+                {
+                    print(e.Message + "\n" + e.StackTrace);
+                }
+
+                finally
+                {
+                    if (writer != null)
+                        writer.Close();
+                    if (sw != null)
+                        sw.Close();
+                }
+            }
+
             Controls = input;
 
             Themes = new List<Theme>();
