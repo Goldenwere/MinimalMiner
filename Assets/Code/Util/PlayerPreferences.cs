@@ -153,7 +153,7 @@ namespace MinimalMiner.Util
         /// </summary>
         private void Start()
         {
-            UpdateTheme(Themes[0]);
+            SelectTheme(0);
         }
 
         /// <summary>
