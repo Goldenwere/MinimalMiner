@@ -155,7 +155,7 @@ namespace MinimalMiner
             Texture2D newTex = MonoBehaviour.Instantiate(tex);
             TextureScaler.Bilinear(newTex, size, size);
 
-            Sprite sprite = Sprite.Create(newTex, new Rect(new Vector2(), new Vector2(size, size)), new Vector2(0.5f, 0.5f), size * 2);
+            Sprite sprite = Sprite.Create(newTex, new Rect(Vector2.zero, new Vector2(size, size)), new Vector2(0.5f, 0.5f), size * 2);
 
             return sprite;
         }
@@ -186,7 +186,23 @@ namespace MinimalMiner
                 };
 
                 List<VectorUtils.Geometry> geoms = VectorUtils.TessellateScene(scene.Scene, tessOptions);
-                Sprite sprite = VectorUtils.BuildSprite(geoms, size * 2, VectorUtils.Alignment.Center, Vector2.zero, 64, false);
+                Sprite tempSprite = VectorUtils.BuildSprite(geoms, size, VectorUtils.Alignment.Center, Vector2.zero, 64, false);
+
+                Shader shader = null;
+                switch (type)
+                {
+                    case SpriteImportType.svggradient:
+                        shader = Shader.Find("Unlit/VectorGradient");
+                        break;
+                    case SpriteImportType.svg:
+                    default:
+                        shader = Shader.Find("Unlit/Vector");
+                        break;
+                }
+
+                Texture2D tex = VectorUtils.RenderSpriteToTexture2D(tempSprite, size, size, new Material(shader));
+                tex.alphaIsTransparency = true;
+                Sprite sprite = Sprite.Create(tex, new Rect(Vector2.zero, new Vector2(tex.width, tex.height)), new Vector2(0.5f, 0.5f), size * 2);
 
                 return sprite;
             }
