@@ -55,7 +55,7 @@ namespace MinimalMiner
 
             catch (Exception e)
             {
-                MonoBehaviour.print(e.Message);
+                MonoBehaviour.print(e.Message + "\nFile: " + file.Name + "\n" + e.StackTrace);
             }
 
             finally
@@ -88,19 +88,15 @@ namespace MinimalMiner
                 if (Path.GetFileNameWithoutExtension(file.Name) == spriteName && !file.Name.Contains("meta"))
                 {
                     int size = DetermineSize(spriteName);
-                    Texture2D newTex = null;
                     switch (spriteType)
                     {
                         case SpriteImportType.svg:
                         case SpriteImportType.svggradient:
-                            newTex = ImportVector(file, size, spriteType);
-                            sprite = Sprite.Create(newTex, new Rect(new Vector2(), new Vector2(size, size)), new Vector2(0.5f, 0.5f), size * 2);
-                            //sprite = ImportVector(file, size, spriteType);
+                            sprite = ImportVector(file, size, spriteType);
                             break;
                         case SpriteImportType.png:
                         default:
-                            newTex = ImportRaster(file, size);
-                            sprite = Sprite.Create(newTex, new Rect(new Vector2(), new Vector2(size, size)), new Vector2(0.5f, 0.5f), size * 2);
+                            sprite = ImportRaster(file, size);
                             break;
                     }
                 }
@@ -126,19 +122,15 @@ namespace MinimalMiner
                 if (file.Name.Contains(spriteName) && !file.Name.Contains("meta"))
                 {
                     int size = DetermineSize(spriteName);
-                    Texture2D newTex = null;
                     switch(spriteType)
                     {
                         case SpriteImportType.svg:
                         case SpriteImportType.svggradient:
-                            newTex = ImportVector(file, size, spriteType);
-                            sprites.Add(Sprite.Create(newTex, new Rect(new Vector2(), new Vector2(size, size)), new Vector2(0.5f, 0.5f), size * 2));
-                            //sprites.Add(ImportVector(file, size, spriteType));
+                            sprites.Add(ImportVector(file, size, spriteType));
                             break;
                         case SpriteImportType.png:
                         default:
-                            newTex = ImportRaster(file, size);
-                            sprites.Add(Sprite.Create(newTex, new Rect(new Vector2(), new Vector2(size, size)), new Vector2(0.5f, 0.5f), size * 2));
+                            sprites.Add(ImportRaster(file, size));
                             break;
                     }
                 }
@@ -148,12 +140,12 @@ namespace MinimalMiner
         }
 
         /// <summary>
-        /// Imports a raster (Texture2D) texture
+        /// Imports a raster texture
         /// </summary>
         /// <param name="file">The file to import from</param>
         /// <param name="size">The size of the texture</param>
-        /// <returns></returns>
-        public static Texture2D ImportRaster(FileInfo file, int size)
+        /// <returns>The raster texture imported as a Sprite</returns>
+        public static Sprite ImportRaster(FileInfo file, int size)
         {
             // WWW is obsolete, needs replaced eventually
             WWW www = new WWW(file.FullName);
@@ -163,17 +155,19 @@ namespace MinimalMiner
             Texture2D newTex = MonoBehaviour.Instantiate(tex);
             TextureScaler.Bilinear(newTex, size, size);
 
-            return newTex;
+            Sprite sprite = Sprite.Create(newTex, new Rect(new Vector2(), new Vector2(size, size)), new Vector2(0.5f, 0.5f), size * 2);
+
+            return sprite;
         }
 
         /// <summary>
-        /// Imports a vector (Sprite) texture
+        /// Imports a vector texture
         /// </summary>
         /// <param name="file">The file to import from</param>
         /// <param name="size">The size of the texture</param>
         /// <param name="type"></param>
-        /// <returns></returns>
-        public static Texture2D ImportVector(FileInfo file, int size, SpriteImportType type)
+        /// <returns>The vector texture imported as a Sprite</returns>
+        public static Sprite ImportVector(FileInfo file, int size, SpriteImportType type)
         {
             StreamReader reader = null;
             StringReader sr = null;
@@ -194,32 +188,12 @@ namespace MinimalMiner
                 List<VectorUtils.Geometry> geoms = VectorUtils.TessellateScene(scene.Scene, tessOptions);
                 Sprite sprite = VectorUtils.BuildSprite(geoms, size * 2, VectorUtils.Alignment.Center, Vector2.zero, 64, false);
 
-                Shader shader = null;
-                switch(type)
-                {
-                    case SpriteImportType.svggradient:
-                        shader = Shader.Find("Unlit/VectorGradient");
-                        break;
-                    case SpriteImportType.svg:
-                    default:
-                        shader = Shader.Find("Unlit/Vector");
-                        break;
-                }
-
-                Texture2D tex = VectorUtils.RenderSpriteToTexture2D(sprite, size, size, new Material(shader));
-                tex.alphaIsTransparency = true;
-
-                Texture2D newTex = MonoBehaviour.Instantiate(tex);
-                TextureScaler.Bilinear(newTex, size, size);
-
-                return newTex;
+                return sprite;
             }
 
             catch (Exception e)
             {
-                MonoBehaviour.print(e.Message);
-                MonoBehaviour.print(e.StackTrace);
-                MonoBehaviour.print(file.Name);
+                MonoBehaviour.print(e.Message + "\nFile: " + file.Name + "\n" + e.StackTrace);
             }
 
             finally
@@ -237,7 +211,7 @@ namespace MinimalMiner
         /// Determines the size of a texture (themes use specific set sizes when importing textures)
         /// </summary>
         /// <param name="spriteName">The sprite being imported</param>
-        /// <returns></returns>
+        /// <returns>The size that a sprite is to be</returns>
         public static int DetermineSize(string spriteName)
         {
             // Backgrounds are 2048px in size
@@ -257,7 +231,7 @@ namespace MinimalMiner
         /// </summary>
         /// <param name="spriteName">The name of the sprite being imported</param>
         /// <param name="theme">Reference to the current theme being checked</param>
-        /// <returns></returns>
+        /// <returns>The type that a sprite is to be</returns>
         public static SpriteImportType DetermineSprite(string spriteName, Theme theme)
         {
             if (spriteName.Contains("background"))
