@@ -59,7 +59,7 @@ namespace MinimalMiner.Util
             bool prefsFound = false;
 
             foreach(FileInfo file in prefsFiles)
-                if (file.Name.Contains("preferences.xml"))
+                if (file.Name.Contains("preferences_controls.xml"))
                     prefsFound = true;
 
             // If found, read from it
@@ -97,8 +97,8 @@ namespace MinimalMiner.Util
             // Otherwise, create one
             else
             {
-                StreamWriter writer = null;
-                StringWriter sw = null;
+                FileStream stream = null;
+                XmlSerializer serializer = null;
 
                 input = new InputDefinitions
                 {
@@ -112,7 +112,9 @@ namespace MinimalMiner.Util
 
                 try
                 {
-                    // TO-DO
+                    stream = File.Create(prefsPath + "/preferences_controls.xml");
+                    serializer = new XmlSerializer(typeof(InputDefinitions));
+                    serializer.Serialize(stream, input);
                 }
 
                 catch (Exception e)
@@ -122,10 +124,8 @@ namespace MinimalMiner.Util
 
                 finally
                 {
-                    if (writer != null)
-                        writer.Close();
-                    if (sw != null)
-                        sw.Close();
+                    if (stream != null)
+                        stream.Close();
                 }
             }
 
