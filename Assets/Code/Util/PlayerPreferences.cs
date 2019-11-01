@@ -97,9 +97,6 @@ namespace MinimalMiner.Util
             // Otherwise, create one
             else
             {
-                FileStream stream = null;
-                XmlSerializer serializer = null;
-
                 input = new InputDefinitions
                 {
                     Menu_Pause = KeyCode.Escape,
@@ -110,26 +107,9 @@ namespace MinimalMiner.Util
                     Ship_Fire = KeyCode.Space
                 };
 
-                try
-                {
-                    stream = File.Create(prefsPath + "/preferences_controls.xml");
-                    serializer = new XmlSerializer(typeof(InputDefinitions));
-                    serializer.Serialize(stream, input);
-                }
-
-                catch (Exception e)
-                {
-                    print(e.Message + "\n" + e.StackTrace);
-                }
-
-                finally
-                {
-                    if (stream != null)
-                        stream.Close();
-                }
+                Controls = input;
+                WriteToControlPreferences();
             }
-
-            Controls = input;
 
             Themes = new List<Theme>();
 
@@ -230,6 +210,35 @@ namespace MinimalMiner.Util
             }
 
             Controls = newControls;
+            WriteToControlPreferences();
+        }
+
+        /// <summary>
+        /// Writes to the [persistentDataPath]/preferences_controls.xml file using the current Controls
+        /// </summary>
+        public void WriteToControlPreferences()
+        {
+            string prefsPath = Application.persistentDataPath;
+            FileStream stream = null;
+            XmlSerializer serializer = null;
+
+            try
+            {
+                stream = File.Create(prefsPath + "/preferences_controls.xml");
+                serializer = new XmlSerializer(typeof(InputDefinitions));
+                serializer.Serialize(stream, Controls);
+            }
+
+            catch (Exception e)
+            {
+                print(e.Message + "\n" + e.StackTrace);
+            }
+
+            finally
+            {
+                if (stream != null)
+                    stream.Close();
+            }
         }
     }
 }
