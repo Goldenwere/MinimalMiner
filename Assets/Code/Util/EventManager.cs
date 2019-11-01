@@ -46,7 +46,7 @@ namespace MinimalMiner.Util
         }
 
         // Refers to the current player preferences
-        [SerializeField] private PlayerPreferences playerPrefs;
+        [SerializeField] private PreferencesManager playerPrefs;
         #endregion
 
         /// <summary>

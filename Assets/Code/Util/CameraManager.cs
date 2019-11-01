@@ -52,7 +52,7 @@ namespace MinimalMiner.Util
         private void OnEnable()
         {
             EventManager.OnUpdateGameState += UpdateGameState;
-            PlayerPreferences.UpdateTheme += UpdateTheme;
+            PreferencesManager.UpdateTheme += UpdateTheme;
         }
 
         /// <summary>
@@ -61,7 +61,7 @@ namespace MinimalMiner.Util
         private void OnDisable()
         {
             EventManager.OnUpdateGameState -= UpdateGameState;
-            PlayerPreferences.UpdateTheme -= UpdateTheme;
+            PreferencesManager.UpdateTheme -= UpdateTheme;
         }
 
         /// <summary>

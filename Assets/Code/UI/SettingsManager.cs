@@ -16,7 +16,7 @@ namespace MinimalMiner.UI
     public class SettingsManager : MonoBehaviour
     {
         // Core fields to manipulate
-        private PlayerPreferences prefs;                                // Used for updating controls
+        private PreferencesManager prefs;                                // Used for updating controls
         private SettingsState currState;                                // The current SettingsState
         private string currControl;                                     // The current control to modify
 
@@ -51,7 +51,7 @@ namespace MinimalMiner.UI
         private void Start()
         {
             // Find the player preferences
-            prefs = GameObject.FindWithTag("managers").GetComponent<PlayerPreferences>();
+            prefs = GameObject.FindWithTag("managers").GetComponent<PreferencesManager>();
 
             // Update the buttons' texts
             controlText["Button_Thrust"].text = prefs.Controls.Ship_Forward.ToString();

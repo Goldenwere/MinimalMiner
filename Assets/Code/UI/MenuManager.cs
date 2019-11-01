@@ -56,7 +56,7 @@ namespace MinimalMiner.UI
         /// </summary>
         private void OnEnable()
         {
-            PlayerPreferences.UpdateTheme += UpdateTheme;
+            PreferencesManager.UpdateTheme += UpdateTheme;
             EventManager.OnUpdateGameState += UpdateGameState;
         }
 
@@ -65,7 +65,7 @@ namespace MinimalMiner.UI
         /// </summary>
         private void OnDisable()
         {
-            PlayerPreferences.UpdateTheme -= UpdateTheme;
+            PreferencesManager.UpdateTheme -= UpdateTheme;
             EventManager.OnUpdateGameState -= UpdateGameState;
         }
 
@@ -105,7 +105,7 @@ namespace MinimalMiner.UI
         /// </summary>
         private void SetupUIElements()
         {
-            PlayerPreferences playerPrefs = GameObject.FindWithTag("managers").GetComponent<PlayerPreferences>();
+            PreferencesManager playerPrefs = GameObject.FindWithTag("managers").GetComponent<PreferencesManager>();
 
             foreach (TMP_Dropdown dropdown in dropdowns)
             {

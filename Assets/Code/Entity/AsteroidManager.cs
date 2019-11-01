@@ -36,7 +36,7 @@ namespace MinimalMiner.Entity
         {
             EventManager.OnUpdateGameState += UpdateGameState;
             currState = GameObject.FindWithTag("managers").GetComponent<EventManager>().CurrState;
-            PlayerPreferences.UpdateTheme += UpdateTheme;
+            PreferencesManager.UpdateTheme += UpdateTheme;
         }
 
         /// <summary>
@@ -45,7 +45,7 @@ namespace MinimalMiner.Entity
         private void OnDisable()
         {
             EventManager.OnUpdateGameState -= UpdateGameState;
-            PlayerPreferences.UpdateTheme -= UpdateTheme;
+            PreferencesManager.UpdateTheme -= UpdateTheme;
         }
 
         /// <summary>

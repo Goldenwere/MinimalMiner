@@ -14,7 +14,7 @@ namespace MinimalMiner.Entity
         #region Fields
         // Core variables
         private GameState currState;
-        private PlayerPreferences playerPrefs;
+        private PreferencesManager playerPrefs;
         private EventManager eventMgr;
         private MaterialManager matMgr;
 
@@ -48,7 +48,7 @@ namespace MinimalMiner.Entity
         private void Awake()
         {
             GameObject managers = GameObject.FindWithTag("managers");
-            playerPrefs = managers.GetComponent<PlayerPreferences>();
+            playerPrefs = managers.GetComponent<PreferencesManager>();
             eventMgr = managers.GetComponent<EventManager>();
             matMgr = managers.GetComponent<MaterialManager>();
         }
@@ -68,7 +68,7 @@ namespace MinimalMiner.Entity
         {
             EventManager.OnUpdateGameState += UpdateGameState;
             currState = GameObject.FindWithTag("managers").GetComponent<EventManager>().CurrState;
-            PlayerPreferences.UpdateTheme += UpdateTheme;
+            PreferencesManager.UpdateTheme += UpdateTheme;
         }
 
         /// <summary>
@@ -77,7 +77,7 @@ namespace MinimalMiner.Entity
         private void OnDisable()
         {
             EventManager.OnUpdateGameState -= UpdateGameState;
-            PlayerPreferences.UpdateTheme -= UpdateTheme;
+            PreferencesManager.UpdateTheme -= UpdateTheme;
         }
 
         /// <summary>
@@ -199,7 +199,7 @@ namespace MinimalMiner.Entity
             shipAccRate = 5f;
 
             GameObject managers = GameObject.FindWithTag("managers");
-            playerPrefs = managers.GetComponent<PlayerPreferences>();
+            playerPrefs = managers.GetComponent<PreferencesManager>();
             eventMgr = managers.GetComponent<EventManager>();
             matMgr = managers.GetComponent<MaterialManager>();
 
