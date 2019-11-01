@@ -238,4 +238,12 @@ namespace MinimalMiner
 
         public KeyCode Menu_Pause;
     }
+
+    /// <summary>
+    /// Defines player preferences
+    /// </summary>
+    public struct PlayerPreferences
+    {
+        public InputDefinitions Controls;
+    }
 }

@@ -19,12 +19,17 @@ namespace MinimalMiner.Util
         /// </summary>
         public static event UpdateThemeHandler UpdateTheme;
 
+        private PlayerPreferences prefs;
+
         /// <summary>
         /// The player's control preferences
         /// </summary>
         public InputDefinitions Controls
         {
-            get; private set;
+            get
+            {
+                return prefs.Controls;
+            }
         }
         
         /// <summary>
@@ -49,9 +54,9 @@ namespace MinimalMiner.Util
         /// </summary>
         private void Awake()
         {
-            #region Controls
-            // Define input
-            InputDefinitions input;
+            #region Preferences
+            // Define prefs
+            prefs = new PlayerPreferences();
 
             // Enter the preferences directory
             string prefsPath = Application.persistentDataPath;
@@ -61,19 +66,19 @@ namespace MinimalMiner.Util
 
             // Find the preferences file
             foreach(FileInfo file in prefsFiles)
-                if (file.Name.Contains("preferences_controls.xml"))
+                if (file.Name.Contains("preferences.xml"))
                     prefsFound = true;
 
             // If found, read from it
             if (prefsFound)
             {
-                Controls = ReadFromControlPreferences();
+                prefs = ReadFromPreferences();
             }
 
             // Otherwise, create one
             else
             {
-                input = new InputDefinitions
+                InputDefinitions input = new InputDefinitions
                 {
                     Menu_Pause = KeyCode.Escape,
                     Ship_Forward = KeyCode.W,
@@ -83,8 +88,8 @@ namespace MinimalMiner.Util
                     Ship_Fire = KeyCode.Space
                 };
 
-                Controls = input;
-                WriteToControlPreferences();
+                prefs.Controls = input;
+                WriteToPreferences();
             }
             #endregion
 
@@ -190,14 +195,14 @@ namespace MinimalMiner.Util
                     break;
             }
 
-            Controls = newControls;
-            WriteToControlPreferences();
+            prefs.Controls = newControls;
+            WriteToPreferences();
         }
 
         /// <summary>
-        /// Writes to the [persistentDataPath]/preferences_controls.xml file using the current Controls
+        /// Writes to the [persistentDataPath]/preferences.xml file using the current prefs
         /// </summary>
-        public void WriteToControlPreferences()
+        public void WriteToPreferences()
         {
             string prefsPath = Application.persistentDataPath;
             FileStream stream = null;
@@ -206,9 +211,9 @@ namespace MinimalMiner.Util
             try
             {
                 // Create and write to the file
-                stream = File.Create(prefsPath + "/preferences_controls.xml");
-                serializer = new XmlSerializer(typeof(InputDefinitions));
-                serializer.Serialize(stream, Controls);
+                stream = File.Create(prefsPath + "/preferences.xml");
+                serializer = new XmlSerializer(typeof(PlayerPreferences));
+                serializer.Serialize(stream, prefs);
             }
 
             catch (Exception e)
@@ -224,11 +229,11 @@ namespace MinimalMiner.Util
         }
 
         /// <summary>
-        /// Reads from the [persistentDataPath]/preferences_controls.xml file and sets the current Controls
+        /// Reads from the [persistentDataPath]/preferences.xml file and sets the current prefs
         /// </summary>
-        public InputDefinitions ReadFromControlPreferences()
+        public PlayerPreferences ReadFromPreferences()
         {
-            InputDefinitions input = new InputDefinitions();
+            PlayerPreferences prefs = new PlayerPreferences();
 
             string prefsPath = Application.persistentDataPath;
             StreamReader reader = null;
@@ -239,14 +244,14 @@ namespace MinimalMiner.Util
             try
             {
                 // Read the file
-                reader = new StreamReader(File.OpenRead(prefsPath + "/preferences_controls.xml"));
+                reader = new StreamReader(File.OpenRead(prefsPath + "/preferences.xml"));
                 string data = reader.ReadToEnd();
                 sr = new StringReader(data);
 
                 // Deserialize the file
-                serializer = new XmlSerializer(typeof(InputDefinitions));
+                serializer = new XmlSerializer(typeof(PlayerPreferences));
                 xmlReader = new XmlTextReader(sr);
-                input = (InputDefinitions)serializer.Deserialize(xmlReader);
+                prefs = (PlayerPreferences)serializer.Deserialize(xmlReader);
             }
 
             catch (Exception e)
@@ -265,7 +270,7 @@ namespace MinimalMiner.Util
                     xmlReader.Close();
             }
 
-            return input;
+            return prefs;
         }
     }
 }
