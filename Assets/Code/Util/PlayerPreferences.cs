@@ -49,15 +49,17 @@ namespace MinimalMiner.Util
         /// </summary>
         private void Awake()
         {
+            #region Controls
             // Define input
             InputDefinitions input;
 
-            // Find the preferences file
+            // Enter the preferences directory
             string prefsPath = Application.persistentDataPath;
             DirectoryInfo prefsDir = new DirectoryInfo(prefsPath);
             FileInfo[] prefsFiles = prefsDir.GetFiles("*.*", SearchOption.AllDirectories);
             bool prefsFound = false;
 
+            // Find the preferences file
             foreach(FileInfo file in prefsFiles)
                 if (file.Name.Contains("preferences_controls.xml"))
                     prefsFound = true;
@@ -65,33 +67,7 @@ namespace MinimalMiner.Util
             // If found, read from it
             if (prefsFound)
             {
-                input = new InputDefinitions();
-
-                StreamReader reader = null;
-                StringReader sr = null;
-                XmlSerializer serializer = null;
-                XmlTextReader xmlReader = null;
-
-                try
-                {
-                    // TO-DO
-                }
-
-                catch (Exception e)
-                {
-                    print(e.Message + "\n" + e.StackTrace);
-                }
-
-                finally
-                {
-                    if (reader != null)
-                        reader.Close();
-                    if (sr != null)
-                        sr.Close();
-
-                    if (xmlReader != null)
-                        xmlReader.Close();
-                }
+                Controls = ReadFromControlPreferences();
             }
 
             // Otherwise, create one
@@ -110,13 +86,17 @@ namespace MinimalMiner.Util
                 Controls = input;
                 WriteToControlPreferences();
             }
+            #endregion
 
+            #region Themes
             Themes = new List<Theme>();
 
+            // Enter the themes directory
             string path = Application.streamingAssetsPath + "/Themes";
             DirectoryInfo directoryInfo = new DirectoryInfo(path);
             FileInfo[] allFiles = directoryInfo.GetFiles("*.*", SearchOption.AllDirectories);
 
+            // Read all the themes in the directory
             foreach (FileInfo file in allFiles)
             {
                 if (file.Extension.Contains("theme"))
@@ -126,6 +106,7 @@ namespace MinimalMiner.Util
             }
 
             CurrentTheme = Themes[0];
+            #endregion
         }
 
         /// <summary>
@@ -224,6 +205,7 @@ namespace MinimalMiner.Util
 
             try
             {
+                // Create and write to the file
                 stream = File.Create(prefsPath + "/preferences_controls.xml");
                 serializer = new XmlSerializer(typeof(InputDefinitions));
                 serializer.Serialize(stream, Controls);
@@ -239,6 +221,51 @@ namespace MinimalMiner.Util
                 if (stream != null)
                     stream.Close();
             }
+        }
+
+        /// <summary>
+        /// Reads from the [persistentDataPath]/preferences_controls.xml file and sets the current Controls
+        /// </summary>
+        public InputDefinitions ReadFromControlPreferences()
+        {
+            InputDefinitions input = new InputDefinitions();
+
+            string prefsPath = Application.persistentDataPath;
+            StreamReader reader = null;
+            StringReader sr = null;
+            XmlSerializer serializer = null;
+            XmlTextReader xmlReader = null;
+
+            try
+            {
+                // Read the file
+                reader = new StreamReader(File.OpenRead(prefsPath + "/preferences_controls.xml"));
+                string data = reader.ReadToEnd();
+                sr = new StringReader(data);
+
+                // Deserialize the file
+                serializer = new XmlSerializer(typeof(InputDefinitions));
+                xmlReader = new XmlTextReader(sr);
+                input = (InputDefinitions)serializer.Deserialize(xmlReader);
+            }
+
+            catch (Exception e)
+            {
+                print(e.Message + "\n" + e.StackTrace);
+            }
+
+            finally
+            {
+                if (reader != null)
+                    reader.Close();
+                if (sr != null)
+                    sr.Close();
+
+                if (xmlReader != null)
+                    xmlReader.Close();
+            }
+
+            return input;
         }
     }
 }
