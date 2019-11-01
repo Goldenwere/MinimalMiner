@@ -142,7 +142,7 @@ namespace MinimalMiner
             spriteColor_player = sprite;
 
             img_backgroundNormal = null;
-            spriteImage_asteroid = null;
+            spriteImage_asteroid = new List<Sprite>();
             spriteImage_player = null;
 
             import_Asteroids = 0;
@@ -175,7 +175,7 @@ namespace MinimalMiner
             spriteColor_asteroid = fore;
 
             img_backgroundNormal = null;
-            spriteImage_asteroid = null;
+            spriteImage_asteroid = new List<Sprite>();
             spriteImage_player = null;
 
             import_Asteroids = 0;
@@ -215,7 +215,7 @@ namespace MinimalMiner
             spriteColor_asteroid = spriteFore;
 
             img_backgroundNormal = null;
-            spriteImage_asteroid = null;
+            spriteImage_asteroid = new List<Sprite>();
             spriteImage_player = null;
 
             import_Asteroids = 0;

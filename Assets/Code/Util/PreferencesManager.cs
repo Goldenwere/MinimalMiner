@@ -99,15 +99,29 @@ namespace MinimalMiner.Util
             // Enter the themes directory
             string path = Application.streamingAssetsPath + "/Themes";
             DirectoryInfo directoryInfo = new DirectoryInfo(path);
-            FileInfo[] allFiles = directoryInfo.GetFiles("*.*", SearchOption.AllDirectories);
+            FileInfo[] allFiles = null;
 
-            // Read all the themes in the directory
-            foreach (FileInfo file in allFiles)
+            if (directoryInfo.Exists)
             {
-                if (file.Extension.Contains("theme"))
+                allFiles = directoryInfo.GetFiles("*.*", SearchOption.AllDirectories);
+
+                // Read all the themes in the directory
+                foreach (FileInfo file in allFiles)
                 {
-                    Themes.Add(ThemeReader.GetTheme(file));
+                    if (file.Extension.Contains("theme"))
+                    {
+                        Themes.Add(ThemeReader.GetTheme(file));
+                    }
                 }
+
+                // If there are none, create a default theme
+                Themes.Add(new Theme("Default"));
+            }
+
+            else
+            {
+                directoryInfo.Create();
+                Themes.Add(new Theme("Default"));
             }
 
             CurrentTheme = Themes[0];
@@ -147,7 +161,8 @@ namespace MinimalMiner.Util
         private void SelectTheme(int themeIndex)
         {
             CurrentTheme = Themes[themeIndex];
-            CurrentTheme = ThemeReader.AssignSprites(CurrentTheme);
+            if (CurrentTheme.themeName != "Default")
+                CurrentTheme = ThemeReader.AssignSprites(CurrentTheme);
             UpdateTheme(CurrentTheme);
         }
 
