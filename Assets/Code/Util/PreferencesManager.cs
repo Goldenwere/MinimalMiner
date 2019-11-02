@@ -89,6 +89,7 @@ namespace MinimalMiner.Util
                 };
 
                 prefs.Controls = input;
+                prefs.CurrentTheme = 0;
                 WriteToPreferences();
             }
             #endregion
@@ -115,7 +116,8 @@ namespace MinimalMiner.Util
                 }
 
                 // If there are none, create a default theme
-                Themes.Add(new Theme("Default"));
+                if (Themes.Count == 0)
+                    Themes.Add(new Theme("Default"));
             }
 
             else
@@ -123,8 +125,6 @@ namespace MinimalMiner.Util
                 directoryInfo.Create();
                 Themes.Add(new Theme("Default"));
             }
-
-            CurrentTheme = Themes[0];
             #endregion
         }
 
@@ -133,7 +133,11 @@ namespace MinimalMiner.Util
         /// </summary>
         private void Start()
         {
-            SelectTheme(0);
+            int index = 0;
+            if (prefs.CurrentTheme < Themes.Count)
+                index = prefs.CurrentTheme;
+
+            SelectTheme(index);
         }
 
         /// <summary>
@@ -161,8 +165,10 @@ namespace MinimalMiner.Util
         private void SelectTheme(int themeIndex)
         {
             CurrentTheme = Themes[themeIndex];
+            prefs.CurrentTheme = themeIndex;
             if (CurrentTheme.themeName != "Default")
                 CurrentTheme = ThemeReader.AssignSprites(CurrentTheme);
+            WriteToPreferences();
             UpdateTheme(CurrentTheme);
         }
 

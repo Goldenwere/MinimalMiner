@@ -16,7 +16,7 @@ namespace MinimalMiner.UI
     public class SettingsManager : MonoBehaviour
     {
         // Core fields to manipulate
-        private PreferencesManager prefs;                                // Used for updating controls
+        private PreferencesManager prefs;                               // Used for updating controls
         private SettingsState currState;                                // The current SettingsState
         private string currControl;                                     // The current control to modify
 

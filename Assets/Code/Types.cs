@@ -244,6 +244,15 @@ namespace MinimalMiner
     /// </summary>
     public struct PlayerPreferences
     {
+        /// <summary>
+        /// The player's control preferences
+        /// </summary>
         public InputDefinitions Controls;
+
+        /// <summary>
+        /// The player's selected theme preference
+        /// </summary>
+        /// <remarks>(reset to 0 if exceeds installed themes e.g. in the situation that themes were removed)</remarks>
+        public int CurrentTheme;
     }
 }

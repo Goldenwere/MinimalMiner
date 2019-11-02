@@ -117,6 +117,14 @@ namespace MinimalMiner.UI
                         dropdown.options.Add(new TMP_Dropdown.OptionData());
                         dropdown.options[i].text = playerPrefs.Themes[i].themeName;
                     }
+                    if (playerPrefs.CurrentTheme.themeName != "Default")
+                    {
+                        //int i = playerPrefs.Themes.IndexOf(playerPrefs.CurrentTheme);         this method currently appears to not work
+                        //dropdown.SetValueWithoutNotify(i);
+                        for (int i = 0; i < playerPrefs.Themes.Count; i++)
+                            if (playerPrefs.Themes[i].themeName == playerPrefs.CurrentTheme.themeName)
+                                dropdown.SetValueWithoutNotify(i);
+                    }
                 }
             }
         }
