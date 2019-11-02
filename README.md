@@ -14,9 +14,11 @@ PC (Windows, Mac (TBA), Linux (TBA)), Mobile TBA
 ## Repository Overview
 
 | File/Directory | Contents |
-| -------------- | -------- |
+| :------------- | :------- |
 | [Assets/Code](Assets/Code) | Source code |
-| [Docs]() | Project-related assets (e.g. documentation) N/A |
+| [Docs](Docs) | Project-related assets (e.g. documentation) |
+| [Wiki](https://github.com/xLightling/MinimalMiner/wiki) | API Documentation |
+| [Wiki/Roadmap](https://github.com/xLightling/MinimalMiner/wiki/Roadmap) | Project roadmap |
 
 ## License
 All of the assets created for this project that do not come from third-party sources (only original assets are pushed to GitHub) are licensed under [MIT](LICENSE). 
