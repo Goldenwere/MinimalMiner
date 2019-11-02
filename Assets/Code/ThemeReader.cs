@@ -150,7 +150,7 @@ namespace MinimalMiner
             // WWW is obsolete, needs replaced eventually
             WWW www = new WWW(file.FullName);
             Texture2D tex = www.texture;
-            tex.alphaIsTransparency = true;
+            //tex.alphaIsTransparency = true;
 
             Texture2D newTex = MonoBehaviour.Instantiate(tex);
             TextureScaler.Bilinear(newTex, size, size);
@@ -201,7 +201,7 @@ namespace MinimalMiner
                 }
 
                 Texture2D tex = VectorUtils.RenderSpriteToTexture2D(tempSprite, size, size, new Material(shader));
-                tex.alphaIsTransparency = true;
+                //tex.alphaIsTransparency = true;
                 Sprite sprite = Sprite.Create(tex, new Rect(Vector2.zero, new Vector2(tex.width, tex.height)), new Vector2(0.5f, 0.5f), size * 2);
 
                 return sprite;
