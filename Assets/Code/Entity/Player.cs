@@ -9,7 +9,7 @@ namespace MinimalMiner.Entity
     /// <summary>
     /// Defines the player's instantiated ship
     /// </summary>
-    public class Player : MonoBehaviour
+    public class PlayerOld : MonoBehaviour
     {
         #region Fields
         // Core variables
@@ -239,5 +239,21 @@ namespace MinimalMiner.Entity
             }
         }
         #endregion
+    }
+
+    /// <summary>
+    /// Defines the player's instantiated ship
+    /// </summary>
+    public class Player : MonoBehaviour
+    {
+        public void TakeDamage(float damageDone)
+        {
+
+        }
+
+        public void ResetPlayer()
+        {
+
+        }
     }
 }

@@ -3,6 +3,9 @@ using UnityEngine;
 
 namespace MinimalMiner.Entity
 {
+    /// <summary>
+    /// Represents a ship configuration in terms of weapons, defensive capabilities, and thrusters
+    /// </summary>
     public class ShipConfiguration
     {
         #region Properties
@@ -36,6 +39,33 @@ namespace MinimalMiner.Entity
         public ShipThrusters Stats_Thrusters
         {
             get; private set;
+        }
+
+        /// <summary>
+        /// Used in setting up the mass of the ship's Rigidbody
+        /// </summary>
+        public float Mass
+        {
+            get; private set;
+        }
+        
+        /// <summary>
+        /// Used in setting up the ship's Polygon Collider
+        /// </summary>
+        public Vector2[] ColliderForm
+        {
+            get; private set;
+        }
+
+        /// <summary>
+        /// Applies damage to the ship
+        /// </summary>
+        /// <param name="damageTaken">The incoming amount of damage to take</param>
+        public void TakeDamage(float damageTaken)
+        {
+            ShipDefenses updatedDef = Current_Defenses;
+            updatedDef.ArmorStrength -= damageTaken;
+            Current_Defenses = updatedDef;
         }
         #endregion
     }
@@ -129,6 +159,16 @@ namespace MinimalMiner.Entity
         /// The force of recoil that is applied to the ship when the weapon fires
         /// </summary>
         public float Recoil;
+
+        /// <summary>
+        /// Represents the prefab used for firing the weapon in-game. This can be a Projectile-based prefab or a Beam-based prefab
+        /// </summary>
+        public GameObject OutputPrefab;
+
+        /// <summary>
+        /// Represents the sound used for firing the weapon in-game
+        /// </summary>
+        public AudioSource OutputSound;
         #endregion
     }
 
