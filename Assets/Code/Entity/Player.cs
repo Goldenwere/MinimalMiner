@@ -1,6 +1,7 @@
 ﻿#pragma warning disable 0649
 #pragma warning disable 0108
 
+using System.Collections.Generic;
 using UnityEngine;
 using MinimalMiner.Util;
 
@@ -246,14 +247,157 @@ namespace MinimalMiner.Entity
     /// </summary>
     public class Player : MonoBehaviour
     {
+        // Ship-related variables
+        private ShipConfiguration shipConfig;
+        private Vector2 shipAccForce;
+
+        [SerializeField] private SpriteRenderer sprite;
+        [SerializeField] private Rigidbody2D rigidbody;
+        [SerializeField] private PolygonCollider2D collider;
+        [SerializeField] private AudioSource damageSound;
+        [SerializeField] private AudioSource deathSound;
+
+        [SerializeField] private GameObject bulletPrefab;
+        [SerializeField] private AudioSource bulletSound;
+
+        // Management variables
+        private GameState currState;
+        private PreferencesManager playerPrefs;
+        private EventManager eventMgr;
+        private MaterialManager matMgr;
+
+        private void Start()
+        {
+            ShipDefenses defenses = new ShipDefenses();
+            ShipThrusters thrusters = new ShipThrusters();
+            ShipWeaponry weapons = new ShipWeaponry();
+            Vector2[] colliders = null;
+
+            #region Setup
+
+            defenses.ArmorStrength = 100f;
+            defenses.ShieldRecharge = 10f;
+            defenses.ShieldStrength = 100f;
+
+            thrusters.DampenerStrength = 2.5f;                  // Equivalent to rigidbody linear drag set before this temp code (shipDragRate was unused)
+            thrusters.ForwardThrusterForce = 5f;                // Equivalent to shipAccRate set in the old player class ResetPlayer()
+            thrusters.MaxDirectionalSpeed = 10f;                // Equivalent to shipMaxSpd set in old player class
+            thrusters.RecoilCompensation = 0.9f;
+            thrusters.ReverseThrusterForce = 3f;
+            thrusters.RotationalSpeed = 5f;                     // Equivalent to shipRotSpd set in old player class
+
+            ShipWeapon basicBlaster = new ShipWeapon();
+            basicBlaster.Damage = 5f;                           // Original hardcoded value in prototyped Projectile was 5
+            basicBlaster.Name = "Basic Blaster";
+            basicBlaster.OutputPrefab = bulletPrefab;           // The prefabs and sounds will eventually be handled/stored outside Player
+            basicBlaster.OutputSound = bulletSound;
+            basicBlaster.RateOfFire = 0.2f;                     // Originally fireRate in old Player
+            basicBlaster.Recoil = 5f;                           // Originally -shipAcc * 5f when handling recoil in old Player
+            basicBlaster.Speed = 100f;                          // Originally projectileSpeed in old Player
+            basicBlaster.Type = WeaponType.projectile;
+
+            weapons.DamageModifier = 1;
+            weapons.RateModifier = 1;
+            weapons.Slots = new List<Vector3>()
+            {
+                new Vector3(0,0,0)
+            };
+            weapons.SlotStatus = new Dictionary<Vector3, WeaponSlotStatus>()
+            {
+                { weapons.Slots[0], WeaponSlotStatus.enabled }
+            };
+            weapons.Weapons = new Dictionary<Vector3, ShipWeapon>()
+            {
+                { weapons.Slots[0], basicBlaster }
+            };
+
+            colliders = new Vector2[]                           // This is based off of what was in the PolygonCollider2D in old Player
+            {
+                new Vector2(0.25f, 0),
+                new Vector2(-0.25f, 0.25f),
+                new Vector2(-0.125f, 0),
+                new Vector2(-0.25f, -0.25f)
+            };
+
+            #endregion
+
+            shipConfig = new ShipConfiguration(weapons, defenses, thrusters, 0.25f, colliders, sprite.sprite);
+
+            // This may seem redundant, accessing what was set in the previous Setup region, but that will eventually disappear once actual ships are defined
+            rigidbody.drag = shipConfig.Stats_Thrusters.DampenerStrength;
+            rigidbody.mass = shipConfig.Mass;
+            collider.points = colliders;
+            sprite.sprite = shipConfig.BodySprite;  // This, like the bulletPrefab and bulletSound, will be handled/stored outside player, so the back-and-fourth setting seen here won't be present eventually
+        }
+
+        /// <summary>
+        /// Called when the current GameState is updated
+        /// </summary>
+        /// <param name="newState">The new GameState after updating</param>
+        /// <param name="prevState">The previous GameState before updating</param>
+        private void UpdateGameState(GameState newState, GameState prevState)
+        {
+            currState = newState;
+        }
+
+        /// <summary>
+        /// Called when the current Theme is updated (note: this is based off of the old Player and will need changed to account for different player sprites)
+        /// </summary>
+        /// <param name="theme">The new GameTheme properties</param>
+        private void UpdateTheme(Theme theme)
+        {
+            if (theme.spriteImage_player != null)
+            {
+                sprite.sprite = theme.spriteImage_player;
+
+                switch (theme.import_Asteroids)
+                {
+                    case (int)SpriteImportType.png:
+                        sprite.material = matMgr.Mat_Raster;
+                        break;
+                    case (int)SpriteImportType.svggradient:
+                        sprite.material = matMgr.Mat_VectorGradient;
+                        break;
+                    case (int)SpriteImportType.svg:
+                    default:
+                        sprite.material = matMgr.Mat_Vector;
+                        break;
+                }
+            }
+
+            else
+            {
+                sprite.sprite = matMgr.Default_Player;
+                sprite.material = matMgr.Mat_Vector;
+            }
+
+            sprite.material.color = theme.spriteColor_player;
+        }
+
         public void TakeDamage(float damageDone)
         {
-
+            shipConfig.TakeDamage(damageDone);
         }
 
         public void ResetPlayer()
         {
+            GameObject managers = GameObject.FindWithTag("managers");
+            playerPrefs = managers.GetComponent<PreferencesManager>();
+            eventMgr = managers.GetComponent<EventManager>();
+            matMgr = managers.GetComponent<MaterialManager>();
 
+            // Reset state and stats
+            shipConfig.ResetShip();
+            eventMgr.UpdateHUDElement(HUDElement.health, shipConfig.Current_Defenses.ArmorStrength.ToString());
+            UpdateTheme(playerPrefs.CurrentTheme);
+
+            // Reset transform
+            transform.position = Vector3.zero;
+            transform.rotation = Quaternion.identity;
+
+            // Reset physics
+            shipAccForce = Vector2.zero;
+            rigidbody.velocity = Vector2.zero;
         }
     }
 }

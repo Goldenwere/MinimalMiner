@@ -58,6 +58,36 @@ namespace MinimalMiner.Entity
         }
 
         /// <summary>
+        /// Represents the main sprite of the ship
+        /// </summary>
+        public Sprite BodySprite
+        {
+            get; private set;
+        }
+        #endregion
+
+        #region Methods
+        /// <summary>
+        /// Creates a ShipConfiguration with the specified parameters
+        /// </summary>
+        /// <param name="wpn">Ship's weapons</param>
+        /// <param name="def">Ship's defenses</param>
+        /// <param name="thr">Ship's thrusters</param>
+        /// <param name="mas">Ship's mass</param>
+        /// <param name="col">Ship's colliders</param>
+        /// <param name="sprite">Ship's body sprite</param>
+        public ShipConfiguration(ShipWeaponry wpn, ShipDefenses def, ShipThrusters thr, float mas, Vector2[] col, Sprite spr)
+        {
+            Stats_Weapons = wpn;
+            Stats_Defenses = def;
+            Current_Defenses = def;
+            Stats_Thrusters = thr;
+            Mass = mas;
+            ColliderForm = col;
+            BodySprite = spr;
+        }
+
+        /// <summary>
         /// Applies damage to the ship
         /// </summary>
         /// <param name="damageTaken">The incoming amount of damage to take</param>
@@ -66,6 +96,11 @@ namespace MinimalMiner.Entity
             ShipDefenses updatedDef = Current_Defenses;
             updatedDef.ArmorStrength -= damageTaken;
             Current_Defenses = updatedDef;
+        }
+
+        public void ResetShip()
+        {
+            Current_Defenses = Stats_Defenses;
         }
         #endregion
     }
@@ -92,12 +127,12 @@ namespace MinimalMiner.Entity
         public Dictionary<Vector3, WeaponSlotStatus> SlotStatus;
 
         /// <summary>
-        /// Modifies all weapons' rate of fire
+        /// Modifies all weapons' rate of fire by this multiplied factor
         /// </summary>
         public float RateModifier;
 
         /// <summary>
-        /// Modifies all weapons' damage
+        /// Modifies all weapons' damage by this multiplied factor
         /// </summary>
         public float DamageModifier;
         #endregion
@@ -200,7 +235,7 @@ namespace MinimalMiner.Entity
         public float ShieldStrength;
 
         /// <summary>
-        /// The rate at which the shields recharge
+        /// The rate at which the shields recharge per second
         /// </summary>
         public float ShieldRecharge;
 
