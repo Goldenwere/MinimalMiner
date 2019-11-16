@@ -75,7 +75,7 @@ namespace MinimalMiner.Entity
         /// <param name="thr">Ship's thrusters</param>
         /// <param name="mas">Ship's mass</param>
         /// <param name="col">Ship's colliders</param>
-        /// <param name="sprite">Ship's body sprite</param>
+        /// <param name="spr">Ship's body sprite</param>
         public ShipConfiguration(ShipWeaponry wpn, ShipDefenses def, ShipThrusters thr, float mas, Vector2[] col, Sprite spr)
         {
             Stats_Weapons = wpn;
@@ -91,11 +91,16 @@ namespace MinimalMiner.Entity
         /// Applies damage to the ship
         /// </summary>
         /// <param name="damageTaken">The incoming amount of damage to take</param>
-        public void TakeDamage(float damageTaken)
+        public bool TakeDamage(float damageTaken)
         {
             ShipDefenses updatedDef = Current_Defenses;
             updatedDef.ArmorStrength -= damageTaken;
             Current_Defenses = updatedDef;
+
+            if (Current_Defenses.ArmorStrength > 0)
+                return false;
+            else
+                return true;
         }
 
         public void ResetShip()

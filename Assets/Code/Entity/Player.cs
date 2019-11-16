@@ -3,6 +3,7 @@
 
 using System.Collections.Generic;
 using UnityEngine;
+using System.Linq;
 using MinimalMiner.Util;
 
 namespace MinimalMiner.Entity
@@ -250,6 +251,7 @@ namespace MinimalMiner.Entity
         // Ship-related variables
         private ShipConfiguration shipConfig;
         private Vector2 shipAccForce;
+        private float fireTimer;
 
         [SerializeField] private SpriteRenderer sprite;
         [SerializeField] private Rigidbody2D rigidbody;
@@ -300,7 +302,7 @@ namespace MinimalMiner.Entity
             weapons.RateModifier = 1;
             weapons.Slots = new List<Vector3>()
             {
-                new Vector3(0,0,0)
+                new Vector3(0.35f,0,0)
             };
             weapons.SlotStatus = new Dictionary<Vector3, WeaponSlotStatus>()
             {
@@ -328,6 +330,15 @@ namespace MinimalMiner.Entity
             rigidbody.mass = shipConfig.Mass;
             collider.points = colliders;
             sprite.sprite = shipConfig.BodySprite;  // This, like the bulletPrefab and bulletSound, will be handled/stored outside player, so the back-and-fourth setting seen here won't be present eventually
+        }
+
+        private void FixedUpdate()
+        {
+            if (currState == GameState.play)
+            {
+                PlayerMovement();
+                PlayerFiring();
+            }
         }
 
         /// <summary>
@@ -374,9 +385,76 @@ namespace MinimalMiner.Entity
             sprite.material.color = theme.spriteColor_player;
         }
 
+        private void PlayerMovement()
+        {
+            // Handle ship turning
+            if (Input.GetKey(playerPrefs.Controls.Ship_CCW))
+            {
+                transform.Rotate(0, 0, shipConfig.Stats_Thrusters.RotationalSpeed);
+            }
+
+            if (Input.GetKey(playerPrefs.Controls.Ship_CW))
+            {
+                transform.Rotate(0, 0, -shipConfig.Stats_Thrusters.RotationalSpeed);
+            }
+
+            if (Input.GetKey(playerPrefs.Controls.Ship_Forward))
+            {   
+                // Handle ship acceleration
+                shipAccForce = shipConfig.Stats_Thrusters.ForwardThrusterForce * transform.right * (Time.fixedDeltaTime * 50f);
+                if (rigidbody.velocity.magnitude < shipConfig.Stats_Thrusters.MaxDirectionalSpeed)
+                {
+                    rigidbody.AddForce(shipAccForce);
+                }
+            }
+        }
+
+        private void PlayerFiring()
+        {
+            fireTimer += Time.fixedDeltaTime;
+            fireTimer = (float)System.Math.Round(fireTimer, 2);
+
+            if (Input.GetKey(playerPrefs.Controls.Ship_Fire))
+            {
+                Vector3[] weapons = new Vector3[shipConfig.Stats_Weapons.Weapons.Count];
+                shipConfig.Stats_Weapons.Weapons.Keys.CopyTo(weapons, 0);
+
+                foreach (Vector3 v in weapons)
+                {
+                    ShipWeapon w = shipConfig.Stats_Weapons.Weapons[v];
+                    if ((fireTimer * Time.fixedDeltaTime) % (w.RateOfFire / Time.fixedDeltaTime) == 0)
+                    {
+                        if (w.Type == WeaponType.projectile)
+                        {
+                            GameObject proj = Instantiate(w.OutputPrefab, v + transform.position + transform.forward, Quaternion.identity);
+
+                            // Set up its velocity and color based on current theme (aka the ship's color)
+                            Projectile behaviour = proj.GetComponentInChildren<Projectile>();
+                            behaviour.Setup(new Vector2(transform.right.x * w.Speed, transform.right.y * w.Speed));
+                            proj.GetComponentInChildren<SpriteRenderer>().material.color = sprite.material.color;
+
+                            // Play fire sound and add recoil force
+                            bulletSound.Play();
+                            rigidbody.AddForce(shipAccForce * w.Recoil);
+                        }
+                    }
+                }
+            }
+        }
+
         public void TakeDamage(float damageDone)
         {
-            shipConfig.TakeDamage(damageDone);
+            bool isDead = shipConfig.TakeDamage(damageDone);
+            eventMgr.UpdateHUDElement(HUDElement.health, shipConfig.Current_Defenses.ArmorStrength.ToString());
+
+            if (isDead)
+            {
+                deathSound.Play();
+                eventMgr.UpdateGameState(GameState.death);
+            }
+
+            else
+                damageSound.Play();
         }
 
         public void ResetPlayer()
@@ -387,8 +465,10 @@ namespace MinimalMiner.Entity
             matMgr = managers.GetComponent<MaterialManager>();
 
             // Reset state and stats
+            Start();
             shipConfig.ResetShip();
             eventMgr.UpdateHUDElement(HUDElement.health, shipConfig.Current_Defenses.ArmorStrength.ToString());
+            UpdateGameState(eventMgr.CurrState, eventMgr.CurrState);
             UpdateTheme(playerPrefs.CurrentTheme);
 
             // Reset transform
