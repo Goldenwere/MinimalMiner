@@ -251,7 +251,7 @@ namespace MinimalMiner.Entity
         // Ship-related variables
         private ShipConfiguration shipConfig;
         private Vector2 shipAccForce;
-        private float fireTimer;
+        private float fireTimer = 30f;
 
         [SerializeField] private SpriteRenderer sprite;
         [SerializeField] private Rigidbody2D rigidbody;
@@ -261,6 +261,7 @@ namespace MinimalMiner.Entity
 
         [SerializeField] private GameObject bulletPrefab;
         [SerializeField] private AudioSource bulletSound;
+        [SerializeField] private List<GameObject> bulletLoc;
 
         // Management variables
         private GameState currState;
@@ -294,7 +295,7 @@ namespace MinimalMiner.Entity
             basicBlaster.OutputPrefab = bulletPrefab;           // The prefabs and sounds will eventually be handled/stored outside Player
             basicBlaster.OutputSound = bulletSound;
             basicBlaster.RateOfFire = 0.2f;                     // Originally fireRate in old Player
-            basicBlaster.Recoil = 5f;                           // Originally -shipAcc * 5f when handling recoil in old Player
+            basicBlaster.Recoil = 15f;                          // Originally -shipAcc * 5f when handling recoil in old Player
             basicBlaster.Speed = 100f;                          // Originally projectileSpeed in old Player
             basicBlaster.Type = WeaponType.projectile;
 
@@ -330,6 +331,14 @@ namespace MinimalMiner.Entity
             rigidbody.mass = shipConfig.Mass;
             collider.points = colliders;
             sprite.sprite = shipConfig.BodySprite;  // This, like the bulletPrefab and bulletSound, will be handled/stored outside player, so the back-and-fourth setting seen here won't be present eventually
+
+            foreach(Vector3 w in weapons.Slots)
+            {
+                GameObject obj = new GameObject();
+                obj.transform.parent = gameObject.transform;
+                obj.transform.position = w;
+                bulletLoc.Add(obj);
+            }
         }
 
         private void FixedUpdate()
@@ -411,22 +420,21 @@ namespace MinimalMiner.Entity
 
         private void PlayerFiring()
         {
-            fireTimer += Time.fixedDeltaTime;
-            fireTimer = (float)System.Math.Round(fireTimer, 2);
+            fireTimer += 0.02f;
 
             if (Input.GetKey(playerPrefs.Controls.Ship_Fire))
             {
                 Vector3[] weapons = new Vector3[shipConfig.Stats_Weapons.Weapons.Count];
                 shipConfig.Stats_Weapons.Weapons.Keys.CopyTo(weapons, 0);
 
-                foreach (Vector3 v in weapons)
+                for (int i = 0; i < weapons.Length; i++)
                 {
-                    ShipWeapon w = shipConfig.Stats_Weapons.Weapons[v];
-                    if ((fireTimer * Time.fixedDeltaTime) % (w.RateOfFire / Time.fixedDeltaTime) == 0)
+                    ShipWeapon w = shipConfig.Stats_Weapons.Weapons[weapons[i]];
+                    if (System.Math.Round(fireTimer % w.RateOfFire, 3) <= 0.02f)
                     {
                         if (w.Type == WeaponType.projectile)
                         {
-                            GameObject proj = Instantiate(w.OutputPrefab, v + transform.position + transform.forward, Quaternion.identity);
+                            GameObject proj = Instantiate(w.OutputPrefab, bulletLoc[i].transform.position, Quaternion.identity);
 
                             // Set up its velocity and color based on current theme (aka the ship's color)
                             Projectile behaviour = proj.GetComponentInChildren<Projectile>();
@@ -435,7 +443,7 @@ namespace MinimalMiner.Entity
 
                             // Play fire sound and add recoil force
                             bulletSound.Play();
-                            rigidbody.AddForce(shipAccForce * w.Recoil);
+                            rigidbody.AddForce(-transform.right * w.Recoil);
                         }
                     }
                 }
