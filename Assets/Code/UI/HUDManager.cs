@@ -13,7 +13,8 @@ namespace MinimalMiner.UI
     {
         #region Fields
         // Updatable HUD elements
-        [SerializeField] TextMeshProUGUI healthText;
+        [SerializeField] TextMeshProUGUI armorText;
+        [SerializeField] TextMeshProUGUI shieldText;
         #endregion
 
         #region Methods
@@ -40,10 +41,11 @@ namespace MinimalMiner.UI
         /// <param name="content">The content to update the element with</param>
         private void UpdateElement(HUDElement element, string content)
         {
-            if (element == HUDElement.health)
-            {
-                healthText.text = content;
-            }
+            if (element == HUDElement.armor)
+                armorText.text = content;
+
+            else if (element == HUDElement.shield)
+                shieldText.text = content;
         }
         #endregion
     }

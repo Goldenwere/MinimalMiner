@@ -1,5 +1,7 @@
 ﻿using System.Collections.Generic;
 using UnityEngine;
+using MinimalMiner.Util;
+using System;
 
 namespace MinimalMiner.Entity
 {
@@ -64,6 +66,9 @@ namespace MinimalMiner.Entity
         {
             get; private set;
         }
+
+        private float rechargeDelay;
+        private EventManager eventMgr;
         #endregion
 
         #region Methods
@@ -76,7 +81,7 @@ namespace MinimalMiner.Entity
         /// <param name="mas">Ship's mass</param>
         /// <param name="col">Ship's colliders</param>
         /// <param name="spr">Ship's body sprite</param>
-        public ShipConfiguration(ShipWeaponry wpn, ShipDefenses def, ShipThrusters thr, float mas, Vector2[] col, Sprite spr)
+        public ShipConfiguration(ShipWeaponry wpn, ShipDefenses def, ShipThrusters thr, float mas, Vector2[] col, Sprite spr, EventManager e)
         {
             Stats_Weapons = wpn;
             Stats_Defenses = def;
@@ -85,6 +90,7 @@ namespace MinimalMiner.Entity
             Mass = mas;
             ColliderForm = col;
             BodySprite = spr;
+            eventMgr = e;
         }
 
         /// <summary>
@@ -94,7 +100,21 @@ namespace MinimalMiner.Entity
         public bool TakeDamage(float damageTaken)
         {
             ShipDefenses updatedDef = Current_Defenses;
-            updatedDef.ArmorStrength -= damageTaken;
+
+            if (updatedDef.ShieldStrength <= 0)
+                updatedDef.ArmorStrength -= damageTaken;
+
+            else
+            {
+                if ((updatedDef.ShieldStrength - damageTaken) <= 0)
+                    updatedDef.ShieldStrength = 0;
+
+                else
+                    updatedDef.ShieldStrength -= damageTaken;
+
+                rechargeDelay = 0;
+            }
+
             Current_Defenses = updatedDef;
 
             if (Current_Defenses.ArmorStrength > 0)
@@ -103,9 +123,45 @@ namespace MinimalMiner.Entity
                 return true;
         }
 
+        /// <summary>
+        /// Resets ship properties
+        /// </summary>
         public void ResetShip()
         {
             Current_Defenses = Stats_Defenses;
+        }
+
+        /// <summary>
+        /// Called every time the ship's parent manager is updated
+        /// </summary>
+        /// <param name="dt">Delta time (between frames)</param>
+        public void Update(float dt)
+        {
+            // If the shield strength is down, start recharge process
+            if (Current_Defenses.ShieldStrength < Stats_Defenses.ShieldStrength)
+            {
+                // Increment timer 
+                if (rechargeDelay < Current_Defenses.ShieldDelay)
+                    rechargeDelay += dt;
+
+                // Increment shields
+                else
+                {
+                    ShipDefenses updatedDef = Current_Defenses;
+                    updatedDef.ShieldStrength += Current_Defenses.ShieldRecharge * dt;
+                    Current_Defenses = updatedDef;
+                    eventMgr.UpdateHUDElement(HUDElement.shield, Math.Round(updatedDef.ShieldStrength, 2).ToString());
+                }
+            }
+
+            // Ensure shields don't go over after recharge process
+            else if (Current_Defenses.ShieldStrength > Stats_Defenses.ShieldStrength)
+            {
+                ShipDefenses updatedDef = Current_Defenses;
+                updatedDef.ShieldStrength = Stats_Defenses.ShieldStrength;
+                Current_Defenses = updatedDef;
+                eventMgr.UpdateHUDElement(HUDElement.shield, Math.Round(updatedDef.ShieldStrength, 2).ToString());
+            }
         }
         #endregion
     }
@@ -243,6 +299,11 @@ namespace MinimalMiner.Entity
         /// The rate at which the shields recharge per second
         /// </summary>
         public float ShieldRecharge;
+
+        /// <summary>
+        /// The delay until shields begin recharging
+        /// </summary>
+        public float ShieldDelay;
 
         /// <summary>
         /// The strength of the ship's armor

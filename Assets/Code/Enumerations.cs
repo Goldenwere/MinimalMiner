@@ -69,7 +69,8 @@
     /// </summary>
     public enum HUDElement
     {
-        health
+        armor,
+        shield
     }
 
     /// <summary>

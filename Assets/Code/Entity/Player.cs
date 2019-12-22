@@ -5,6 +5,7 @@ using System.Collections.Generic;
 using UnityEngine;
 using System.Linq;
 using MinimalMiner.Util;
+using System;
 
 namespace MinimalMiner.Entity
 {
@@ -207,7 +208,7 @@ namespace MinimalMiner.Entity
 
             // Reset state and stats
             playerHealth = 10f;
-            eventMgr.UpdateHUDElement(HUDElement.health, playerHealth.ToString());
+            eventMgr.UpdateHUDElement(HUDElement.armor, playerHealth.ToString());
             UpdateTheme(playerPrefs.CurrentTheme);
 
             // Reset transform
@@ -229,7 +230,7 @@ namespace MinimalMiner.Entity
             if (playerHealth > 0)
             {
                 playerHealth -= damageDone;
-                eventMgr.UpdateHUDElement(HUDElement.health, playerHealth.ToString());
+                eventMgr.UpdateHUDElement(HUDElement.armor, playerHealth.ToString());
                 damageSound.Play();
             }
 
@@ -278,9 +279,10 @@ namespace MinimalMiner.Entity
 
             #region Setup
 
-            defenses.ArmorStrength = 100f;
-            defenses.ShieldRecharge = 10f;
-            defenses.ShieldStrength = 100f;
+            defenses.ArmorStrength = 10f;
+            defenses.ShieldRecharge = 1f;
+            defenses.ShieldStrength = 5f;
+            defenses.ShieldDelay = 2f;
 
             thrusters.DampenerStrength = 2.5f;                  // Equivalent to rigidbody linear drag set before this temp code (shipDragRate was unused)
             thrusters.ForwardThrusterForce = 5f;                // Equivalent to shipAccRate set in the old player class ResetPlayer()
@@ -339,7 +341,7 @@ namespace MinimalMiner.Entity
 
             #endregion
 
-            shipConfig = new ShipConfiguration(weapons, defenses, thrusters, 0.25f, colliders, sprite.sprite);
+            shipConfig = new ShipConfiguration(weapons, defenses, thrusters, 0.25f, colliders, sprite.sprite, eventMgr);
 
             // This may seem redundant, accessing what was set in the previous Setup region, but that will eventually disappear once actual ships are defined
             rigidbody.drag = shipConfig.Stats_Thrusters.DampenerStrength;
@@ -362,6 +364,7 @@ namespace MinimalMiner.Entity
             {
                 PlayerMovement();
                 PlayerFiring();
+                shipConfig.Update(Time.fixedDeltaTime);
             }
         }
 
@@ -468,7 +471,8 @@ namespace MinimalMiner.Entity
         public void TakeDamage(float damageDone)
         {
             bool isDead = shipConfig.TakeDamage(damageDone);
-            eventMgr.UpdateHUDElement(HUDElement.health, shipConfig.Current_Defenses.ArmorStrength.ToString());
+            eventMgr.UpdateHUDElement(HUDElement.armor, Math.Round(shipConfig.Current_Defenses.ArmorStrength, 2).ToString());
+            eventMgr.UpdateHUDElement(HUDElement.shield, Math.Round(shipConfig.Current_Defenses.ShieldStrength, 2).ToString());
 
             if (isDead)
             {
@@ -490,7 +494,8 @@ namespace MinimalMiner.Entity
             // Reset state and stats
             Start();
             shipConfig.ResetShip();
-            eventMgr.UpdateHUDElement(HUDElement.health, shipConfig.Current_Defenses.ArmorStrength.ToString());
+            eventMgr.UpdateHUDElement(HUDElement.armor, shipConfig.Current_Defenses.ArmorStrength.ToString());
+            eventMgr.UpdateHUDElement(HUDElement.shield, shipConfig.Current_Defenses.ShieldStrength.ToString());
             UpdateGameState(eventMgr.CurrState, eventMgr.CurrState);
             UpdateTheme(playerPrefs.CurrentTheme);
 
