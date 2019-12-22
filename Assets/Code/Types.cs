@@ -235,6 +235,7 @@ namespace MinimalMiner
         public KeyCode Ship_CW;
         public KeyCode Ship_CCW;
         public KeyCode Ship_Fire;
+        public KeyCode Ship_Dampener;
 
         public KeyCode Menu_Pause;
     }

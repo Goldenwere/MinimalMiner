@@ -85,7 +85,8 @@ namespace MinimalMiner.Util
                     Ship_Reverse = KeyCode.S,
                     Ship_CW = KeyCode.D,
                     Ship_CCW = KeyCode.A,
-                    Ship_Fire = KeyCode.Space
+                    Ship_Fire = KeyCode.Space,
+                    Ship_Dampener = KeyCode.Q
                 };
 
                 prefs.Controls = input;
@@ -213,6 +214,9 @@ namespace MinimalMiner.Util
                     break;
                 case "Menu_Pause":
                     newControls.Menu_Pause = key;
+                    break;
+                case "Ship_Dampener":
+                    newControls.Ship_Dampener = key;
                     break;
             }
 

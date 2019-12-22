@@ -59,6 +59,7 @@ namespace MinimalMiner.UI
             controlText["Button_Turn-Left"].text = prefs.Controls.Ship_CCW.ToString();
             controlText["Button_Fire"].text = prefs.Controls.Ship_Fire.ToString();
             controlText["Button_Pause"].text = prefs.Controls.Menu_Pause.ToString();
+            controlText["Button_Dampener"].text = prefs.Controls.Ship_Dampener.ToString();
 
             // Set up current states
             currControl = "";
@@ -145,6 +146,9 @@ namespace MinimalMiner.UI
                     case "Menu_Pause":
                         controlText["Button_Pause"].text = "";
                         break;
+                    case "Ship_Dampener":
+                        controlText["Button_Dampener"].text = "";
+                        break;
                 }
             }
 
@@ -172,6 +176,9 @@ namespace MinimalMiner.UI
                         break;
                     case "Menu_Pause":
                         controlText["Button_Pause"].text = prefs.Controls.Menu_Pause.ToString();
+                        break;
+                    case "Ship_Dampener":
+                        controlText["Button_Dampener"].text = prefs.Controls.Ship_Dampener.ToString();
                         break;
                 }
             }

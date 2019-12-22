@@ -362,6 +362,20 @@ namespace MinimalMiner.Entity
         }
 
         /// <summary>
+        /// Called once every frame
+        /// </summary>
+        private void Update()
+        {
+            if (Input.GetKeyDown(playerPrefs.Controls.Ship_Dampener))
+            {
+                if (rigidbody.drag > 0)
+                    rigidbody.drag = 0;
+                else
+                    rigidbody.drag = shipConfig.Stats_Thrusters.DampenerStrength;
+            }
+        }
+
+        /// <summary>
         /// Called once every physics update
         /// </summary>
         private void FixedUpdate()
@@ -425,23 +439,17 @@ namespace MinimalMiner.Entity
         {
             // Handle ship turning
             if (Input.GetKey(playerPrefs.Controls.Ship_CCW))
-            {
                 transform.Rotate(0, 0, shipConfig.Stats_Thrusters.RotationalSpeed);
-            }
 
             if (Input.GetKey(playerPrefs.Controls.Ship_CW))
-            {
                 transform.Rotate(0, 0, -shipConfig.Stats_Thrusters.RotationalSpeed);
-            }
 
             if (Input.GetKey(playerPrefs.Controls.Ship_Forward))
             {   
                 // Handle ship acceleration
                 shipAccForce = shipConfig.Stats_Thrusters.ForwardThrusterForce * transform.right * (Time.fixedDeltaTime * 50f);
-                if (rigidbody.velocity.magnitude < shipConfig.Stats_Thrusters.MaxDirectionalSpeed)
-                {
-                    rigidbody.AddForce(shipAccForce);
-                }
+                rigidbody.AddForce(shipAccForce);
+                rigidbody.velocity = Vector2.ClampMagnitude(rigidbody.velocity, shipConfig.Stats_Thrusters.MaxDirectionalSpeed);
             }
         }
 
