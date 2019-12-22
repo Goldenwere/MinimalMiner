@@ -67,7 +67,9 @@ namespace MinimalMiner.Entity
             get; private set;
         }
 
+        // Timer used for delaying shield recharge
         private float rechargeDelay;
+        // For updating text without a damage event
         private EventManager eventMgr;
         #endregion
 

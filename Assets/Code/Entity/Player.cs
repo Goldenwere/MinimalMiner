@@ -270,6 +270,9 @@ namespace MinimalMiner.Entity
         private EventManager eventMgr;
         private MaterialManager matMgr;
 
+        /// <summary>
+        /// Called before the first frame update
+        /// </summary>
         private void Start()
         {
             ShipDefenses defenses = new ShipDefenses();
@@ -358,6 +361,9 @@ namespace MinimalMiner.Entity
             }
         }
 
+        /// <summary>
+        /// Called once every physics update
+        /// </summary>
         private void FixedUpdate()
         {
             if (currState == GameState.play)
@@ -412,6 +418,9 @@ namespace MinimalMiner.Entity
             sprite.material.color = theme.spriteColor_player;
         }
 
+        /// <summary>
+        /// Handles player movement in the game scene
+        /// </summary>
         private void PlayerMovement()
         {
             // Handle ship turning
@@ -436,6 +445,9 @@ namespace MinimalMiner.Entity
             }
         }
 
+        /// <summary>
+        /// Handles player firing
+        /// </summary>
         private void PlayerFiring()
         {
             fireTimer += 0.02f;
@@ -468,6 +480,10 @@ namespace MinimalMiner.Entity
             }
         }
 
+        /// <summary>
+        /// Handles damage taken from other entities
+        /// </summary>
+        /// <param name="damageDone">The damage that was taken</param>
         public void TakeDamage(float damageDone)
         {
             bool isDead = shipConfig.TakeDamage(damageDone);
@@ -484,6 +500,9 @@ namespace MinimalMiner.Entity
                 damageSound.Play();
         }
 
+        /// <summary>
+        /// Resets player properties
+        /// </summary>
         public void ResetPlayer()
         {
             GameObject managers = GameObject.FindWithTag("managers");
