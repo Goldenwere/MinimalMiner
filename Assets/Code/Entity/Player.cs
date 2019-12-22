@@ -294,24 +294,39 @@ namespace MinimalMiner.Entity
             basicBlaster.Name = "Basic Blaster";
             basicBlaster.OutputPrefab = bulletPrefab;           // The prefabs and sounds will eventually be handled/stored outside Player
             basicBlaster.OutputSound = bulletSound;
-            basicBlaster.RateOfFire = 0.2f;                     // Originally fireRate in old Player
+            basicBlaster.RateOfFire = 0.35f;                    // Originally fireRate in old Player
             basicBlaster.Recoil = 15f;                          // Originally -shipAcc * 5f when handling recoil in old Player
-            basicBlaster.Speed = 100f;                          // Originally projectileSpeed in old Player
+            basicBlaster.Speed = 200f;                          // Originally projectileSpeed in old Player
             basicBlaster.Type = WeaponType.projectile;
+            ShipWeapon secondBlaster = new ShipWeapon();
+            secondBlaster.Damage = 1f;
+            secondBlaster.Name = "Secondary Blaster";
+            secondBlaster.OutputPrefab = bulletPrefab;
+            secondBlaster.OutputSound = bulletSound;
+            secondBlaster.RateOfFire = 0.2f;
+            secondBlaster.Recoil = 5f;
+            secondBlaster.Speed = 100f;
+            secondBlaster.Type = WeaponType.projectile;
 
             weapons.DamageModifier = 1;
             weapons.RateModifier = 1;
             weapons.Slots = new List<Vector3>()
             {
-                new Vector3(0.35f,0,0)
+                new Vector3(0.35f,0,0),
+                new Vector3(0.25f,0.21f,0),
+                new Vector3(0.258f,-0.21f,0)
             };
             weapons.SlotStatus = new Dictionary<Vector3, WeaponSlotStatus>()
             {
-                { weapons.Slots[0], WeaponSlotStatus.enabled }
+                { weapons.Slots[0], WeaponSlotStatus.enabled },
+                { weapons.Slots[1], WeaponSlotStatus.enabled },
+                { weapons.Slots[2], WeaponSlotStatus.enabled }
             };
             weapons.Weapons = new Dictionary<Vector3, ShipWeapon>()
             {
-                { weapons.Slots[0], basicBlaster }
+                { weapons.Slots[0], basicBlaster },
+                { weapons.Slots[1], secondBlaster },
+                { weapons.Slots[2], secondBlaster }
             };
 
             colliders = new Vector2[]                           // This is based off of what was in the PolygonCollider2D in old Player
