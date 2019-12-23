@@ -113,11 +113,10 @@ namespace MinimalMiner.Entity
 
                 else
                     updatedDef.ShieldStrength -= damageTaken;
-
-                rechargeDelay = 0;
             }
 
             Current_Defenses = updatedDef;
+            rechargeDelay = 0;
 
             if (Current_Defenses.ArmorStrength > 0)
                 return false;
