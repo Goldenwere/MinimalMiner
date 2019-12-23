@@ -247,6 +247,7 @@ namespace MinimalMiner.Entity
                             // Play fire sound and add recoil force
                             bulletSound.Play();
                             rigidbody.AddForce(-transform.right * w.Recoil);
+                            rigidbody.velocity = Vector2.ClampMagnitude(rigidbody.velocity, shipConfig.Stats_Thrusters.MaxDirectionalSpeed);
                         }
                     }
                 }
