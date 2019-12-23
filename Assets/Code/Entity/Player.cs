@@ -27,6 +27,7 @@ namespace MinimalMiner.Entity
 
         [SerializeField] private GameObject bulletPrefab;
         [SerializeField] private AudioSource bulletSound;
+        [SerializeField] private AudioSource bulletSound2;
         [SerializeField] private List<GameObject> bulletLoc;
 
         // Management variables
@@ -72,7 +73,7 @@ namespace MinimalMiner.Entity
             secondBlaster.Damage = 1f;
             secondBlaster.Name = "Secondary Blaster";
             secondBlaster.OutputPrefab = bulletPrefab;
-            secondBlaster.OutputSound = bulletSound;
+            secondBlaster.OutputSound = bulletSound2;
             secondBlaster.RateOfFire = 0.2f;
             secondBlaster.Recoil = 5f;
             secondBlaster.Speed = 100f;
@@ -85,6 +86,12 @@ namespace MinimalMiner.Entity
                 new Vector3(0.35f,0,0),
                 new Vector3(0.25f,0.21f,0),
                 new Vector3(0.258f,-0.21f,0)
+            };
+            weapons.Rotations = new Dictionary<Vector3, Vector3>()
+            {
+                { weapons.Slots[0], new Vector3(0,0,0) },
+                { weapons.Slots[1], new Vector3(0,0,25f) },
+                { weapons.Slots[2], new Vector3(0,0,-25f) }
             };
             weapons.SlotStatus = new Dictionary<Vector3, WeaponSlotStatus>()
             {
@@ -119,9 +126,11 @@ namespace MinimalMiner.Entity
 
             foreach(Vector3 w in weapons.Slots)
             {
-                GameObject obj = new GameObject();
+                GameObject obj = new GameObject(weapons.Weapons[w].Name);
                 obj.transform.parent = gameObject.transform;
                 obj.transform.position = w;
+                Quaternion rot = Quaternion.Euler(weapons.Rotations[w]);
+                obj.transform.rotation = rot;
                 bulletLoc.Add(obj);
             }
         }
@@ -233,7 +242,7 @@ namespace MinimalMiner.Entity
                 for (int i = 0; i < weapons.Length; i++)
                 {
                     ShipWeapon w = shipConfig.Stats_Weapons.Weapons[weapons[i]];
-                    if (System.Math.Round(fireTimer % w.RateOfFire, 3) <= 0.02f)
+                    if (Math.Round(fireTimer % w.RateOfFire, 3) <= 0.02f)
                     {
                         if (w.Type == WeaponType.projectile)
                         {
@@ -241,11 +250,11 @@ namespace MinimalMiner.Entity
 
                             // Set up its velocity and color based on current theme (aka the ship's color)
                             Projectile behaviour = proj.GetComponentInChildren<Projectile>();
-                            behaviour.Setup(new Vector2(transform.right.x * w.Speed, transform.right.y * w.Speed));
+                            behaviour.Setup(Vector2.ClampMagnitude(new Vector2(bulletLoc[i].transform.right.x * w.Speed, bulletLoc[i].transform.right.y * w.Speed), w.Speed));
                             proj.GetComponentInChildren<SpriteRenderer>().material.color = sprite.material.color;
 
                             // Play fire sound and add recoil force
-                            bulletSound.Play();
+                            w.OutputSound.Play();
                             rigidbody.AddForce(-transform.right * w.Recoil);
                             rigidbody.velocity = Vector2.ClampMagnitude(rigidbody.velocity, shipConfig.Stats_Thrusters.MaxDirectionalSpeed);
                         }

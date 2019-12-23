@@ -180,6 +180,11 @@ namespace MinimalMiner.Entity
         public List<Vector3> Slots;
 
         /// <summary>
+        /// Defines the rotations of weapon slots on the ship, where the key is the wepaon slot's position and the value is the rotation itself
+        /// </summary>
+        public Dictionary<Vector3, Vector3> Rotations;
+
+        /// <summary>
         /// Defines the weapons on a ship, where the key is the weapon slot's position on the ship and the value is the weapon itself
         /// </summary>
         public Dictionary<Vector3, ShipWeapon> Weapons;
