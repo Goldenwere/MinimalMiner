@@ -49,6 +49,7 @@ namespace MinimalMiner.Util
         }
         #endregion
 
+        #region Methods
         /// <summary>
         /// Sets up the preferences when Awake is called
         /// </summary>
@@ -297,6 +298,7 @@ namespace MinimalMiner.Util
 
             return prefs;
         }
+        #endregion
     }
 }
  

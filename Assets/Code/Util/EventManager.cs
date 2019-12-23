@@ -49,6 +49,7 @@ namespace MinimalMiner.Util
         [SerializeField] private PreferencesManager playerPrefs;
         #endregion
 
+        #region Methods
         /// <summary>
         /// Handles the start of the object before the first frame
         /// </summary>
@@ -146,5 +147,6 @@ namespace MinimalMiner.Util
         {
             OnUpdateHUDElement(element, content);
         }
+        #endregion
     }
 }
