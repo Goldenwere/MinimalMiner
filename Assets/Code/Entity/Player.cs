@@ -141,6 +141,7 @@ namespace MinimalMiner.Entity
         /// </summary>
         private void Update()
         {
+            // Toggle the ship dampener
             if (Input.GetKeyDown(playerPrefs.Controls.Ship_Dampener))
             {
                 if (rigidbody.drag > 0)
@@ -148,6 +149,10 @@ namespace MinimalMiner.Entity
                 else
                     rigidbody.drag = shipConfig.Stats_Thrusters.DampenerStrength;
             }
+
+            // Resets the fire timer when spacebar is first pressed
+            if (Input.GetKeyDown(playerPrefs.Controls.Ship_Fire))
+                fireTimer = 30f;
         }
 
         /// <summary>
