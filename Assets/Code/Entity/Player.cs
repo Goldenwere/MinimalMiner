@@ -159,6 +159,7 @@ namespace MinimalMiner.Entity
             {
                 PlayerMovement();
                 PlayerFiring();
+                PlayerTargeting();
                 shipConfig.Update(Time.fixedDeltaTime);
             }
         }
@@ -267,6 +268,21 @@ namespace MinimalMiner.Entity
                         }
                     }
                 }
+            }
+        }
+
+        /// <summary>
+        /// Handles player targetting (soft-locking onto asteroids)
+        /// </summary>
+        private void PlayerTargeting()
+        {
+            RaycastHit2D hit = Physics2D.Raycast(transform.position + (transform.right * 0.5f), transform.right, 3f);
+            if (hit.collider != null)
+            {
+                Vector3 toTarget = hit.transform.position - transform.position;
+                float angle = Mathf.Atan2(toTarget.y, toTarget.x) * Mathf.Rad2Deg;
+                Quaternion newRot = Quaternion.AngleAxis(angle, Vector3.forward);
+                transform.rotation = Quaternion.Slerp(transform.rotation, newRot, shipConfig.Stats_Thrusters.RotationalSpeed * Time.fixedDeltaTime);
             }
         }
 

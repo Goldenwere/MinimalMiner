@@ -50,6 +50,7 @@ namespace MinimalMiner.Entity
         /// </summary>
         private void Update()
         {
+            // Handle boundaries
             if (transform.position.x < -SceneConstants.BoundarySize.x || transform.position.x > SceneConstants.BoundarySize.x ||
                 transform.position.y < -SceneConstants.BoundarySize.y || transform.position.y > SceneConstants.BoundarySize.y)
             {
