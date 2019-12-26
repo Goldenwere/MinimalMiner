@@ -31,5 +31,13 @@ namespace MinimalMiner.Util
         {
             get { return new Vector2(2f, 2f); }
         }
+
+        /// <summary>
+        /// The smooth time for various elements (such as target UI element transition and asteroid healthbar transition)
+        /// </summary>
+        public static float SmoothTime
+        {
+            get { return 10f; }
+        }
     }
 }

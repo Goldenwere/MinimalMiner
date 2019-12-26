@@ -78,7 +78,7 @@ namespace MinimalMiner.Entity
 
             if (healthBar.gameObject.activeInHierarchy)
             {
-                healthBar.value = Mathf.Lerp(healthBar.value, currHealth, 5f * Time.deltaTime);
+                healthBar.value = Mathf.Lerp(healthBar.value, currHealth, SceneConstants.SmoothTime * Time.deltaTime);
                 healthBarParent.position = transform.position;
                 healthBarParent.rotation = Quaternion.identity;
             }

@@ -25,6 +25,7 @@ namespace MinimalMiner.Entity
         [SerializeField] private PolygonCollider2D collider;
         [SerializeField] private AudioSource damageSound;
         [SerializeField] private AudioSource deathSound;
+        [SerializeField] private GameObject targetSoftLock;
 
         [SerializeField] private GameObject bulletPrefab;
         [SerializeField] private AudioSource bulletSound;
@@ -288,13 +289,37 @@ namespace MinimalMiner.Entity
         /// </summary>
         private void PlayerTargeting()
         {
-            RaycastHit2D hit = Physics2D.Raycast(transform.position + (transform.right * 0.5f), transform.right, 3f);
-            if (hit.collider != null)
+            RaycastHit2D hit = Physics2D.Raycast(transform.position + (transform.right * 0.5f), transform.right, 5f);
+            if (hit.collider != null && hit.collider.tag == "asteroid")
             {
+                // Rotate toward target
                 Vector3 toTarget = hit.transform.position - transform.position;
                 float angle = Mathf.Atan2(toTarget.y, toTarget.x) * Mathf.Rad2Deg;
                 Quaternion newRot = Quaternion.AngleAxis(angle, Vector3.forward);
                 transform.rotation = Quaternion.Slerp(transform.rotation, newRot, shipConfig.Stats_Thrusters.RotationalSpeed * Time.fixedDeltaTime);
+                Rigidbody2D rigidbody = hit.collider.gameObject.GetComponent<Rigidbody2D>();
+                // Handle UI element for targetting
+                if (!targetSoftLock.gameObject.activeInHierarchy)
+                {
+                    targetSoftLock.SetActive(true);
+                    targetSoftLock.transform.position = transform.position;
+                }
+                Vector2 predict = new Vector2(targetSoftLock.transform.position.x, targetSoftLock.transform.position.y) +
+                    rigidbody.velocity.normalized * (rigidbody.velocity.magnitude * Time.deltaTime);
+                targetSoftLock.transform.position = Vector3.Lerp(
+                    predict, 
+                    hit.transform.position, 
+                    SceneConstants.SmoothTime * Time.deltaTime);
+                targetSoftLock.transform.localScale = Vector3.Lerp(
+                    targetSoftLock.transform.localScale, 
+                    hit.transform.localScale, 
+                    SceneConstants.SmoothTime * Time.deltaTime);
+            }
+
+            else if (targetSoftLock.gameObject.activeInHierarchy)
+            {
+                targetSoftLock.SetActive(false);
+                targetSoftLock.transform.localScale = Vector3.one;
             }
         }
 
@@ -339,6 +364,8 @@ namespace MinimalMiner.Entity
             // Reset transform
             transform.position = Vector3.zero;
             transform.rotation = Quaternion.identity;
+            targetSoftLock.transform.position = Vector3.zero;
+            targetSoftLock.transform.localScale = Vector3.one;
 
             // Reset physics
             shipAccForce = Vector2.zero;
