@@ -12,15 +12,16 @@ MinimalMiner is currently in early public alpha. This means that not all feature
 
 #### Movement & Interaction
 
-- Main movement defaults to WAD, can be set via menus / Settings / Controls
+- Main movement defaults to WAD, can be set via main menu / Settings / Controls
+- Can toggle dampening (enables/disables 'drag'-like motion on ship, slowing it to a halt when not using thrusters/firing), defaults to Q, can be set via main menu / Settings / Controls
 
 #### Weapons
 
-- Primary firing defaults to Spacebar, can be set via menus / Settings / Controls
+- Primary firing defaults to Spacebar, can be set via main menu / Settings / Controls
 
 #### Menus
 
-- Pause defaults to Escape, can be set via menus / Settings / Controls
+- Pause defaults to Escape, can be set via main menu / Settings / Controls
 - Use left-click to select UI option
 
 ### Gameplay

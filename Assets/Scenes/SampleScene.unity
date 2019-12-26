@@ -10455,6 +10455,16 @@ PrefabInstance:
       propertyPath: bulletSound2
       value: 
       objectReference: {fileID: 1442845733}
+    - target: {fileID: 2842819292967055845, guid: d0670d720d9aac4418f1b90074e5145a,
+        type: 3}
+      propertyPath: boundarySize.x
+      value: 75
+      objectReference: {fileID: 0}
+    - target: {fileID: 2842819292967055845, guid: d0670d720d9aac4418f1b90074e5145a,
+        type: 3}
+      propertyPath: boundarySize.y
+      value: 75
+      objectReference: {fileID: 0}
     - target: {fileID: 2842819292967055844, guid: d0670d720d9aac4418f1b90074e5145a,
         type: 3}
       propertyPath: m_LocalPosition.x

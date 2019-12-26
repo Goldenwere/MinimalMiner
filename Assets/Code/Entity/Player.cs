@@ -6,6 +6,7 @@ using UnityEngine;
 using System.Linq;
 using MinimalMiner.Util;
 using System;
+using System.Collections;
 
 namespace MinimalMiner.Entity
 {
@@ -85,13 +86,13 @@ namespace MinimalMiner.Entity
             {
                 new Vector3(0.35f,0,0),
                 new Vector3(0.25f,0.21f,0),
-                new Vector3(0.258f,-0.21f,0)
+                new Vector3(0.25f,-0.21f,0)
             };
             weapons.Rotations = new Dictionary<Vector3, Vector3>()
             {
                 { weapons.Slots[0], new Vector3(0,0,0) },
-                { weapons.Slots[1], new Vector3(0,0,25f) },
-                { weapons.Slots[2], new Vector3(0,0,-25f) }
+                { weapons.Slots[1], new Vector3(0,0,10f) },
+                { weapons.Slots[2], new Vector3(0,0,-10f) }
             };
             weapons.SlotStatus = new Dictionary<Vector3, WeaponSlotStatus>()
             {
@@ -225,6 +226,12 @@ namespace MinimalMiner.Entity
                 rigidbody.AddForce(shipAccForce);
                 rigidbody.velocity = Vector2.ClampMagnitude(rigidbody.velocity, shipConfig.Stats_Thrusters.MaxDirectionalSpeed);
             }
+
+            // Handle boundaries
+            if (transform.position.x < -SceneConstants.BoundarySize.x || transform.position.x > SceneConstants.BoundarySize.x)
+                rigidbody.AddForce(-transform.position * Mathf.Abs(transform.position.x - SceneConstants.BoundarySize.x) * 0.1f);
+            if (transform.position.y < -SceneConstants.BoundarySize.y || transform.position.y > SceneConstants.BoundarySize.y)
+                rigidbody.AddForce(-transform.position * Mathf.Abs(transform.position.y - SceneConstants.BoundarySize.y) * 0.1f);
         }
 
         /// <summary>

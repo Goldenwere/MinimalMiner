@@ -98,7 +98,7 @@ namespace MinimalMiner.Entity
         private void SpawnAsteroids()
         {
             // Currently hard-coding max-asteroids until some sort of StarSystem info struct is created
-            for (int i = 0; i < 50; i++)
+            for (int i = 0; i < 200; i++)
             {
                 asteroids.Add(SpawnAsteroid());
             }
@@ -146,9 +146,12 @@ namespace MinimalMiner.Entity
             Vector3 position;
             do
             {
-                position = new Vector3(Random.Range(-20f, 20f), Random.Range(-20f, 20f), 0);
+                position = new Vector3(
+                    Random.Range(-(SceneConstants.BoundarySize.x - SceneConstants.BodySpawnPadding), SceneConstants.BoundarySize.x - SceneConstants.BodySpawnPadding), 
+                    Random.Range(-(SceneConstants.BoundarySize.y - SceneConstants.BodySpawnPadding), SceneConstants.BoundarySize.y - SceneConstants.BodySpawnPadding), 0);
             }
-            while (position.x > -1f && position.x < 1f || position.y > -1f && position.y < 1f);
+            while (position.x > -SceneConstants.PlayerSafeZone.x && position.x < SceneConstants.PlayerSafeZone.x 
+                || position.y > -SceneConstants.PlayerSafeZone.y && position.y < SceneConstants.PlayerSafeZone.y);
 
             Material mat = null;
 

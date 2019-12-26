@@ -3,6 +3,7 @@
 
 using System.Collections.Generic;
 using UnityEngine;
+using MinimalMiner.Util;
 
 namespace MinimalMiner.Entity
 {
@@ -45,6 +46,34 @@ namespace MinimalMiner.Entity
         }
 
         /// <summary>
+        /// Called once per frame
+        /// </summary>
+        private void Update()
+        {
+            if (transform.position.x < -SceneConstants.BoundarySize.x || transform.position.x > SceneConstants.BoundarySize.x ||
+                transform.position.y < -SceneConstants.BoundarySize.y || transform.position.y > SceneConstants.BoundarySize.y)
+            {
+                float newX;
+                float newY;
+                if (transform.position.x < -SceneConstants.BoundarySize.x)
+                    newX = SceneConstants.BoundarySize.x;
+                else if (transform.position.x > SceneConstants.BoundarySize.x)
+                    newX = -SceneConstants.BoundarySize.x;
+                else
+                    newX = transform.position.x;
+
+                if (transform.position.y < -SceneConstants.BoundarySize.y)
+                    newY = SceneConstants.BoundarySize.y;
+                else if (transform.position.y > SceneConstants.BoundarySize.y)
+                    newY = -SceneConstants.BoundarySize.y;
+                else
+                    newY = transform.position.y;
+
+                transform.position = new Vector2(newX, newY);
+            }
+        }
+
+        /// <summary>
         /// Handles collision between this asteroid and another object in the scene
         /// </summary>
         /// <param name="collision">Holds the collision information</param>
@@ -67,7 +96,7 @@ namespace MinimalMiner.Entity
         /// Called when the current Theme is updated
         /// </summary>
         /// <param name="theme">The new GameTheme properties</param>
-        public void UpdateTheme(Theme theme)
+        private void UpdateTheme(Theme theme)
         {
             sprite.material.color = theme.spriteColor_asteroid;
         }

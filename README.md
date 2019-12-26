@@ -21,4 +21,4 @@ PC (Windows, Mac (TBA), Linux (TBA)), Mobile TBA
 | [Wiki/Roadmap](https://github.com/xLightling/MinimalMiner/wiki/Roadmap) | Project roadmap |
 
 ## License
-All of the assets created for this project that do not come from third-party sources (only original assets are pushed to GitHub) are licensed under [MIT](LICENSE). 
+All of the assets created for this project that do not come from third-party sources (only original assets are pushed to GitHub, with the exception of (Assets/Packages); fonts contained under there have licenses associated with them) are licensed under [MIT](LICENSE). 
