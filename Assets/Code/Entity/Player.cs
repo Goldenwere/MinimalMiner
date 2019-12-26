@@ -223,7 +223,14 @@ namespace MinimalMiner.Entity
             if (Input.GetKey(playerPrefs.Controls.Ship_Forward))
             {   
                 // Handle ship acceleration
-                shipAccForce = shipConfig.Stats_Thrusters.ForwardThrusterForce * transform.right * (Time.fixedDeltaTime * 50f);
+                shipAccForce = shipConfig.Stats_Thrusters.ForwardThrusterForce * transform.right;
+                rigidbody.AddForce(shipAccForce);
+                rigidbody.velocity = Vector2.ClampMagnitude(rigidbody.velocity, shipConfig.Stats_Thrusters.MaxDirectionalSpeed);
+            }
+
+            if (Input.GetKey(playerPrefs.Controls.Ship_Reverse))
+            {
+                shipAccForce = shipConfig.Stats_Thrusters.ReverseThrusterForce * -transform.right;
                 rigidbody.AddForce(shipAccForce);
                 rigidbody.velocity = Vector2.ClampMagnitude(rigidbody.velocity, shipConfig.Stats_Thrusters.MaxDirectionalSpeed);
             }
