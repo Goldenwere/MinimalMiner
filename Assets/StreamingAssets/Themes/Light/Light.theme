@@ -70,4 +70,16 @@
         <b>30</b>
         <a>255</a>
     </spriteColor_asteroid>
+    <elem_objHealthValue>
+        <r>0</r>
+        <g>0</g>
+        <b>0</b>
+        <a>255</a>
+    </elem_objHealthValue>
+    <elem_objHealthBkgd>
+        <r>150</r>
+        <g>150</g>
+        <b>150</b>
+        <a>255</a>
+    </elem_objHealthBkgd>
 </Theme>

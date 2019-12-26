@@ -174,7 +174,12 @@ namespace MinimalMiner.Entity
 
             Asteroid behaviour = asteroid.GetComponent<Asteroid>();
 
-            behaviour.Setup(AsteroidType.general, (AsteroidSize)size, asteroidSprites[spriteIndex], mat, currTheme.spriteColor_asteroid, velocity, position, this);
+            Color32[] uiColors = new Color32[]
+            {
+                currTheme.elem_objHealthValue,
+                currTheme.elem_objHealthBkgd
+            };
+            behaviour.Setup(AsteroidType.general, (AsteroidSize)size, asteroidSprites[spriteIndex], mat, currTheme.spriteColor_asteroid, velocity, position, this, uiColors);
 
             return asteroid;
         }
@@ -213,7 +218,12 @@ namespace MinimalMiner.Entity
 
             Asteroid behaviour = asteroid.GetComponentInChildren<Asteroid>();
 
-            behaviour.Setup(type, (AsteroidSize)size, asteroidSprites[spriteIndex], mat, currTheme.spriteColor_asteroid, velocity, originalPosition, this);
+            Color32[] uiColors = new Color32[]
+{
+                currTheme.elem_objHealthValue,
+                currTheme.elem_objHealthBkgd
+};
+            behaviour.Setup(type, (AsteroidSize)size, asteroidSprites[spriteIndex], mat, currTheme.spriteColor_asteroid, velocity, originalPosition, this, uiColors);
 
             return asteroid;
         }

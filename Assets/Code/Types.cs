@@ -68,6 +68,18 @@ namespace MinimalMiner
 
         #endregion
 
+        #region UI Elements
+        /// <summary>
+        /// The value color of health bar sliders
+        /// </summary>
+        public Color32 elem_objHealthValue;
+
+        /// <summary>
+        /// The background color of health bar sliders
+        /// </summary>
+        public Color32 elem_objHealthBkgd;
+        #endregion
+
         #region Images
 
         /// <summary>
@@ -148,6 +160,9 @@ namespace MinimalMiner
             import_Asteroids = 0;
             import_Backgrounds = 0;
             import_Player = 0;
+
+            elem_objHealthValue = sprite;
+            elem_objHealthBkgd = bkgd;
         }
 
         /// <summary>
@@ -181,6 +196,9 @@ namespace MinimalMiner
             import_Asteroids = 0;
             import_Backgrounds = 0;
             import_Player = 0;
+
+            elem_objHealthValue = fore;
+            elem_objHealthBkgd = back;
         }
 
         /// <summary>
@@ -221,6 +239,9 @@ namespace MinimalMiner
             import_Asteroids = 0;
             import_Backgrounds = 0;
             import_Player = 0;
+
+            elem_objHealthValue = textFore;
+            elem_objHealthBkgd = bkgdColor;
         }
         #endregion
     }

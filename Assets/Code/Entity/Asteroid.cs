@@ -177,6 +177,28 @@ namespace MinimalMiner.Entity
         }
 
         /// <summary>
+        /// Sets up the asteroid upon instantiation
+        /// </summary>
+        /// <param name="type">The type that the asteroid should be</param>
+        /// <param name="size">The size of the asteroid</param>
+        /// <param name="sprite">The sprite to use for the asteroid</param>
+        /// <param name="mat">The material to use for the asteroid</param>
+        /// <param name="color">The color to use for the sprite</param>
+        /// <param name="velocity">The initial velocity of the asteroid</param>
+        /// <param name="position">The initial position of the asteroid</param>
+        /// <param name="manager">The asteroid manager that spawned this asteroid</param>
+        /// <param name="uiColors">The colors for the healthbar</param>
+        public void Setup(AsteroidType type, AsteroidSize size, Sprite sprite, Material mat, Color32 color, Vector2 velocity, Vector3 position, AsteroidManager manager, Color32[] uiColors)
+        {
+            Setup(type, size, sprite, mat, color, velocity, position, manager);
+
+            ColorBlock block = healthBar.colors;
+            block.normalColor = uiColors[0];
+            healthBar.colors = block;
+            healthBar.gameObject.GetComponentInChildren<Image>().color = uiColors[1];
+        }
+
+        /// <summary>
         /// Contributes damage to the asteroid
         /// </summary>
         /// <param name="damageDone">The damage to contribute</param>
@@ -187,7 +209,7 @@ namespace MinimalMiner.Entity
             if (!healthBar.gameObject.activeInHierarchy)
             {
                 healthBar.gameObject.SetActive(true);
-                healthBarParent.parent = null; // prevent rotating with asteroid
+                healthBarParent.parent.SetParent(null, false); // prevent rotating with asteroid
             }
 
             audio.Play();
