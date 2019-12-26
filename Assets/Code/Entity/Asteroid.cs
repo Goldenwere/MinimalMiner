@@ -3,6 +3,7 @@
 
 using System.Collections.Generic;
 using UnityEngine;
+using UnityEngine.UI;
 using MinimalMiner.Util;
 
 namespace MinimalMiner.Entity
@@ -21,6 +22,8 @@ namespace MinimalMiner.Entity
         [SerializeField] private Rigidbody2D rigidbody;
         [SerializeField] private SpriteRenderer sprite;
         [SerializeField] private AudioSource audio;
+        [SerializeField] private Slider healthBar;
+        private Transform healthBarParent;
         private float currHealth = 10f;
 
         // Asteroid characteristics
@@ -71,6 +74,13 @@ namespace MinimalMiner.Entity
                     newY = transform.position.y;
 
                 transform.position = new Vector2(newX, newY);
+            }
+
+            if (healthBar.gameObject.activeInHierarchy)
+            {
+                healthBar.value = Mathf.Lerp(healthBar.value, currHealth, 5f * Time.deltaTime);
+                healthBarParent.position = transform.position;
+                healthBarParent.rotation = Quaternion.identity;
             }
         }
 
@@ -159,6 +169,11 @@ namespace MinimalMiner.Entity
             this.sprite.sprite = sprite;
             this.sprite.material = mat;
             this.sprite.color = color;
+            healthBar.minValue = 0;
+            healthBar.maxValue = currHealth;
+            healthBar.value = currHealth;
+            healthBar.gameObject.SetActive(false);
+            healthBarParent = healthBar.transform.parent;
         }
 
         /// <summary>
@@ -168,10 +183,18 @@ namespace MinimalMiner.Entity
         public void TakeDamage(float damageDone)
         {
             currHealth -= damageDone;
+
+            if (!healthBar.gameObject.activeInHierarchy)
+            {
+                healthBar.gameObject.SetActive(true);
+                healthBarParent.parent = null; // prevent rotating with asteroid
+            }
+
             audio.Play();
 
             if (currHealth <= 0)
             {
+                Destroy(healthBarParent.gameObject);
                 asteroidMgr.OnAsteroidDestruction(gameObject, Split());
             }
         }
