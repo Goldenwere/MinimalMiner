@@ -171,6 +171,24 @@ namespace MinimalMiner.Entity
         }
 
         /// <summary>
+        /// Handles subscribing to events
+        /// </summary>
+        private void OnEnable()
+        {
+            EventManager.OnUpdateGameState += UpdateGameState;
+            PreferencesManager.UpdateTheme += UpdateTheme;
+        }
+
+        /// <summary>
+        /// Handles unsubscribing to events
+        /// </summary>
+        private void OnDisable()
+        {
+            EventManager.OnUpdateGameState -= UpdateGameState;
+            PreferencesManager.UpdateTheme -= UpdateTheme;
+        }
+
+        /// <summary>
         /// Called when the current GameState is updated
         /// </summary>
         /// <param name="newState">The new GameState after updating</param>
@@ -178,6 +196,10 @@ namespace MinimalMiner.Entity
         private void UpdateGameState(GameState newState, GameState prevState)
         {
             currState = newState;
+
+            // Ensure target HUD element is disabled once the game state changes
+            if (currState != GameState.play && currState != GameState.pause && prevState == GameState.play)
+                eventMgr.UpdateTargetElement(false, null, null, null);
         }
 
         /// <summary>
@@ -186,7 +208,7 @@ namespace MinimalMiner.Entity
         /// <param name="theme">The new GameTheme properties</param>
         private void UpdateTheme(Theme theme)
         {
-            if (theme.spriteImage_player != null)
+            /*if (theme.spriteImage_player != null)
             {
                 sprite.sprite = theme.spriteImage_player;
 
@@ -209,7 +231,7 @@ namespace MinimalMiner.Entity
             {
                 sprite.sprite = matMgr.Default_Player;
                 sprite.material = matMgr.Mat_Vector;
-            }
+            }*/
 
             sprite.material.color = theme.spriteColor_player;
         }
