@@ -221,10 +221,16 @@ namespace MinimalMiner.Entity
         {
             // Handle ship turning
             if (Input.GetKey(playerPrefs.Controls.Ship_CCW))
-                transform.Rotate(0, 0, shipConfig.Stats_Thrusters.RotationalSpeed);
+                if (isTargeting)
+                    transform.Rotate(0, 0, shipConfig.Stats_Thrusters.RotationalSpeed / 4f);
+                else
+                    transform.Rotate(0, 0, shipConfig.Stats_Thrusters.RotationalSpeed);
 
             if (Input.GetKey(playerPrefs.Controls.Ship_CW))
-                transform.Rotate(0, 0, -shipConfig.Stats_Thrusters.RotationalSpeed);
+                if (isTargeting)
+                    transform.Rotate(0, 0, -shipConfig.Stats_Thrusters.RotationalSpeed / 4f);
+                else
+                    transform.Rotate(0, 0, -shipConfig.Stats_Thrusters.RotationalSpeed);
 
             if (Input.GetKey(playerPrefs.Controls.Ship_Forward))
             {   
