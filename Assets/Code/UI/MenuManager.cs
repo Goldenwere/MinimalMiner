@@ -27,6 +27,7 @@ namespace MinimalMiner.UI
         private List<TextMeshProUGUI> bodyText;
         private List<Button> buttons;
         private List<TMP_Dropdown> dropdowns;
+        private List<Slider> sliders;
         #endregion
 
         #region Methods
@@ -79,6 +80,7 @@ namespace MinimalMiner.UI
             bodyText = new List<TextMeshProUGUI>();
             buttons = new List<Button>();
             dropdowns = new List<TMP_Dropdown>();
+            sliders = new List<Slider>();
 
             List<GameObject> canvases = new List<GameObject>()
             {
@@ -97,6 +99,7 @@ namespace MinimalMiner.UI
 
                 buttons.AddRange(c.GetComponentsInChildren<Button>());
                 dropdowns.AddRange(c.GetComponentsInChildren<TMP_Dropdown>());
+                sliders.AddRange(c.GetComponentsInChildren<Slider>());
             }
         }
 
@@ -125,6 +128,14 @@ namespace MinimalMiner.UI
                             if (playerPrefs.Themes[i].themeName == playerPrefs.CurrentTheme.themeName)
                                 dropdown.SetValueWithoutNotify(i);
                     }
+                }
+            }
+
+            foreach (Slider slider in sliders)
+            {
+                if (slider.name == "Slider_TargetLockForce")
+                {
+                    slider.value = playerPrefs.TargetLockForce;
                 }
             }
         }
@@ -161,7 +172,7 @@ namespace MinimalMiner.UI
                 b.colors = c;
             }
 
-            // update dropdown colors
+            // Update dropdown colors
             foreach(TMP_Dropdown d in dropdowns)
             {
                 ColorBlock c = d.colors;
@@ -173,6 +184,31 @@ namespace MinimalMiner.UI
                 c.disabledColor = theme.button_disabled;
 
                 d.colors = c;
+            }
+
+            // Update slider colors
+            foreach(Slider s in sliders)
+            {
+                ColorBlock c = s.colors;
+
+                c.normalColor = theme.button_normal;
+                c.highlightedColor = theme.button_hover;
+                c.pressedColor = theme.button_active;
+                c.selectedColor = theme.button_focus;
+                c.disabledColor = theme.button_disabled;
+
+                s.colors = c;
+
+                GameObject[] children = s.gameObject.GetChildren();
+                
+                foreach(GameObject g in children)
+                {
+                    if (g.name == "Background")
+                        g.GetComponent<Image>().color = theme.elem_objHealthBkgd;
+
+                    if (g.name == "Fill")
+                        g.GetComponent<Image>().color = theme.elem_objHealthValue;
+                }
             }
         }
 
