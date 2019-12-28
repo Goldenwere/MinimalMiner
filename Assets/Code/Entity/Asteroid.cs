@@ -193,7 +193,7 @@ namespace MinimalMiner.Entity
             Setup(type, size, sprite, mat, color, velocity, position, manager);
 
             ColorBlock block = healthBar.colors;
-            block.normalColor = uiColors[0];
+            block.disabledColor = uiColors[0];
             healthBar.colors = block;
             healthBar.gameObject.GetComponentInChildren<Image>().color = uiColors[1];
         }
