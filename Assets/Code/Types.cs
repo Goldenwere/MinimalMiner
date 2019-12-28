@@ -276,5 +276,10 @@ namespace MinimalMiner
         /// </summary>
         /// <remarks>(reset to 0 if exceeds installed themes e.g. in the situation that themes were removed)</remarks>
         public int CurrentTheme;
+
+        /// <summary>
+        /// The force of the soft targeting mechanism (must be a number greater than one, or else destroys rotation)
+        /// </summary>
+        public float TargetLockForce;
     }
 }

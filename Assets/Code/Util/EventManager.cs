@@ -17,6 +17,12 @@ namespace MinimalMiner.Util
         /// </summary>
         public static event OnSelectThemeDelegate OnSelectTheme = delegate { };
 
+        public delegate void OnTargetLockForceValueDelegate(float force);
+        /// <summary>
+        /// Informs subscribed objects that the TargetLockForce value has changed
+        /// </summary>
+        public static event OnTargetLockForceValueDelegate OnTargetLockForceValueChanged = delegate { };
+
         public delegate void OnUpdateGameStateDelegate(GameState newState, GameState prevState);
         /// <summary>
         /// Informs subscribed objects that the current GameState was changed
@@ -135,6 +141,15 @@ namespace MinimalMiner.Util
         public void UpdateTheme(int themeIndex)
         {
             OnSelectTheme(themeIndex);
+        }
+
+        /// <summary>
+        /// Updates the TargetLockForce value
+        /// </summary>
+        /// <param name="val">The value that it was updated to</param>
+        public void UpdateTargetLockForceValue(float val)
+        {
+            OnTargetLockForceValueChanged(val);
         }
 
         /// <summary>

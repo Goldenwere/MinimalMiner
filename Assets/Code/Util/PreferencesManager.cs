@@ -31,6 +31,14 @@ namespace MinimalMiner.Util
                 return prefs.Controls;
             }
         }
+
+        /// <summary>
+        /// The force of the soft targeting mechanism
+        /// </summary>
+        public float TargetLockForce
+        {
+            get { return prefs.TargetLockForce; }
+        }
         
         /// <summary>
         /// The themes that the player has installed
@@ -149,6 +157,7 @@ namespace MinimalMiner.Util
         {
             EventManager.OnSelectTheme += SelectTheme;
             EventManager.OnUpdateGameState += UpdateGameState;
+            EventManager.OnTargetLockForceValueChanged += UpdateTargetLockForce;
         }
 
         /// <summary>
@@ -158,6 +167,7 @@ namespace MinimalMiner.Util
         {
             EventManager.OnSelectTheme -= SelectTheme;
             EventManager.OnUpdateGameState -= UpdateGameState;
+            EventManager.OnTargetLockForceValueChanged -= UpdateTargetLockForce;
         }
 
         /// <summary>
@@ -223,6 +233,15 @@ namespace MinimalMiner.Util
 
             prefs.Controls = newControls;
             WriteToPreferences();
+        }
+
+        /// <summary>
+        /// Updates the TargetLockForce
+        /// </summary>
+        /// <param name="force">The new force</param>
+        public void UpdateTargetLockForce(float force)
+        {
+            prefs.TargetLockForce = force;
         }
 
         /// <summary>
