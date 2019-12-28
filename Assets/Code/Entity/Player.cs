@@ -198,7 +198,7 @@ namespace MinimalMiner.Entity
             currState = newState;
 
             // Ensure target HUD element is disabled once the game state changes
-            if (currState != GameState.play && currState != GameState.pause && prevState == GameState.play)
+            if (currState != GameState.play && currState != GameState.pause && prevState == GameState.pause)
                 eventMgr.UpdateTargetElement(false, null, null, null);
         }
 
