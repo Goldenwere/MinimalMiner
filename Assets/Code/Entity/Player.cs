@@ -270,10 +270,15 @@ namespace MinimalMiner.Entity
             }
 
             // Handle boundaries
-            if (transform.position.x < -SceneConstants.BoundarySize.x || transform.position.x > SceneConstants.BoundarySize.x)
-                rigidbody.AddForce(-transform.position * Mathf.Abs(transform.position.x - SceneConstants.BoundarySize.x) * 0.1f);
-            if (transform.position.y < -SceneConstants.BoundarySize.y || transform.position.y > SceneConstants.BoundarySize.y)
-                rigidbody.AddForce(-transform.position * Mathf.Abs(transform.position.y - SceneConstants.BoundarySize.y) * 0.1f);
+            if (transform.position.x > SceneConstants.BoundarySize.x)
+                rigidbody.AddForce(-transform.position * (transform.position.x - SceneConstants.BoundarySize.x) * 0.1f);
+            else if (transform.position.x < -SceneConstants.BoundarySize.x)
+                rigidbody.AddForce(transform.position * (SceneConstants.BoundarySize.x + transform.position.x) * 0.1f);
+
+            if (transform.position.y > SceneConstants.BoundarySize.y)
+                rigidbody.AddForce(-transform.position * (transform.position.y - SceneConstants.BoundarySize.y) * 0.1f);
+            else if (transform.position.y < -SceneConstants.BoundarySize.y)
+                rigidbody.AddForce(transform.position * (SceneConstants.BoundarySize.y + transform.position.y) * 0.1f);
         }
 
         /// <summary>
