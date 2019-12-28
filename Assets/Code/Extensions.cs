@@ -63,5 +63,24 @@ namespace MinimalMiner
 
             return null;
         }
+
+        /// <summary>
+        /// Finds all children of a gameobject
+        /// </summary>
+        /// <param name="parent">The parent object to search from</param>
+        /// <returns>The parent's children</returns>
+        /// <remarks>Extension provided by PlexusDuMenton: http://answers.unity.com/answers/1615437/view.html </remarks>
+        public static GameObject[] GetChildren(this GameObject parent)
+        {
+            if (parent == null)
+                throw new System.ArgumentNullException();
+
+            GameObject[] children = new GameObject[parent.transform.childCount];
+
+            for (int i = 0; i < children.Length; i++)
+                children[i] = parent.transform.GetChild(i).gameObject;
+
+            return children;
+        }
     }
 }
