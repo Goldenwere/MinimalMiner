@@ -29,6 +29,12 @@ namespace MinimalMiner.Util
         /// </summary>
         public static event OnUpdateHUDElementDelegate OnUpdateHUDElement = delegate { };
 
+        public delegate void OnUpdateTargetDelegate(bool isEnabled, Transform target, Transform source, Rigidbody2D rigidbody);
+        /// <summary>
+        /// Informs subscribed objects that the target element needs updated
+        /// </summary>
+        public static event OnUpdateTargetDelegate OnUpdateTarget = delegate { };
+
         /// <summary>
         /// The current GameState that the game is in
         /// </summary>
@@ -142,10 +148,24 @@ namespace MinimalMiner.Util
         /// <summary>
         /// Can be used to notify the HUD to update an element
         /// </summary>
-        /// <param name="element"></param>
+        /// <param name="element">The element to update</param>
+        /// <param name="content">The content to update the element with</param>
         public void UpdateHUDElement(HUDElement element, string content)
         {
             OnUpdateHUDElement(element, content);
+        }
+
+        /// <summary>
+        /// Can be used to notify the HUD to update the target HUD element
+        /// <para>Note: All references are required if isEnabled is true; otherwise, null is sufficient</para>
+        /// </summary>
+        /// <param name="isEnabled">Whether the element is enabled or disabled</param>
+        /// <param name="target">The target transform being locked on to</param>
+        /// <param name="source">The source transform (i.e. the player in most circumstances)</param>
+        /// <param name="rigidbody">The target's rigidbody</param>
+        public void UpdateTargetElement(bool isEnabled, Transform target, Transform source, Rigidbody2D rigidbody)
+        {
+            OnUpdateTarget(isEnabled, target, source, rigidbody);
         }
         #endregion
     }

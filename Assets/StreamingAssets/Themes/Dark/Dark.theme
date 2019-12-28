@@ -77,9 +77,9 @@
         <a>255</a>
     </elem_objHealthValue>
     <elem_objHealthBkgd>
-        <r>225</r>
-        <g>225</g>
-        <b>225</b>
-        <a>255</a>
+        <r>200</r>
+        <g>200</g>
+        <b>200</b>
+        <a>200</a>
     </elem_objHealthBkgd>
 </Theme>
