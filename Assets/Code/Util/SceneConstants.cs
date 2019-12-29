@@ -45,7 +45,7 @@ namespace MinimalMiner.Util
         /// </summary>
         public static float DamageFlashTime
         {
-            get { return 2f; }
+            get { return 0.5f; }
         }
     }
 }

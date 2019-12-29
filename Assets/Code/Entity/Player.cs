@@ -165,7 +165,7 @@ namespace MinimalMiner.Entity
                 else
                     sprite.material.color = playerPrefs.CurrentTheme.spriteColor_player;
 
-                if (flashTimer >= 2f)
+                if (flashTimer >= SceneConstants.DamageFlashTime)
                 {
                     flashTimer = -1f;
                     sprite.material.color = playerPrefs.CurrentTheme.spriteColor_player;

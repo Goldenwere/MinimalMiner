@@ -179,7 +179,7 @@ namespace MinimalMiner.Entity
                 currTheme.elem_objHealthValue,
                 currTheme.elem_objHealthBkgd
             };
-            behaviour.Setup(AsteroidType.general, (AsteroidSize)size, asteroidSprites[spriteIndex], mat, currTheme.spriteColor_asteroid, velocity, position, this, uiColors);
+            behaviour.Setup(AsteroidType.general, (AsteroidSize)size, asteroidSprites[spriteIndex], mat, currTheme.spriteColor_asteroid, velocity, position, this, uiColors, currTheme.spriteColor_asteroidDamage);
 
             return asteroid;
         }
@@ -223,7 +223,7 @@ namespace MinimalMiner.Entity
                 currTheme.elem_objHealthValue,
                 currTheme.elem_objHealthBkgd
 };
-            behaviour.Setup(type, (AsteroidSize)size, asteroidSprites[spriteIndex], mat, currTheme.spriteColor_asteroid, velocity, originalPosition, this, uiColors);
+            behaviour.Setup(type, (AsteroidSize)size, asteroidSprites[spriteIndex], mat, currTheme.spriteColor_asteroid, velocity, originalPosition, this, uiColors, currTheme.spriteColor_asteroidDamage);
 
             return asteroid;
         }

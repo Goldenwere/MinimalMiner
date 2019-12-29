@@ -24,7 +24,10 @@ namespace MinimalMiner.Entity
         [SerializeField] private AudioSource audio;
         [SerializeField] private Slider healthBar;
         private Transform healthBarParent;
+        private Color32 damageColor;
+        private Color32 normalColor;
         private float currHealth = 10f;
+        private float flashTimer;
 
         // Asteroid characteristics
         private AsteroidType type;
@@ -81,6 +84,22 @@ namespace MinimalMiner.Entity
                 healthBar.value = Mathf.Lerp(healthBar.value, currHealth, SceneConstants.SmoothTime * Time.deltaTime);
                 healthBarParent.position = transform.position;
                 healthBarParent.rotation = Quaternion.identity;
+            }
+
+            if (flashTimer > -1f)
+            {
+                flashTimer += Time.deltaTime;
+
+                if (sprite.material.color == normalColor)
+                    sprite.material.color = damageColor;
+                else
+                    sprite.material.color = normalColor;
+
+                if (flashTimer >= SceneConstants.DamageFlashTime)
+                {
+                    flashTimer = -1f;
+                    sprite.material.color = normalColor;
+                }
             }
         }
 
@@ -168,12 +187,14 @@ namespace MinimalMiner.Entity
             asteroidMgr = manager;
             this.sprite.sprite = sprite;
             this.sprite.material = mat;
-            this.sprite.color = color;
+            this.sprite.material.color = color;
             healthBar.minValue = 0;
             healthBar.maxValue = currHealth;
             healthBar.value = currHealth;
             healthBar.gameObject.SetActive(false);
             healthBarParent = healthBar.transform.parent;
+            normalColor = color;
+            flashTimer = -1f;
         }
 
         /// <summary>
@@ -188,7 +209,8 @@ namespace MinimalMiner.Entity
         /// <param name="position">The initial position of the asteroid</param>
         /// <param name="manager">The asteroid manager that spawned this asteroid</param>
         /// <param name="uiColors">The colors for the healthbar</param>
-        public void Setup(AsteroidType type, AsteroidSize size, Sprite sprite, Material mat, Color32 color, Vector2 velocity, Vector3 position, AsteroidManager manager, Color32[] uiColors)
+        /// <param name="damageColor">The damage color to use for the asteroid</param>
+        public void Setup(AsteroidType type, AsteroidSize size, Sprite sprite, Material mat, Color32 color, Vector2 velocity, Vector3 position, AsteroidManager manager, Color32[] uiColors, Color32 damageColor)
         {
             Setup(type, size, sprite, mat, color, velocity, position, manager);
 
@@ -196,6 +218,7 @@ namespace MinimalMiner.Entity
             block.disabledColor = uiColors[0];
             healthBar.colors = block;
             healthBar.gameObject.GetComponentInChildren<Image>().color = uiColors[1];
+            this.damageColor = damageColor;
         }
 
         /// <summary>
@@ -219,7 +242,10 @@ namespace MinimalMiner.Entity
             }
 
             else
+            {
+                flashTimer = 0;
                 audio.Play();
+            }
         }
         #endregion
     }
