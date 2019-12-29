@@ -212,13 +212,14 @@ namespace MinimalMiner.Entity
                 healthBarParent.parent.SetParent(null, false); // prevent rotating with asteroid
             }
 
-            audio.Play();
-
             if (currHealth <= 0)
             {
                 Destroy(healthBarParent.gameObject);
                 asteroidMgr.OnAsteroidDestruction(gameObject, Split());
             }
+
+            else
+                audio.Play();
         }
         #endregion
     }
