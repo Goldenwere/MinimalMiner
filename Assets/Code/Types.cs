@@ -102,6 +102,11 @@ namespace MinimalMiner
         public Color32 spriteColor_player;
 
         /// <summary>
+        /// The color used for the player's flashing damage
+        /// </summary>
+        public Color32 spriteColor_playerDamage;
+
+        /// <summary>
         /// The sprite used for the player
         /// </summary>
         public Sprite spriteImage_player;
@@ -110,6 +115,11 @@ namespace MinimalMiner
         /// The color used for asteroids
         /// </summary>
         public Color32 spriteColor_asteroid;
+
+        /// <summary>
+        /// The color used for the asteroid's flashing damage
+        /// </summary>
+        public Color32 spriteColor_asteroidDamage;
 
         /// <summary>
         /// The sprites used for the asteroids

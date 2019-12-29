@@ -64,12 +64,24 @@
         <b>245</b>
         <a>255</a>
     </spriteColor_player>
+    <spriteColor_playerDamage>
+        <r>145</r>
+        <g>145</g>
+        <b>145</b>
+        <a>255</a>
+    </spriteColor_playerDamage>
     <spriteColor_asteroid>
         <r>245</r>
         <g>245</g>
         <b>245</b>
         <a>255</a>
     </spriteColor_asteroid>
+    <spriteColor_asteroidDamage>
+        <r>145</r>
+        <g>145</g>
+        <b>145</b>
+        <a>255</a>
+    </spriteColor_asteroidDamage>
     <elem_objHealthValue>
         <r>255</r>
         <g>255</g>
