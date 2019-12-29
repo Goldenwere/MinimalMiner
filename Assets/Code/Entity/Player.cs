@@ -18,7 +18,8 @@ namespace MinimalMiner.Entity
         // Ship-related variables
         private ShipConfiguration shipConfig;
         private Vector2 shipAccForce;
-        private float fireTimer = 30f;
+        private float fireTimer;
+        private float flashTimer;
         private bool isTargeting;
 
         [SerializeField] private SpriteRenderer sprite;
@@ -154,6 +155,22 @@ namespace MinimalMiner.Entity
             // Resets the fire timer when spacebar is first pressed
             if (Input.GetKeyDown(playerPrefs.Controls.Ship_Fire))
                 fireTimer = 30f;
+
+            if (flashTimer > -1f)
+            {
+                flashTimer += Time.deltaTime;
+
+                if (sprite.material.color == playerPrefs.CurrentTheme.spriteColor_player)
+                    sprite.material.color = playerPrefs.CurrentTheme.spriteColor_playerDamage;
+                else
+                    sprite.material.color = playerPrefs.CurrentTheme.spriteColor_player;
+
+                if (flashTimer >= 2f)
+                {
+                    flashTimer = -1f;
+                    sprite.material.color = playerPrefs.CurrentTheme.spriteColor_player;
+                }
+            }
         }
 
         /// <summary>
@@ -363,7 +380,10 @@ namespace MinimalMiner.Entity
             }
 
             else
+            {
+                flashTimer = 0;
                 damageSound.Play();
+            }
         }
 
         /// <summary>
@@ -384,6 +404,8 @@ namespace MinimalMiner.Entity
             eventMgr.UpdateTargetElement(false, null, null, null);
             UpdateGameState(eventMgr.CurrState, eventMgr.CurrState);
             UpdateTheme(playerPrefs.CurrentTheme);
+            flashTimer = -1f;
+            fireTimer = 30f;
 
             // Reset transform
             transform.position = Vector3.zero;

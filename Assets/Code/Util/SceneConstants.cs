@@ -39,5 +39,13 @@ namespace MinimalMiner.Util
         {
             get { return 10f; }
         }
+
+        /// <summary>
+        /// The duration of damage flashing
+        /// </summary>
+        public static float DamageFlashTime
+        {
+            get { return 2f; }
+        }
     }
 }

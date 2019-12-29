@@ -162,6 +162,8 @@ namespace MinimalMiner
 
             spriteColor_asteroid = sprite;
             spriteColor_player = sprite;
+            spriteColor_playerDamage = new Color32(255, 0, 0, 255);
+            spriteColor_asteroidDamage = new Color32(255, 0, 0, 255);
 
             img_backgroundNormal = null;
             spriteImage_asteroid = new List<Sprite>();
@@ -198,6 +200,8 @@ namespace MinimalMiner
 
             spriteColor_player = fore;
             spriteColor_asteroid = fore;
+            spriteColor_playerDamage = new Color32(255, 0, 0, 255);
+            spriteColor_asteroidDamage = new Color32(255, 0, 0, 255);
 
             img_backgroundNormal = null;
             spriteImage_asteroid = new List<Sprite>();
@@ -241,6 +245,8 @@ namespace MinimalMiner
 
             spriteColor_player = spriteFore;
             spriteColor_asteroid = spriteFore;
+            spriteColor_playerDamage = new Color32(255, 0, 0, 255);
+            spriteColor_asteroidDamage = new Color32(255, 0, 0, 255);
 
             img_backgroundNormal = null;
             spriteImage_asteroid = new List<Sprite>();
