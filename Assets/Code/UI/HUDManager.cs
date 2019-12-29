@@ -13,11 +13,13 @@ namespace MinimalMiner.UI
     {
         #region Fields
         // Updatable HUD elements
-        [SerializeField] TextMeshProUGUI armorText;
-        [SerializeField] TextMeshProUGUI shieldText;
+        [SerializeField] private TextMeshProUGUI armorText;
+        [SerializeField] private TextMeshProUGUI shieldText;
 
         // Other HUD elements
-        [SerializeField] GameObject targetSoftLock;
+        [SerializeField] private GameObject targetSoftLock;
+
+        private float timer;    // Used for preventing jitteriness of soft lock target element
         #endregion
 
         #region Methods
@@ -37,6 +39,14 @@ namespace MinimalMiner.UI
         {
             EventManager.OnUpdateHUDElement -= UpdateElement;
             EventManager.OnUpdateTarget -= UpdateTarget;
+        }
+
+        /// <summary>
+        /// Called once per frame
+        /// </summary>
+        private void Update()
+        {
+            timer += Time.deltaTime;
         }
 
         /// <summary>
@@ -67,7 +77,9 @@ namespace MinimalMiner.UI
                 if (!targetSoftLock.activeInHierarchy)
                 {
                     targetSoftLock.SetActive(true);
-                    targetSoftLock.transform.position = source.position;
+                    if (timer > 0.5f)
+                        targetSoftLock.transform.position = source.position;
+                    timer = 0;
                 }
 
                 Vector2 predict = new Vector2(targetSoftLock.transform.position.x, targetSoftLock.transform.position.y)
