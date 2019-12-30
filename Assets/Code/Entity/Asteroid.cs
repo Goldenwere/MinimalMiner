@@ -33,6 +33,7 @@ namespace MinimalMiner.Entity
         // Asteroid characteristics
         private AsteroidType[] types;
         private AsteroidSize size;
+        public AsteroidSize Size { get { return size; } }
         #endregion
 
         #region Methods
@@ -126,14 +127,45 @@ namespace MinimalMiner.Entity
         {
             if (collision.gameObject.tag == "asteroid")
             {
-                collision.gameObject.GetComponentInParent<Asteroid>().TakeDamage(1f);
-                TakeDamage(1f);
+                Vector2 netVelocity = collision.gameObject.GetComponent<Rigidbody2D>().velocity - rigidbody.velocity;
+                Asteroid collided = collision.gameObject.GetComponentInParent<Asteroid>();
+                int netScale = Mathf.Abs((int)size - (int)collided.Size);
+                if (netVelocity.magnitude > Mathf.Pow(netScale, 2))
+                {
+                    float damage = 0.5f * netScale * Mathf.Pow(netVelocity.magnitude, 2);   // KE = 1/2 mv^2
+
+                    if ((int)collided.size < (int)size)
+                    {
+                        collided.TakeDamage(damage * 0.75f);
+                        TakeDamage(damage * 0.25f);
+                    }
+                    else
+                    {
+                        TakeDamage(damage * 0.75f);
+                        collided.TakeDamage(damage * 0.25f);
+                    }
+                }
             }
 
             else if (collision.gameObject.tag == "player")
             {
-                collision.gameObject.GetComponentInParent<Player>().TakeDamage(1f);
-                TakeDamage(1f);
+                Vector2 netVelocity = collision.gameObject.GetComponent<Rigidbody2D>().velocity - rigidbody.velocity;
+                Player player = collision.gameObject.GetComponent<Player>();
+                float sizeDiff = Mathf.Abs((int)size - player.Rigidbody.mass);
+                if (netVelocity.magnitude > Mathf.Pow(sizeDiff, 2))
+                {
+                    float damage = 0.5f * sizeDiff * Mathf.Pow(netVelocity.magnitude, 2);   // KE = 1/2 mv^2
+                    if (player.Rigidbody.mass < (int)size)
+                    {
+                        player.TakeDamage(damage * 0.75f);
+                        TakeDamage(damage * 0.25f);
+                    }
+                    else
+                    {
+                        TakeDamage(damage * 0.75f);
+                        player.TakeDamage(damage * 0.25f);
+                    }
+                }
             }
         }
 

@@ -24,6 +24,7 @@ namespace MinimalMiner.Entity
 
         [SerializeField] private SpriteRenderer sprite;
         [SerializeField] private Rigidbody2D rigidbody;
+        public Rigidbody2D Rigidbody { get { return rigidbody; } }
         [SerializeField] private PolygonCollider2D collider;
         [SerializeField] private AudioSource damageSound;
         [SerializeField] private AudioSource deathSound;
@@ -56,7 +57,7 @@ namespace MinimalMiner.Entity
             defenses.ShieldStrength = 5f;
             defenses.ShieldDelay = 2f;
 
-            thrusters.DampenerStrength = 2.5f;                  // Equivalent to rigidbody linear drag set before this temp code (shipDragRate was unused)
+            thrusters.DampenerStrength = 0.5f;                  // Equivalent to rigidbody linear drag set before this temp code (shipDragRate was unused)
             thrusters.ForwardThrusterForce = 5f;                // Equivalent to shipAccRate set in the old player class ResetPlayer()
             thrusters.MaxDirectionalSpeed = 10f;                // Equivalent to shipMaxSpd set in old player class
             thrusters.RecoilCompensation = 0.9f;
@@ -119,7 +120,7 @@ namespace MinimalMiner.Entity
 
             #endregion
 
-            shipConfig = new ShipConfiguration(weapons, defenses, thrusters, 0.25f, colliders, sprite.sprite, eventMgr);
+            shipConfig = new ShipConfiguration(weapons, defenses, thrusters, 1, colliders, sprite.sprite, eventMgr);
 
             // This may seem redundant, accessing what was set in the previous Setup region, but that will eventually disappear once actual ships are defined
             rigidbody.drag = shipConfig.Stats_Thrusters.DampenerStrength;
