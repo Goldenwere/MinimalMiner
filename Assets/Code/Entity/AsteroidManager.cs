@@ -179,7 +179,7 @@ namespace MinimalMiner.Entity
                 currTheme.elem_objHealthValue,
                 currTheme.elem_objHealthBkgd
             };
-            behaviour.Setup(AsteroidType.general, (AsteroidSize)size, asteroidSprites[spriteIndex], mat, currTheme.spriteColor_asteroid, velocity, position, this, uiColors, currTheme.spriteColor_asteroidDamage);
+            behaviour.Setup(new AsteroidType[] { AsteroidType.general }, (AsteroidSize)size, asteroidSprites[spriteIndex], mat, currTheme.spriteColor_asteroid, velocity, position, this, uiColors, currTheme.spriteColor_asteroidDamage);
 
             return asteroid;
         }
@@ -192,7 +192,7 @@ namespace MinimalMiner.Entity
         /// <param name="originalVelocity">The original velocity to base new velocity off of</param>
         /// <param name="originalPosition">The original position to base new position off of</param>
         /// <returns>The asteroid that was spawned</returns>
-        public GameObject SpawnAsteroid(AsteroidType type, int maxSize, Vector2 originalVelocity, Vector3 originalPosition)
+        public GameObject SpawnAsteroid(AsteroidType[] types, int maxSize, Vector2 originalVelocity, Vector3 originalPosition)
         {
             int spriteIndex = Random.Range(0, asteroidSprites.Count);
             int size = Random.Range(0, maxSize);
@@ -223,7 +223,7 @@ namespace MinimalMiner.Entity
                 currTheme.elem_objHealthValue,
                 currTheme.elem_objHealthBkgd
 };
-            behaviour.Setup(type, (AsteroidSize)size, asteroidSprites[spriteIndex], mat, currTheme.spriteColor_asteroid, velocity, originalPosition, this, uiColors, currTheme.spriteColor_asteroidDamage);
+            behaviour.Setup(types, (AsteroidSize)size, asteroidSprites[spriteIndex], mat, currTheme.spriteColor_asteroid, velocity, originalPosition, this, uiColors, currTheme.spriteColor_asteroidDamage);
 
             return asteroid;
         }

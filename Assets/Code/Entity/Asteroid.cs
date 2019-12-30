@@ -30,7 +30,7 @@ namespace MinimalMiner.Entity
         private float flashTimer;
 
         // Asteroid characteristics
-        private AsteroidType type;
+        private AsteroidType[] types;
         private AsteroidSize size;
         #endregion
 
@@ -145,7 +145,7 @@ namespace MinimalMiner.Entity
 
                 for (int i = 0; i < amountToSpawn; i++)
                 {
-                    newAsteroids.Add(asteroidMgr.SpawnAsteroid(type, (int)size, rigidbody.velocity, transform.position));
+                    newAsteroids.Add(asteroidMgr.SpawnAsteroid(types, (int)size, rigidbody.velocity, transform.position));
                 }
             }
 
@@ -163,9 +163,11 @@ namespace MinimalMiner.Entity
         /// <param name="velocity">The initial velocity of the asteroid</param>
         /// <param name="position">The initial position of the asteroid</param>
         /// <param name="manager">The asteroid manager that spawned this asteroid</param>
-        public void Setup(AsteroidType type, AsteroidSize size, Sprite sprite, Material mat, Color32 color, Vector2 velocity, Vector3 position, AsteroidManager manager)
+        /// <param name="uiColors">The colors for the healthbar</param>
+        /// <param name="damageColor">The damage color to use for the asteroid</param>
+        public void Setup(AsteroidType[] types, AsteroidSize size, Sprite sprite, Material mat, Color32 color, Vector2 velocity, Vector3 position, AsteroidManager manager, Color32[] uiColors, Color32 damageColor)
         {
-            this.type = type;
+            this.types = types;
             this.size = size;
 
             switch (size)
@@ -195,24 +197,6 @@ namespace MinimalMiner.Entity
             healthBarParent = healthBar.transform.parent;
             normalColor = color;
             flashTimer = -1f;
-        }
-
-        /// <summary>
-        /// Sets up the asteroid upon instantiation
-        /// </summary>
-        /// <param name="type">The type that the asteroid should be</param>
-        /// <param name="size">The size of the asteroid</param>
-        /// <param name="sprite">The sprite to use for the asteroid</param>
-        /// <param name="mat">The material to use for the asteroid</param>
-        /// <param name="color">The color to use for the sprite</param>
-        /// <param name="velocity">The initial velocity of the asteroid</param>
-        /// <param name="position">The initial position of the asteroid</param>
-        /// <param name="manager">The asteroid manager that spawned this asteroid</param>
-        /// <param name="uiColors">The colors for the healthbar</param>
-        /// <param name="damageColor">The damage color to use for the asteroid</param>
-        public void Setup(AsteroidType type, AsteroidSize size, Sprite sprite, Material mat, Color32 color, Vector2 velocity, Vector3 position, AsteroidManager manager, Color32[] uiColors, Color32 damageColor)
-        {
-            Setup(type, size, sprite, mat, color, velocity, position, manager);
 
             ColorBlock block = healthBar.colors;
             block.disabledColor = uiColors[0];
