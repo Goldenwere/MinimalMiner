@@ -3,6 +3,7 @@
 using UnityEngine;
 using TMPro;
 using MinimalMiner.Util;
+using UnityEngine.UI;
 
 namespace MinimalMiner.UI
 {
@@ -15,6 +16,11 @@ namespace MinimalMiner.UI
         // Updatable HUD elements
         [SerializeField] private TextMeshProUGUI armorText;
         [SerializeField] private TextMeshProUGUI shieldText;
+
+        // Minimap-related elements
+        [SerializeField] private Camera minimapCam;
+        [SerializeField] private SpriteRenderer minimapIcon;
+        [SerializeField] private RawImage minimapImage;
 
         // Other HUD elements
         [SerializeField] private GameObject targetSoftLock;
@@ -30,6 +36,7 @@ namespace MinimalMiner.UI
         {
             EventManager.OnUpdateHUDElement += UpdateElement;
             EventManager.OnUpdateTarget += UpdateTarget;
+            PreferencesManager.UpdateTheme += UpdateTheme;
         }
 
         /// <summary>
@@ -39,6 +46,7 @@ namespace MinimalMiner.UI
         {
             EventManager.OnUpdateHUDElement -= UpdateElement;
             EventManager.OnUpdateTarget -= UpdateTarget;
+            PreferencesManager.UpdateTheme += UpdateTheme;
         }
 
         /// <summary>
@@ -47,6 +55,16 @@ namespace MinimalMiner.UI
         private void Update()
         {
             timer += Time.deltaTime;
+        }
+
+        /// <summary>
+        /// Called when the current Theme is updated
+        /// </summary>
+        /// <param name="theme">The new GameTheme properties</param>
+        private void UpdateTheme(Theme theme)
+        {
+            minimapIcon.sprite = theme.spriteImage_player;
+            minimapIcon.material.color = theme.spriteColor_player;
         }
 
         /// <summary>
