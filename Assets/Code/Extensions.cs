@@ -65,12 +65,12 @@ namespace MinimalMiner
         }
 
         /// <summary>
-        /// Finds all children of a gameobject
+        /// Finds the direct children of a GameObject
         /// </summary>
         /// <param name="parent">The parent object to search from</param>
         /// <returns>The parent's children</returns>
         /// <remarks>Extension provided by PlexusDuMenton: http://answers.unity.com/answers/1615437/view.html </remarks>
-        public static GameObject[] GetChildren(this GameObject parent)
+        public static GameObject[] GetDirectChildren(this GameObject parent)
         {
             if (parent == null)
                 throw new System.ArgumentNullException();
@@ -81,6 +81,31 @@ namespace MinimalMiner
                 children[i] = parent.transform.GetChild(i).gameObject;
 
             return children;
+        }
+
+        /// <summary>
+        /// Finds all children of a GameObject recursively
+        /// </summary>
+        /// <param name="parent">The parent object to search from</param>
+        /// <returns>The parent's children</returns>
+        /// <remarks>Extension based off of non-recursive version by PlexusDuMenton: http://answers.unity.com/answers/1615437/view.html </remarks>
+        public static GameObject[] GetAllChildren(this GameObject parent)
+        {
+            if (parent == null)
+                throw new System.ArgumentNullException();
+
+            List<GameObject> children = new List<GameObject>();
+
+            for (int i = 0; i < parent.transform.childCount; i++)
+            {
+                GameObject child = parent.transform.GetChild(i).gameObject;
+                children.Add(child);
+
+                if (child.transform.childCount > 0)
+                    children.AddRange(child.GetAllChildren());
+            }
+
+            return children.ToArray();
         }
     }
 }

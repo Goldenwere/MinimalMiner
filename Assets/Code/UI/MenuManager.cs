@@ -184,6 +184,31 @@ namespace MinimalMiner.UI
                 c.disabledColor = theme.button_disabled;
 
                 d.colors = c;
+
+                GameObject[] children = d.gameObject.GetAllChildren();
+
+                foreach(GameObject g in children)
+                {
+                    if (g.name == "Template")
+                        g.GetComponent<Image>().color = theme.button_normal;
+
+                    else if (g.name == "Item")
+                    {
+                        Toggle t = g.GetComponent<Toggle>();
+                        ColorBlock b = t.colors;
+
+                        b.normalColor = theme.button_normal;
+                        b.highlightedColor = theme.button_hover;
+                        b.pressedColor = theme.button_active;
+                        b.selectedColor = theme.button_focus;
+                        b.disabledColor = theme.button_disabled;
+
+                        t.colors = b;
+                    }
+
+                    else if (g.name == "Item Label")
+                        g.GetComponent<TextMeshProUGUI>().color = theme.text_body;
+                }
             }
 
             // Update slider colors
@@ -199,14 +224,14 @@ namespace MinimalMiner.UI
 
                 s.colors = c;
 
-                GameObject[] children = s.gameObject.GetChildren();
+                GameObject[] children = s.gameObject.GetDirectChildren();
                 
                 foreach(GameObject g in children)
                 {
                     if (g.name == "Background")
                         g.GetComponent<Image>().color = theme.elem_objHealthBkgd;
 
-                    if (g.name == "Fill")
+                    else if (g.name == "Fill")
                         g.GetComponent<Image>().color = theme.elem_objHealthValue;
                 }
             }
