@@ -98,7 +98,7 @@ namespace MinimalMiner.Entity
         private void SpawnAsteroids()
         {
             // Currently hard-coding max-asteroids until some sort of StarSystem info struct is created
-            for (int i = 0; i < 200; i++)
+            for (int i = 0; i < 250; i++)
             {
                 asteroids.Add(SpawnAsteroid());
             }
@@ -153,6 +153,10 @@ namespace MinimalMiner.Entity
             while (position.x > -SceneConstants.PlayerSafeZone.x && position.x < SceneConstants.PlayerSafeZone.x 
                 || position.y > -SceneConstants.PlayerSafeZone.y && position.y < SceneConstants.PlayerSafeZone.y);
 
+            AsteroidType[] contents = new AsteroidType[Random.Range(1, 11)];
+            for (int i = 0; i < contents.Length; i++)
+                contents[i] = GenerateAsteroidType();
+
             Material mat = null;
 
             switch (currTheme.import_Asteroids)
@@ -179,7 +183,7 @@ namespace MinimalMiner.Entity
                 currTheme.elem_objHealthValue,
                 currTheme.elem_objHealthBkgd
             };
-            behaviour.Setup(new AsteroidType[] { AsteroidType.general }, (AsteroidSize)size, asteroidSprites[spriteIndex], mat, currTheme.spriteColor_asteroid, velocity, position, this, uiColors, currTheme.spriteColor_asteroidDamage);
+            behaviour.Setup(contents, (AsteroidSize)size, asteroidSprites[spriteIndex], mat, currTheme.spriteColor_asteroid, velocity, position, this, uiColors, currTheme.spriteColor_asteroidDamage);
 
             return asteroid;
         }
@@ -226,6 +230,90 @@ namespace MinimalMiner.Entity
             behaviour.Setup(types, (AsteroidSize)size, asteroidSprites[spriteIndex], mat, currTheme.spriteColor_asteroid, velocity, originalPosition, this, uiColors, currTheme.spriteColor_asteroidDamage);
 
             return asteroid;
+        }
+
+        /// <summary>
+        /// Randomly generates an AsteroidType
+        /// </summary>
+        /// <returns>A random AsteroidType, based on an external loot table spreadsheet</returns>
+        public AsteroidType GenerateAsteroidType()
+        {
+            float chance = Random.Range(0f, 100f);
+
+            #region Elements
+            if (chance < 2.5f)
+                return AsteroidType.indium;
+            else if (chance < 5)
+                return AsteroidType.copper;
+            else if (chance < 7.5f)
+                return AsteroidType.nickel;
+            else if (chance < 10)
+                return AsteroidType.lithium;
+            else if (chance < 12.5f)
+                return AsteroidType.phosphorus;
+            else if (chance < 15f)
+                return AsteroidType.cobalt;
+            else if (chance < 17.5f)
+                return AsteroidType.zinc;
+            else if (chance < 20f)
+                return AsteroidType.lead;
+            else if (chance < 21f)
+                return AsteroidType.silver;
+            else if (chance < 22f)
+                return AsteroidType.tin;
+            else if (chance < 23f)
+                return AsteroidType.gold;
+            else if (chance < 24f)
+                return AsteroidType.platinum;
+            else if (chance < 25f)
+                return AsteroidType.antimony;
+            else if (chance < 40f)
+                return AsteroidType.carbon;
+            else if (chance < 49f)
+                return AsteroidType.iron;
+            else if (chance < 49.75f)
+                return AsteroidType.osmium;
+            else if (chance < 49.875f)
+                return AsteroidType.uranium;
+            else if (chance < 50f)
+                return AsteroidType.thorium;
+            #endregion
+
+            #region Silicates
+            else if (chance < 52.5f)
+                return AsteroidType.olivine;
+            else if (chance < 55)
+                return AsteroidType.garnet;
+            else if (chance < 57.5f)
+                return AsteroidType.zircon;
+            else if (chance < 60)
+                return AsteroidType.topaz;
+            else if (chance < 62.5f)
+                return AsteroidType.feldspar;
+            else if (chance < 65)
+                return AsteroidType.titanite;
+            else if (chance < 67.5f)
+                return AsteroidType.quartz;
+            else if (chance < 70)
+                return AsteroidType.rhodonite;
+            else if (chance < 72.5f)
+                return AsteroidType.mica;
+            else if (chance < 75)
+                return AsteroidType.chlorite;
+            else if (chance < 75.5f)
+                return AsteroidType.hemimorphite;
+            else if (chance < 75.625f)
+                return AsteroidType.osumilite;
+            #endregion
+
+            #region Other
+            else if (chance < 75.75f)
+                return AsteroidType.diamond;
+            else if (chance < 90)
+                return AsteroidType.rock;
+            else
+                return AsteroidType.ice;
+            #endregion
         }
         #endregion
     }
