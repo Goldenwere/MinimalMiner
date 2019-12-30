@@ -47,5 +47,13 @@ namespace MinimalMiner.Util
         {
             get { return 0.5f; }
         }
+
+        /// <summary>
+        /// The length of time that entity health bars stay alive after said entity has taken damage
+        /// </summary>
+        public static float HealthbarKeepAliveTime
+        {
+            get { return 3f; }
+        }
     }
 }

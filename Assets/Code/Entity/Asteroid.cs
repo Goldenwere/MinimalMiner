@@ -28,6 +28,7 @@ namespace MinimalMiner.Entity
         private Color32 normalColor;
         private float currHealth = 10f;
         private float flashTimer;
+        private float damageTimer;
 
         // Asteroid characteristics
         private AsteroidType[] types;
@@ -79,6 +80,7 @@ namespace MinimalMiner.Entity
                 transform.position = new Vector2(newX, newY);
             }
 
+            // Handle healthbar
             if (healthBar.gameObject.activeInHierarchy)
             {
                 healthBar.value = Mathf.Lerp(healthBar.value, currHealth, SceneConstants.SmoothTime * Time.deltaTime);
@@ -86,6 +88,7 @@ namespace MinimalMiner.Entity
                 healthBarParent.rotation = Quaternion.identity;
             }
 
+            // Handle damage flashing
             if (flashTimer > -1f)
             {
                 flashTimer += Time.deltaTime;
@@ -99,6 +102,18 @@ namespace MinimalMiner.Entity
                 {
                     flashTimer = -1f;
                     sprite.material.color = normalColor;
+                }
+            }
+
+            // Handle healthbar keep-alive
+            if (damageTimer > -1f)
+            {
+                damageTimer += Time.deltaTime;
+
+                if (damageTimer >= SceneConstants.HealthbarKeepAliveTime)
+                {
+                    damageTimer = -1f;
+                    healthBar.gameObject.SetActive(false);
                 }
             }
         }
@@ -203,6 +218,7 @@ namespace MinimalMiner.Entity
             healthBar.colors = block;
             healthBar.gameObject.GetComponentInChildren<Image>().color = uiColors[1];
             this.damageColor = damageColor;
+            damageTimer = -1;
         }
 
         /// <summary>
@@ -212,6 +228,7 @@ namespace MinimalMiner.Entity
         public void TakeDamage(float damageDone)
         {
             currHealth -= damageDone;
+            damageTimer = 0;
 
             if (!healthBar.gameObject.activeInHierarchy)
             {
