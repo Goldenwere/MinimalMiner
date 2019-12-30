@@ -496,7 +496,7 @@ GameObject:
   - component: {fileID: 43313352}
   - component: {fileID: 43313354}
   - component: {fileID: 43313353}
-  m_Layer: 0
+  m_Layer: 5
   m_Name: Image
   m_TagString: Untagged
   m_Icon: {fileID: 0}
@@ -1971,7 +1971,7 @@ Camera:
   m_Depth: 0
   m_CullingMask:
     serializedVersion: 2
-    m_Bits: 4294967295
+    m_Bits: 7
   m_RenderingPath: -1
   m_TargetTexture: {fileID: 8400000, guid: 95f1eb346360bfe48897d88d8ad1195a, type: 2}
   m_TargetDisplay: 0
@@ -9090,7 +9090,7 @@ GameObject:
   - component: {fileID: 1561962950}
   - component: {fileID: 1561962949}
   - component: {fileID: 1561962948}
-  m_Layer: 0
+  m_Layer: 5
   m_Name: PostProcessing
   m_TagString: Untagged
   m_Icon: {fileID: 0}
@@ -11498,6 +11498,11 @@ PrefabInstance:
   m_Modification:
     m_TransformParent: {fileID: 0}
     m_Modifications:
+    - target: {fileID: 2024705576615400757, guid: 8ef2f09326fe0ee429714a277163551c,
+        type: 3}
+      propertyPath: m_Layer
+      value: 5
+      objectReference: {fileID: 0}
     - target: {fileID: 6274987936255847281, guid: 8ef2f09326fe0ee429714a277163551c,
         type: 3}
       propertyPath: m_Name
@@ -11557,6 +11562,16 @@ PrefabInstance:
         type: 3}
       propertyPath: m_LocalEulerAnglesHint.z
       value: 0
+      objectReference: {fileID: 0}
+    - target: {fileID: 2024705577055193755, guid: 8ef2f09326fe0ee429714a277163551c,
+        type: 3}
+      propertyPath: m_Layer
+      value: 5
+      objectReference: {fileID: 0}
+    - target: {fileID: 2024705576373274256, guid: 8ef2f09326fe0ee429714a277163551c,
+        type: 3}
+      propertyPath: m_Layer
+      value: 5
       objectReference: {fileID: 0}
     m_RemovedComponents: []
   m_SourcePrefab: {fileID: 100100000, guid: 8ef2f09326fe0ee429714a277163551c, type: 3}
