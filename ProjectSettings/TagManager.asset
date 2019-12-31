@@ -11,6 +11,7 @@ TagManager:
   - UI_text_primaryHead
   - UI_text_secondaryHead
   - UI_text_body
+  - item
   layers:
   - Default
   - TransparentFX

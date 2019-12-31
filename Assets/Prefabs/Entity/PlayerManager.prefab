@@ -95,6 +95,7 @@ GameObject:
   - component: {fileID: 2024705576208264353}
   - component: {fileID: 2024705576208264352}
   - component: {fileID: 2024705576208264355}
+  - component: {fileID: 636844881}
   m_Layer: 0
   m_Name: Player
   m_TagString: player
@@ -136,6 +137,7 @@ MonoBehaviour:
   collider: {fileID: 2024705576208264352}
   damageSound: {fileID: 2024705578119912749}
   deathSound: {fileID: 2024705576225475126}
+  colliderListener: {fileID: 636844881}
   bulletPrefab: {fileID: 8385927219721995690, guid: 93ce7606e24d1544cb95e144ec62e143,
     type: 3}
   bulletSound: {fileID: 2024705576696630248}
@@ -242,6 +244,18 @@ Rigidbody2D:
   m_SleepingMode: 1
   m_CollisionDetection: 0
   m_Constraints: 0
+--- !u!114 &636844881
+MonoBehaviour:
+  m_ObjectHideFlags: 0
+  m_CorrespondingSourceObject: {fileID: 0}
+  m_PrefabInstance: {fileID: 0}
+  m_PrefabAsset: {fileID: 0}
+  m_GameObject: {fileID: 2024705576208264357}
+  m_Enabled: 1
+  m_EditorHideFlags: 0
+  m_Script: {fileID: 11500000, guid: db04ebc9da43c9042b3a75988ff11103, type: 3}
+  m_Name: 
+  m_EditorClassIdentifier: 
 --- !u!1 &2024705576225475128
 GameObject:
   m_ObjectHideFlags: 0
@@ -380,7 +394,7 @@ GameObject:
   - component: {fileID: 2024705576373274257}
   - component: {fileID: 2024705576373274223}
   - component: {fileID: 2024705576373274222}
-  m_Layer: 0
+  m_Layer: 5
   m_Name: RasterVer
   m_TagString: Untagged
   m_Icon: {fileID: 0}
@@ -453,7 +467,7 @@ GameObject:
   - component: {fileID: 2024705576615400752}
   - component: {fileID: 2024705576615400755}
   - component: {fileID: 2024705576615400754}
-  m_Layer: 0
+  m_Layer: 5
   m_Name: SVGVer
   m_TagString: Untagged
   m_Icon: {fileID: 0}
@@ -677,7 +691,7 @@ GameObject:
   - component: {fileID: 2024705577055193751}
   - component: {fileID: 2024705577055193750}
   - component: {fileID: 2024705577055193753}
-  m_Layer: 0
+  m_Layer: 5
   m_Name: PlayerHUD
   m_TagString: Untagged
   m_Icon: {fileID: 0}

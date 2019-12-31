@@ -15,6 +15,12 @@ namespace MinimalMiner.Entity
         /// </summary>
         public event OnCollisionDetectedDelegate OnCollisionDetected = delegate { };
 
+        public delegate void OnTriggerDetectedDelegate(Collider2D collider);
+        /// <summary>
+        /// Informs subscribed objects that a trigger has been detected
+        /// </summary>
+        public event OnTriggerDetectedDelegate OnTriggerDetected = delegate { };
+
         /// <summary>
         /// Called when a 2D collision has been detected
         /// </summary>
@@ -22,6 +28,11 @@ namespace MinimalMiner.Entity
         private void OnCollisionEnter2D(Collision2D collision)
         {
             OnCollisionDetected(collision);
+        }
+
+        private void OnTriggerEnter2D(Collider2D collider)
+        {
+            OnTriggerDetected(collider);
         }
     }
 }

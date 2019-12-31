@@ -1,9 +1,9 @@
 ﻿namespace MinimalMiner
 {
     /// <summary>
-    /// Defines the type of content an asteroid contains
+    /// Defines an item drop that an asteroid contains
     /// </summary>
-    public enum AsteroidType
+    public enum ItemMaterial
     {
         #region Alpha 1.3.0
         rock,

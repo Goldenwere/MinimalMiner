@@ -153,9 +153,9 @@ namespace MinimalMiner.Entity
             while (position.x > -SceneConstants.PlayerSafeZone.x && position.x < SceneConstants.PlayerSafeZone.x 
                 || position.y > -SceneConstants.PlayerSafeZone.y && position.y < SceneConstants.PlayerSafeZone.y);
 
-            AsteroidType[] contents = new AsteroidType[Random.Range(1, 11)];
+            ItemMaterial[] contents = new ItemMaterial[Random.Range(1, 11)];
             for (int i = 0; i < contents.Length; i++)
-                contents[i] = GenerateAsteroidType();
+                contents[i] = GenerateItemMaterial();
 
             Material mat = null;
 
@@ -196,7 +196,7 @@ namespace MinimalMiner.Entity
         /// <param name="originalVelocity">The original velocity to base new velocity off of</param>
         /// <param name="originalPosition">The original position to base new position off of</param>
         /// <returns>The asteroid that was spawned</returns>
-        public GameObject SpawnAsteroid(AsteroidType[] types, int maxSize, Vector2 originalVelocity, Vector3 originalPosition)
+        public GameObject SpawnAsteroid(ItemMaterial[] types, int maxSize, Vector2 originalVelocity, Vector3 originalPosition)
         {
             int spriteIndex = Random.Range(0, asteroidSprites.Count);
             int size = Random.Range(0, maxSize);
@@ -233,86 +233,86 @@ namespace MinimalMiner.Entity
         }
 
         /// <summary>
-        /// Randomly generates an AsteroidType
+        /// Randomly generates an ItemMaterial
         /// </summary>
-        /// <returns>A random AsteroidType, based on an external loot table spreadsheet</returns>
-        public AsteroidType GenerateAsteroidType()
+        /// <returns>A random ItemMaterial, based on an external loot table spreadsheet</returns>
+        public ItemMaterial GenerateItemMaterial()
         {
             float chance = Random.Range(0f, 100f);
 
             #region Elements
             if (chance < 2.5f)
-                return AsteroidType.indium;
+                return ItemMaterial.indium;
             else if (chance < 5)
-                return AsteroidType.copper;
+                return ItemMaterial.copper;
             else if (chance < 7.5f)
-                return AsteroidType.nickel;
+                return ItemMaterial.nickel;
             else if (chance < 10)
-                return AsteroidType.lithium;
+                return ItemMaterial.lithium;
             else if (chance < 12.5f)
-                return AsteroidType.phosphorus;
+                return ItemMaterial.phosphorus;
             else if (chance < 15f)
-                return AsteroidType.cobalt;
+                return ItemMaterial.cobalt;
             else if (chance < 17.5f)
-                return AsteroidType.zinc;
+                return ItemMaterial.zinc;
             else if (chance < 20f)
-                return AsteroidType.lead;
+                return ItemMaterial.lead;
             else if (chance < 21f)
-                return AsteroidType.silver;
+                return ItemMaterial.silver;
             else if (chance < 22f)
-                return AsteroidType.tin;
+                return ItemMaterial.tin;
             else if (chance < 23f)
-                return AsteroidType.gold;
+                return ItemMaterial.gold;
             else if (chance < 24f)
-                return AsteroidType.platinum;
+                return ItemMaterial.platinum;
             else if (chance < 25f)
-                return AsteroidType.antimony;
+                return ItemMaterial.antimony;
             else if (chance < 40f)
-                return AsteroidType.carbon;
+                return ItemMaterial.carbon;
             else if (chance < 49f)
-                return AsteroidType.iron;
+                return ItemMaterial.iron;
             else if (chance < 49.75f)
-                return AsteroidType.osmium;
+                return ItemMaterial.osmium;
             else if (chance < 49.875f)
-                return AsteroidType.uranium;
+                return ItemMaterial.uranium;
             else if (chance < 50f)
-                return AsteroidType.thorium;
+                return ItemMaterial.thorium;
             #endregion
 
             #region Silicates
             else if (chance < 52.5f)
-                return AsteroidType.olivine;
+                return ItemMaterial.olivine;
             else if (chance < 55)
-                return AsteroidType.garnet;
+                return ItemMaterial.garnet;
             else if (chance < 57.5f)
-                return AsteroidType.zircon;
+                return ItemMaterial.zircon;
             else if (chance < 60)
-                return AsteroidType.topaz;
+                return ItemMaterial.topaz;
             else if (chance < 62.5f)
-                return AsteroidType.feldspar;
+                return ItemMaterial.feldspar;
             else if (chance < 65)
-                return AsteroidType.titanite;
+                return ItemMaterial.titanite;
             else if (chance < 67.5f)
-                return AsteroidType.quartz;
+                return ItemMaterial.quartz;
             else if (chance < 70)
-                return AsteroidType.rhodonite;
+                return ItemMaterial.rhodonite;
             else if (chance < 72.5f)
-                return AsteroidType.mica;
+                return ItemMaterial.mica;
             else if (chance < 75)
-                return AsteroidType.chlorite;
+                return ItemMaterial.chlorite;
             else if (chance < 75.5f)
-                return AsteroidType.hemimorphite;
+                return ItemMaterial.hemimorphite;
             else if (chance < 75.625f)
-                return AsteroidType.osumilite;
+                return ItemMaterial.osumilite;
             #endregion
 
             #region Other
             else if (chance < 75.75f)
-                return AsteroidType.diamond;
+                return ItemMaterial.diamond;
             else if (chance < 90)
-                return AsteroidType.rock;
+                return ItemMaterial.rock;
             else
-                return AsteroidType.ice;
+                return ItemMaterial.ice;
             #endregion
         }
         #endregion

@@ -29,6 +29,7 @@ namespace MinimalMiner.Entity
         [SerializeField] private PolygonCollider2D collider;
         [SerializeField] private AudioSource damageSound;
         [SerializeField] private AudioSource deathSound;
+        [SerializeField] private ColliderListener colliderListener;
 
         [SerializeField] private GameObject bulletPrefab;
         [SerializeField] private AudioSource bulletSound;
@@ -197,6 +198,7 @@ namespace MinimalMiner.Entity
         {
             EventManager.OnUpdateGameState += UpdateGameState;
             PreferencesManager.UpdateTheme += UpdateTheme;
+            colliderListener.OnTriggerDetected += OnTriggerDetected;
         }
 
         /// <summary>
@@ -206,6 +208,7 @@ namespace MinimalMiner.Entity
         {
             EventManager.OnUpdateGameState -= UpdateGameState;
             PreferencesManager.UpdateTheme -= UpdateTheme;
+            colliderListener.OnTriggerDetected -= OnTriggerDetected;
         }
 
         /// <summary>
@@ -250,6 +253,14 @@ namespace MinimalMiner.Entity
             }*/
 
             sprite.material.color = theme.spriteColor_player;
+        }
+
+        private void OnTriggerDetected(Collider2D collider)
+        {
+            if (collider.gameObject.tag == "item")
+            {
+                print("Item would've been picked up: " + collider.gameObject.GetComponent<ItemDrop>().Material.ToString());
+            }
         }
 
         /// <summary>

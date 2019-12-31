@@ -31,7 +31,7 @@ namespace MinimalMiner.Entity
         private float damageTimer;
 
         // Asteroid characteristics
-        private AsteroidType[] types;
+        private ItemMaterial[] types;
         private AsteroidSize size;
         public float Mass
         {
@@ -207,7 +207,7 @@ namespace MinimalMiner.Entity
         /// <param name="manager">The asteroid manager that spawned this asteroid</param>
         /// <param name="uiColors">The colors for the healthbar</param>
         /// <param name="damageColor">The damage color to use for the asteroid</param>
-        public void Setup(AsteroidType[] types, AsteroidSize size, Sprite sprite, Material mat, Color32 color, Vector2 velocity, Vector3 position, AsteroidManager manager, Color32[] uiColors, Color32 damageColor)
+        public void Setup(ItemMaterial[] types, AsteroidSize size, Sprite sprite, Material mat, Color32 color, Vector2 velocity, Vector3 position, AsteroidManager manager, Color32[] uiColors, Color32 damageColor)
         {
             this.types = types;
             this.size = size;
