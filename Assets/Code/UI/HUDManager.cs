@@ -76,7 +76,8 @@ namespace MinimalMiner.UI
         /// <param name="theme">The new GameTheme properties</param>
         private void UpdateTheme(Theme theme)
         {
-            minimapIcon.sprite = theme.spriteImage_player;
+            if (theme.spriteImage_player != null)
+                minimapIcon.sprite = theme.spriteImage_player;
             minimapIcon.material.color = theme.spriteColor_player;
         }
 

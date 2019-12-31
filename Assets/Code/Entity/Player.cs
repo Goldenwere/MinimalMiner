@@ -255,6 +255,10 @@ namespace MinimalMiner.Entity
             sprite.material.color = theme.spriteColor_player;
         }
 
+        /// <summary>
+        /// Handles collision between this asteroid and a trigger in the scene
+        /// </summary>
+        /// <param name="collider">The collider that triggered this</param>
         private void OnTriggerDetected(Collider2D collider)
         {
             if (collider.gameObject.tag == "item")
