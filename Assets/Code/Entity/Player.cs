@@ -25,6 +25,7 @@ namespace MinimalMiner.Entity
         [SerializeField] private SpriteRenderer sprite;
         [SerializeField] private Rigidbody2D rigidbody;
         public Rigidbody2D Rigidbody { get { return rigidbody; } }
+        public float DamageResistance { get { return shipConfig.Current_Defenses.DamageResistance; } }
         [SerializeField] private PolygonCollider2D collider;
         [SerializeField] private AudioSource damageSound;
         [SerializeField] private AudioSource deathSound;
@@ -52,10 +53,11 @@ namespace MinimalMiner.Entity
 
             #region Setup
 
-            defenses.ArmorStrength = 10f;
+            defenses.ArmorStrength = 50f;
             defenses.ShieldRecharge = 1f;
-            defenses.ShieldStrength = 5f;
-            defenses.ShieldDelay = 2f;
+            defenses.ShieldStrength = 15f;
+            defenses.ShieldDelay = 5f;
+            defenses.DamageResistance = 15f;
 
             thrusters.DampenerStrength = 0.5f;                  // Equivalent to rigidbody linear drag set before this temp code (shipDragRate was unused)
             thrusters.ForwardThrusterForce = 10f;               // Equivalent to shipAccRate set in the old player class ResetPlayer()

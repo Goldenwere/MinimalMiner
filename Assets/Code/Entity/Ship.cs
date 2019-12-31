@@ -315,6 +315,11 @@ namespace MinimalMiner.Entity
         /// The strength of the ship's armor
         /// </summary>
         public float ArmorStrength;
+
+        /// <summary>
+        /// The resistance the ship is to damage
+        /// </summary>
+        public float DamageResistance;
         #endregion
     }
 

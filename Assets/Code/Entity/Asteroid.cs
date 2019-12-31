@@ -33,7 +33,14 @@ namespace MinimalMiner.Entity
         // Asteroid characteristics
         private AsteroidType[] types;
         private AsteroidSize size;
-        public AsteroidSize Size { get { return size; } }
+        public float Mass
+        {
+            get { return ((int)size + 1) * types.Length; }
+        }
+        public float DamageResistance
+        {
+            get { return types.Length + 1; }
+        }
         #endregion
 
         #region Methods
@@ -127,45 +134,33 @@ namespace MinimalMiner.Entity
         {
             if (collision.gameObject.tag == "asteroid")
             {
-                Vector2 netVelocity = collision.gameObject.GetComponent<Rigidbody2D>().velocity - rigidbody.velocity;
                 Asteroid collided = collision.gameObject.GetComponentInParent<Asteroid>();
-                int netScale = Mathf.Abs((int)size - (int)collided.Size);
-                if (netVelocity.magnitude > Mathf.Pow(netScale, 2))
-                {
-                    float damage = 0.5f * netScale * Mathf.Pow(netVelocity.magnitude, 2);   // KE = 1/2 mv^2
+                Vector2 net = rigidbody.velocity - collided.rigidbody.velocity;
+                float KE1 = Mass * net.sqrMagnitude / 2;
+                float KE2 = collided.Mass * net.sqrMagnitude / 2;
+                float dmg1 = KE2 * collided.rigidbody.sharedMaterial.bounciness;
+                float dmg2 = KE1 * rigidbody.sharedMaterial.bounciness;
 
-                    if ((int)collided.size < (int)size)
-                    {
-                        collided.TakeDamage(damage * 0.75f);
-                        TakeDamage(damage * 0.25f);
-                    }
-                    else
-                    {
-                        TakeDamage(damage * 0.75f);
-                        collided.TakeDamage(damage * 0.25f);
-                    }
-                }
+                // Damage is half due to OnCollisionDetected being called on both asteroids
+                if (dmg1 > DamageResistance)
+                    TakeDamage((dmg1 - DamageResistance) / 2);
+                if (dmg2 > collided.DamageResistance)
+                    collided.TakeDamage((dmg2 - collided.DamageResistance) / 2);
             }
 
             else if (collision.gameObject.tag == "player")
             {
-                Vector2 netVelocity = collision.gameObject.GetComponent<Rigidbody2D>().velocity - rigidbody.velocity;
-                Player player = collision.gameObject.GetComponent<Player>();
-                float sizeDiff = Mathf.Abs((int)size - player.Rigidbody.mass);
-                if (netVelocity.magnitude > Mathf.Pow(sizeDiff, 2))
-                {
-                    float damage = 0.5f * sizeDiff * Mathf.Pow(netVelocity.magnitude, 2);   // KE = 1/2 mv^2
-                    if (player.Rigidbody.mass < (int)size)
-                    {
-                        player.TakeDamage(damage * 0.75f);
-                        TakeDamage(damage * 0.25f);
-                    }
-                    else
-                    {
-                        TakeDamage(damage * 0.75f);
-                        player.TakeDamage(damage * 0.25f);
-                    }
-                }
+                Player collided = collision.gameObject.GetComponent<Player>();
+                Vector2 net = rigidbody.velocity - collided.Rigidbody.velocity;
+                float KE1 = Mass * net.sqrMagnitude / 2;
+                float KE2 = collided.Rigidbody.mass * net.sqrMagnitude / 2;
+                float dmg1 = KE2 * collided.Rigidbody.sharedMaterial.bounciness;
+                float dmg2 = KE1 * rigidbody.sharedMaterial.bounciness;
+
+                if (dmg1 > DamageResistance)
+                    TakeDamage(dmg1 - DamageResistance);
+                if (dmg2 > collided.DamageResistance)
+                    collided.TakeDamage(dmg2 - collided.DamageResistance);
             }
         }
 
