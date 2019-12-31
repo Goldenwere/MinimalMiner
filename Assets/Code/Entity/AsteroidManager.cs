@@ -145,7 +145,7 @@ namespace MinimalMiner.Entity
                     float scale = asteroid.transform.localScale.x;
                     pos.x += Random.Range(-scale, scale);
                     pos.y += Random.Range(-scale, scale);
-                    drop.SpawnDrop(pos, d);
+                    drop.SpawnDrop(pos, d, GenerateItemSprite(d));
                 }
             }
 
@@ -340,6 +340,58 @@ namespace MinimalMiner.Entity
             else
                 return ItemMaterial.ice;
             #endregion
+        }
+
+        /// <summary>
+        /// Randomly generates an ItemDrop's sprite based on the incoming ItemMaterial
+        /// </summary>
+        /// <param name="mat">The material of the item drop</param>
+        /// <returns>A sprite that matches the item drop's category</returns>
+        public Sprite GenerateItemSprite(ItemMaterial mat)
+        {
+            switch(mat)
+            {
+                // Elemental
+                case ItemMaterial.indium:
+                case ItemMaterial.copper:
+                case ItemMaterial.nickel:
+                case ItemMaterial.lithium:
+                case ItemMaterial.phosphorus:
+                case ItemMaterial.cobalt:
+                case ItemMaterial.zinc:
+                case ItemMaterial.lead:
+                case ItemMaterial.silver:
+                case ItemMaterial.tin:
+                case ItemMaterial.gold:
+                case ItemMaterial.platinum:
+                case ItemMaterial.antimony:
+                case ItemMaterial.carbon:
+                case ItemMaterial.iron:
+                case ItemMaterial.osmium:
+                case ItemMaterial.uranium:
+                case ItemMaterial.thorium:
+                    return elementSprites[Random.Range(0, elementSprites.Count)];
+                // Silicates
+                case ItemMaterial.olivine:
+                case ItemMaterial.garnet:
+                case ItemMaterial.zircon:
+                case ItemMaterial.topaz:
+                case ItemMaterial.feldspar:
+                case ItemMaterial.titanite:
+                case ItemMaterial.quartz:
+                case ItemMaterial.rhodonite:
+                case ItemMaterial.mica:
+                case ItemMaterial.chlorite:
+                case ItemMaterial.hemimorphite:
+                case ItemMaterial.osumilite:
+                    return silicateSprites[Random.Range(0, silicateSprites.Count)];
+                // General
+                case ItemMaterial.diamond:
+                case ItemMaterial.ice:
+                case ItemMaterial.rock:
+                default:
+                    return generalItemSprites[Random.Range(0, generalItemSprites.Count)];
+            }
         }
         #endregion
     }
