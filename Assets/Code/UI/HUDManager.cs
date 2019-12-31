@@ -37,6 +37,7 @@ namespace MinimalMiner.UI
             EventManager.OnUpdateHUDElement += UpdateElement;
             EventManager.OnUpdateTarget += UpdateTarget;
             PreferencesManager.UpdateTheme += UpdateTheme;
+            EventManager.OnUpdateGameState += UpdateGameState;
         }
 
         /// <summary>
@@ -46,7 +47,8 @@ namespace MinimalMiner.UI
         {
             EventManager.OnUpdateHUDElement -= UpdateElement;
             EventManager.OnUpdateTarget -= UpdateTarget;
-            PreferencesManager.UpdateTheme += UpdateTheme;
+            PreferencesManager.UpdateTheme -= UpdateTheme;
+            EventManager.OnUpdateGameState -= UpdateGameState;
         }
 
         /// <summary>
@@ -55,6 +57,17 @@ namespace MinimalMiner.UI
         private void Update()
         {
             timer += Time.deltaTime;
+        }
+
+        /// <summary>
+        /// Called when the current GameState is updated
+        /// </summary>
+        /// <param name="newState">The new GameState after updating</param>
+        /// <param name="prevState">The previous GameState before updating</param>
+        private void UpdateGameState(GameState newState, GameState prevState)
+        {
+            if (newState != GameState.play && newState != GameState.pause)
+                UpdateTarget(false, null, null, null);
         }
 
         /// <summary>

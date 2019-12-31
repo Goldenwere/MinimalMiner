@@ -58,7 +58,7 @@ namespace MinimalMiner.Entity
             defenses.ShieldDelay = 2f;
 
             thrusters.DampenerStrength = 0.5f;                  // Equivalent to rigidbody linear drag set before this temp code (shipDragRate was unused)
-            thrusters.ForwardThrusterForce = 5f;                // Equivalent to shipAccRate set in the old player class ResetPlayer()
+            thrusters.ForwardThrusterForce = 10f;               // Equivalent to shipAccRate set in the old player class ResetPlayer()
             thrusters.MaxDirectionalSpeed = 10f;                // Equivalent to shipMaxSpd set in old player class
             thrusters.RecoilCompensation = 0.9f;
             thrusters.ReverseThrusterForce = 3f;
@@ -214,10 +214,6 @@ namespace MinimalMiner.Entity
         private void UpdateGameState(GameState newState, GameState prevState)
         {
             currState = newState;
-
-            // Ensure target HUD element is disabled once the game state changes
-            if (currState != GameState.play && currState != GameState.pause && prevState == GameState.pause)
-                eventMgr.UpdateTargetElement(false, null, null, null);
         }
 
         /// <summary>
