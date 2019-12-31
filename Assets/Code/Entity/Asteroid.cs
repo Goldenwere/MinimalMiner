@@ -41,6 +41,10 @@ namespace MinimalMiner.Entity
         {
             get { return types.Length + 1; }
         }
+        public ItemMaterial[] Drops 
+        { 
+            get { return types; } 
+        }
         #endregion
 
         #region Methods

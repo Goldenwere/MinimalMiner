@@ -15,8 +15,14 @@ namespace MinimalMiner.Entity
         private GameState currState;                                // The current GameState
         private Theme currTheme;                                    // The current Theme
         private List<GameObject> asteroids;                         // The asteroids instantiated in the scene
-        [SerializeField] private GameObject asteroidPrefab;         // The basic asteroid prefab/format to spawn asteroids with
-        private List<Sprite> asteroidSprites;                       // The various sprites asteroids can use
+        [SerializeField] private GameObject asteroidPrefab;         // The asteroid prefab/format to spawn asteroids with
+        [SerializeField] private GameObject dropPrefab;             // The drop prefab/format to spawn drops from asteroids with
+
+        // Sprites that entities can use
+        private List<Sprite> asteroidSprites;
+        private List<Sprite> elementSprites;
+        private List<Sprite> silicateSprites;
+        private List<Sprite> generalItemSprites;
         [SerializeField] private MaterialManager matMgr;            // Used for setting appropriate materials for sprites based on theme
         #endregion
 
@@ -67,6 +73,10 @@ namespace MinimalMiner.Entity
             {
                 asteroidSprites = matMgr.Default_Asteroids;
             }
+
+            elementSprites = matMgr.Default_Elements;
+            silicateSprites = matMgr.Default_Silicates;
+            generalItemSprites = matMgr.Default_GeneralItems;
         }
 
         /// <summary>
@@ -123,6 +133,22 @@ namespace MinimalMiner.Entity
         /// <param name="newAsteroids">A new list of asteroids if the parent asteroid was large</param>
         public void OnAsteroidDestruction(GameObject asteroid, List<GameObject> newAsteroids)
         {
+            // Spawn items if there aren't new asteroids
+            if (newAsteroids.Count == 0)
+            {
+                ItemMaterial[] drops = asteroid.GetComponent<Asteroid>().Drops;
+                foreach(ItemMaterial d in drops)
+                {
+                    GameObject g = Instantiate(dropPrefab);
+                    ItemDrop drop = g.GetComponent<ItemDrop>();
+                    Vector3 pos = asteroid.transform.position;
+                    float scale = asteroid.transform.localScale.x;
+                    pos.x += Random.Range(-scale, scale);
+                    pos.y += Random.Range(-scale, scale);
+                    drop.SpawnDrop(pos, d);
+                }
+            }
+
             // Remove current asteroid
             asteroids.Remove(asteroid);
             Destroy(asteroid);

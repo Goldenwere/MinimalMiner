@@ -10,6 +10,7 @@ namespace MinimalMiner.Util
     /// </summary>
     public class MaterialManager : MonoBehaviour
     {
+        #region Materials
         [SerializeField] private Material mat_vector;
 
         /// <summary>
@@ -43,8 +44,7 @@ namespace MinimalMiner.Util
         {
             get { return mat_raster; }
         }
-
-
+        #endregion
 
         [SerializeField] private Sprite default_Player;
 
@@ -65,5 +65,37 @@ namespace MinimalMiner.Util
         {
             get { return default_Asteroids; }
         }
+
+        #region Items
+        [SerializeField] private List<Sprite> default_Elements;
+
+        /// <summary>
+        /// The default element drop sprites
+        /// </summary>
+        public List<Sprite> Default_Elements
+        {
+            get { return default_Elements; }
+        }
+
+        [SerializeField] private List<Sprite> default_Silicates;
+
+        /// <summary>
+        /// The default silicate drop sprites
+        /// </summary>
+        public List<Sprite> Default_Silicates
+        {
+            get { return default_Silicates; }
+        }
+
+        [SerializeField] private List<Sprite> default_GeneralItems;
+
+        /// <summary>
+        /// The default general item drop sprites
+        /// </summary>
+        public List<Sprite> Default_GeneralItems
+        {
+            get { return default_GeneralItems; }
+        }
+        #endregion
     }
 }
