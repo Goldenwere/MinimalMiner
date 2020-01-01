@@ -146,7 +146,7 @@ namespace MinimalMiner.Entity
                     float scale = asteroid.transform.localScale.x;
                     pos.x += Random.Range(-scale, scale);
                     pos.y += Random.Range(-scale, scale);
-                    drop.SpawnDrop(pos, new Item(d), GenerateItemSprite(d));
+                    drop.SpawnDrop(pos, new Item(d), GenerateItemSprite(Definitions.ItemCategories[d]));
                 }
             }
 
@@ -265,131 +265,41 @@ namespace MinimalMiner.Entity
         /// <returns>A random ItemMaterial, based on an external loot table spreadsheet</returns>
         public ItemMaterial GenerateItemMaterial()
         {
-            float chance = Random.Range(0f, 100f);
+            // ItemMaterial can be expanded upon in later versions. This method of iterating over using min-max helps account for that
+            // DropWeightTotal is all of the DropWeights added together. This is precalculated using a spreadsheet document that defines items before being written to code
+            float chance = Random.Range(0f, (float)Definitions.ItemDropWeightTotal);
+            float min;
+            float max = 0;
+            ItemMaterial[] vals = (ItemMaterial[])System.Enum.GetValues(typeof(ItemMaterial));
 
-            #region Elements
-            if (chance < 2.5f)
-                return ItemMaterial.indium;
-            else if (chance < 5)
-                return ItemMaterial.copper;
-            else if (chance < 7.5f)
-                return ItemMaterial.nickel;
-            else if (chance < 10)
-                return ItemMaterial.lithium;
-            else if (chance < 12.5f)
-                return ItemMaterial.phosphorus;
-            else if (chance < 15f)
-                return ItemMaterial.cobalt;
-            else if (chance < 17.5f)
-                return ItemMaterial.zinc;
-            else if (chance < 20f)
-                return ItemMaterial.lead;
-            else if (chance < 21f)
-                return ItemMaterial.silver;
-            else if (chance < 22f)
-                return ItemMaterial.tin;
-            else if (chance < 23f)
-                return ItemMaterial.gold;
-            else if (chance < 24f)
-                return ItemMaterial.platinum;
-            else if (chance < 25f)
-                return ItemMaterial.antimony;
-            else if (chance < 40f)
-                return ItemMaterial.carbon;
-            else if (chance < 49f)
-                return ItemMaterial.iron;
-            else if (chance < 49.75f)
-                return ItemMaterial.osmium;
-            else if (chance < 49.875f)
-                return ItemMaterial.uranium;
-            else if (chance < 50f)
-                return ItemMaterial.thorium;
-            #endregion
+            for (int i = 0; i < vals.Length; i++)
+            {
+                // Define the range
+                min = max;
+                max = min + Definitions.ItemDropWeights[vals[i]];
 
-            #region Silicates
-            else if (chance < 52.5f)
-                return ItemMaterial.olivine;
-            else if (chance < 55)
-                return ItemMaterial.garnet;
-            else if (chance < 57.5f)
-                return ItemMaterial.zircon;
-            else if (chance < 60)
-                return ItemMaterial.topaz;
-            else if (chance < 62.5f)
-                return ItemMaterial.feldspar;
-            else if (chance < 65)
-                return ItemMaterial.titanite;
-            else if (chance < 67.5f)
-                return ItemMaterial.quartz;
-            else if (chance < 70)
-                return ItemMaterial.rhodonite;
-            else if (chance < 72.5f)
-                return ItemMaterial.mica;
-            else if (chance < 75)
-                return ItemMaterial.chlorite;
-            else if (chance < 75.5f)
-                return ItemMaterial.hemimorphite;
-            else if (chance < 75.625f)
-                return ItemMaterial.osumilite;
-            #endregion
+                // Return the material if it fits the range
+                if (chance >= min && chance <= max)
+                    return vals[i];
+            }
 
-            #region Other
-            else if (chance < 75.75f)
-                return ItemMaterial.diamond;
-            else if (chance < 90)
-                return ItemMaterial.rock;
-            else
-                return ItemMaterial.ice;
-            #endregion
+            return ItemMaterial.rock;
         }
 
         /// <summary>
         /// Randomly generates an ItemDrop's sprite based on the incoming ItemMaterial
         /// </summary>
-        /// <param name="mat">The material of the item drop</param>
+        /// <param name="cat">The category of the item drop</param>
         /// <returns>A sprite that matches the item drop's category</returns>
-        public Sprite GenerateItemSprite(ItemMaterial mat)
+        public Sprite GenerateItemSprite(ItemCategory cat)
         {
-            switch(mat)
+            switch(cat)
             {
-                // Elemental
-                case ItemMaterial.indium:
-                case ItemMaterial.copper:
-                case ItemMaterial.nickel:
-                case ItemMaterial.lithium:
-                case ItemMaterial.phosphorus:
-                case ItemMaterial.cobalt:
-                case ItemMaterial.zinc:
-                case ItemMaterial.lead:
-                case ItemMaterial.silver:
-                case ItemMaterial.tin:
-                case ItemMaterial.gold:
-                case ItemMaterial.platinum:
-                case ItemMaterial.antimony:
-                case ItemMaterial.carbon:
-                case ItemMaterial.iron:
-                case ItemMaterial.osmium:
-                case ItemMaterial.uranium:
-                case ItemMaterial.thorium:
+                case ItemCategory.RawElement:
                     return elementSprites[Random.Range(0, elementSprites.Count)];
-                // Silicates
-                case ItemMaterial.olivine:
-                case ItemMaterial.garnet:
-                case ItemMaterial.zircon:
-                case ItemMaterial.topaz:
-                case ItemMaterial.feldspar:
-                case ItemMaterial.titanite:
-                case ItemMaterial.quartz:
-                case ItemMaterial.rhodonite:
-                case ItemMaterial.mica:
-                case ItemMaterial.chlorite:
-                case ItemMaterial.hemimorphite:
-                case ItemMaterial.osumilite:
+                case ItemCategory.RawSilicate:
                     return silicateSprites[Random.Range(0, silicateSprites.Count)];
-                // General
-                case ItemMaterial.diamond:
-                case ItemMaterial.ice:
-                case ItemMaterial.rock:
+                case ItemCategory.RawGeneric:
                 default:
                     return generalItemSprites[Random.Range(0, generalItemSprites.Count)];
             }
