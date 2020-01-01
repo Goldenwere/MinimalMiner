@@ -266,7 +266,8 @@ namespace MinimalMiner.Entity
         {
             if (collider.gameObject.tag == "item")
             {
-                print("Item would've been picked up: " + ((RawMaterial)(collider.gameObject.GetComponent<ItemDrop>().m_Item)).Material.ToString());
+                inventory.Inventory.Add(PlayerInventory.NextEmptySlot(inventory), new SlotInformation(collider.gameObject.GetComponent<ItemDrop>().m_Item, 1));
+                Destroy(collider.gameObject);
             }
         }
 
@@ -412,6 +413,7 @@ namespace MinimalMiner.Entity
             playerPrefs = managers.GetComponent<PreferencesManager>();
             eventMgr = managers.GetComponent<EventManager>();
             matMgr = managers.GetComponent<MaterialManager>();
+            inventory = new PlayerInventory(10000f, 10, 10);
 
             // Reset state and stats
             Start();

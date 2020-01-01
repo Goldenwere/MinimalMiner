@@ -60,6 +60,23 @@ namespace MinimalMiner.Inventory
             SizeY = y;
             Inventory = new Dictionary<Vector2, SlotInformation>();
         }
+
+        /// <summary>
+        /// Returns the next empty slot in an inventory
+        /// </summary>
+        /// <param name="inv"></param>
+        /// <returns></returns>
+        public static Vector2 NextEmptySlot(PlayerInventory inv)
+        {
+            // Iterate over the inventory and return a slot if the inventory does not contain a key for it
+            for(int i = 0; i < inv.SizeX; i++)
+                for (int j = 0; j < inv.SizeY; j++)
+                    if (!inv.Inventory.ContainsKey(new Vector2(i, j)))
+                        return new Vector2(i, j);
+
+            // Return (-1, -1) if there are no empty slots
+            return new Vector2(-1, -1);
+        }
     }
 
     /// <summary>
@@ -83,6 +100,17 @@ namespace MinimalMiner.Inventory
         public float SlotWeight
         {
             get { return m_Item.Weight * Amount; }
+        }
+
+        /// <summary>
+        /// Creates slot information with a defined item and amount
+        /// </summary>
+        /// <param name="item">The item for the slot</param>
+        /// <param name="amt">The amount in the slot</param>
+        public SlotInformation(Item item, int amt)
+        {
+            Amount = amt;
+            m_Item = item;
         }
     }
 }
