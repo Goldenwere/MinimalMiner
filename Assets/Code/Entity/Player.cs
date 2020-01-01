@@ -36,6 +36,8 @@ namespace MinimalMiner.Entity
         [SerializeField] private AudioSource bulletSound2;
         [SerializeField] private List<GameObject> bulletLoc;
 
+        private PlayerInventory inventory;
+
         // Management variables
         private GameState currState;
         private PreferencesManager playerPrefs;

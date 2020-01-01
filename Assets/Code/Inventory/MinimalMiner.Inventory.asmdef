@@ -1,0 +1,15 @@
+{
+    "name": "MinimalMiner.Inventory",
+    "references": [
+        "GUID:7bf6e98a84d8a4244bbde5a507393aa8"
+    ],
+    "includePlatforms": [],
+    "excludePlatforms": [],
+    "allowUnsafeCode": false,
+    "overrideReferences": false,
+    "precompiledReferences": [],
+    "autoReferenced": true,
+    "defineConstraints": [],
+    "versionDefines": [],
+    "noEngineReferences": false
+}
