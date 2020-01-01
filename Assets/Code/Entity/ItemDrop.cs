@@ -4,6 +4,7 @@ using System.Collections;
 using System.Collections.Generic;
 using UnityEngine;
 using MinimalMiner;
+using MinimalMiner.Inventory;
 
 namespace MinimalMiner.Entity
 {
@@ -15,7 +16,7 @@ namespace MinimalMiner.Entity
         /// <summary>
         /// The material that an item drop is
         /// </summary>
-        public ItemMaterial Material { get; private set; }
+        public Item m_Item { get; private set; }
         [SerializeField] private SpriteRenderer sprite;
         [SerializeField] private Animator animator;
 
@@ -25,12 +26,12 @@ namespace MinimalMiner.Entity
         /// Used for setting up an item drop upon spawning
         /// </summary>
         /// <param name="position">The position of the drop</param>
-        /// <param name="mat">The item material of the drop</param>
+        /// <param name="item">The item associated with the drop</param>
         /// <param name="sp">The sprite for the item drop</param>
-        public void SpawnDrop(Vector3 position, ItemMaterial mat, Sprite sp)
+        public void SpawnDrop(Vector3 position, Item item, Sprite sp)
         {
             transform.position = position;
-            Material = mat;
+            m_Item = item;
             sprite.sprite = sp;
             animator.SetFloat("Delay", Random.Range(0f, 1f));
         }

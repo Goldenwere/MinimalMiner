@@ -3,6 +3,7 @@
 using System.Collections.Generic;
 using UnityEngine;
 using MinimalMiner.Util;
+using MinimalMiner.Inventory;
 
 namespace MinimalMiner.Entity
 {
@@ -145,7 +146,7 @@ namespace MinimalMiner.Entity
                     float scale = asteroid.transform.localScale.x;
                     pos.x += Random.Range(-scale, scale);
                     pos.y += Random.Range(-scale, scale);
-                    drop.SpawnDrop(pos, d, GenerateItemSprite(d));
+                    drop.SpawnDrop(pos, new RawMaterial(d), GenerateItemSprite(d));
                 }
             }
 

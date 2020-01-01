@@ -3,10 +3,11 @@
 
 using System.Collections.Generic;
 using UnityEngine;
-using System.Linq;
-using MinimalMiner.Util;
 using System;
+using System.Linq;
 using System.Collections;
+using MinimalMiner.Util;
+using MinimalMiner.Inventory;
 
 namespace MinimalMiner.Entity
 {
@@ -265,7 +266,7 @@ namespace MinimalMiner.Entity
         {
             if (collider.gameObject.tag == "item")
             {
-                print("Item would've been picked up: " + collider.gameObject.GetComponent<ItemDrop>().Material.ToString());
+                print("Item would've been picked up: " + ((RawMaterial)(collider.gameObject.GetComponent<ItemDrop>().m_Item)).Material.ToString());
             }
         }
 

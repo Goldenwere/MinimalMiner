@@ -1,6 +1,7 @@
 {
     "name": "MinimalMiner-Entity",
     "references": [
+        "GUID:a42638ce960a8dd4a955cbbd19d7affb",
         "GUID:a9b5389721cd0cf46a4ac77099e8009a",
         "GUID:7bf6e98a84d8a4244bbde5a507393aa8"
     ],
