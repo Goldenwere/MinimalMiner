@@ -146,7 +146,7 @@ namespace MinimalMiner.Entity
                     float scale = asteroid.transform.localScale.x;
                     pos.x += Random.Range(-scale, scale);
                     pos.y += Random.Range(-scale, scale);
-                    drop.SpawnDrop(pos, new RawMaterial(d), GenerateItemSprite(d));
+                    drop.SpawnDrop(pos, new Item(d), GenerateItemSprite(d));
                 }
             }
 

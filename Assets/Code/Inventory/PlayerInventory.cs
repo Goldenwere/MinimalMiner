@@ -77,6 +77,23 @@ namespace MinimalMiner.Inventory
             // Return (-1, -1) if there are no empty slots
             return new Vector2(-1, -1);
         }
+
+        public static Vector2 FindItemSlot(PlayerInventory inv, Item item)
+        {
+            // Iterate over the inventory and return a slot if the inventory does not contain a key for it
+            for (int i = 0; i < inv.SizeX; i++)
+            {
+                for (int j = 0; j < inv.SizeY; j++)
+                {
+                    Vector2 working = new Vector2(i, j);
+                    if (inv.Inventory.ContainsKey(working))
+                        if (inv.Inventory[working].m_Item.Material == item.Material)
+                            return new Vector2(i, j);
+                }
+            }
+
+            return new Vector2(-1, -1);
+        }
     }
 
     /// <summary>

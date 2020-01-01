@@ -10,28 +10,37 @@ namespace MinimalMiner.Inventory
         /// <summary>
         /// The value of the item
         /// </summary>
-        public float Value { get; set; }
+        public float Value
+        {
+            get { return Definitions.ItemValues[Material]; }
+        }
 
         /// <summary>
         /// The weight of the item
         /// </summary>
-        public float Weight { get; set; }
-    }
+        public float Weight
+        {
+            get { return Definitions.ItemWeights[Material]; }
+        }
 
-    /// <summary>
-    /// Raw material, typically dropped by asteroids
-    /// </summary>
-    public class RawMaterial : Item
-    {
         /// <summary>
-        /// The material associated with this item
+        /// The category of the item
+        /// </summary>
+        public ItemCategory Category
+        {
+            get { return Definitions.ItemCategories[Material]; }
+        }
+
+        /// <summary>
+        /// The item as a definition
         /// </summary>
         public ItemMaterial Material { get; set; }
 
         /// <summary>
-        /// Create a RawMaterial with an associated ItemMaterial
+        /// Creates an instance of an item
         /// </summary>
-        public RawMaterial(ItemMaterial mat)
+        /// <param name="mat">The material of the item</param>
+        public Item(ItemMaterial mat)
         {
             Material = mat;
         }

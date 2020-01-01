@@ -1,16 +1,19 @@
 ﻿namespace MinimalMiner
 {
     /// <summary>
-    /// Defines an item drop that an asteroid contains
+    /// Defines the items in the game
     /// </summary>
     public enum ItemMaterial
     {
         #region Alpha 1.3.0
+        #region Raw Asteroid Materials
+        #region Generic
         rock,
         ice,
         diamond,
+        #endregion
 
-        // elements
+        #region Elements
         carbon,             // abundant
         nickel,             // common - alloys, electroplating
         lithium,            // common - electronics, batteries, lubricant
@@ -34,8 +37,9 @@
         osmium,             // rare - alloy, electron microscopy
         uranium,            // very rare - power
         thorium,            // very rare - power
+        #endregion
 
-        // silicates
+        #region Silicates
         olivine,            // common - good for CO2 reduction, uses requiring repeated heating and cooling
         garnet,             // common - good abrasive, gemstone
         zircon,             // common - good as opacifier, zirconium dioxide (high-heat resistance)
@@ -52,6 +56,18 @@
         chlorite,           // common - carving (v soft)
         quartz,             // common - various
         #endregion
+        #endregion
+        #endregion
+    }
+
+    /// <summary>
+    /// Defines categories for items
+    /// </summary>
+    public enum ItemCategory
+    {
+        RawElement,
+        RawSilicate,
+        RawGeneric,
     }
 
     /// <summary>

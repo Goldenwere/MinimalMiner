@@ -37,7 +37,7 @@ namespace MinimalMiner.Entity
         [SerializeField] private AudioSource bulletSound2;
         [SerializeField] private List<GameObject> bulletLoc;
 
-        private PlayerInventory inventory;
+        private PlayerInventory inv;
 
         // Management variables
         private GameState currState;
@@ -266,8 +266,21 @@ namespace MinimalMiner.Entity
         {
             if (collider.gameObject.tag == "item")
             {
-                inventory.Inventory.Add(PlayerInventory.NextEmptySlot(inventory), new SlotInformation(collider.gameObject.GetComponent<ItemDrop>().m_Item, 1));
-                Destroy(collider.gameObject);
+                Vector2 slot;
+                Item item = collider.gameObject.GetComponent<ItemDrop>().m_Item;
+                // First, see if the item already exists
+                if ((slot = PlayerInventory.FindItemSlot(inv, item)) != new Vector2(-1, -1))
+                {
+                    SlotInformation atSlot = inv.Inventory[slot];
+                    atSlot.Amount += 1;
+                    inv.Inventory[slot] = atSlot;
+                    Destroy(collider.gameObject);
+                }
+                else if ((slot = PlayerInventory.NextEmptySlot(inv)) != new Vector2(-1, -1))
+                {
+                    inv.Inventory.Add(slot, new SlotInformation(collider.gameObject.GetComponent<ItemDrop>().m_Item, 1));
+                    Destroy(collider.gameObject);
+                }
             }
         }
 
@@ -413,7 +426,7 @@ namespace MinimalMiner.Entity
             playerPrefs = managers.GetComponent<PreferencesManager>();
             eventMgr = managers.GetComponent<EventManager>();
             matMgr = managers.GetComponent<MaterialManager>();
-            inventory = new PlayerInventory(10000f, 10, 10);
+            inv = new PlayerInventory(10000f, 10, 10);
 
             // Reset state and stats
             Start();
