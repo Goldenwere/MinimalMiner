@@ -17,6 +17,7 @@ namespace MinimalMiner.Entity
         /// </summary>
         public ItemMaterial Material { get; private set; }
         [SerializeField] private SpriteRenderer sprite;
+        [SerializeField] private Animator animator;
 
         // TO-DO: Add UpdateTheme handler
 
@@ -31,6 +32,7 @@ namespace MinimalMiner.Entity
             transform.position = position;
             Material = mat;
             sprite.sprite = sp;
+            animator.SetFloat("Delay", Random.Range(0f, 1f));
         }
     }
 }
