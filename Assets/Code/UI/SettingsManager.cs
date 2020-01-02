@@ -56,13 +56,16 @@ namespace MinimalMiner.UI
             // Find the player preferences
             prefs = GameObject.FindWithTag("managers").GetComponent<PreferencesManager>();
 
-            // Update the buttons' texts
+            // Update control's text elements
             controlText["Button_Thrust"].text = prefs.Controls.Ship_Forward.ToString();
             controlText["Button_Turn-Right"].text = prefs.Controls.Ship_CW.ToString();
             controlText["Button_Turn-Left"].text = prefs.Controls.Ship_CCW.ToString();
             controlText["Button_Fire"].text = prefs.Controls.Ship_Fire.ToString();
             controlText["Button_Pause"].text = prefs.Controls.Menu_Pause.ToString();
             controlText["Button_Dampener"].text = prefs.Controls.Ship_Dampener.ToString();
+
+            // Update framerate display
+            framerateDisplay.text = prefs.Graphics.TargetFramerate.ToString();
 
             // Set up current states
             currControl = "";
@@ -218,7 +221,7 @@ namespace MinimalMiner.UI
         /// <param name="rate">The framerate to set to</param>
         public void UpdateTargetFramerate(float rate)
         {
-            prefs.UpdateTargetFramerate(rate);
+            prefs.UpdateTargetFramerate((int)rate);
             framerateDisplay.text = ((int)rate).ToString();
         }
 

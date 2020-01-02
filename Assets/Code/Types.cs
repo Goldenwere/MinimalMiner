@@ -277,6 +277,14 @@ namespace MinimalMiner
         public KeyCode Menu_Pause;
     }
 
+    public struct GraphicSettings
+    {
+        public int PostProcessingPreset;
+        public int AntiAliasingMode;
+        public int TargetFramerate;
+        public bool UseVsync;
+    }
+
     /// <summary>
     /// Defines player preferences
     /// </summary>
@@ -298,26 +306,9 @@ namespace MinimalMiner
         /// </summary>
         public float TargetLockForce;
 
-        #region Graphics
         /// <summary>
-        /// The player's post processing preference
+        /// The player's graphical preferences
         /// </summary>
-        public int CurrentPostProc;
-
-        /// <summary>
-        /// The player's anti-aliasing preference
-        /// </summary>
-        public int CurrentAA;
-
-        /// <summary>
-        /// The player's vsync preference
-        /// </summary>
-        public bool UseVsync;
-
-        /// <summary>
-        /// The player's target framerate preference
-        /// </summary>
-        public int CurrentFramerate;
-        #endregion
+        public GraphicSettings Graphics;
     }
 }

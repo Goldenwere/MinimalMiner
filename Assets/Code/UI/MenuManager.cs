@@ -28,6 +28,7 @@ namespace MinimalMiner.UI
         private List<Button> buttons;
         private List<TMP_Dropdown> dropdowns;
         private List<Slider> sliders;
+        private List<Toggle> toggles;
         #endregion
 
         #region Methods
@@ -81,6 +82,7 @@ namespace MinimalMiner.UI
             buttons = new List<Button>();
             dropdowns = new List<TMP_Dropdown>();
             sliders = new List<Slider>();
+            toggles = new List<Toggle>();
 
             List<GameObject> canvases = new List<GameObject>()
             {
@@ -100,6 +102,7 @@ namespace MinimalMiner.UI
                 buttons.AddRange(c.GetComponentsInChildren<Button>());
                 dropdowns.AddRange(c.GetComponentsInChildren<TMP_Dropdown>());
                 sliders.AddRange(c.GetComponentsInChildren<Slider>());
+                toggles.AddRange(c.GetComponentsInChildren<Toggle>());
             }
         }
 
@@ -129,14 +132,27 @@ namespace MinimalMiner.UI
                                 dropdown.SetValueWithoutNotify(i);
                     }
                 }
+
+                else if (dropdown.name == "Dropdown_PP")
+                    dropdown.SetValueWithoutNotify(playerPrefs.Graphics.PostProcessingPreset);
+
+                else if (dropdown.name == "Dropdown_AA")
+                    dropdown.SetValueWithoutNotify(playerPrefs.Graphics.AntiAliasingMode);
             }
 
             foreach (Slider slider in sliders)
             {
                 if (slider.name == "Slider_TargetLockForce")
-                {
-                    slider.value = playerPrefs.TargetLockForce;
-                }
+                    slider.SetValueWithoutNotify(playerPrefs.TargetLockForce);
+
+                else if (slider.name == "Slider_Framerate")
+                    slider.SetValueWithoutNotify(playerPrefs.Graphics.TargetFramerate);
+            }
+
+            foreach (Toggle toggle in toggles)
+            {
+                if (toggle.name == "Toggle_Vsync")
+                    toggle.SetIsOnWithoutNotify(playerPrefs.Graphics.UseVsync);
             }
         }
 

@@ -35,6 +35,11 @@ namespace MinimalMiner.Util
             }
         }
 
+        public GraphicSettings Graphics
+        {
+            get { return prefs.Graphics; }
+        }
+
         /// <summary>
         /// The force of the soft targeting mechanism
         /// </summary>
@@ -94,6 +99,7 @@ namespace MinimalMiner.Util
             // Otherwise, create one
             else
             {
+                // Define controls
                 InputDefinitions input = new InputDefinitions
                 {
                     Menu_Pause = KeyCode.Escape,
@@ -104,11 +110,43 @@ namespace MinimalMiner.Util
                     Ship_Fire = KeyCode.Space,
                     Ship_Dampener = KeyCode.Q
                 };
-
                 prefs.Controls = input;
+
+                // Define graphics
+                GraphicSettings graphics = new GraphicSettings
+                {
+                    AntiAliasingMode = 0,
+                    PostProcessingPreset = 0,
+                    TargetFramerate = 60,
+                    UseVsync = true
+                };
+                prefs.Graphics = graphics;
+                
+                // Define misc settings
                 prefs.CurrentTheme = 0;
+                prefs.TargetLockForce = 0.5f;
+
                 WriteToPreferences();
             }
+            #endregion
+
+            #region Graphics
+            // Post processing
+            for (int i = 0; i < ppPresets.Length; i++)
+            {
+                if (prefs.Graphics.PostProcessingPreset == i)
+                    ppPresets[i].SetActive(true);
+                else
+                    ppPresets[i].SetActive(false);
+            }
+            camLayer.antialiasingMode = (PostProcessLayer.Antialiasing)prefs.Graphics.AntiAliasingMode;
+
+            // Framerate
+            if (prefs.Graphics.UseVsync)
+                QualitySettings.vSyncCount = 1;
+            else
+                QualitySettings.vSyncCount = 0;
+            Application.targetFrameRate = prefs.Graphics.TargetFramerate;
             #endregion
 
             #region Themes
@@ -264,7 +302,7 @@ namespace MinimalMiner.Util
                     ppPresets[i].SetActive(false);
             }
 
-            prefs.CurrentPostProc = preset;
+            prefs.Graphics.PostProcessingPreset = preset;
         }
 
         /// <summary>
@@ -278,17 +316,17 @@ namespace MinimalMiner.Util
             else
                 QualitySettings.vSyncCount = 0;
 
-            prefs.UseVsync = toggled;
+            prefs.Graphics.UseVsync = toggled;
         }
 
         /// <summary>
         /// Updates the target framerate
         /// </summary>
         /// <param name="rate">The framerate to set to</param>
-        public void UpdateTargetFramerate(float rate)
+        public void UpdateTargetFramerate(int rate)
         {
-            Application.targetFrameRate = (int)rate;
-            prefs.CurrentFramerate = (int)rate;
+            Application.targetFrameRate = rate;
+            prefs.Graphics.TargetFramerate = rate;
         }
 
         /// <summary>
@@ -298,7 +336,7 @@ namespace MinimalMiner.Util
         public void UpdateAntiAlias(PostProcessLayer.Antialiasing option)
         {
             camLayer.antialiasingMode = option;
-            prefs.CurrentAA = (int)option;
+            prefs.Graphics.AntiAliasingMode = (int)option;
         }
 
         /// <summary>

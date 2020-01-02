@@ -1584,6 +1584,17 @@ MonoBehaviour:
           m_StringArgument: 
           m_BoolArgument: 0
         m_CallState: 2
+      - m_Target: {fileID: 247396937}
+        m_MethodName: WriteToPreferences
+        m_Mode: 1
+        m_Arguments:
+          m_ObjectArgument: {fileID: 0}
+          m_ObjectArgumentAssemblyTypeName: UnityEngine.Object, UnityEngine
+          m_IntArgument: 0
+          m_FloatArgument: 0
+          m_StringArgument: 
+          m_BoolArgument: 0
+        m_CallState: 2
 --- !u!114 &130713702
 MonoBehaviour:
   m_ObjectHideFlags: 0
@@ -1954,6 +1965,17 @@ MonoBehaviour:
         m_CallState: 2
       - m_Target: {fileID: 770967117}
         m_MethodName: Play
+        m_Mode: 1
+        m_Arguments:
+          m_ObjectArgument: {fileID: 0}
+          m_ObjectArgumentAssemblyTypeName: UnityEngine.Object, UnityEngine
+          m_IntArgument: 0
+          m_FloatArgument: 0
+          m_StringArgument: 
+          m_BoolArgument: 0
+        m_CallState: 2
+      - m_Target: {fileID: 247396937}
+        m_MethodName: WriteToPreferences
         m_Mode: 1
         m_Arguments:
           m_ObjectArgument: {fileID: 0}
@@ -2478,6 +2500,11 @@ MonoBehaviour:
   m_Script: {fileID: 11500000, guid: ce1444659eada1447bdad83148fc115a, type: 3}
   m_Name: 
   m_EditorClassIdentifier: 
+  camLayer: {fileID: 519420033}
+  ppPresets:
+  - {fileID: 475238127}
+  - {fileID: 43313351}
+  - {fileID: 1430767496}
 --- !u!114 &247396938
 MonoBehaviour:
   m_ObjectHideFlags: 0
@@ -11793,6 +11820,7 @@ MonoBehaviour:
   - {fileID: 1029514662}
   - {fileID: 168144859}
   - {fileID: 1090264953}
+  framerateDisplay: {fileID: 969369060}
   controlText_key:
   - Button_Thrust
   - Button_Turn-Left
@@ -11807,12 +11835,6 @@ MonoBehaviour:
   - {fileID: 1341098191}
   - {fileID: 1526967403}
   - {fileID: 1273188930}
-  camLayer: {fileID: 519420033}
-  ppPresets:
-  - {fileID: 475238127}
-  - {fileID: 43313351}
-  - {fileID: 1430767496}
-  framerateDisplay: {fileID: 969369060}
 --- !u!1 &1403848846
 GameObject:
   m_ObjectHideFlags: 0
