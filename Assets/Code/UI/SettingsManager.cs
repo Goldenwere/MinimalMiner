@@ -5,6 +5,7 @@ using System.Collections.Generic;
 using System;
 using UnityEngine;
 using UnityEngine.UI;
+using UnityEngine.Rendering.PostProcessing;
 using TMPro;
 using MinimalMiner.Util;
 
@@ -23,6 +24,7 @@ namespace MinimalMiner.UI
         // Canvases that need enabled/disabled appropriately
         [SerializeField] private GameObject canvasSettingsPrimary;      // The main settings canvas gameobject
         [SerializeField] private GameObject canvasSettingsControls;     // The controls settings canvas gameobject
+        [SerializeField] private GameObject canvasSettingsGraphics;     // The graphics settings canvas gameobject
 
         // UI elements that need updating
         [SerializeField] private List<Button> controls;                 // A list of the buttons related to controls in the controls canvas
@@ -31,6 +33,11 @@ namespace MinimalMiner.UI
         // Assign these in the inspector in matching order
         [SerializeField] private string[] controlText_key;              // used for controlText
         [SerializeField] private TextMeshProUGUI[] controlText_value;   // used for controlText
+
+        // Graphics-related elements
+        [SerializeField] private PostProcessLayer camLayer;
+        [SerializeField] private GameObject[] ppPresets;
+        [SerializeField] private TextMeshProUGUI framerateDisplay;
 
         /// <summary>
         /// Sets up the controlText collection before Start is first called
@@ -98,9 +105,15 @@ namespace MinimalMiner.UI
 
             switch (currState)
             {
+                case SettingsState.graphics:
+                    canvasSettingsPrimary.SetActive(false);
+                    canvasSettingsControls.SetActive(false);
+                    canvasSettingsGraphics.SetActive(true);
+                    break;
                 case SettingsState.controls_inactive:
                     canvasSettingsPrimary.SetActive(false);
                     canvasSettingsControls.SetActive(true);
+                    canvasSettingsGraphics.SetActive(false);
                     break;
                 case SettingsState.controls_active:
                     // Handled with UpdateControlState
@@ -109,6 +122,7 @@ namespace MinimalMiner.UI
                 default:
                     canvasSettingsPrimary.SetActive(true);
                     canvasSettingsControls.SetActive(false);
+                    canvasSettingsGraphics.SetActive(false);
                     break;
             }
         }
@@ -182,6 +196,52 @@ namespace MinimalMiner.UI
                         break;
                 }
             }
+        }
+
+        /// <summary>
+        /// Updates the post processing preset to be used
+        /// </summary>
+        /// <param name="preset">The index of the preset to use</param>
+        public void UpdatePostProcPreset(int preset)
+        {
+            for (int i = 0; i < ppPresets.Length; i++)
+            {
+                if (preset == i)
+                    ppPresets[i].SetActive(true);
+                else
+                    ppPresets[i].SetActive(false);
+            }
+        }
+
+        /// <summary>
+        /// Updates the vsync preference
+        /// </summary>
+        /// <param name="toggled">Whether the toggle was checked or not</param>
+        public void UpdateVsync(bool toggled)
+        {
+            if (toggled)
+                QualitySettings.vSyncCount = 1;
+            else
+                QualitySettings.vSyncCount = 0;
+        }
+
+        /// <summary>
+        /// Updates the target framerate
+        /// </summary>
+        /// <param name="rate">The framerate to set to</param>
+        public void UpdateTargetFramerate(float rate)
+        {
+            Application.targetFrameRate = (int)rate;
+            framerateDisplay.text = ((int)rate).ToString();
+        }
+
+        /// <summary>
+        /// Updates antialiasing on the post processing layer
+        /// </summary>
+        /// <param name="option">The index of the option in the enum</param>
+        public void UpdateAntiAlias(int option)
+        {
+            camLayer.antialiasingMode = (PostProcessLayer.Antialiasing)option;
         }
     }
 }

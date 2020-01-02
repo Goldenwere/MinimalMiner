@@ -123,7 +123,11 @@
         /// <summary>
         /// The controls menu, with a control selected
         /// </summary>
-        controls_active
+        controls_active,
+        /// <summary>
+        /// The graphics menu
+        /// </summary>
+        graphics
     }
 
     /// <summary>
