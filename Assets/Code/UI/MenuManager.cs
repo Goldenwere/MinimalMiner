@@ -3,6 +3,7 @@
 using UnityEngine;
 using UnityEngine.UI;
 using TMPro;
+using Unity.VectorGraphics;
 using MinimalMiner.Util;
 using System.Collections.Generic;
 
@@ -253,6 +254,26 @@ namespace MinimalMiner.UI
                     else if (g.name == "Fill")
                         g.GetComponent<Image>().color = theme.elem_objHealthValue;
                 }
+            }
+
+            // Update toggle colors
+            foreach(Toggle t in toggles)
+            {
+                ColorBlock c = t.colors;
+
+                c.normalColor = theme.button_normal;
+                c.highlightedColor = theme.button_hover;
+                c.pressedColor = theme.button_active;
+                c.selectedColor = theme.button_focus;
+                c.disabledColor = theme.button_disabled;
+
+                t.colors = c;
+
+                GameObject[] children = t.gameObject.GetAllChildren();
+
+                foreach (GameObject g in children)
+                    if (g.name == "Checkmark")
+                        g.GetComponent<SVGImage>().color = theme.text_body;
             }
         }
 
