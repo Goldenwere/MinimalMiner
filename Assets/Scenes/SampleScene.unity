@@ -2692,6 +2692,7 @@ MonoBehaviour:
     type: 3}
   dropPrefab: {fileID: 7875849222102994849, guid: 49f179e12e9bc10408e93a9aa2d021e7,
     type: 3}
+  prefsMgr: {fileID: 247396937}
   matMgr: {fileID: 247396944}
 --- !u!4 &247396940
 Transform:

@@ -275,7 +275,8 @@ namespace MinimalMiner.Entity
 
             else
             {
-                flashTimer = 0;
+                if(asteroidMgr.DamageFlashOn)
+                    flashTimer = 0;
                 audio.Play();
             }
         }

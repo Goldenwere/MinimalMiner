@@ -412,7 +412,8 @@ namespace MinimalMiner.Entity
 
             else
             {
-                flashTimer = 0;
+                if (playerPrefs.DoDamageFlash)
+                    flashTimer = 0;
                 damageSound.Play();
             }
         }

@@ -18,6 +18,11 @@ namespace MinimalMiner.Entity
         private List<GameObject> asteroids;                         // The asteroids instantiated in the scene
         [SerializeField] private GameObject asteroidPrefab;         // The asteroid prefab/format to spawn asteroids with
         [SerializeField] private GameObject dropPrefab;             // The drop prefab/format to spawn drops from asteroids with
+        [SerializeField] private PreferencesManager prefsMgr;
+        public bool DamageFlashOn
+        {
+            get { return prefsMgr.DoDamageFlash; }
+        }
 
         // Sprites that entities can use
         private List<Sprite> asteroidSprites;
