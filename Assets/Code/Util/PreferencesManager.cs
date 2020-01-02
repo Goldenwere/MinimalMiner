@@ -1,4 +1,7 @@
-﻿using UnityEngine;
+﻿#pragma warning disable 0649
+
+using UnityEngine;
+using UnityEngine.Rendering.PostProcessing;
 using System.IO;
 using System.Xml;
 using System.Xml.Serialization;
@@ -55,6 +58,10 @@ namespace MinimalMiner.Util
         {
             get; private set;
         }
+
+        // Graphics-related elements
+        [SerializeField] private PostProcessLayer camLayer;
+        [SerializeField] private GameObject[] ppPresets;
         #endregion
 
         #region Methods
@@ -232,7 +239,6 @@ namespace MinimalMiner.Util
             }
 
             prefs.Controls = newControls;
-            WriteToPreferences();
         }
 
         /// <summary>
@@ -242,6 +248,57 @@ namespace MinimalMiner.Util
         public void UpdateTargetLockForce(float force)
         {
             prefs.TargetLockForce = force;
+        }
+
+        /// <summary>
+        /// Updates the post processing preset to be used
+        /// </summary>
+        /// <param name="preset">The index of the preset to use</param>
+        public void UpdatePostProcPreset(int preset)
+        {
+            for (int i = 0; i < ppPresets.Length; i++)
+            {
+                if (preset == i)
+                    ppPresets[i].SetActive(true);
+                else
+                    ppPresets[i].SetActive(false);
+            }
+
+            prefs.CurrentPostProc = preset;
+        }
+
+        /// <summary>
+        /// Updates the vsync preference
+        /// </summary>
+        /// <param name="toggled">Whether the toggle was checked or not</param>
+        public void UpdateVsync(bool toggled)
+        {
+            if (toggled)
+                QualitySettings.vSyncCount = 1;
+            else
+                QualitySettings.vSyncCount = 0;
+
+            prefs.UseVsync = toggled;
+        }
+
+        /// <summary>
+        /// Updates the target framerate
+        /// </summary>
+        /// <param name="rate">The framerate to set to</param>
+        public void UpdateTargetFramerate(float rate)
+        {
+            Application.targetFrameRate = (int)rate;
+            prefs.CurrentFramerate = (int)rate;
+        }
+
+        /// <summary>
+        /// Updates antialiasing on the post processing layer
+        /// </summary>
+        /// <param name="option">The index of the option in the enum</param>
+        public void UpdateAntiAlias(PostProcessLayer.Antialiasing option)
+        {
+            camLayer.antialiasingMode = option;
+            prefs.CurrentAA = (int)option;
         }
 
         /// <summary>

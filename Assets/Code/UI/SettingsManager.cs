@@ -29,15 +29,11 @@ namespace MinimalMiner.UI
         // UI elements that need updating
         [SerializeField] private List<Button> controls;                 // A list of the buttons related to controls in the controls canvas
         private Dictionary<string, TextMeshProUGUI> controlText;        // A collection of the texts associated with the controls' buttons
+        [SerializeField] private TextMeshProUGUI framerateDisplay;
 
         // Assign these in the inspector in matching order
         [SerializeField] private string[] controlText_key;              // used for controlText
         [SerializeField] private TextMeshProUGUI[] controlText_value;   // used for controlText
-
-        // Graphics-related elements
-        [SerializeField] private PostProcessLayer camLayer;
-        [SerializeField] private GameObject[] ppPresets;
-        [SerializeField] private TextMeshProUGUI framerateDisplay;
 
         /// <summary>
         /// Sets up the controlText collection before Start is first called
@@ -204,13 +200,7 @@ namespace MinimalMiner.UI
         /// <param name="preset">The index of the preset to use</param>
         public void UpdatePostProcPreset(int preset)
         {
-            for (int i = 0; i < ppPresets.Length; i++)
-            {
-                if (preset == i)
-                    ppPresets[i].SetActive(true);
-                else
-                    ppPresets[i].SetActive(false);
-            }
+            prefs.UpdatePostProcPreset(preset);
         }
 
         /// <summary>
@@ -219,10 +209,7 @@ namespace MinimalMiner.UI
         /// <param name="toggled">Whether the toggle was checked or not</param>
         public void UpdateVsync(bool toggled)
         {
-            if (toggled)
-                QualitySettings.vSyncCount = 1;
-            else
-                QualitySettings.vSyncCount = 0;
+            prefs.UpdateVsync(toggled);
         }
 
         /// <summary>
@@ -231,7 +218,7 @@ namespace MinimalMiner.UI
         /// <param name="rate">The framerate to set to</param>
         public void UpdateTargetFramerate(float rate)
         {
-            Application.targetFrameRate = (int)rate;
+            prefs.UpdateTargetFramerate(rate);
             framerateDisplay.text = ((int)rate).ToString();
         }
 
@@ -241,7 +228,7 @@ namespace MinimalMiner.UI
         /// <param name="option">The index of the option in the enum</param>
         public void UpdateAntiAlias(int option)
         {
-            camLayer.antialiasingMode = (PostProcessLayer.Antialiasing)option;
+            prefs.UpdateAntiAlias((PostProcessLayer.Antialiasing)option);
         }
     }
 }

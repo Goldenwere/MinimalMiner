@@ -297,5 +297,27 @@ namespace MinimalMiner
         /// The force of the soft targeting mechanism (must be a number greater than one, or else destroys rotation)
         /// </summary>
         public float TargetLockForce;
+
+        #region Graphics
+        /// <summary>
+        /// The player's post processing preference
+        /// </summary>
+        public int CurrentPostProc;
+
+        /// <summary>
+        /// The player's anti-aliasing preference
+        /// </summary>
+        public int CurrentAA;
+
+        /// <summary>
+        /// The player's vsync preference
+        /// </summary>
+        public bool UseVsync;
+
+        /// <summary>
+        /// The player's target framerate preference
+        /// </summary>
+        public int CurrentFramerate;
+        #endregion
     }
 }
