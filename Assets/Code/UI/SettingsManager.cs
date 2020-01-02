@@ -233,5 +233,14 @@ namespace MinimalMiner.UI
         {
             prefs.UpdateAntiAlias((PostProcessLayer.Antialiasing)option);
         }
+
+        /// <summary>
+        /// Updates damage flashing preference
+        /// </summary>
+        /// <param name="toggled">Whether to enable or disable this setting</param>
+        public void UpdateDamageFlash(bool toggled)
+        {
+            prefs.UpdateDamageFlash(toggled);
+        }
     }
 }

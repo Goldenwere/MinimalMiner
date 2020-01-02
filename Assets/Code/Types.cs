@@ -296,6 +296,11 @@ namespace MinimalMiner
         public InputDefinitions Controls;
 
         /// <summary>
+        /// The player's graphical preferences
+        /// </summary>
+        public GraphicSettings Graphics;
+
+        /// <summary>
         /// The player's selected theme preference
         /// </summary>
         /// <remarks>(reset to 0 if exceeds installed themes e.g. in the situation that themes were removed)</remarks>
@@ -307,8 +312,8 @@ namespace MinimalMiner
         public float TargetLockForce;
 
         /// <summary>
-        /// The player's graphical preferences
+        /// The player's preference for sprite flashing on damage taken
         /// </summary>
-        public GraphicSettings Graphics;
+        public bool DoDamageFlashing;
     }
 }

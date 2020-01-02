@@ -153,6 +153,9 @@ namespace MinimalMiner.UI
             {
                 if (toggle.name == "Toggle_Vsync")
                     toggle.SetIsOnWithoutNotify(playerPrefs.Graphics.UseVsync);
+
+                else if (toggle.name == "Toggle_DamageFlashing")
+                    toggle.SetIsOnWithoutNotify(playerPrefs.DoDamageFlash);
             }
         }
 

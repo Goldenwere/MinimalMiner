@@ -47,6 +47,14 @@ namespace MinimalMiner.Util
         {
             get { return prefs.TargetLockForce; }
         }
+
+        /// <summary>
+        /// The player's preference for sprite flashing on damage taken
+        /// </summary>
+        public bool DoDamageFlash
+        {
+            get { return prefs.DoDamageFlashing; }
+        }
         
         /// <summary>
         /// The themes that the player has installed
@@ -125,6 +133,7 @@ namespace MinimalMiner.Util
                 // Define misc settings
                 prefs.CurrentTheme = 0;
                 prefs.TargetLockForce = 0.5f;
+                prefs.DoDamageFlashing = false;
 
                 WriteToPreferences();
             }
@@ -337,6 +346,15 @@ namespace MinimalMiner.Util
         {
             camLayer.antialiasingMode = option;
             prefs.Graphics.AntiAliasingMode = (int)option;
+        }
+
+        /// <summary>
+        /// Updates damage flashing preference
+        /// </summary>
+        /// <param name="toggled">Whether to enable or disable this setting</param>
+        public void UpdateDamageFlash(bool toggled)
+        {
+            prefs.DoDamageFlashing = toggled;
         }
 
         /// <summary>
