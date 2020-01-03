@@ -21,6 +21,8 @@ namespace MinimalMiner.UI
         [SerializeField] private GameObject canvasPlay;
         [SerializeField] private GameObject canvasPause;
         [SerializeField] private GameObject canvasDeath;
+        [SerializeField] private GameObject canvasModeSel;
+        [SerializeField] private GameObject canvasShipDesigner;
 
         // Collections of UI elements that need theme updates
         private List<TextMeshProUGUI> primaryHeadings;
@@ -91,7 +93,9 @@ namespace MinimalMiner.UI
                 canvasSettings,
                 canvasPlay,
                 canvasPause,
-                canvasDeath
+                canvasDeath,
+                canvasModeSel,
+                canvasShipDesigner
             };
 
             foreach(GameObject c in canvases)
@@ -299,6 +303,12 @@ namespace MinimalMiner.UI
                 case GameState.death:
                     canvasDeath.SetActive(false);
                     break;
+                case GameState.modeselect:
+                    canvasModeSel.SetActive(false);
+                    break;
+                case GameState.shipdesigner:
+                    canvasShipDesigner.SetActive(false);
+                    break;
                 case GameState.main:
                     canvasMain.SetActive(false);
                     break;
@@ -307,6 +317,8 @@ namespace MinimalMiner.UI
                     canvasPause.SetActive(false);
                     canvasPlay.SetActive(false);
                     canvasSettings.SetActive(false);
+                    canvasShipDesigner.SetActive(false);
+                    canvasModeSel.SetActive(false);
                     break;
             }
 
@@ -324,6 +336,12 @@ namespace MinimalMiner.UI
                     break;
                 case GameState.death:
                     canvasDeath.SetActive(true);
+                    break;
+                case GameState.modeselect:
+                    canvasModeSel.SetActive(true);
+                    break;
+                case GameState.shipdesigner:
+                    canvasShipDesigner.SetActive(true);
                     break;
                 case GameState.main:
                 default:
