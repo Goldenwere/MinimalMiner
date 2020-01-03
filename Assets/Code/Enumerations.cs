@@ -94,7 +94,7 @@
         /// </summary>
         settings,
         /// <summary>
-        /// Normal play screen
+        /// The main playing gamestate, further defined by PlayMode
         /// </summary>
         play,
         /// <summary>
@@ -104,7 +104,34 @@
         /// <summary>
         /// The death menu
         /// </summary>
-        death
+        death,
+        /// <summary>
+        /// The mode select menu
+        /// </summary>
+        modeselect,
+        /// <summary>
+        /// The ship designer menu (used in sandbox PlayMode)
+        /// </summary>
+        shipdesigner
+    }
+
+    /// <summary>
+    /// Represents the different modes for the play GameState
+    /// </summary>
+    public enum PlayMode
+    {
+        /// <summary>
+        /// Sandbox playmode
+        /// </summary>
+        sandbox,
+        /// <summary>
+        /// Career playmode
+        /// </summary>
+        career,
+        /// <summary>
+        /// Story playmode
+        /// </summary>
+        story
     }
 
     /// <summary>

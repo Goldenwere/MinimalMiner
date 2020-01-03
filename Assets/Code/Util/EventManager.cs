@@ -11,6 +11,7 @@ namespace MinimalMiner.Util
     public class EventManager : MonoBehaviour
     {
         #region Fields & Properties
+        #region Events
         public delegate void OnSelectThemeDelegate(int themeIndex);
         /// <summary>
         /// Informs subscribed objects that a Theme was selected
@@ -41,10 +42,25 @@ namespace MinimalMiner.Util
         /// </summary>
         public static event OnUpdateTargetDelegate OnUpdateTarget = delegate { };
 
+        public delegate void OnUpdatePlayModeDelegate(PlayMode mode);
+        /// <summary>
+        /// Informs subscribed objects that the play mode was changed
+        /// </summary>
+        public static event OnUpdatePlayModeDelegate OnUpdatePlayMode = delegate { };
+        #endregion
+
         /// <summary>
         /// The current GameState that the game is in
         /// </summary>
         public GameState CurrState
+        {
+            get; private set;
+        }
+
+        /// <summary>
+        /// The current PlayMode that the game is in
+        /// </summary>
+        public PlayMode CurrMode
         {
             get; private set;
         }
@@ -116,6 +132,27 @@ namespace MinimalMiner.Util
             CurrState = newState;
             OnUpdateGameState(newState, prevState);
             UpdateTimeState();
+        }
+
+        /// <summary>
+        /// Updates the current PlayMode and passes this update to relevant objects
+        /// </summary>
+        /// <param name="newMode">The new PlayMode</param>
+        public void UpdatePlayMode(PlayMode newMode)
+        {
+            CurrMode = newMode;
+            OnUpdatePlayMode(newMode);
+        }
+
+        /// <summary>
+        /// Updates the current PlayMode and passes this update to relevant objects
+        /// </summary>
+        /// <param name="newMode">The new PlayMode</param>
+        public void UpdatePlayMode(string desiredMode)
+        {
+            Enum.TryParse<PlayMode>(desiredMode, out PlayMode newMode);
+            CurrMode = newMode;
+            OnUpdatePlayMode(newMode);
         }
 
         /// <summary>
