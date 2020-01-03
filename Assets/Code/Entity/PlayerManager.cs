@@ -40,7 +40,7 @@ namespace MinimalMiner.Entity
         private void UpdateGameState(GameState newState, GameState prevState)
         {
             // Enable player at the start of gameplay
-            if (newState == GameState.play && prevState == GameState.main)
+            if (newState == GameState.play && prevState != GameState.pause)
             {
                 playerObj.SetActive(true);
                 player.enabled = true;

@@ -95,7 +95,7 @@ namespace MinimalMiner.Entity
             currState = newState;
 
             // Spawn asteroids at the start of gameplay
-            if (newState == GameState.play && prevState == GameState.main)
+            if (newState == GameState.play && prevState != GameState.pause)
             {
                 SpawnAsteroids();
             }
