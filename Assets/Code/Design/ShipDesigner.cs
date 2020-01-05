@@ -18,6 +18,12 @@ namespace MinimalMiner.Design
         {
             get { return shipClass.Config.Stats_Weapons.Weapons[shipClass.Config.Stats_Weapons.Slots[weaponIndex]]; }
         }
+        private Vector3 CurrentWeaponKey
+        {
+            get { return shipClass.Config.Stats_Weapons.Slots[weaponIndex]; }
+        }
+        private Vector3 weaponRot;
+        private Vector3 weaponPos;
 
         // Start is called before the first frame update
         void Start()
@@ -110,19 +116,29 @@ namespace MinimalMiner.Design
                     shipClass.Config.UpdateWeapon(w, weaponIndex);
                     break;
                 case ShipComponent.Wpn_PosX:
+                    weaponPos = new Vector3(value, weaponPos.y);
+                    shipClass.Config.UpdateWeaponTransform(weaponIndex, weaponPos, TransformChanged.position);
                     break;
                 case ShipComponent.Wpn_PosY:
+                    weaponPos = new Vector3(weaponPos.x, value);
+                    shipClass.Config.UpdateWeaponTransform(weaponIndex, weaponPos, TransformChanged.position);
                     break;
                 case ShipComponent.Wpn_RateOfFire:
                     break;
                 case ShipComponent.Wpn_Recoil:
                     break;
                 case ShipComponent.Wpn_RotX:
+                    weaponRot = new Vector3(value, weaponRot.y);
+                    shipClass.Config.UpdateWeaponTransform(weaponIndex, weaponPos, TransformChanged.rotation);
                     break;
                 case ShipComponent.Wpn_RotY:
+                    weaponRot = new Vector3(weaponRot.x, value);
+                    shipClass.Config.UpdateWeaponTransform(weaponIndex, weaponPos, TransformChanged.rotation);
                     break;
                 case ShipComponent.Wpn_Selection:
                     weaponIndex = (int)value;
+                    weaponRot = shipClass.Config.Stats_Weapons.Rotations[CurrentWeaponKey];
+                    weaponPos = shipClass.Config.Stats_Weapons.Slots[weaponIndex];
                     break;
                 case ShipComponent.Wpn_Speed:
                     break;
@@ -137,6 +153,8 @@ namespace MinimalMiner.Design
         private void ResetWeapons()
         {
             weaponIndex = 0;
+            weaponPos = new Vector3();
+            weaponRot = new Vector3();
             ShipWeaponry sw = new ShipWeaponry();
             sw.DamageModifier = 1;
             sw.RateModifier = 1;

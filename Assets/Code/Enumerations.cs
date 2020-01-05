@@ -216,4 +216,13 @@
         Thr_Recoil,
         Thr_Dampener
     }
+
+    /// <summary>
+    /// Defines what transform is being chaned for use in configuring a ship
+    /// </summary>
+    public enum TransformChanged
+    {
+        position,
+        rotation
+    }
 }

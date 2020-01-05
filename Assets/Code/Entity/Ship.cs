@@ -183,6 +183,36 @@ namespace MinimalMiner.Entity
         {
             Stats_Weapons.Weapons[Stats_Weapons.Slots[slot]] = wpn;
         }
+
+        /// <summary>
+        /// Used for updating the transform of a weapon
+        /// </summary>
+        /// <param name="slot">The weapon slot being manipulated</param>
+        /// <param name="vec">The new transform vector</param>
+        /// <param name="tc">Whether position or rotation are being updated</param>
+        public void UpdateWeaponTransform(int slot, Vector3 vec, TransformChanged tc)
+        {
+            if (tc == TransformChanged.position)
+            {
+                Vector3 slotVec = Stats_Weapons.Slots[slot];
+
+                Vector3 rot = Stats_Weapons.Rotations[slotVec];
+                WeaponSlotStatus s = Stats_Weapons.SlotStatus[slotVec];
+                ShipWeapon w = Stats_Weapons.Weapons[slotVec];
+
+                Stats_Weapons.Rotations.Remove(slotVec);
+                Stats_Weapons.SlotStatus.Remove(slotVec);
+                Stats_Weapons.Weapons.Remove(slotVec);
+
+                Stats_Weapons.Slots[slot] = vec;
+                Stats_Weapons.Rotations[vec] = rot;
+                Stats_Weapons.SlotStatus[vec] = s;
+                Stats_Weapons.Weapons[vec] = w;
+            }
+
+            else
+                Stats_Weapons.Rotations[Stats_Weapons.Slots[slot]] = vec;
+        }
         #endregion
     }
 
