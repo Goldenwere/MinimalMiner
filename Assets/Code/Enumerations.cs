@@ -186,6 +186,9 @@
         svggradient
     }
 
+    /// <summary>
+    /// Defines a ship component for use in configuring a ship
+    /// </summary>
     public enum ShipComponent
     {
         Def_ShieldStrength,
