@@ -1,4 +1,6 @@
-﻿using System;
+﻿#pragma warning disable CS0649
+
+using System;
 using System.Collections.Generic;
 using UnityEngine;
 using MinimalMiner;
@@ -6,6 +8,9 @@ using MinimalMiner.Entity;
 
 namespace MinimalMiner.Design
 {
+    /// <summary>
+    /// Used for designing a player ship
+    /// </summary>
     public class ShipDesigner : MonoBehaviour
     {
         [SerializeField] private GameObject shipParent;

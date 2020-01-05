@@ -96,6 +96,31 @@ namespace MinimalMiner.Entity
         }
 
         /// <summary>
+        /// Creates a basic, otherwise blank ship config
+        /// </summary>
+        /// <param name="spr">The sprite for the ship</param>
+        /// <param name="e">A reference to the EventManager in the scene</param>
+        public ShipConfiguration(Sprite spr, EventManager e)
+        {
+            eventMgr = e;
+            BodySprite = spr;
+
+            ShipWeaponry w = new ShipWeaponry();
+            w.Slots = new List<Vector3>();
+            w.Weapons = new Dictionary<Vector3, ShipWeapon>();
+            w.SlotStatus = new Dictionary<Vector3, WeaponSlotStatus>();
+            w.Rotations = new Dictionary<Vector3, Vector3>();
+            Stats_Weapons = w;
+
+            ShipDefenses d = new ShipDefenses();
+            Stats_Defenses = d;
+            Current_Defenses = d;
+
+            ShipThrusters t = new ShipThrusters();
+            Stats_Thrusters = t;
+        }
+
+        /// <summary>
         /// Applies damage to the ship
         /// </summary>
         /// <param name="damageTaken">The incoming amount of damage to take</param>
