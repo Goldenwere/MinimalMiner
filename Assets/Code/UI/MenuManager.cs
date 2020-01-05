@@ -229,9 +229,6 @@ namespace MinimalMiner.UI
 
                         t.colors = b;
                     }
-
-                    else if (g.name == "Item Label")
-                        g.GetComponent<TextMeshProUGUI>().color = theme.text_body;
                 }
             }
 
