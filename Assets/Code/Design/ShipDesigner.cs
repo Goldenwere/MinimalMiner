@@ -83,6 +83,7 @@ namespace MinimalMiner.Design
         /// <param name="comp">The component being manipulated in SetValue</param>
         public void OnValueSet(ShipComponent comp)
         {
+            ShipWeapon w;
             switch(comp)
             {
                 case ShipComponent.Def_Armor:
@@ -111,7 +112,7 @@ namespace MinimalMiner.Design
                     ResetWeapons();
                     break;
                 case ShipComponent.Wpn_Damage:
-                    ShipWeapon w = CurrentWeapon;
+                    w = CurrentWeapon;
                     w.Damage = value;
                     shipClass.Config.UpdateWeapon(w, weaponIndex);
                     break;
@@ -124,8 +125,14 @@ namespace MinimalMiner.Design
                     shipClass.Config.UpdateWeaponTransform(weaponIndex, weaponPos, TransformChanged.position);
                     break;
                 case ShipComponent.Wpn_RateOfFire:
+                    w = CurrentWeapon;
+                    w.RateOfFire = value;
+                    shipClass.Config.UpdateWeapon(w, weaponIndex);
                     break;
                 case ShipComponent.Wpn_Recoil:
+                    w = CurrentWeapon;
+                    w.Recoil = value;
+                    shipClass.Config.UpdateWeapon(w, weaponIndex);
                     break;
                 case ShipComponent.Wpn_RotX:
                     weaponRot = new Vector3(value, weaponRot.y);
@@ -141,8 +148,14 @@ namespace MinimalMiner.Design
                     weaponPos = shipClass.Config.Stats_Weapons.Slots[weaponIndex];
                     break;
                 case ShipComponent.Wpn_Speed:
+                    w = CurrentWeapon;
+                    w.Speed = value;
+                    shipClass.Config.UpdateWeapon(w, weaponIndex);
                     break;
                 case ShipComponent.Wpn_Type:
+                    w = CurrentWeapon;
+                    w.Type = (WeaponType)(int)value;
+                    shipClass.Config.UpdateWeapon(w, weaponIndex);
                     break;
             }
         }
