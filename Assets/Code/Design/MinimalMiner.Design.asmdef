@@ -1,0 +1,18 @@
+{
+    "name": "MinimalMiner.Design",
+    "references": [
+        "GUID:7bf6e98a84d8a4244bbde5a507393aa8",
+        "GUID:a9b5389721cd0cf46a4ac77099e8009a",
+        "GUID:a8f2626909d214647a9257d090c2abc5",
+        "GUID:a42638ce960a8dd4a955cbbd19d7affb"
+    ],
+    "includePlatforms": [],
+    "excludePlatforms": [],
+    "allowUnsafeCode": false,
+    "overrideReferences": false,
+    "precompiledReferences": [],
+    "autoReferenced": true,
+    "defineConstraints": [],
+    "versionDefines": [],
+    "noEngineReferences": false
+}

@@ -185,4 +185,32 @@
         svg,
         svggradient
     }
+
+    public enum ShipComponent
+    {
+        Def_ShieldStrength,
+        Def_ShieldRecharge,
+        Def_ShieldDelay,
+        Def_Armor,
+        Def_Resistance,
+
+        Wpn_Count,
+        Wpn_Selection,
+        Wpn_PosX,
+        Wpn_PosY,
+        Wpn_RotX,
+        Wpn_RotY,
+        Wpn_Type,
+        Wpn_Damage,
+        Wpn_Speed,
+        Wpn_Recoil,
+        Wpn_RateOfFire,
+
+        Thr_Forward,
+        Thr_Reverse,
+        Thr_RotSpd,
+        Thr_MaxSpd,
+        Thr_Recoil,
+        Thr_Dampener
+    }
 }
