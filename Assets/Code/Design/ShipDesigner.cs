@@ -11,7 +11,13 @@ namespace MinimalMiner.Design
         [SerializeField] private GameObject shipParent;
         [SerializeField] private LowLevelPlayer shipClass;
         private float value;
+
+        // Current weapon being manipulated in weapon config
         private int weaponIndex;
+        private ShipWeapon CurrentWeapon
+        {
+            get { return shipClass.Config.Stats_Weapons.Weapons[shipClass.Config.Stats_Weapons.Slots[weaponIndex]]; }
+        }
 
         // Start is called before the first frame update
         void Start()
@@ -99,6 +105,9 @@ namespace MinimalMiner.Design
                     ResetWeapons();
                     break;
                 case ShipComponent.Wpn_Damage:
+                    ShipWeapon w = CurrentWeapon;
+                    w.Damage = value;
+                    shipClass.Config.UpdateWeapon(w, weaponIndex);
                     break;
                 case ShipComponent.Wpn_PosX:
                     break;
@@ -113,6 +122,7 @@ namespace MinimalMiner.Design
                 case ShipComponent.Wpn_RotY:
                     break;
                 case ShipComponent.Wpn_Selection:
+                    weaponIndex = (int)value;
                     break;
                 case ShipComponent.Wpn_Speed:
                     break;
@@ -142,6 +152,8 @@ namespace MinimalMiner.Design
             sw.Rotations = new Dictionary<Vector3, Vector3>();
             for (int i = 0; i < value; i++)
                 sw.Rotations[sw.Slots[i]] = new Vector3();
+
+            shipClass.Config.UpdateWeaponConfig(sw);
         }
     }
 }

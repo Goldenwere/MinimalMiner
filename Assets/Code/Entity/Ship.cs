@@ -168,11 +168,20 @@ namespace MinimalMiner.Entity
         /// <summary>
         /// Used for updating weapons when in the shipdesigner GameState
         /// </summary>
-        /// <param name="wpn"></param>
-        public void UpdateWeapons(ShipWeaponry wpn)
+        /// <param name="wpn">The new weaponry that replaces Stats_Weapons</param>
+        public void UpdateWeaponConfig(ShipWeaponry wpn)
         {
             if (eventMgr.CurrState == GameState.shipdesigner)
                 Stats_Weapons = wpn;
+        }
+
+        /// <summary>
+        /// Used for updating a specific weapon when in the shipdesigner GameState
+        /// </summary>
+        /// <param name="wpn">The new weapon</param>
+        public void UpdateWeapon(ShipWeapon wpn, int slot)
+        {
+            Stats_Weapons.Weapons[Stats_Weapons.Slots[slot]] = wpn;
         }
         #endregion
     }
