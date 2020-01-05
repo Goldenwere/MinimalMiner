@@ -217,11 +217,24 @@ namespace MinimalMiner.Entity
         /// <summary>
         /// Used for updating thrusters when in the shipdesigner GameState
         /// </summary>
-        /// <param name="thr"></param>
+        /// <param name="thr">The new thrusters that replaces Stats_Thrusters</param>
         public void UpdateThrusterConfig(ShipThrusters thr)
         {
             if (eventMgr.CurrState == GameState.shipdesigner)
                 Stats_Thrusters = thr;
+        }
+
+        /// <summary>
+        /// Used for updating defense config when in the shipdesigner GameState
+        /// </summary>
+        /// <param name="def">The new defenses that replaces Stats_Defenses and Current_Defenses</param>
+        public void UpdateDefenseConfig(ShipDefenses def)
+        {
+            if (eventMgr.CurrState == GameState.shipdesigner)
+            {
+                Stats_Defenses = def;
+                Current_Defenses = def;
+            }
         }
         #endregion
     }

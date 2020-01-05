@@ -30,6 +30,10 @@ namespace MinimalMiner.Design
         {
             get { return shipClass.Config.Stats_Thrusters; }
         }
+        private ShipDefenses CurrentDefenses
+        {
+            get { return shipClass.Config.Stats_Defenses; }
+        }
 
         // Start is called before the first frame update
         void Start()
@@ -91,17 +95,33 @@ namespace MinimalMiner.Design
         {
             ShipWeapon w;
             ShipThrusters thr;
+            ShipDefenses def;
             switch(comp)
             {
                 case ShipComponent.Def_Armor:
+                    def = CurrentDefenses;
+                    def.ArmorStrength = value;
+                    shipClass.Config.UpdateDefenseConfig(def);
                     break;
                 case ShipComponent.Def_Resistance:
+                    def = CurrentDefenses;
+                    def.DamageResistance = value;
+                    shipClass.Config.UpdateDefenseConfig(def);
                     break;
                 case ShipComponent.Def_ShieldDelay:
+                    def = CurrentDefenses;
+                    def.ShieldDelay = value;
+                    shipClass.Config.UpdateDefenseConfig(def);
                     break;
                 case ShipComponent.Def_ShieldRecharge:
+                    def = CurrentDefenses;
+                    def.ShieldRecharge = value;
+                    shipClass.Config.UpdateDefenseConfig(def);
                     break;
                 case ShipComponent.Def_ShieldStrength:
+                    def = CurrentDefenses;
+                    def.ShieldStrength = value;
+                    shipClass.Config.UpdateDefenseConfig(def);
                     break;
                 case ShipComponent.Thr_Dampener:
                     thr = CurrentThrusters;
