@@ -7,6 +7,7 @@ namespace MinimalMiner.Design
     public class ShipDesigner : MonoBehaviour
     {
         [SerializeField] private GameObject shipParent;
+        [SerializeField] private LowLevelPlayer shipClass;
         private float value;
 
         // Start is called before the first frame update
@@ -67,7 +68,53 @@ namespace MinimalMiner.Design
         /// <param name="comp">The component being manipulated in SetValue</param>
         public void OnValueSet(ShipComponent comp)
         {
-
+            switch(comp)
+            {
+                case ShipComponent.Def_Armor:
+                    break;
+                case ShipComponent.Def_Resistance:
+                    break;
+                case ShipComponent.Def_ShieldDelay:
+                    break;
+                case ShipComponent.Def_ShieldRecharge:
+                    break;
+                case ShipComponent.Def_ShieldStrength:
+                    break;
+                case ShipComponent.Thr_Dampener:
+                    break;
+                case ShipComponent.Thr_Forward:
+                    break;
+                case ShipComponent.Thr_MaxSpd:
+                    break;
+                case ShipComponent.Thr_Recoil:
+                    break;
+                case ShipComponent.Thr_Reverse:
+                    break;
+                case ShipComponent.Thr_RotSpd:
+                    break;
+                case ShipComponent.Wpn_Count:
+                    break;
+                case ShipComponent.Wpn_Damage:
+                    break;
+                case ShipComponent.Wpn_PosX:
+                    break;
+                case ShipComponent.Wpn_PosY:
+                    break;
+                case ShipComponent.Wpn_RateOfFire:
+                    break;
+                case ShipComponent.Wpn_Recoil:
+                    break;
+                case ShipComponent.Wpn_RotX:
+                    break;
+                case ShipComponent.Wpn_RotY:
+                    break;
+                case ShipComponent.Wpn_Selection:
+                    break;
+                case ShipComponent.Wpn_Speed:
+                    break;
+                case ShipComponent.Wpn_Type:
+                    break;
+            }
         }
     }
 }
