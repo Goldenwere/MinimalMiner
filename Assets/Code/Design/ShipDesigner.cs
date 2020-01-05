@@ -25,6 +25,12 @@ namespace MinimalMiner.Design
         private Vector3 weaponRot;
         private Vector3 weaponPos;
 
+        // Current other stuff
+        private ShipThrusters CurrentThrusters
+        {
+            get { return shipClass.Config.Stats_Thrusters; }
+        }
+
         // Start is called before the first frame update
         void Start()
         {
@@ -84,6 +90,7 @@ namespace MinimalMiner.Design
         public void OnValueSet(ShipComponent comp)
         {
             ShipWeapon w;
+            ShipThrusters thr;
             switch(comp)
             {
                 case ShipComponent.Def_Armor:
@@ -97,16 +104,34 @@ namespace MinimalMiner.Design
                 case ShipComponent.Def_ShieldStrength:
                     break;
                 case ShipComponent.Thr_Dampener:
+                    thr = CurrentThrusters;
+                    thr.DampenerStrength = value;
+                    shipClass.Config.UpdateThrusterConfig(thr);
                     break;
                 case ShipComponent.Thr_Forward:
+                    thr = CurrentThrusters;
+                    thr.ForwardThrusterForce = value;
+                    shipClass.Config.UpdateThrusterConfig(thr);
                     break;
                 case ShipComponent.Thr_MaxSpd:
+                    thr = CurrentThrusters;
+                    thr.MaxDirectionalSpeed = value;
+                    shipClass.Config.UpdateThrusterConfig(thr);
                     break;
                 case ShipComponent.Thr_Recoil:
+                    thr = CurrentThrusters;
+                    thr.RecoilCompensation = value;
+                    shipClass.Config.UpdateThrusterConfig(thr);
                     break;
                 case ShipComponent.Thr_Reverse:
+                    thr = CurrentThrusters;
+                    thr.ReverseThrusterForce = value;
+                    shipClass.Config.UpdateThrusterConfig(thr);
                     break;
                 case ShipComponent.Thr_RotSpd:
+                    thr = CurrentThrusters;
+                    thr.RotationalSpeed = value;
+                    shipClass.Config.UpdateThrusterConfig(thr);
                     break;
                 case ShipComponent.Wpn_Count:
                     ResetWeapons();

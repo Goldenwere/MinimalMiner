@@ -213,6 +213,16 @@ namespace MinimalMiner.Entity
             else
                 Stats_Weapons.Rotations[Stats_Weapons.Slots[slot]] = vec;
         }
+
+        /// <summary>
+        /// Used for updating thrusters when in the shipdesigner GameState
+        /// </summary>
+        /// <param name="thr"></param>
+        public void UpdateThrusterConfig(ShipThrusters thr)
+        {
+            if (eventMgr.CurrState == GameState.shipdesigner)
+                Stats_Thrusters = thr;
+        }
         #endregion
     }
 
