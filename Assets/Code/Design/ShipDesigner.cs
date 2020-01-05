@@ -1,6 +1,8 @@
 ﻿using System;
+using System.Collections.Generic;
 using UnityEngine;
 using MinimalMiner;
+using MinimalMiner.Entity;
 
 namespace MinimalMiner.Design
 {
@@ -9,6 +11,7 @@ namespace MinimalMiner.Design
         [SerializeField] private GameObject shipParent;
         [SerializeField] private LowLevelPlayer shipClass;
         private float value;
+        private int weaponIndex;
 
         // Start is called before the first frame update
         void Start()
@@ -93,6 +96,7 @@ namespace MinimalMiner.Design
                 case ShipComponent.Thr_RotSpd:
                     break;
                 case ShipComponent.Wpn_Count:
+                    ResetWeapons();
                     break;
                 case ShipComponent.Wpn_Damage:
                     break;
@@ -115,6 +119,29 @@ namespace MinimalMiner.Design
                 case ShipComponent.Wpn_Type:
                     break;
             }
+        }
+
+        /// <summary>
+        /// Resets weapons when the weapon count is updated
+        /// </summary>
+        private void ResetWeapons()
+        {
+            weaponIndex = 0;
+            ShipWeaponry sw = new ShipWeaponry();
+            sw.DamageModifier = 1;
+            sw.RateModifier = 1;
+
+            sw.Slots = new List<Vector3>();
+            for (int i = 0; i < value; i++)
+                sw.Slots[i] = new Vector3();
+
+            sw.SlotStatus = new Dictionary<Vector3, WeaponSlotStatus>();
+            for (int i = 0; i < value; i++)
+                sw.SlotStatus[sw.Slots[i]] = WeaponSlotStatus.enabled;
+
+            sw.Rotations = new Dictionary<Vector3, Vector3>();
+            for (int i = 0; i < value; i++)
+                sw.Rotations[sw.Slots[i]] = new Vector3();
         }
     }
 }

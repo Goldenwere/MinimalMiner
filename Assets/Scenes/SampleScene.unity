@@ -15422,7 +15422,7 @@ MonoBehaviour:
   m_OnCullStateChanged:
     m_PersistentCalls:
       m_Calls: []
-  m_text: 'Edit Weapon:'
+  m_text: 'Weapon Type:'
   m_isRightToLeft: 0
   m_fontAsset: {fileID: 11400000, guid: e855e1abb2447294ebd71967ab62e449, type: 2}
   m_sharedMaterial: {fileID: 6083060210738713762, guid: e855e1abb2447294ebd71967ab62e449,
@@ -34084,6 +34084,7 @@ MonoBehaviour:
   m_Name: 
   m_EditorClassIdentifier: 
   shipParent: {fileID: 0}
+  shipClass: {fileID: 0}
 --- !u!1 &1904691093
 GameObject:
   m_ObjectHideFlags: 0

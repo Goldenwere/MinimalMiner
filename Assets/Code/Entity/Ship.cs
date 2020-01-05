@@ -164,6 +164,16 @@ namespace MinimalMiner.Entity
                 eventMgr.UpdateHUDElement(HUDElement.shield, Math.Round(updatedDef.ShieldStrength, 2).ToString());
             }
         }
+
+        /// <summary>
+        /// Used for updating weapons when in the shipdesigner GameState
+        /// </summary>
+        /// <param name="wpn"></param>
+        public void UpdateWeapons(ShipWeaponry wpn)
+        {
+            if (eventMgr.CurrState == GameState.shipdesigner)
+                Stats_Weapons = wpn;
+        }
         #endregion
     }
 
