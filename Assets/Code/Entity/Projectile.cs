@@ -20,6 +20,9 @@ namespace MinimalMiner.Entity
         [SerializeField] private SpriteRenderer sprite;
         [SerializeField] private ColliderListener colliderListener;
         [SerializeField] private Rigidbody2D rigidbody;
+
+        // Weapon variables
+        private float damage;
         #endregion
 
         #region Methods
@@ -67,7 +70,7 @@ namespace MinimalMiner.Entity
         {
             if (collision.gameObject.tag == "asteroid")
             {
-                collision.gameObject.GetComponent<Asteroid>().TakeDamage(5f);
+                collision.gameObject.GetComponent<Asteroid>().TakeDamage(damage);
             }
 
             Destroy(gameObject);
@@ -96,9 +99,10 @@ namespace MinimalMiner.Entity
         /// Sets up the projectile on instantiation
         /// </summary>
         /// <param name="vel"></param>
-        public void Setup(Vector2 vel)
+        public void Setup(Vector2 vel, float dmg)
         {
             rigidbody.AddForce(vel);
+            damage = dmg;
         }
         #endregion
     }

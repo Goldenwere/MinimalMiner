@@ -352,7 +352,8 @@ namespace MinimalMiner.Entity
 
                             // Set up its velocity and color based on current theme (aka the ship's color)
                             Projectile behaviour = proj.GetComponentInChildren<Projectile>();
-                            behaviour.Setup(Vector2.ClampMagnitude(new Vector2(bulletLoc[i].transform.right.x * w.Speed, bulletLoc[i].transform.right.y * w.Speed), w.Speed));
+                            behaviour.Setup(Vector2.ClampMagnitude(new Vector2(bulletLoc[i].transform.right.x * w.Speed, bulletLoc[i].transform.right.y * w.Speed), w.Speed),
+                                w.Damage * shipConfig.Stats_Weapons.DamageModifier);
                             proj.GetComponentInChildren<SpriteRenderer>().material.color = sprite.material.color;
 
                             // Play fire sound and add recoil force

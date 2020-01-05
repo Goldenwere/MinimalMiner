@@ -1,5 +1,5 @@
 {
-    "name": "MinimalMiner-Util",
+    "name": "MinimalMiner.Util",
     "references": [
         "GUID:7bf6e98a84d8a4244bbde5a507393aa8",
         "GUID:d60799ab2a985554ea1a39cd38695018"

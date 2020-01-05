@@ -1,5 +1,5 @@
 {
-    "name": "MinimalMiner-Entity",
+    "name": "MinimalMiner.Entity",
     "references": [
         "GUID:a42638ce960a8dd4a955cbbd19d7affb",
         "GUID:a9b5389721cd0cf46a4ac77099e8009a",
