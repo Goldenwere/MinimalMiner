@@ -13,9 +13,9 @@ namespace MinimalMiner.UI
         [SerializeField] private TMP_Dropdown weaponSelectionDropdown;
         [SerializeField] private Slider[] individualWeaponSliders;
         [SerializeField] private TMP_Dropdown[] individualWeaponDropdowns;
-        [SerializeField] private string[] valueIndicatorTitles;
+        [SerializeField] private ShipComponent[] valueIndicatorTitles;
         [SerializeField] private TextMeshProUGUI[] valueIndicatorTexts;
-        private Dictionary<string, TextMeshProUGUI> valueIndicators;
+        private Dictionary<ShipComponent, TextMeshProUGUI> valueIndicators;
         private float value;
 
         /// <summary>
@@ -24,7 +24,7 @@ namespace MinimalMiner.UI
         private void Awake()
         {
             // Build dictionary from serialized arrays
-            valueIndicators = new Dictionary<string, TextMeshProUGUI>();
+            valueIndicators = new Dictionary<ShipComponent, TextMeshProUGUI>();
             for (int i = 0; i < valueIndicatorTitles.Length; i++)
                 valueIndicators.Add(valueIndicatorTitles[i], valueIndicatorTexts[i]);
         }
@@ -50,11 +50,12 @@ namespace MinimalMiner.UI
         /// <summary>
         /// Defines what the working value is (used by designer UI)
         /// </summary>
-        /// <param name="indicator">Must be a valid key in valueIndicators</param>
+        /// <param name="indicator">Must be a valid ShipComponent</param>
         public void OnValueChanged(string indicator)
         {
-            if (valueIndicators.ContainsKey(indicator))
-                valueIndicators[indicator].text = Math.Round(value, 2).ToString();
+            if (Enum.TryParse(indicator, out ShipComponent comp))
+                if (valueIndicators.ContainsKey(comp))
+                    valueIndicators[comp].text = Math.Round(value, 2).ToString();
         }
 
         /// <summary>

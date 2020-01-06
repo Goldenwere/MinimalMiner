@@ -1744,6 +1744,28 @@ MonoBehaviour:
           m_StringArgument: Thr_Recoil
           m_BoolArgument: 0
         m_CallState: 2
+      - m_Target: {fileID: 1904079964}
+        m_MethodName: SetValue
+        m_Mode: 0
+        m_Arguments:
+          m_ObjectArgument: {fileID: 0}
+          m_ObjectArgumentAssemblyTypeName: UnityEngine.Object, UnityEngine
+          m_IntArgument: 0
+          m_FloatArgument: 0
+          m_StringArgument: 
+          m_BoolArgument: 0
+        m_CallState: 2
+      - m_Target: {fileID: 1904079964}
+        m_MethodName: OnValueChanged
+        m_Mode: 5
+        m_Arguments:
+          m_ObjectArgument: {fileID: 0}
+          m_ObjectArgumentAssemblyTypeName: UnityEngine.Object, UnityEngine
+          m_IntArgument: 0
+          m_FloatArgument: 0
+          m_StringArgument: Thr_Recoil
+          m_BoolArgument: 0
+        m_CallState: 2
 --- !u!1 &78583146
 GameObject:
   m_ObjectHideFlags: 0
@@ -2004,6 +2026,28 @@ MonoBehaviour:
         m_CallState: 2
       - m_Target: {fileID: 1904079963}
         m_MethodName: OnValueSet
+        m_Mode: 5
+        m_Arguments:
+          m_ObjectArgument: {fileID: 0}
+          m_ObjectArgumentAssemblyTypeName: UnityEngine.Object, UnityEngine
+          m_IntArgument: 0
+          m_FloatArgument: 0
+          m_StringArgument: Def_ShieldStrength
+          m_BoolArgument: 0
+        m_CallState: 2
+      - m_Target: {fileID: 1904079964}
+        m_MethodName: SetValue
+        m_Mode: 0
+        m_Arguments:
+          m_ObjectArgument: {fileID: 0}
+          m_ObjectArgumentAssemblyTypeName: UnityEngine.Object, UnityEngine
+          m_IntArgument: 0
+          m_FloatArgument: 0
+          m_StringArgument: 
+          m_BoolArgument: 0
+        m_CallState: 2
+      - m_Target: {fileID: 1904079964}
+        m_MethodName: OnValueChanged
         m_Mode: 5
         m_Arguments:
           m_ObjectArgument: {fileID: 0}
@@ -4708,6 +4752,28 @@ MonoBehaviour:
           m_StringArgument: Wpn_Speed
           m_BoolArgument: 0
         m_CallState: 2
+      - m_Target: {fileID: 1904079964}
+        m_MethodName: SetValue
+        m_Mode: 0
+        m_Arguments:
+          m_ObjectArgument: {fileID: 0}
+          m_ObjectArgumentAssemblyTypeName: UnityEngine.Object, UnityEngine
+          m_IntArgument: 0
+          m_FloatArgument: 0
+          m_StringArgument: 
+          m_BoolArgument: 0
+        m_CallState: 2
+      - m_Target: {fileID: 1904079964}
+        m_MethodName: OnValueChanged
+        m_Mode: 5
+        m_Arguments:
+          m_ObjectArgument: {fileID: 0}
+          m_ObjectArgumentAssemblyTypeName: UnityEngine.Object, UnityEngine
+          m_IntArgument: 0
+          m_FloatArgument: 0
+          m_StringArgument: Wpn_Speed
+          m_BoolArgument: 0
+        m_CallState: 2
 --- !u!1 &193812541
 GameObject:
   m_ObjectHideFlags: 0
@@ -5519,6 +5585,28 @@ MonoBehaviour:
         m_CallState: 2
       - m_Target: {fileID: 1904079963}
         m_MethodName: OnValueSet
+        m_Mode: 5
+        m_Arguments:
+          m_ObjectArgument: {fileID: 0}
+          m_ObjectArgumentAssemblyTypeName: UnityEngine.Object, UnityEngine
+          m_IntArgument: 0
+          m_FloatArgument: 0
+          m_StringArgument: Wpn_RateOfFire
+          m_BoolArgument: 0
+        m_CallState: 2
+      - m_Target: {fileID: 1904079964}
+        m_MethodName: SetValue
+        m_Mode: 0
+        m_Arguments:
+          m_ObjectArgument: {fileID: 0}
+          m_ObjectArgumentAssemblyTypeName: UnityEngine.Object, UnityEngine
+          m_IntArgument: 0
+          m_FloatArgument: 0
+          m_StringArgument: 
+          m_BoolArgument: 0
+        m_CallState: 2
+      - m_Target: {fileID: 1904079964}
+        m_MethodName: OnValueChanged
         m_Mode: 5
         m_Arguments:
           m_ObjectArgument: {fileID: 0}
@@ -8311,6 +8399,28 @@ MonoBehaviour:
           m_StringArgument: Thr_Forward
           m_BoolArgument: 0
         m_CallState: 2
+      - m_Target: {fileID: 1904079964}
+        m_MethodName: SetValue
+        m_Mode: 0
+        m_Arguments:
+          m_ObjectArgument: {fileID: 0}
+          m_ObjectArgumentAssemblyTypeName: UnityEngine.Object, UnityEngine
+          m_IntArgument: 0
+          m_FloatArgument: 0
+          m_StringArgument: 
+          m_BoolArgument: 0
+        m_CallState: 2
+      - m_Target: {fileID: 1904079964}
+        m_MethodName: OnValueChanged
+        m_Mode: 5
+        m_Arguments:
+          m_ObjectArgument: {fileID: 0}
+          m_ObjectArgumentAssemblyTypeName: UnityEngine.Object, UnityEngine
+          m_IntArgument: 0
+          m_FloatArgument: 0
+          m_StringArgument: Thr_Forward
+          m_BoolArgument: 0
+        m_CallState: 2
 --- !u!1 &365245243
 GameObject:
   m_ObjectHideFlags: 0
@@ -10677,6 +10787,28 @@ MonoBehaviour:
           m_StringArgument: Thr_Reverse
           m_BoolArgument: 0
         m_CallState: 2
+      - m_Target: {fileID: 1904079964}
+        m_MethodName: SetValue
+        m_Mode: 0
+        m_Arguments:
+          m_ObjectArgument: {fileID: 0}
+          m_ObjectArgumentAssemblyTypeName: UnityEngine.Object, UnityEngine
+          m_IntArgument: 0
+          m_FloatArgument: 0
+          m_StringArgument: 
+          m_BoolArgument: 0
+        m_CallState: 2
+      - m_Target: {fileID: 1904079964}
+        m_MethodName: OnValueChanged
+        m_Mode: 5
+        m_Arguments:
+          m_ObjectArgument: {fileID: 0}
+          m_ObjectArgumentAssemblyTypeName: UnityEngine.Object, UnityEngine
+          m_IntArgument: 0
+          m_FloatArgument: 0
+          m_StringArgument: Thr_Reverse
+          m_BoolArgument: 0
+        m_CallState: 2
 --- !u!1 &472480783
 GameObject:
   m_ObjectHideFlags: 0
@@ -11252,6 +11384,28 @@ MonoBehaviour:
         m_CallState: 2
       - m_Target: {fileID: 1904079963}
         m_MethodName: OnValueSet
+        m_Mode: 5
+        m_Arguments:
+          m_ObjectArgument: {fileID: 0}
+          m_ObjectArgumentAssemblyTypeName: UnityEngine.Object, UnityEngine
+          m_IntArgument: 0
+          m_FloatArgument: 0
+          m_StringArgument: Def_ShieldRecharge
+          m_BoolArgument: 0
+        m_CallState: 2
+      - m_Target: {fileID: 1904079964}
+        m_MethodName: SetValue
+        m_Mode: 0
+        m_Arguments:
+          m_ObjectArgument: {fileID: 0}
+          m_ObjectArgumentAssemblyTypeName: UnityEngine.Object, UnityEngine
+          m_IntArgument: 0
+          m_FloatArgument: 0
+          m_StringArgument: 
+          m_BoolArgument: 0
+        m_CallState: 2
+      - m_Target: {fileID: 1904079964}
+        m_MethodName: OnValueChanged
         m_Mode: 5
         m_Arguments:
           m_ObjectArgument: {fileID: 0}
@@ -14824,6 +14978,28 @@ MonoBehaviour:
           m_StringArgument: Wpn_Count
           m_BoolArgument: 0
         m_CallState: 2
+      - m_Target: {fileID: 1904079964}
+        m_MethodName: SetValue
+        m_Mode: 0
+        m_Arguments:
+          m_ObjectArgument: {fileID: 0}
+          m_ObjectArgumentAssemblyTypeName: UnityEngine.Object, UnityEngine
+          m_IntArgument: 0
+          m_FloatArgument: 0
+          m_StringArgument: 
+          m_BoolArgument: 0
+        m_CallState: 2
+      - m_Target: {fileID: 1904079964}
+        m_MethodName: OnValueChanged
+        m_Mode: 5
+        m_Arguments:
+          m_ObjectArgument: {fileID: 0}
+          m_ObjectArgumentAssemblyTypeName: UnityEngine.Object, UnityEngine
+          m_IntArgument: 0
+          m_FloatArgument: 0
+          m_StringArgument: Wpn_Count
+          m_BoolArgument: 0
+        m_CallState: 2
 --- !u!1 &737788417
 GameObject:
   m_ObjectHideFlags: 0
@@ -18024,6 +18200,28 @@ MonoBehaviour:
         m_CallState: 2
       - m_Target: {fileID: 1904079963}
         m_MethodName: OnValueSet
+        m_Mode: 5
+        m_Arguments:
+          m_ObjectArgument: {fileID: 0}
+          m_ObjectArgumentAssemblyTypeName: UnityEngine.Object, UnityEngine
+          m_IntArgument: 0
+          m_FloatArgument: 0
+          m_StringArgument: Wpn_Damage
+          m_BoolArgument: 0
+        m_CallState: 2
+      - m_Target: {fileID: 1904079964}
+        m_MethodName: SetValue
+        m_Mode: 0
+        m_Arguments:
+          m_ObjectArgument: {fileID: 0}
+          m_ObjectArgumentAssemblyTypeName: UnityEngine.Object, UnityEngine
+          m_IntArgument: 0
+          m_FloatArgument: 0
+          m_StringArgument: 
+          m_BoolArgument: 0
+        m_CallState: 2
+      - m_Target: {fileID: 1904079964}
+        m_MethodName: OnValueChanged
         m_Mode: 5
         m_Arguments:
           m_ObjectArgument: {fileID: 0}
@@ -22152,6 +22350,28 @@ MonoBehaviour:
           m_StringArgument: Def_Armor
           m_BoolArgument: 0
         m_CallState: 2
+      - m_Target: {fileID: 1904079964}
+        m_MethodName: SetValue
+        m_Mode: 0
+        m_Arguments:
+          m_ObjectArgument: {fileID: 0}
+          m_ObjectArgumentAssemblyTypeName: UnityEngine.Object, UnityEngine
+          m_IntArgument: 0
+          m_FloatArgument: 0
+          m_StringArgument: 
+          m_BoolArgument: 0
+        m_CallState: 2
+      - m_Target: {fileID: 1904079964}
+        m_MethodName: OnValueChanged
+        m_Mode: 5
+        m_Arguments:
+          m_ObjectArgument: {fileID: 0}
+          m_ObjectArgumentAssemblyTypeName: UnityEngine.Object, UnityEngine
+          m_IntArgument: 0
+          m_FloatArgument: 0
+          m_StringArgument: Def_Armor
+          m_BoolArgument: 0
+        m_CallState: 2
 --- !u!1 &1206200373
 GameObject:
   m_ObjectHideFlags: 0
@@ -22797,6 +23017,28 @@ MonoBehaviour:
         m_CallState: 2
       - m_Target: {fileID: 1904079963}
         m_MethodName: OnValueSet
+        m_Mode: 5
+        m_Arguments:
+          m_ObjectArgument: {fileID: 0}
+          m_ObjectArgumentAssemblyTypeName: UnityEngine.Object, UnityEngine
+          m_IntArgument: 0
+          m_FloatArgument: 0
+          m_StringArgument: Def_Resistance
+          m_BoolArgument: 0
+        m_CallState: 2
+      - m_Target: {fileID: 1904079964}
+        m_MethodName: SetValue
+        m_Mode: 0
+        m_Arguments:
+          m_ObjectArgument: {fileID: 0}
+          m_ObjectArgumentAssemblyTypeName: UnityEngine.Object, UnityEngine
+          m_IntArgument: 0
+          m_FloatArgument: 0
+          m_StringArgument: 
+          m_BoolArgument: 0
+        m_CallState: 2
+      - m_Target: {fileID: 1904079964}
+        m_MethodName: OnValueChanged
         m_Mode: 5
         m_Arguments:
           m_ObjectArgument: {fileID: 0}
@@ -29058,6 +29300,28 @@ MonoBehaviour:
           m_StringArgument: Thr_RotSpd
           m_BoolArgument: 0
         m_CallState: 2
+      - m_Target: {fileID: 1904079964}
+        m_MethodName: SetValue
+        m_Mode: 0
+        m_Arguments:
+          m_ObjectArgument: {fileID: 0}
+          m_ObjectArgumentAssemblyTypeName: UnityEngine.Object, UnityEngine
+          m_IntArgument: 0
+          m_FloatArgument: 0
+          m_StringArgument: 
+          m_BoolArgument: 0
+        m_CallState: 2
+      - m_Target: {fileID: 1904079964}
+        m_MethodName: OnValueChanged
+        m_Mode: 5
+        m_Arguments:
+          m_ObjectArgument: {fileID: 0}
+          m_ObjectArgumentAssemblyTypeName: UnityEngine.Object, UnityEngine
+          m_IntArgument: 0
+          m_FloatArgument: 0
+          m_StringArgument: Thr_RotSpd
+          m_BoolArgument: 0
+        m_CallState: 2
 --- !u!1 &1544640070
 GameObject:
   m_ObjectHideFlags: 0
@@ -32271,6 +32535,28 @@ MonoBehaviour:
           m_StringArgument: Wpn_Recoil
           m_BoolArgument: 0
         m_CallState: 2
+      - m_Target: {fileID: 1904079964}
+        m_MethodName: SetValue
+        m_Mode: 0
+        m_Arguments:
+          m_ObjectArgument: {fileID: 0}
+          m_ObjectArgumentAssemblyTypeName: UnityEngine.Object, UnityEngine
+          m_IntArgument: 0
+          m_FloatArgument: 0
+          m_StringArgument: 
+          m_BoolArgument: 0
+        m_CallState: 2
+      - m_Target: {fileID: 1904079964}
+        m_MethodName: OnValueChanged
+        m_Mode: 5
+        m_Arguments:
+          m_ObjectArgument: {fileID: 0}
+          m_ObjectArgumentAssemblyTypeName: UnityEngine.Object, UnityEngine
+          m_IntArgument: 0
+          m_FloatArgument: 0
+          m_StringArgument: Wpn_Recoil
+          m_BoolArgument: 0
+        m_CallState: 2
 --- !u!1 &1794047224
 GameObject:
   m_ObjectHideFlags: 0
@@ -34123,6 +34409,28 @@ MonoBehaviour:
           m_StringArgument: Thr_Dampener
           m_BoolArgument: 0
         m_CallState: 2
+      - m_Target: {fileID: 1904079964}
+        m_MethodName: SetValue
+        m_Mode: 0
+        m_Arguments:
+          m_ObjectArgument: {fileID: 0}
+          m_ObjectArgumentAssemblyTypeName: UnityEngine.Object, UnityEngine
+          m_IntArgument: 0
+          m_FloatArgument: 0
+          m_StringArgument: 
+          m_BoolArgument: 0
+        m_CallState: 2
+      - m_Target: {fileID: 1904079964}
+        m_MethodName: OnValueChanged
+        m_Mode: 5
+        m_Arguments:
+          m_ObjectArgument: {fileID: 0}
+          m_ObjectArgumentAssemblyTypeName: UnityEngine.Object, UnityEngine
+          m_IntArgument: 0
+          m_FloatArgument: 0
+          m_StringArgument: Thr_Dampener
+          m_BoolArgument: 0
+        m_CallState: 2
 --- !u!1 &1888054575
 GameObject:
   m_ObjectHideFlags: 0
@@ -34642,23 +34950,7 @@ MonoBehaviour:
   - {fileID: 244392948}
   individualWeaponDropdowns:
   - {fileID: 77363267}
-  valueIndicatorTitles:
-  - Slider_ThrusterFwd
-  - Slider_ThrusterRev
-  - Slider_RotSpd
-  - Slider_MaxDirSpd
-  - Slider_Recoil
-  - Slider_Dampener
-  - Slider_WeaponDamage
-  - Slider_WeaponSpeed
-  - Slider_WeaponRecoil
-  - Slider_WeaponROF
-  - Slider_WeaponCount
-  - Slider_ShieldStr
-  - Slider_ShieldRe
-  - Slider_ShieldDel
-  - Slider_Armor
-  - Slider_Res
+  valueIndicatorTitles: 1000000011000000120000001300000014000000150000000c0000000d0000000e0000000f000000050000000000000001000000020000000300000004000000
   valueIndicatorTexts:
   - {fileID: 1459080623}
   - {fileID: 1758785735}
@@ -34853,6 +35145,28 @@ MonoBehaviour:
         m_CallState: 2
       - m_Target: {fileID: 1904079963}
         m_MethodName: OnValueSet
+        m_Mode: 5
+        m_Arguments:
+          m_ObjectArgument: {fileID: 0}
+          m_ObjectArgumentAssemblyTypeName: UnityEngine.Object, UnityEngine
+          m_IntArgument: 0
+          m_FloatArgument: 0
+          m_StringArgument: Def_ShieldDelay
+          m_BoolArgument: 0
+        m_CallState: 2
+      - m_Target: {fileID: 1904079964}
+        m_MethodName: SetValue
+        m_Mode: 0
+        m_Arguments:
+          m_ObjectArgument: {fileID: 0}
+          m_ObjectArgumentAssemblyTypeName: UnityEngine.Object, UnityEngine
+          m_IntArgument: 0
+          m_FloatArgument: 0
+          m_StringArgument: 
+          m_BoolArgument: 0
+        m_CallState: 2
+      - m_Target: {fileID: 1904079964}
+        m_MethodName: OnValueChanged
         m_Mode: 5
         m_Arguments:
           m_ObjectArgument: {fileID: 0}
@@ -35972,6 +36286,28 @@ MonoBehaviour:
         m_CallState: 2
       - m_Target: {fileID: 1904079963}
         m_MethodName: OnValueSet
+        m_Mode: 5
+        m_Arguments:
+          m_ObjectArgument: {fileID: 0}
+          m_ObjectArgumentAssemblyTypeName: UnityEngine.Object, UnityEngine
+          m_IntArgument: 0
+          m_FloatArgument: 0
+          m_StringArgument: Thr_MaxSpd
+          m_BoolArgument: 0
+        m_CallState: 2
+      - m_Target: {fileID: 1904079964}
+        m_MethodName: SetValue
+        m_Mode: 0
+        m_Arguments:
+          m_ObjectArgument: {fileID: 0}
+          m_ObjectArgumentAssemblyTypeName: UnityEngine.Object, UnityEngine
+          m_IntArgument: 0
+          m_FloatArgument: 0
+          m_StringArgument: 
+          m_BoolArgument: 0
+        m_CallState: 2
+      - m_Target: {fileID: 1904079964}
+        m_MethodName: OnValueChanged
         m_Mode: 5
         m_Arguments:
           m_ObjectArgument: {fileID: 0}
