@@ -66,7 +66,7 @@ namespace MinimalMiner.UI
             List<TMP_Dropdown.OptionData> options = new List<TMP_Dropdown.OptionData>();
 
             for (int i = 0; i < value; i++)
-                options.Add(new TMP_Dropdown.OptionData("Weapon " + i));
+                options.Add(new TMP_Dropdown.OptionData("Weapon " + (i + 1)));
 
             weaponSelectionDropdown.options = options;
             weaponSelectionDropdown.SetValueWithoutNotify(0);

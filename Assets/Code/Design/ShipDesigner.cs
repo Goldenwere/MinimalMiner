@@ -21,11 +21,7 @@ namespace MinimalMiner.Design
         private int weaponIndex;
         private ShipWeapon CurrentWeapon
         {
-            get { return shipClass.Config.Stats_Weapons.Weapons[shipClass.Config.Stats_Weapons.Slots[weaponIndex]]; }
-        }
-        private Vector3 CurrentWeaponKey
-        {
-            get { return shipClass.Config.Stats_Weapons.Slots[weaponIndex]; }
+            get { return shipClass.Config.Stats_Weapons.Weapons[weaponIndex]; }
         }
         private Vector3 weaponRot;
         private Vector3 weaponPos;
@@ -194,8 +190,8 @@ namespace MinimalMiner.Design
                     break;
                 case ShipComponent.Wpn_Selection:
                     weaponIndex = (int)value;
-                    weaponRot = shipClass.Config.Stats_Weapons.Rotations[CurrentWeaponKey];
-                    weaponPos = shipClass.Config.Stats_Weapons.Slots[weaponIndex];
+                    weaponRot = shipClass.Config.Stats_Weapons.Rotations[weaponIndex];
+                    weaponPos = shipClass.Config.Stats_Weapons.Positions[weaponIndex];
                     break;
                 case ShipComponent.Wpn_Speed:
                     w = CurrentWeapon;
@@ -221,18 +217,23 @@ namespace MinimalMiner.Design
             ShipWeaponry sw = new ShipWeaponry();
             sw.DamageModifier = 1;
             sw.RateModifier = 1;
+            sw.WeaponCount = (int)value;
 
-            sw.Slots = new List<Vector3>();
+            sw.Positions = new List<Vector3>();
             for (int i = 0; i < value; i++)
-                sw.Slots[i] = new Vector3();
+                sw.Positions.Add(new Vector3());
 
-            sw.SlotStatus = new Dictionary<Vector3, WeaponSlotStatus>();
+            sw.Rotations = new List<Vector3>();
             for (int i = 0; i < value; i++)
-                sw.SlotStatus[sw.Slots[i]] = WeaponSlotStatus.enabled;
+                sw.Rotations.Add(new Vector3());
 
-            sw.Rotations = new Dictionary<Vector3, Vector3>();
+            sw.SlotStatus = new List<WeaponSlotStatus>();
             for (int i = 0; i < value; i++)
-                sw.Rotations[sw.Slots[i]] = new Vector3();
+                sw.SlotStatus.Add(WeaponSlotStatus.enabled);
+
+            sw.Weapons = new List<ShipWeapon>();
+            for (int i = 0; i < value; i++)
+                sw.Weapons.Add(new ShipWeapon());
 
             shipClass.Config.UpdateWeaponConfig(sw);
         }

@@ -106,10 +106,11 @@ namespace MinimalMiner.Entity
             BodySprite = spr;
 
             ShipWeaponry w = new ShipWeaponry();
-            w.Slots = new List<Vector3>();
-            w.Weapons = new Dictionary<Vector3, ShipWeapon>();
-            w.SlotStatus = new Dictionary<Vector3, WeaponSlotStatus>();
-            w.Rotations = new Dictionary<Vector3, Vector3>();
+            w.WeaponCount = 3;
+            w.Weapons = new List<ShipWeapon>();
+            w.Rotations = new List<Vector3>();
+            w.Positions = new List<Vector3>();
+            w.SlotStatus = new List<WeaponSlotStatus>();
             Stats_Weapons = w;
 
             ShipDefenses d = new ShipDefenses();
@@ -206,7 +207,7 @@ namespace MinimalMiner.Entity
         /// <param name="wpn">The new weapon</param>
         public void UpdateWeapon(ShipWeapon wpn, int slot)
         {
-            Stats_Weapons.Weapons[Stats_Weapons.Slots[slot]] = wpn;
+            Stats_Weapons.Weapons[slot] = wpn;
         }
 
         /// <summary>
@@ -218,25 +219,10 @@ namespace MinimalMiner.Entity
         public void UpdateWeaponTransform(int slot, Vector3 vec, TransformChanged tc)
         {
             if (tc == TransformChanged.position)
-            {
-                Vector3 slotVec = Stats_Weapons.Slots[slot];
-
-                Vector3 rot = Stats_Weapons.Rotations[slotVec];
-                WeaponSlotStatus s = Stats_Weapons.SlotStatus[slotVec];
-                ShipWeapon w = Stats_Weapons.Weapons[slotVec];
-
-                Stats_Weapons.Rotations.Remove(slotVec);
-                Stats_Weapons.SlotStatus.Remove(slotVec);
-                Stats_Weapons.Weapons.Remove(slotVec);
-
-                Stats_Weapons.Slots[slot] = vec;
-                Stats_Weapons.Rotations[vec] = rot;
-                Stats_Weapons.SlotStatus[vec] = s;
-                Stats_Weapons.Weapons[vec] = w;
-            }
+                Stats_Weapons.Positions[slot] = vec;
 
             else
-                Stats_Weapons.Rotations[Stats_Weapons.Slots[slot]] = vec;
+                Stats_Weapons.Rotations[slot] = vec;
         }
 
         /// <summary>
@@ -271,24 +257,29 @@ namespace MinimalMiner.Entity
     {
         #region Properties
         /// <summary>
-        /// Defines the positions of weapon slots on the ship (used as keys for the Weapons and SlotStatus collections)
+        /// Defines the number of weapons currently on the ship (used as an index for Positions, Rotations, Weapons, and SlotStatus)
         /// </summary>
-        public List<Vector3> Slots;
+        public int WeaponCount;
 
         /// <summary>
-        /// Defines the rotations of weapon slots on the ship, where the key is the wepaon slot's position and the value is the rotation itself
+        /// Defines the positions of weapon slots on the ship
         /// </summary>
-        public Dictionary<Vector3, Vector3> Rotations;
+        public List<Vector3> Positions;
 
         /// <summary>
-        /// Defines the weapons on a ship, where the key is the weapon slot's position on the ship and the value is the weapon itself
+        /// Defines the rotations of weapon slots on the ship
         /// </summary>
-        public Dictionary<Vector3, ShipWeapon> Weapons;
+        public List<Vector3> Rotations;
 
         /// <summary>
-        /// Defines the status of the weapon slots on a ship, where the key is the weapon slot's position on the ship and the value is the status of that slot
+        /// Defines the weapons on a ship
         /// </summary>
-        public Dictionary<Vector3, WeaponSlotStatus> SlotStatus;
+        public List<ShipWeapon> Weapons;
+
+        /// <summary>
+        /// Defines the status of the weapon slots on a ship
+        /// </summary>
+        public List<WeaponSlotStatus> SlotStatus;
 
         /// <summary>
         /// Modifies all weapons' rate of fire by this multiplied factor

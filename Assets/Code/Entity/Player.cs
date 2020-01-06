@@ -91,29 +91,30 @@ namespace MinimalMiner.Entity
 
             weapons.DamageModifier = 1;
             weapons.RateModifier = 1;
-            weapons.Slots = new List<Vector3>()
+            weapons.WeaponCount = 3;
+            weapons.Positions = new List<Vector3>()
             {
                 new Vector3(0.35f,0,0),
                 new Vector3(0.25f,0.21f,0),
                 new Vector3(0.25f,-0.21f,0)
             };
-            weapons.Rotations = new Dictionary<Vector3, Vector3>()
+            weapons.Rotations = new List<Vector3>
             {
-                { weapons.Slots[0], new Vector3(0,0,0) },
-                { weapons.Slots[1], new Vector3(0,0,10f) },
-                { weapons.Slots[2], new Vector3(0,0,-10f) }
+                { new Vector3(0,0,0) },
+                { new Vector3(0,0,10f) },
+                { new Vector3(0,0,-10f) }
             };
-            weapons.SlotStatus = new Dictionary<Vector3, WeaponSlotStatus>()
+            weapons.SlotStatus = new List<WeaponSlotStatus>
             {
-                { weapons.Slots[0], WeaponSlotStatus.enabled },
-                { weapons.Slots[1], WeaponSlotStatus.enabled },
-                { weapons.Slots[2], WeaponSlotStatus.enabled }
+                { WeaponSlotStatus.enabled },
+                { WeaponSlotStatus.enabled },
+                { WeaponSlotStatus.enabled }
             };
-            weapons.Weapons = new Dictionary<Vector3, ShipWeapon>()
+            weapons.Weapons = new List<ShipWeapon>
             {
-                { weapons.Slots[0], basicBlaster },
-                { weapons.Slots[1], secondBlaster },
-                { weapons.Slots[2], secondBlaster }
+                { basicBlaster },
+                { secondBlaster },
+                { secondBlaster }
             };
 
             colliders = new Vector2[]                           // This is based off of what was in the PolygonCollider2D in old Player
@@ -134,13 +135,13 @@ namespace MinimalMiner.Entity
             collider.points = colliders;
             sprite.sprite = shipConfig.BodySprite;  // This, like the bulletPrefab and bulletSound, will be handled/stored outside player, so the back-and-fourth setting seen here won't be present eventually
 
-            foreach(Vector3 w in weapons.Slots)
+            for (int i = 0; i < weapons.WeaponCount; i++)
             {
-                GameObject obj = new GameObject(weapons.Weapons[w].Name);
+                ShipWeapon w = weapons.Weapons[i];
+                GameObject obj = new GameObject(w.Name);
                 obj.transform.parent = gameObject.transform;
-                obj.transform.position = w;
-                Quaternion rot = Quaternion.Euler(weapons.Rotations[w]);
-                obj.transform.rotation = rot;
+                obj.transform.position = weapons.Positions[i];
+                obj.transform.rotation = Quaternion.Euler(weapons.Rotations[i]);
                 bulletLoc.Add(obj);
             }
         }
@@ -338,12 +339,9 @@ namespace MinimalMiner.Entity
 
             if (Input.GetKey(playerPrefs.Controls.Ship_Fire))
             {
-                Vector3[] weapons = new Vector3[shipConfig.Stats_Weapons.Weapons.Count];
-                shipConfig.Stats_Weapons.Weapons.Keys.CopyTo(weapons, 0);
-
-                for (int i = 0; i < weapons.Length; i++)
+                for (int i = 0; i < shipConfig.Stats_Weapons.WeaponCount; i++)
                 {
-                    ShipWeapon w = shipConfig.Stats_Weapons.Weapons[weapons[i]];
+                    ShipWeapon w = shipConfig.Stats_Weapons.Weapons[i];
                     if (Math.Round(fireTimer % w.RateOfFire, 3) <= 0.02f)
                     {
                         if (w.Type == WeaponType.projectile)
