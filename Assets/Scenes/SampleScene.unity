@@ -1110,14 +1110,14 @@ RectTransform:
   m_PrefabInstance: {fileID: 0}
   m_PrefabAsset: {fileID: 0}
   m_GameObject: {fileID: 50384205}
-  m_LocalRotation: {x: 0, y: 0, z: -0.7071068, w: 0.7071068}
+  m_LocalRotation: {x: 0, y: 0, z: 0.7071068, w: 0.7071068}
   m_LocalPosition: {x: 0, y: 0, z: 0}
   m_LocalScale: {x: 1, y: 1, z: 1}
   m_Children:
   - {fileID: 400166553}
   m_Father: {fileID: 1617366669}
   m_RootOrder: 1
-  m_LocalEulerAnglesHint: {x: 0, y: 0, z: -90}
+  m_LocalEulerAnglesHint: {x: 0, y: 0, z: 90}
   m_AnchorMin: {x: 0.5, y: 0.5}
   m_AnchorMax: {x: 0.5, y: 0.5}
   m_AnchoredPosition: {x: 70, y: 0}
@@ -1165,7 +1165,7 @@ MonoBehaviour:
   m_TargetGraphic: {fileID: 1695914225}
   m_HandleRect: {fileID: 1695914224}
   m_Direction: 0
-  m_Value: 0
+  m_Value: 0.9999999
   m_Size: 0.3481481
   m_NumberOfSteps: 0
   m_OnValueChanged:
@@ -1715,10 +1715,10 @@ MonoBehaviour:
   m_FillRect: {fileID: 1175653325}
   m_HandleRect: {fileID: 245020590}
   m_Direction: 0
-  m_MinValue: 1
-  m_MaxValue: 4
+  m_MinValue: 0.1
+  m_MaxValue: 5
   m_WholeNumbers: 0
-  m_Value: 1
+  m_Value: 0.9
   m_OnValueChanged:
     m_PersistentCalls:
       m_Calls:
@@ -1984,10 +1984,10 @@ MonoBehaviour:
   m_FillRect: {fileID: 1148804745}
   m_HandleRect: {fileID: 1409623144}
   m_Direction: 0
-  m_MinValue: 1
-  m_MaxValue: 4
-  m_WholeNumbers: 0
-  m_Value: 1
+  m_MinValue: 0
+  m_MaxValue: 15
+  m_WholeNumbers: 1
+  m_Value: 5
   m_OnValueChanged:
     m_PersistentCalls:
       m_Calls:
@@ -4679,10 +4679,10 @@ MonoBehaviour:
   m_FillRect: {fileID: 147711088}
   m_HandleRect: {fileID: 2057049029}
   m_Direction: 0
-  m_MinValue: 1
-  m_MaxValue: 4
-  m_WholeNumbers: 0
-  m_Value: 1
+  m_MinValue: 10
+  m_MaxValue: 250
+  m_WholeNumbers: 1
+  m_Value: 100
   m_OnValueChanged:
     m_PersistentCalls:
       m_Calls:
@@ -5376,7 +5376,7 @@ RectTransform:
   m_LocalEulerAnglesHint: {x: 0, y: 0, z: 0}
   m_AnchorMin: {x: 0.5, y: 0.5}
   m_AnchorMax: {x: 0.5, y: 0.5}
-  m_AnchoredPosition: {x: 0, y: -70}
+  m_AnchoredPosition: {x: 0, y: -69.99999}
   m_SizeDelta: {x: 100, y: 375}
   m_Pivot: {x: 0.5, y: 0.5}
 --- !u!1 &234841984
@@ -5499,10 +5499,10 @@ MonoBehaviour:
   m_FillRect: {fileID: 347062814}
   m_HandleRect: {fileID: 1354775902}
   m_Direction: 0
-  m_MinValue: 1
-  m_MaxValue: 4
+  m_MinValue: 0.05
+  m_MaxValue: 1
   m_WholeNumbers: 0
-  m_Value: 1
+  m_Value: 0.25
   m_OnValueChanged:
     m_PersistentCalls:
       m_Calls:
@@ -8283,9 +8283,9 @@ MonoBehaviour:
   m_HandleRect: {fileID: 1009578460}
   m_Direction: 0
   m_MinValue: 1
-  m_MaxValue: 4
-  m_WholeNumbers: 0
-  m_Value: 1
+  m_MaxValue: 25
+  m_WholeNumbers: 1
+  m_Value: 10
   m_OnValueChanged:
     m_PersistentCalls:
       m_Calls:
@@ -10649,9 +10649,9 @@ MonoBehaviour:
   m_HandleRect: {fileID: 1941361253}
   m_Direction: 0
   m_MinValue: 1
-  m_MaxValue: 4
-  m_WholeNumbers: 0
-  m_Value: 1
+  m_MaxValue: 15
+  m_WholeNumbers: 1
+  m_Value: 10
   m_OnValueChanged:
     m_PersistentCalls:
       m_Calls:
@@ -11232,8 +11232,8 @@ MonoBehaviour:
   m_FillRect: {fileID: 1114002067}
   m_HandleRect: {fileID: 1010592507}
   m_Direction: 0
-  m_MinValue: 1
-  m_MaxValue: 4
+  m_MinValue: 0.25
+  m_MaxValue: 2
   m_WholeNumbers: 0
   m_Value: 1
   m_OnValueChanged:
@@ -11768,7 +11768,7 @@ MonoBehaviour:
   m_HandleRect: {fileID: 1685114005}
   m_Direction: 0
   m_Value: 1
-  m_Size: 0.6266666
+  m_Size: 0.62666667
   m_NumberOfSteps: 0
   m_OnValueChanged:
     m_PersistentCalls:
@@ -14796,9 +14796,9 @@ MonoBehaviour:
   m_HandleRect: {fileID: 1663384801}
   m_Direction: 0
   m_MinValue: 1
-  m_MaxValue: 4
-  m_WholeNumbers: 0
-  m_Value: 1
+  m_MaxValue: 8
+  m_WholeNumbers: 1
+  m_Value: 3
   m_OnValueChanged:
     m_PersistentCalls:
       m_Calls:
@@ -18005,9 +18005,9 @@ MonoBehaviour:
   m_HandleRect: {fileID: 1874909876}
   m_Direction: 0
   m_MinValue: 1
-  m_MaxValue: 4
-  m_WholeNumbers: 0
-  m_Value: 1
+  m_MaxValue: 25
+  m_WholeNumbers: 1
+  m_Value: 5
   m_OnValueChanged:
     m_PersistentCalls:
       m_Calls:
@@ -22123,10 +22123,10 @@ MonoBehaviour:
   m_FillRect: {fileID: 1348035736}
   m_HandleRect: {fileID: 1579839222}
   m_Direction: 0
-  m_MinValue: 1
-  m_MaxValue: 4
-  m_WholeNumbers: 0
-  m_Value: 1
+  m_MinValue: 10
+  m_MaxValue: 200
+  m_WholeNumbers: 1
+  m_Value: 50
   m_OnValueChanged:
     m_PersistentCalls:
       m_Calls:
@@ -22778,9 +22778,9 @@ MonoBehaviour:
   m_HandleRect: {fileID: 1342636118}
   m_Direction: 0
   m_MinValue: 1
-  m_MaxValue: 4
-  m_WholeNumbers: 0
-  m_Value: 1
+  m_MaxValue: 25
+  m_WholeNumbers: 1
+  m_Value: 15
   m_OnValueChanged:
     m_PersistentCalls:
       m_Calls:
@@ -29030,9 +29030,9 @@ MonoBehaviour:
   m_HandleRect: {fileID: 1843082269}
   m_Direction: 0
   m_MinValue: 1
-  m_MaxValue: 4
-  m_WholeNumbers: 0
-  m_Value: 1
+  m_MaxValue: 10
+  m_WholeNumbers: 1
+  m_Value: 5
   m_OnValueChanged:
     m_PersistentCalls:
       m_Calls:
@@ -32243,9 +32243,9 @@ MonoBehaviour:
   m_HandleRect: {fileID: 1806566130}
   m_Direction: 0
   m_MinValue: 1
-  m_MaxValue: 4
-  m_WholeNumbers: 0
-  m_Value: 1
+  m_MaxValue: 25
+  m_WholeNumbers: 1
+  m_Value: 5
   m_OnValueChanged:
     m_PersistentCalls:
       m_Calls:
@@ -32984,7 +32984,7 @@ RectTransform:
   m_LocalEulerAnglesHint: {x: 0, y: 0, z: 0}
   m_AnchorMin: {x: 0.5, y: 0.5}
   m_AnchorMax: {x: 0.5, y: 0.5}
-  m_AnchoredPosition: {x: 0, y: 220}
+  m_AnchoredPosition: {x: 0, y: -219.99997}
   m_SizeDelta: {x: 100, y: 675}
   m_Pivot: {x: 0.5, y: 0.5}
 --- !u!1 &1825792306
@@ -34094,10 +34094,10 @@ MonoBehaviour:
   m_FillRect: {fileID: 29306284}
   m_HandleRect: {fileID: 509145610}
   m_Direction: 0
-  m_MinValue: 1
-  m_MaxValue: 4
+  m_MinValue: 0.1
+  m_MaxValue: 5
   m_WholeNumbers: 0
-  m_Value: 1
+  m_Value: 0.5
   m_OnValueChanged:
     m_PersistentCalls:
       m_Calls:
@@ -34516,6 +34516,7 @@ GameObject:
   - component: {fileID: 1904079961}
   - component: {fileID: 1904079960}
   - component: {fileID: 1904079963}
+  - component: {fileID: 1904079964}
   m_Layer: 0
   m_Name: Menu_ShipDesigner
   m_TagString: Untagged
@@ -34621,6 +34622,52 @@ MonoBehaviour:
   m_EditorClassIdentifier: 
   shipParent: {fileID: 0}
   shipClass: {fileID: 0}
+--- !u!114 &1904079964
+MonoBehaviour:
+  m_ObjectHideFlags: 0
+  m_CorrespondingSourceObject: {fileID: 0}
+  m_PrefabInstance: {fileID: 0}
+  m_PrefabAsset: {fileID: 0}
+  m_GameObject: {fileID: 1904079958}
+  m_Enabled: 1
+  m_EditorHideFlags: 0
+  m_Script: {fileID: 11500000, guid: 6a38edabb3df4b148b121e00fa7a60e2, type: 3}
+  m_Name: 
+  m_EditorClassIdentifier: 
+  valueIndicatorTitles:
+  - Slider_ThrusterFwd
+  - Slider_ThrusterRev
+  - Slider_RotSpd
+  - Slider_MaxDirSpd
+  - Slider_Recoil
+  - Slider_Dampener
+  - Slider_WeaponDamage
+  - Slider_WeaponSpeed
+  - Slider_WeaponRecoil
+  - Slider_WeaponROF
+  - Slider_WeaponCount
+  - Slider_ShieldStr
+  - Slider_ShieldRe
+  - Slider_ShieldDel
+  - Slider_Armor
+  - Slider_Res
+  valueIndicatorTexts:
+  - {fileID: 1459080623}
+  - {fileID: 1758785735}
+  - {fileID: 782374653}
+  - {fileID: 1942391867}
+  - {fileID: 1828784107}
+  - {fileID: 1346688646}
+  - {fileID: 670512724}
+  - {fileID: 2082998190}
+  - {fileID: 1209240721}
+  - {fileID: 262361139}
+  - {fileID: 1458993546}
+  - {fileID: 2142294158}
+  - {fileID: 1280375150}
+  - {fileID: 1771691036}
+  - {fileID: 303061460}
+  - {fileID: 1620813965}
 --- !u!1 &1904691093
 GameObject:
   m_ObjectHideFlags: 0
@@ -34779,9 +34826,9 @@ MonoBehaviour:
   m_HandleRect: {fileID: 1853030164}
   m_Direction: 0
   m_MinValue: 1
-  m_MaxValue: 4
-  m_WholeNumbers: 0
-  m_Value: 1
+  m_MaxValue: 10
+  m_WholeNumbers: 1
+  m_Value: 5
   m_OnValueChanged:
     m_PersistentCalls:
       m_Calls:
@@ -35898,9 +35945,9 @@ MonoBehaviour:
   m_HandleRect: {fileID: 1797225782}
   m_Direction: 0
   m_MinValue: 1
-  m_MaxValue: 4
-  m_WholeNumbers: 0
-  m_Value: 1
+  m_MaxValue: 25
+  m_WholeNumbers: 1
+  m_Value: 10
   m_OnValueChanged:
     m_PersistentCalls:
       m_Calls:

@@ -120,7 +120,7 @@ namespace MinimalMiner.Design
                     break;
                 case ShipComponent.Def_ShieldRecharge:
                     def = CurrentDefenses;
-                    def.ShieldRecharge = value;
+                    def.ShieldRecharge = (float)Math.Round(value, 2);
                     shipClass.Config.UpdateDefenseConfig(def);
                     break;
                 case ShipComponent.Def_ShieldStrength:
@@ -130,7 +130,7 @@ namespace MinimalMiner.Design
                     break;
                 case ShipComponent.Thr_Dampener:
                     thr = CurrentThrusters;
-                    thr.DampenerStrength = value;
+                    thr.DampenerStrength = (float)Math.Round(value, 2);
                     shipClass.Config.UpdateThrusterConfig(thr);
                     break;
                 case ShipComponent.Thr_Forward:
@@ -145,7 +145,7 @@ namespace MinimalMiner.Design
                     break;
                 case ShipComponent.Thr_Recoil:
                     thr = CurrentThrusters;
-                    thr.RecoilCompensation = value;
+                    thr.RecoilCompensation = (float)Math.Round(value, 2);
                     shipClass.Config.UpdateThrusterConfig(thr);
                     break;
                 case ShipComponent.Thr_Reverse:
@@ -176,7 +176,7 @@ namespace MinimalMiner.Design
                     break;
                 case ShipComponent.Wpn_RateOfFire:
                     w = CurrentWeapon;
-                    w.RateOfFire = value;
+                    w.RateOfFire = (float)Math.Round(value, 2);
                     shipClass.Config.UpdateWeapon(w, weaponIndex);
                     break;
                 case ShipComponent.Wpn_Recoil:
