@@ -34634,6 +34634,14 @@ MonoBehaviour:
   m_Script: {fileID: 11500000, guid: 6a38edabb3df4b148b121e00fa7a60e2, type: 3}
   m_Name: 
   m_EditorClassIdentifier: 
+  weaponSelectionDropdown: {fileID: 0}
+  individualWeaponSliders:
+  - {fileID: 961087684}
+  - {fileID: 190364017}
+  - {fileID: 1778947692}
+  - {fileID: 244392948}
+  individualWeaponDropdowns:
+  - {fileID: 77363267}
   valueIndicatorTitles:
   - Slider_ThrusterFwd
   - Slider_ThrusterRev
