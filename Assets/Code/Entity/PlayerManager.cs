@@ -56,6 +56,11 @@ namespace MinimalMiner.Entity
                 player.enabled = false;
             }
         }
+
+        public void SetupPlayer(ShipConfiguration config)
+        {
+            player.SetupPlayer(config);
+        }
         #endregion
     }
 }

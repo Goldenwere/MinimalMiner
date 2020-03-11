@@ -15,7 +15,9 @@ namespace MinimalMiner.Design
     {
         [SerializeField] private GameObject shipParent;
         [SerializeField] private LowLevelPlayer shipClass;
+        [SerializeField] private PlayerManager playerMgr;
         private float value;
+        private ShipConfiguration CurrentConfig { get { return shipClass.Config; } }    // to avoid repeating shipClass.Config
 
         // Current weapon being manipulated in weapon config
         private int weaponIndex;
@@ -236,6 +238,13 @@ namespace MinimalMiner.Design
                 sw.Weapons.Add(new ShipWeapon());
 
             shipClass.Config.UpdateWeaponConfig(sw);
+        }
+
+        public void InstantiateShip()
+        {
+            ShipConfiguration config = new ShipConfiguration(CurrentConfig.Stats_Weapons, CurrentConfig.Stats_Defenses,
+                CurrentConfig.Stats_Thrusters, CurrentConfig.Mass, CurrentConfig.ColliderForm, CurrentConfig.BodySprite, null);
+            playerMgr.SetupPlayer(config);
         }
     }
 }

@@ -127,13 +127,13 @@ namespace MinimalMiner.Entity
 
             #endregion
 
-            shipConfig = new ShipConfiguration(weapons, defenses, thrusters, 1, colliders, sprite.sprite, eventMgr);
+            ShipConfiguration tempShipConfig = new ShipConfiguration(weapons, defenses, thrusters, 1, colliders, sprite.sprite, eventMgr);
 
             // This may seem redundant, accessing what was set in the previous Setup region, but that will eventually disappear once actual ships are defined
-            rigidbody.drag = shipConfig.Stats_Thrusters.DampenerStrength;
-            rigidbody.mass = shipConfig.Mass;
+            rigidbody.drag = tempShipConfig.Stats_Thrusters.DampenerStrength;
+            rigidbody.mass = tempShipConfig.Mass;
             collider.points = colliders;
-            sprite.sprite = shipConfig.BodySprite;  // This, like the bulletPrefab and bulletSound, will be handled/stored outside player, so the back-and-fourth setting seen here won't be present eventually
+            sprite.sprite = tempShipConfig.BodySprite;  // This, like the bulletPrefab and bulletSound, will be handled/stored outside player, so the back-and-fourth setting seen here won't be present eventually
 
             for (int i = 0; i < weapons.WeaponCount; i++)
             {
@@ -446,6 +446,15 @@ namespace MinimalMiner.Entity
             // Reset physics
             shipAccForce = Vector2.zero;
             rigidbody.velocity = Vector2.zero;
+        }
+
+        public void SetupPlayer(ShipConfiguration config)
+        {
+            GameObject managers = GameObject.FindWithTag("managers");
+            ShipConfiguration configWithEMgr = new ShipConfiguration(config.Stats_Weapons, config.Stats_Defenses, config.Stats_Thrusters,
+                config.Mass, config.ColliderForm, config.BodySprite, managers.GetComponent<EventManager>());
+            shipConfig = configWithEMgr;
+            ResetPlayer();
         }
     }
 }
