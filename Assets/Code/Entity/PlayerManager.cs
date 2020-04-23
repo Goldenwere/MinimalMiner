@@ -60,6 +60,9 @@ namespace MinimalMiner.Entity
         public void SetupPlayer(ShipConfiguration config)
         {
             player.SetupPlayer(config);
+            player.enabled = true;
+            player.ResetPlayer();
+            playerObj.SetActive(true);
         }
         #endregion
     }

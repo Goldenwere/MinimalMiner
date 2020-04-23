@@ -3946,6 +3946,10 @@ MonoBehaviour:
   m_Name: 
   m_EditorClassIdentifier: 
   renderer: {fileID: 164336377}
+  bulletPrefab: {fileID: 8385927219721995690, guid: 93ce7606e24d1544cb95e144ec62e143,
+    type: 3}
+  bulletSound: {fileID: 1088009817}
+  bulletSound2: {fileID: 268727569}
 --- !u!212 &164336377
 SpriteRenderer:
   m_ObjectHideFlags: 0
@@ -6274,6 +6278,12 @@ CanvasRenderer:
   m_PrefabAsset: {fileID: 0}
   m_GameObject: {fileID: 263257424}
   m_CullTransparentMesh: 0
+--- !u!82 &268727569 stripped
+AudioSource:
+  m_CorrespondingSourceObject: {fileID: 2024705578132046795, guid: 8ef2f09326fe0ee429714a277163551c,
+    type: 3}
+  m_PrefabInstance: {fileID: 2024705576689211374}
+  m_PrefabAsset: {fileID: 0}
 --- !u!1 &274161511
 GameObject:
   m_ObjectHideFlags: 0
@@ -20182,6 +20192,12 @@ CanvasRenderer:
   m_PrefabAsset: {fileID: 0}
   m_GameObject: {fileID: 1083250494}
   m_CullTransparentMesh: 0
+--- !u!82 &1088009817 stripped
+AudioSource:
+  m_CorrespondingSourceObject: {fileID: 2024705576696630248, guid: 8ef2f09326fe0ee429714a277163551c,
+    type: 3}
+  m_PrefabInstance: {fileID: 2024705576689211374}
+  m_PrefabAsset: {fileID: 0}
 --- !u!1 &1090264951
 GameObject:
   m_ObjectHideFlags: 0
@@ -40386,7 +40402,7 @@ PrefabInstance:
     - target: {fileID: 6274987936255847281, guid: 8ef2f09326fe0ee429714a277163551c,
         type: 3}
       propertyPath: m_IsActive
-      value: 0
+      value: 1
       objectReference: {fileID: 0}
     m_RemovedComponents: []
   m_SourcePrefab: {fileID: 100100000, guid: 8ef2f09326fe0ee429714a277163551c, type: 3}

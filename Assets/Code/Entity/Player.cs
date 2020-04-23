@@ -448,10 +448,7 @@ namespace MinimalMiner.Entity
 
         public void SetupPlayer(ShipConfiguration config)
         {
-            GameObject managers = GameObject.FindWithTag("managers");
-            ShipConfiguration configWithEMgr = new ShipConfiguration(config.Stats_Weapons, config.Stats_Defenses, config.Stats_Thrusters,
-                config.Mass, config.ColliderForm, config.BodySprite);
-            shipConfig = configWithEMgr;
+            shipConfig = config;
             ResetPlayer();
         }
     }
