@@ -12,7 +12,7 @@ public class DefaultSliderFiller : MonoBehaviour
 
     private void Awake()
     {
-        sliderField.value = defaultValue;
+        sliderField.SetValueWithoutNotify(defaultValue);
         sliderText.text = defaultValue.ToString();
     }
 }

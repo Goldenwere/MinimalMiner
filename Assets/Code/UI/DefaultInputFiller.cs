@@ -10,6 +10,6 @@ public class DefaultInputFiller : MonoBehaviour
 
     private void Awake()
     {
-        field.text = defaultValue;
+        field.SetTextWithoutNotify(defaultValue);
     }
 }
