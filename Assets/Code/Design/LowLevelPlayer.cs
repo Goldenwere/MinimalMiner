@@ -21,7 +21,6 @@ namespace MinimalMiner.Design
         }
 
         [SerializeField] private SpriteRenderer renderer;
-        [SerializeField] private EventManager eventMgr;
         private float fireTimer;
 
         /// <summary>
@@ -29,7 +28,7 @@ namespace MinimalMiner.Design
         /// </summary>
         private void Start()
         {
-            Config = new ShipConfiguration(ShipSprite, eventMgr);
+            Config = new ShipConfiguration(ShipSprite);
         }
     }
 }

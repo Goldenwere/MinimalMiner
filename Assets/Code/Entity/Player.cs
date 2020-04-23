@@ -42,7 +42,6 @@ namespace MinimalMiner.Entity
         // Management variables
         private GameState currState;
         private PreferencesManager playerPrefs;
-        private EventManager eventMgr;
         private MaterialManager matMgr;
 
         /// <summary>
@@ -127,7 +126,7 @@ namespace MinimalMiner.Entity
 
             #endregion
 
-            ShipConfiguration tempShipConfig = new ShipConfiguration(weapons, defenses, thrusters, 1, colliders, sprite.sprite, eventMgr);
+            ShipConfiguration tempShipConfig = new ShipConfiguration(weapons, defenses, thrusters, 1, colliders, sprite.sprite);
 
             // This may seem redundant, accessing what was set in the previous Setup region, but that will eventually disappear once actual ships are defined
             rigidbody.drag = tempShipConfig.Stats_Thrusters.DampenerStrength;
@@ -383,13 +382,13 @@ namespace MinimalMiner.Entity
 
                 Rigidbody2D rigidbody = hit.collider.gameObject.GetComponent<Rigidbody2D>();
 
-                eventMgr.UpdateTargetElement(true, hit.transform, transform, rigidbody);
+                EventManager.Instance.UpdateTargetElement(true, hit.transform, transform, rigidbody);
             }
 
             else if (isTargeting)
             {
                 isTargeting = false;
-                eventMgr.UpdateTargetElement(false, null, null, null);
+                EventManager.Instance.UpdateTargetElement(false, null, null, null);
             }
         }
 
@@ -400,13 +399,13 @@ namespace MinimalMiner.Entity
         public void TakeDamage(float damageDone)
         {
             bool isDead = shipConfig.TakeDamage(damageDone);
-            eventMgr.UpdateHUDElement(HUDElement.armor, Math.Round(shipConfig.Current_Defenses.ArmorStrength, 2).ToString());
-            eventMgr.UpdateHUDElement(HUDElement.shield, Math.Round(shipConfig.Current_Defenses.ShieldStrength, 2).ToString());
+            EventManager.Instance.UpdateHUDElement(HUDElement.armor, Math.Round(shipConfig.Current_Defenses.ArmorStrength, 2).ToString());
+            EventManager.Instance.UpdateHUDElement(HUDElement.shield, Math.Round(shipConfig.Current_Defenses.ShieldStrength, 2).ToString());
 
             if (isDead)
             {
                 deathSound.Play();
-                eventMgr.UpdateGameState(GameState.death);
+                EventManager.Instance.UpdateGameState(GameState.death);
             }
 
             else
@@ -424,17 +423,16 @@ namespace MinimalMiner.Entity
         {
             GameObject managers = GameObject.FindWithTag("managers");
             playerPrefs = managers.GetComponent<PreferencesManager>();
-            eventMgr = managers.GetComponent<EventManager>();
             matMgr = managers.GetComponent<MaterialManager>();
             inv = new PlayerInventory(10000f, 10, 10);
 
             // Reset state and stats
             Start();
             shipConfig.ResetShip();
-            eventMgr.UpdateHUDElement(HUDElement.armor, shipConfig.Current_Defenses.ArmorStrength.ToString());
-            eventMgr.UpdateHUDElement(HUDElement.shield, shipConfig.Current_Defenses.ShieldStrength.ToString());
-            eventMgr.UpdateTargetElement(false, null, null, null);
-            UpdateGameState(eventMgr.CurrState, eventMgr.CurrState);
+            EventManager.Instance.UpdateHUDElement(HUDElement.armor, shipConfig.Current_Defenses.ArmorStrength.ToString());
+            EventManager.Instance.UpdateHUDElement(HUDElement.shield, shipConfig.Current_Defenses.ShieldStrength.ToString());
+            EventManager.Instance.UpdateTargetElement(false, null, null, null);
+            UpdateGameState(EventManager.Instance.CurrState, EventManager.Instance.CurrState);
             UpdateTheme(playerPrefs.CurrentTheme);
             flashTimer = -1f;
             fireTimer = 30f;
@@ -452,7 +450,7 @@ namespace MinimalMiner.Entity
         {
             GameObject managers = GameObject.FindWithTag("managers");
             ShipConfiguration configWithEMgr = new ShipConfiguration(config.Stats_Weapons, config.Stats_Defenses, config.Stats_Thrusters,
-                config.Mass, config.ColliderForm, config.BodySprite, managers.GetComponent<EventManager>());
+                config.Mass, config.ColliderForm, config.BodySprite);
             shipConfig = configWithEMgr;
             ResetPlayer();
         }

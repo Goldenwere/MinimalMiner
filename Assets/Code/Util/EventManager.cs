@@ -73,11 +73,25 @@ namespace MinimalMiner.Util
             get; private set;
         }
 
+        public static EventManager Instance
+        {
+            get; private set;
+        }
+
         // Refers to the current player preferences
         [SerializeField] private PreferencesManager playerPrefs;
         #endregion
 
         #region Methods
+        private void Awake()
+        {
+            if (Instance != null && Instance != this)
+                Destroy(gameObject);
+
+            DontDestroyOnLoad(gameObject);
+            Instance = this;
+        }
+
         /// <summary>
         /// Handles the start of the object before the first frame
         /// </summary>

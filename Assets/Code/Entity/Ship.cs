@@ -69,8 +69,6 @@ namespace MinimalMiner.Entity
 
         // Timer used for delaying shield recharge
         private float rechargeDelay;
-        // For updating text without a damage event
-        private EventManager eventMgr;
         #endregion
 
         #region Methods
@@ -83,7 +81,7 @@ namespace MinimalMiner.Entity
         /// <param name="mas">Ship's mass</param>
         /// <param name="col">Ship's colliders</param>
         /// <param name="spr">Ship's body sprite</param>
-        public ShipConfiguration(ShipWeaponry wpn, ShipDefenses def, ShipThrusters thr, float mas, Vector2[] col, Sprite spr, EventManager e)
+        public ShipConfiguration(ShipWeaponry wpn, ShipDefenses def, ShipThrusters thr, float mas, Vector2[] col, Sprite spr)
         {
             Stats_Weapons = wpn;
             Stats_Defenses = def;
@@ -92,7 +90,6 @@ namespace MinimalMiner.Entity
             Mass = mas;
             ColliderForm = col;
             BodySprite = spr;
-            eventMgr = e;
         }
 
         /// <summary>
@@ -100,9 +97,8 @@ namespace MinimalMiner.Entity
         /// </summary>
         /// <param name="spr">The sprite for the ship</param>
         /// <param name="e">A reference to the EventManager in the scene</param>
-        public ShipConfiguration(Sprite spr, EventManager e)
+        public ShipConfiguration(Sprite spr)
         {
-            eventMgr = e;
             BodySprite = spr;
 
             ShipWeaponry w = new ShipWeaponry();
@@ -177,7 +173,7 @@ namespace MinimalMiner.Entity
                     ShipDefenses updatedDef = Current_Defenses;
                     updatedDef.ShieldStrength += Current_Defenses.ShieldRecharge * dt;
                     Current_Defenses = updatedDef;
-                    eventMgr.UpdateHUDElement(HUDElement.shield, Math.Round(updatedDef.ShieldStrength, 2).ToString());
+                    EventManager.Instance.UpdateHUDElement(HUDElement.shield, Math.Round(updatedDef.ShieldStrength, 2).ToString());
                 }
             }
 
@@ -187,7 +183,7 @@ namespace MinimalMiner.Entity
                 ShipDefenses updatedDef = Current_Defenses;
                 updatedDef.ShieldStrength = Stats_Defenses.ShieldStrength;
                 Current_Defenses = updatedDef;
-                eventMgr.UpdateHUDElement(HUDElement.shield, Math.Round(updatedDef.ShieldStrength, 2).ToString());
+                EventManager.Instance.UpdateHUDElement(HUDElement.shield, Math.Round(updatedDef.ShieldStrength, 2).ToString());
             }
         }
 
@@ -197,7 +193,7 @@ namespace MinimalMiner.Entity
         /// <param name="wpn">The new weaponry that replaces Stats_Weapons</param>
         public void UpdateWeaponConfig(ShipWeaponry wpn)
         {
-            if (eventMgr.CurrState == GameState.shipdesigner)
+            if (EventManager.Instance.CurrState == GameState.shipdesigner)
                 Stats_Weapons = wpn;
         }
 
@@ -231,7 +227,7 @@ namespace MinimalMiner.Entity
         /// <param name="thr">The new thrusters that replaces Stats_Thrusters</param>
         public void UpdateThrusterConfig(ShipThrusters thr)
         {
-            if (eventMgr.CurrState == GameState.shipdesigner)
+            if (EventManager.Instance.CurrState == GameState.shipdesigner)
                 Stats_Thrusters = thr;
         }
 
@@ -241,7 +237,7 @@ namespace MinimalMiner.Entity
         /// <param name="def">The new defenses that replaces Stats_Defenses and Current_Defenses</param>
         public void UpdateDefenseConfig(ShipDefenses def)
         {
-            if (eventMgr.CurrState == GameState.shipdesigner)
+            if (EventManager.Instance.CurrState == GameState.shipdesigner)
             {
                 Stats_Defenses = def;
                 Current_Defenses = def;

@@ -1652,6 +1652,7 @@ GameObject:
   m_Component:
   - component: {fileID: 77890229}
   - component: {fileID: 77890230}
+  - component: {fileID: 77890231}
   m_Layer: 5
   m_Name: Slider_Recoil
   m_TagString: Untagged
@@ -1777,6 +1778,21 @@ MonoBehaviour:
           m_StringArgument: Thr_Recoil
           m_BoolArgument: 0
         m_CallState: 2
+--- !u!114 &77890231
+MonoBehaviour:
+  m_ObjectHideFlags: 0
+  m_CorrespondingSourceObject: {fileID: 0}
+  m_PrefabInstance: {fileID: 0}
+  m_PrefabAsset: {fileID: 0}
+  m_GameObject: {fileID: 77890228}
+  m_Enabled: 1
+  m_EditorHideFlags: 0
+  m_Script: {fileID: 11500000, guid: 78cc14fe12d54554a801f2386a9d1cc9, type: 3}
+  m_Name: 
+  m_EditorClassIdentifier: 
+  sliderField: {fileID: 77890230}
+  sliderText: {fileID: 1828784107}
+  defaultValue: 0.9
 --- !u!1 &78583146
 GameObject:
   m_ObjectHideFlags: 0
@@ -1943,6 +1959,7 @@ GameObject:
   m_Component:
   - component: {fileID: 80353088}
   - component: {fileID: 80353089}
+  - component: {fileID: 80353090}
   m_Layer: 5
   m_Name: Slider_ShieldStr
   m_TagString: Untagged
@@ -2068,6 +2085,21 @@ MonoBehaviour:
           m_StringArgument: Def_ShieldStrength
           m_BoolArgument: 0
         m_CallState: 2
+--- !u!114 &80353090
+MonoBehaviour:
+  m_ObjectHideFlags: 0
+  m_CorrespondingSourceObject: {fileID: 0}
+  m_PrefabInstance: {fileID: 0}
+  m_PrefabAsset: {fileID: 0}
+  m_GameObject: {fileID: 80353087}
+  m_Enabled: 1
+  m_EditorHideFlags: 0
+  m_Script: {fileID: 11500000, guid: 78cc14fe12d54554a801f2386a9d1cc9, type: 3}
+  m_Name: 
+  m_EditorClassIdentifier: 
+  sliderField: {fileID: 80353089}
+  sliderText: {fileID: 2142294158}
+  defaultValue: 5
 --- !u!1 &85856477
 GameObject:
   m_ObjectHideFlags: 0
@@ -3914,7 +3946,6 @@ MonoBehaviour:
   m_Name: 
   m_EditorClassIdentifier: 
   renderer: {fileID: 164336377}
-  eventMgr: {fileID: 247396938}
 --- !u!212 &164336377
 SpriteRenderer:
   m_ObjectHideFlags: 0
@@ -4671,6 +4702,7 @@ GameObject:
   m_Component:
   - component: {fileID: 190364016}
   - component: {fileID: 190364017}
+  - component: {fileID: 190364018}
   m_Layer: 5
   m_Name: Slider_WeaponSpeed
   m_TagString: Untagged
@@ -4796,6 +4828,21 @@ MonoBehaviour:
           m_StringArgument: Wpn_Speed
           m_BoolArgument: 0
         m_CallState: 2
+--- !u!114 &190364018
+MonoBehaviour:
+  m_ObjectHideFlags: 0
+  m_CorrespondingSourceObject: {fileID: 0}
+  m_PrefabInstance: {fileID: 0}
+  m_PrefabAsset: {fileID: 0}
+  m_GameObject: {fileID: 190364015}
+  m_Enabled: 1
+  m_EditorHideFlags: 0
+  m_Script: {fileID: 11500000, guid: 78cc14fe12d54554a801f2386a9d1cc9, type: 3}
+  m_Name: 
+  m_EditorClassIdentifier: 
+  sliderField: {fileID: 190364017}
+  sliderText: {fileID: 2082998190}
+  defaultValue: 100
 --- !u!1 &193812541
 GameObject:
   m_ObjectHideFlags: 0
@@ -5513,6 +5560,7 @@ GameObject:
   m_Component:
   - component: {fileID: 244392947}
   - component: {fileID: 244392948}
+  - component: {fileID: 244392949}
   m_Layer: 5
   m_Name: Slider_WeaponROF
   m_TagString: Untagged
@@ -5638,6 +5686,21 @@ MonoBehaviour:
           m_StringArgument: Wpn_RateOfFire
           m_BoolArgument: 0
         m_CallState: 2
+--- !u!114 &244392949
+MonoBehaviour:
+  m_ObjectHideFlags: 0
+  m_CorrespondingSourceObject: {fileID: 0}
+  m_PrefabInstance: {fileID: 0}
+  m_PrefabAsset: {fileID: 0}
+  m_GameObject: {fileID: 244392946}
+  m_Enabled: 1
+  m_EditorHideFlags: 0
+  m_Script: {fileID: 11500000, guid: 78cc14fe12d54554a801f2386a9d1cc9, type: 3}
+  m_Name: 
+  m_EditorClassIdentifier: 
+  sliderField: {fileID: 244392948}
+  sliderText: {fileID: 262361139}
+  defaultValue: 0.25
 --- !u!1 &245020589
 GameObject:
   m_ObjectHideFlags: 0
@@ -6223,6 +6286,7 @@ GameObject:
   - component: {fileID: 274161515}
   - component: {fileID: 274161514}
   - component: {fileID: 274161513}
+  - component: {fileID: 274161516}
   m_Layer: 0
   m_Name: Input_RotY
   m_TagString: Untagged
@@ -6405,6 +6469,20 @@ CanvasRenderer:
   m_PrefabAsset: {fileID: 0}
   m_GameObject: {fileID: 274161511}
   m_CullTransparentMesh: 0
+--- !u!114 &274161516
+MonoBehaviour:
+  m_ObjectHideFlags: 0
+  m_CorrespondingSourceObject: {fileID: 0}
+  m_PrefabInstance: {fileID: 0}
+  m_PrefabAsset: {fileID: 0}
+  m_GameObject: {fileID: 274161511}
+  m_Enabled: 1
+  m_EditorHideFlags: 0
+  m_Script: {fileID: 11500000, guid: 1451d40c1dbcb1c4dbe639b5c32c3c9f, type: 3}
+  m_Name: 
+  m_EditorClassIdentifier: 
+  field: {fileID: 274161513}
+  defaultValue: 0
 --- !u!1 &278406177
 GameObject:
   m_ObjectHideFlags: 0
@@ -8318,6 +8396,7 @@ GameObject:
   m_Component:
   - component: {fileID: 362282882}
   - component: {fileID: 362282883}
+  - component: {fileID: 362282884}
   m_Layer: 5
   m_Name: Slider_ThrusterFwd
   m_TagString: Untagged
@@ -8443,6 +8522,21 @@ MonoBehaviour:
           m_StringArgument: Thr_Forward
           m_BoolArgument: 0
         m_CallState: 2
+--- !u!114 &362282884
+MonoBehaviour:
+  m_ObjectHideFlags: 0
+  m_CorrespondingSourceObject: {fileID: 0}
+  m_PrefabInstance: {fileID: 0}
+  m_PrefabAsset: {fileID: 0}
+  m_GameObject: {fileID: 362282881}
+  m_Enabled: 1
+  m_EditorHideFlags: 0
+  m_Script: {fileID: 11500000, guid: 78cc14fe12d54554a801f2386a9d1cc9, type: 3}
+  m_Name: 
+  m_EditorClassIdentifier: 
+  sliderField: {fileID: 362282883}
+  sliderText: {fileID: 1459080623}
+  defaultValue: 10
 --- !u!1 &365245243
 GameObject:
   m_ObjectHideFlags: 0
@@ -10706,6 +10800,7 @@ GameObject:
   m_Component:
   - component: {fileID: 471853813}
   - component: {fileID: 471853814}
+  - component: {fileID: 471853815}
   m_Layer: 5
   m_Name: Slider_ThrusterRev
   m_TagString: Untagged
@@ -10831,6 +10926,21 @@ MonoBehaviour:
           m_StringArgument: Thr_Reverse
           m_BoolArgument: 0
         m_CallState: 2
+--- !u!114 &471853815
+MonoBehaviour:
+  m_ObjectHideFlags: 0
+  m_CorrespondingSourceObject: {fileID: 0}
+  m_PrefabInstance: {fileID: 0}
+  m_PrefabAsset: {fileID: 0}
+  m_GameObject: {fileID: 471853812}
+  m_Enabled: 1
+  m_EditorHideFlags: 0
+  m_Script: {fileID: 11500000, guid: 78cc14fe12d54554a801f2386a9d1cc9, type: 3}
+  m_Name: 
+  m_EditorClassIdentifier: 
+  sliderField: {fileID: 471853814}
+  sliderText: {fileID: 1758785735}
+  defaultValue: 10
 --- !u!1 &472480783
 GameObject:
   m_ObjectHideFlags: 0
@@ -11312,6 +11422,7 @@ GameObject:
   m_Component:
   - component: {fileID: 512153449}
   - component: {fileID: 512153450}
+  - component: {fileID: 512153451}
   m_Layer: 5
   m_Name: Slider_ShieldRe
   m_TagString: Untagged
@@ -11437,6 +11548,21 @@ MonoBehaviour:
           m_StringArgument: Def_ShieldRecharge
           m_BoolArgument: 0
         m_CallState: 2
+--- !u!114 &512153451
+MonoBehaviour:
+  m_ObjectHideFlags: 0
+  m_CorrespondingSourceObject: {fileID: 0}
+  m_PrefabInstance: {fileID: 0}
+  m_PrefabAsset: {fileID: 0}
+  m_GameObject: {fileID: 512153448}
+  m_Enabled: 1
+  m_EditorHideFlags: 0
+  m_Script: {fileID: 11500000, guid: 78cc14fe12d54554a801f2386a9d1cc9, type: 3}
+  m_Name: 
+  m_EditorClassIdentifier: 
+  sliderField: {fileID: 512153450}
+  sliderText: {fileID: 1280375150}
+  defaultValue: 1
 --- !u!1 &512579989
 GameObject:
   m_ObjectHideFlags: 0
@@ -12684,6 +12810,7 @@ GameObject:
   - component: {fileID: 571938384}
   - component: {fileID: 571938383}
   - component: {fileID: 571938382}
+  - component: {fileID: 571938385}
   m_Layer: 0
   m_Name: Input_PosX
   m_TagString: Untagged
@@ -12866,6 +12993,20 @@ CanvasRenderer:
   m_PrefabAsset: {fileID: 0}
   m_GameObject: {fileID: 571938380}
   m_CullTransparentMesh: 0
+--- !u!114 &571938385
+MonoBehaviour:
+  m_ObjectHideFlags: 0
+  m_CorrespondingSourceObject: {fileID: 0}
+  m_PrefabInstance: {fileID: 0}
+  m_PrefabAsset: {fileID: 0}
+  m_GameObject: {fileID: 571938380}
+  m_Enabled: 1
+  m_EditorHideFlags: 0
+  m_Script: {fileID: 11500000, guid: 1451d40c1dbcb1c4dbe639b5c32c3c9f, type: 3}
+  m_Name: 
+  m_EditorClassIdentifier: 
+  field: {fileID: 571938382}
+  defaultValue: 0
 --- !u!1 &588331728
 GameObject:
   m_ObjectHideFlags: 0
@@ -14897,6 +15038,7 @@ GameObject:
   m_Component:
   - component: {fileID: 735417933}
   - component: {fileID: 735417934}
+  - component: {fileID: 735417935}
   m_Layer: 5
   m_Name: Slider_WeaponCount
   m_TagString: Untagged
@@ -15033,6 +15175,21 @@ MonoBehaviour:
           m_StringArgument: 
           m_BoolArgument: 0
         m_CallState: 2
+--- !u!114 &735417935
+MonoBehaviour:
+  m_ObjectHideFlags: 0
+  m_CorrespondingSourceObject: {fileID: 0}
+  m_PrefabInstance: {fileID: 0}
+  m_PrefabAsset: {fileID: 0}
+  m_GameObject: {fileID: 735417932}
+  m_Enabled: 1
+  m_EditorHideFlags: 0
+  m_Script: {fileID: 11500000, guid: 78cc14fe12d54554a801f2386a9d1cc9, type: 3}
+  m_Name: 
+  m_EditorClassIdentifier: 
+  sliderField: {fileID: 0}
+  sliderText: {fileID: 0}
+  defaultValue: 0
 --- !u!1 &737788417
 GameObject:
   m_ObjectHideFlags: 0
@@ -18139,6 +18296,7 @@ GameObject:
   m_Component:
   - component: {fileID: 961087683}
   - component: {fileID: 961087684}
+  - component: {fileID: 961087685}
   m_Layer: 5
   m_Name: Slider_WeaponDamage
   m_TagString: Untagged
@@ -18264,6 +18422,21 @@ MonoBehaviour:
           m_StringArgument: Wpn_Damage
           m_BoolArgument: 0
         m_CallState: 2
+--- !u!114 &961087685
+MonoBehaviour:
+  m_ObjectHideFlags: 0
+  m_CorrespondingSourceObject: {fileID: 0}
+  m_PrefabInstance: {fileID: 0}
+  m_PrefabAsset: {fileID: 0}
+  m_GameObject: {fileID: 961087682}
+  m_Enabled: 1
+  m_EditorHideFlags: 0
+  m_Script: {fileID: 11500000, guid: 78cc14fe12d54554a801f2386a9d1cc9, type: 3}
+  m_Name: 
+  m_EditorClassIdentifier: 
+  sliderField: {fileID: 961087684}
+  sliderText: {fileID: 670512724}
+  defaultValue: 5
 --- !u!1 &969369058
 GameObject:
   m_ObjectHideFlags: 0
@@ -21564,6 +21737,7 @@ GameObject:
   - component: {fileID: 1159119946}
   - component: {fileID: 1159119945}
   - component: {fileID: 1159119944}
+  - component: {fileID: 1159119947}
   m_Layer: 0
   m_Name: Input_RotX
   m_TagString: Untagged
@@ -21746,6 +21920,20 @@ CanvasRenderer:
   m_PrefabAsset: {fileID: 0}
   m_GameObject: {fileID: 1159119942}
   m_CullTransparentMesh: 0
+--- !u!114 &1159119947
+MonoBehaviour:
+  m_ObjectHideFlags: 0
+  m_CorrespondingSourceObject: {fileID: 0}
+  m_PrefabInstance: {fileID: 0}
+  m_PrefabAsset: {fileID: 0}
+  m_GameObject: {fileID: 1159119942}
+  m_Enabled: 1
+  m_EditorHideFlags: 0
+  m_Script: {fileID: 11500000, guid: 1451d40c1dbcb1c4dbe639b5c32c3c9f, type: 3}
+  m_Name: 
+  m_EditorClassIdentifier: 
+  field: {fileID: 1159119944}
+  defaultValue: 0
 --- !u!1 &1160421862
 GameObject:
   m_ObjectHideFlags: 0
@@ -22280,6 +22468,7 @@ GameObject:
   m_Component:
   - component: {fileID: 1193225703}
   - component: {fileID: 1193225704}
+  - component: {fileID: 1193225705}
   m_Layer: 5
   m_Name: Slider_Armor
   m_TagString: Untagged
@@ -22405,6 +22594,21 @@ MonoBehaviour:
           m_StringArgument: Def_Armor
           m_BoolArgument: 0
         m_CallState: 2
+--- !u!114 &1193225705
+MonoBehaviour:
+  m_ObjectHideFlags: 0
+  m_CorrespondingSourceObject: {fileID: 0}
+  m_PrefabInstance: {fileID: 0}
+  m_PrefabAsset: {fileID: 0}
+  m_GameObject: {fileID: 1193225702}
+  m_Enabled: 1
+  m_EditorHideFlags: 0
+  m_Script: {fileID: 11500000, guid: 78cc14fe12d54554a801f2386a9d1cc9, type: 3}
+  m_Name: 
+  m_EditorClassIdentifier: 
+  sliderField: {fileID: 1193225704}
+  sliderText: {fileID: 303061460}
+  defaultValue: 50
 --- !u!1 &1206200373
 GameObject:
   m_ObjectHideFlags: 0
@@ -22956,6 +23160,7 @@ GameObject:
   m_Component:
   - component: {fileID: 1227316456}
   - component: {fileID: 1227316457}
+  - component: {fileID: 1227316458}
   m_Layer: 5
   m_Name: Slider_Res
   m_TagString: Untagged
@@ -23081,6 +23286,21 @@ MonoBehaviour:
           m_StringArgument: Def_Resistance
           m_BoolArgument: 0
         m_CallState: 2
+--- !u!114 &1227316458
+MonoBehaviour:
+  m_ObjectHideFlags: 0
+  m_CorrespondingSourceObject: {fileID: 0}
+  m_PrefabInstance: {fileID: 0}
+  m_PrefabAsset: {fileID: 0}
+  m_GameObject: {fileID: 1227316455}
+  m_Enabled: 1
+  m_EditorHideFlags: 0
+  m_Script: {fileID: 11500000, guid: 78cc14fe12d54554a801f2386a9d1cc9, type: 3}
+  m_Name: 
+  m_EditorClassIdentifier: 
+  sliderField: {fileID: 1227316457}
+  sliderText: {fileID: 1620813965}
+  defaultValue: 15
 --- !u!1 &1227401976
 GameObject:
   m_ObjectHideFlags: 0
@@ -24579,6 +24799,7 @@ GameObject:
   - component: {fileID: 1288594942}
   - component: {fileID: 1288594941}
   - component: {fileID: 1288594940}
+  - component: {fileID: 1288594943}
   m_Layer: 0
   m_Name: Input_PosY
   m_TagString: Untagged
@@ -24761,6 +24982,20 @@ CanvasRenderer:
   m_PrefabAsset: {fileID: 0}
   m_GameObject: {fileID: 1288594938}
   m_CullTransparentMesh: 0
+--- !u!114 &1288594943
+MonoBehaviour:
+  m_ObjectHideFlags: 0
+  m_CorrespondingSourceObject: {fileID: 0}
+  m_PrefabInstance: {fileID: 0}
+  m_PrefabAsset: {fileID: 0}
+  m_GameObject: {fileID: 1288594938}
+  m_Enabled: 1
+  m_EditorHideFlags: 0
+  m_Script: {fileID: 11500000, guid: 1451d40c1dbcb1c4dbe639b5c32c3c9f, type: 3}
+  m_Name: 
+  m_EditorClassIdentifier: 
+  field: {fileID: 1288594940}
+  defaultValue: 0.25
 --- !u!1 &1292344075
 GameObject:
   m_ObjectHideFlags: 0
@@ -29230,6 +29465,7 @@ GameObject:
   m_Component:
   - component: {fileID: 1542771500}
   - component: {fileID: 1542771501}
+  - component: {fileID: 1542771502}
   m_Layer: 5
   m_Name: Slider_RotSpd
   m_TagString: Untagged
@@ -29355,6 +29591,21 @@ MonoBehaviour:
           m_StringArgument: Thr_RotSpd
           m_BoolArgument: 0
         m_CallState: 2
+--- !u!114 &1542771502
+MonoBehaviour:
+  m_ObjectHideFlags: 0
+  m_CorrespondingSourceObject: {fileID: 0}
+  m_PrefabInstance: {fileID: 0}
+  m_PrefabAsset: {fileID: 0}
+  m_GameObject: {fileID: 1542771499}
+  m_Enabled: 1
+  m_EditorHideFlags: 0
+  m_Script: {fileID: 11500000, guid: 78cc14fe12d54554a801f2386a9d1cc9, type: 3}
+  m_Name: 
+  m_EditorClassIdentifier: 
+  sliderField: {fileID: 1542771501}
+  sliderText: {fileID: 782374653}
+  defaultValue: 5
 --- !u!1 &1544640070
 GameObject:
   m_ObjectHideFlags: 0
@@ -32465,6 +32716,7 @@ GameObject:
   m_Component:
   - component: {fileID: 1778947691}
   - component: {fileID: 1778947692}
+  - component: {fileID: 1778947693}
   m_Layer: 5
   m_Name: Slider_WeaponRecoil
   m_TagString: Untagged
@@ -32590,6 +32842,21 @@ MonoBehaviour:
           m_StringArgument: Wpn_Recoil
           m_BoolArgument: 0
         m_CallState: 2
+--- !u!114 &1778947693
+MonoBehaviour:
+  m_ObjectHideFlags: 0
+  m_CorrespondingSourceObject: {fileID: 0}
+  m_PrefabInstance: {fileID: 0}
+  m_PrefabAsset: {fileID: 0}
+  m_GameObject: {fileID: 1778947690}
+  m_Enabled: 1
+  m_EditorHideFlags: 0
+  m_Script: {fileID: 11500000, guid: 78cc14fe12d54554a801f2386a9d1cc9, type: 3}
+  m_Name: 
+  m_EditorClassIdentifier: 
+  sliderField: {fileID: 1778947692}
+  sliderText: {fileID: 1209240721}
+  defaultValue: 5
 --- !u!1 &1794047224
 GameObject:
   m_ObjectHideFlags: 0
@@ -34339,6 +34606,7 @@ GameObject:
   m_Component:
   - component: {fileID: 1884620675}
   - component: {fileID: 1884620676}
+  - component: {fileID: 1884620677}
   m_Layer: 5
   m_Name: Slider_Dampener
   m_TagString: Untagged
@@ -34464,6 +34732,21 @@ MonoBehaviour:
           m_StringArgument: Thr_Dampener
           m_BoolArgument: 0
         m_CallState: 2
+--- !u!114 &1884620677
+MonoBehaviour:
+  m_ObjectHideFlags: 0
+  m_CorrespondingSourceObject: {fileID: 0}
+  m_PrefabInstance: {fileID: 0}
+  m_PrefabAsset: {fileID: 0}
+  m_GameObject: {fileID: 1884620674}
+  m_Enabled: 1
+  m_EditorHideFlags: 0
+  m_Script: {fileID: 11500000, guid: 78cc14fe12d54554a801f2386a9d1cc9, type: 3}
+  m_Name: 
+  m_EditorClassIdentifier: 
+  sliderField: {fileID: 1884620676}
+  sliderText: {fileID: 1346688646}
+  defaultValue: 0.5
 --- !u!1 &1888054575
 GameObject:
   m_ObjectHideFlags: 0
@@ -35085,6 +35368,7 @@ GameObject:
   m_Component:
   - component: {fileID: 1912047273}
   - component: {fileID: 1912047274}
+  - component: {fileID: 1912047275}
   m_Layer: 5
   m_Name: Slider_ShieldDel
   m_TagString: Untagged
@@ -35210,6 +35494,21 @@ MonoBehaviour:
           m_StringArgument: Def_ShieldDelay
           m_BoolArgument: 0
         m_CallState: 2
+--- !u!114 &1912047275
+MonoBehaviour:
+  m_ObjectHideFlags: 0
+  m_CorrespondingSourceObject: {fileID: 0}
+  m_PrefabInstance: {fileID: 0}
+  m_PrefabAsset: {fileID: 0}
+  m_GameObject: {fileID: 1912047272}
+  m_Enabled: 1
+  m_EditorHideFlags: 0
+  m_Script: {fileID: 11500000, guid: 78cc14fe12d54554a801f2386a9d1cc9, type: 3}
+  m_Name: 
+  m_EditorClassIdentifier: 
+  sliderField: {fileID: 1912047274}
+  sliderText: {fileID: 1771691036}
+  defaultValue: 5
 --- !u!1 &1918264966
 GameObject:
   m_ObjectHideFlags: 0
@@ -36226,6 +36525,7 @@ GameObject:
   m_Component:
   - component: {fileID: 1966303751}
   - component: {fileID: 1966303752}
+  - component: {fileID: 1966303753}
   m_Layer: 5
   m_Name: Slider_MaxDirSpd
   m_TagString: Untagged
@@ -36351,6 +36651,21 @@ MonoBehaviour:
           m_StringArgument: Thr_MaxSpd
           m_BoolArgument: 0
         m_CallState: 2
+--- !u!114 &1966303753
+MonoBehaviour:
+  m_ObjectHideFlags: 0
+  m_CorrespondingSourceObject: {fileID: 0}
+  m_PrefabInstance: {fileID: 0}
+  m_PrefabAsset: {fileID: 0}
+  m_GameObject: {fileID: 1966303750}
+  m_Enabled: 1
+  m_EditorHideFlags: 0
+  m_Script: {fileID: 11500000, guid: 78cc14fe12d54554a801f2386a9d1cc9, type: 3}
+  m_Name: 
+  m_EditorClassIdentifier: 
+  sliderField: {fileID: 1966303752}
+  sliderText: {fileID: 1942391867}
+  defaultValue: 10
 --- !u!1 &1967851477
 GameObject:
   m_ObjectHideFlags: 0
@@ -40008,16 +40323,6 @@ PrefabInstance:
   m_Modification:
     m_TransformParent: {fileID: 0}
     m_Modifications:
-    - target: {fileID: 6274987936255847281, guid: 8ef2f09326fe0ee429714a277163551c,
-        type: 3}
-      propertyPath: m_Name
-      value: PlayerManager
-      objectReference: {fileID: 0}
-    - target: {fileID: 6274987936255847281, guid: 8ef2f09326fe0ee429714a277163551c,
-        type: 3}
-      propertyPath: m_IsActive
-      value: 0
-      objectReference: {fileID: 0}
     - target: {fileID: 2225706657218712266, guid: 8ef2f09326fe0ee429714a277163551c,
         type: 3}
       propertyPath: m_LocalPosition.x
@@ -40071,6 +40376,16 @@ PrefabInstance:
     - target: {fileID: 2225706657218712266, guid: 8ef2f09326fe0ee429714a277163551c,
         type: 3}
       propertyPath: m_LocalEulerAnglesHint.z
+      value: 0
+      objectReference: {fileID: 0}
+    - target: {fileID: 6274987936255847281, guid: 8ef2f09326fe0ee429714a277163551c,
+        type: 3}
+      propertyPath: m_Name
+      value: PlayerManager
+      objectReference: {fileID: 0}
+    - target: {fileID: 6274987936255847281, guid: 8ef2f09326fe0ee429714a277163551c,
+        type: 3}
+      propertyPath: m_IsActive
       value: 0
       objectReference: {fileID: 0}
     m_RemovedComponents: []

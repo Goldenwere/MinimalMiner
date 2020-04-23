@@ -243,7 +243,7 @@ namespace MinimalMiner.Design
         public void InstantiateShip()
         {
             ShipConfiguration config = new ShipConfiguration(CurrentConfig.Stats_Weapons, CurrentConfig.Stats_Defenses,
-                CurrentConfig.Stats_Thrusters, CurrentConfig.Mass, CurrentConfig.ColliderForm, CurrentConfig.BodySprite, null);
+                CurrentConfig.Stats_Thrusters, CurrentConfig.Mass, CurrentConfig.ColliderForm, CurrentConfig.BodySprite);
             playerMgr.SetupPlayer(config);
         }
     }
