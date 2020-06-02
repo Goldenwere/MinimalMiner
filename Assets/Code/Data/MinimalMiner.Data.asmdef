@@ -1,0 +1,15 @@
+{
+    "name": "MinimalMiner.Data",
+    "references": [
+        "GUID:a8f2626909d214647a9257d090c2abc5"
+    ],
+    "includePlatforms": [],
+    "excludePlatforms": [],
+    "allowUnsafeCode": false,
+    "overrideReferences": false,
+    "precompiledReferences": [],
+    "autoReferenced": true,
+    "defineConstraints": [],
+    "versionDefines": [],
+    "noEngineReferences": false
+}

@@ -8,6 +8,7 @@ namespace MinimalMiner.Entity
     /// <summary>
     /// Represents a ship configuration in terms of weapons, defensive capabilities, and thrusters
     /// </summary>
+    [Serializable]
     public class ShipConfiguration
     {
         #region Properties
