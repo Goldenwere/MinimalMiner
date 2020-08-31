@@ -5,7 +5,7 @@
 </p>
 
 ## About
-MinimalMiner is a 2D shoot-em-up based off of the Atari classic Asteroids featuring minimalist vector graphics. MinimalMiner is currently in early alpha.
+MinimalMiner is a 2D shoot-em-up based off of the Atari classic Asteroids featuring minimalist vector graphics. MinimalMiner is currently in early alpha and is on hiatus.
  
 ## Background
 This project is based off of an academic project that was to create a sort of asteroids clone using self-coded collision algorithms. The project was enjoyable, and there were a lot of ideas that were had both during and after working on the project that were beyond the scope of was was essentially a 2-3 day (2-3 hours per day) project. This project is more intended to be a sort of space mining game, with the threat of other entities such as space pirates as well as the progression of upgrade mechanics and such. The game is of a highly minimal theme by default but will have the potential to expand beyond this with theme mods (regular modding support using mod.io TBA).
@@ -24,8 +24,8 @@ PC (Windows, Mac (TBA), Linux (TBA)), Mobile TBA
 | :------------- | :------- |
 | [Assets/Code](Assets/Code) | Source code |
 | [Docs](Docs) | Project-related assets (e.g. documentation) |
-| [Wiki](https://github.com/xLightling/MinimalMiner/wiki) | API Documentation |
-| [Wiki/Roadmap](https://github.com/xLightling/MinimalMiner/wiki/Roadmap) | Project roadmap |
+| [Wiki](https://github.com/Goldenwere/MinimalMiner/wiki) | API Documentation |
+| [Wiki/Roadmap](https://github.com/Goldenwere/MinimalMiner/wiki/Roadmap) | Project roadmap |
 
 ## License
 All of the assets created for this project that do not come from third-party sources (only original assets are pushed to GitHub, with the exception of (Assets/Packages); fonts contained under there have licenses associated with them) are licensed under [GPLv3](LICENSE.md) (originally under MIT). 
